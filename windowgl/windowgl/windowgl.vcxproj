@@ -74,7 +74,7 @@
     <LibraryPath>E:\vsprogs\windowgl\OpenGLStuff\libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>..\OpenGLStuff\includes;$(IncludePath)</IncludePath>
+    <IncludePath>..\OpenGLStuff\includes;..\windowgl;$(IncludePath)</IncludePath>
     <LibraryPath>..\OpenGLStuff\libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -130,6 +130,14 @@
   <ItemGroup>
     <ClCompile Include="..\OpenGLStuff\glad\src\glad.c" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Shader.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Shader.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Fragment.glsl" />
+    <None Include="Vertex.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
