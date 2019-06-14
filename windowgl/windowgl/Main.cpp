@@ -6,6 +6,9 @@
 #include <conio.h>
 #include <Shader.h>
 
+//GLOBAL VARIABLES
+int _INITIAL_SCREEN_WIDTH = 800;
+int _INITIAL_SCREEN_HEIGHT = 600;
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 
@@ -17,8 +20,13 @@ float vertices[] = {
 	0.0f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f    // top 
 };
 unsigned int indices[] = {  // note that we start from 0!
-	0, 1, 3,   // first triangle
-	1, 2, 3    // second triangle
+	0, 1, 2,   // first triangle
+};
+
+float texCoords[] = {
+	0.0f, 0.0f,  // lower-left corner  
+	1.0f, 0.0f,  // lower-right corner
+	0.5f, 1.0f   // top-center corner
 };
 
 void processInput(GLFWwindow *window)
@@ -36,7 +44,8 @@ int main()
 	//MAC LOOSERS glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
 	//Create window
-	GLFWwindow* window = glfwCreateWindow(800, 600, "Primera ventana", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(_INITIAL_SCREEN_WIDTH, _INITIAL_SCREEN_HEIGHT, 
+		"Primera ventana", NULL, NULL); //Resolution and name
 	if (window == NULL)
 	{
 		std::cout << "Failed to create GLFW window" << std::endl;
@@ -55,10 +64,10 @@ int main()
 	}
 
 	//Tell glad windows size (1, 2, 3, 4) where 1, 2 is the left corner
-	glViewport(0, 0, 800, 600);
+	glViewport(0, 0, _INITIAL_SCREEN_WIDTH, _INITIAL_SCREEN_HEIGHT);
 
 	//REGISTRAR CALLBACKS
-	//Si se cambia el tamaño de la ventana, llamar glviewport
+	//If window size changed, call glviewport
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
 	//Create and bind Vertex buffer (VBO)
@@ -66,12 +75,11 @@ int main()
 	glGenBuffers(1, &VBO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
 	//SHADERS
 	Shader myShader("Vertex.glsl", "Fragment.glsl");
 
 
-	//Generate VAO object
+	//Generate VAO object. Vertex Array Object
 	unsigned int VAO;
 	glGenVertexArrays(1, &VAO);
 	// 1. bind Vertex Array Object
@@ -80,33 +88,49 @@ int main()
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 	
+	//Generate EBO object. Element Buffer Object. Selects wich vertices to draw from the VAO
+	unsigned int EBO;
+	glGenBuffers(1, &EBO);
+	//Bind the EBO and copy it to memory
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
 	//set our vertex attributes pointers
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
 
+	//Set texture
+	//Configure options. s t (r) = x y (z)
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
 
-	//Bucle del juego
+	//Interpolation between pixels
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	//Interpolation between mipmaps
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+
+
+	//Game loop
 	while (!glfwWindowShouldClose(window))
 	{
 		//INPUT
 		processInput(window);
 
-
-
 		//RENDERING
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		//dibujar triangulo
-		//activar shader
+		//draw triangle
+		//activate shader
 		myShader.use();
-		myShader.setInt("offset", 1);
+		//myShader.setFloat("offset", 0);
 		//bind vao
 		glBindVertexArray(VAO);
-		//glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-		glDrawArrays(GL_TRIANGLES, 0, 6);
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+		//glDrawArrays(GL_TRIANGLES, 0, 6);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
