@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <conio.h>
 #include <Shader.h>
+#include <stb_image.h>
 
 //GLOBAL VARIABLES
 int _INITIAL_SCREEN_WIDTH = 800;
@@ -14,13 +15,15 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 
 
 float vertices[] = {
-	// positions         // colors
-	0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,   // bottom right
-	-0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,   // bottom left
-	0.0f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f    // top 
+	// positions          // colors           // texture coords
+	0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // top right
+	0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,   // bottom right
+	-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // bottom left
+	-0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f    // top left 
 };
 unsigned int indices[] = {  // note that we start from 0!
-	0, 1, 2,   // first triangle
+	0, 1, 3,   // first triangle
+	1, 2, 3    // second triangle
 };
 
 float texCoords[] = {
@@ -78,7 +81,6 @@ int main()
 	//SHADERS
 	Shader myShader("Vertex.glsl", "Fragment.glsl");
 
-
 	//Generate VAO object. Vertex Array Object
 	unsigned int VAO;
 	glGenVertexArrays(1, &VAO);
@@ -96,12 +98,22 @@ int main()
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
 	//set our vertex attributes pointers
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+	glEnableVertexAttribArray(2);
 
-	//Set texture
+	//TEXTURE1
+	//--------
+	//Create texture id
+	unsigned int texture1, texture2;
+	glGenTextures(1, &texture1);
+	
+	//Bind texture
+	glBindTexture(GL_TEXTURE_2D, texture1);
+
 	//Configure options. s t (r) = x y (z)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
@@ -112,6 +124,52 @@ int main()
 	//Interpolation between mipmaps
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 
+	//Load texture image
+	int width, height, nrChannels;
+	unsigned char *data = stbi_load("container.jpg", &width, &height, &nrChannels, 0);
+	if (data)
+	{
+		std::cout << "Image1 loaded" << std::endl;
+		//Generate the texture and mipmap
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+		glGenerateMipmap(GL_TEXTURE_2D);
+	}
+	else
+	{
+		std::cout << "Failed to load texture1" << std::endl;
+	}
+	//Free image memory
+	stbi_image_free(data);
+
+	//TEXTURE 2
+	//---------
+	glGenTextures(1, &texture2);
+	glBindTexture(GL_TEXTURE_2D, texture2);
+
+	//Configure options. s t (r) = x y (z)
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
+
+	//Interpolation between pixels
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	//Interpolation between mipmaps
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+
+	stbi_set_flip_vertically_on_load(true); //flip image
+	data = stbi_load("awesomeface.png", &width, &height, &nrChannels, 0);
+	if (data)
+	{
+		std::cout << "Image2 loaded" << std::endl;
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+		glGenerateMipmap(GL_TEXTURE_2D);
+	}
+	else
+	{
+		std::cout << "Failed to load texture2" << std::endl;
+	}
+	//Free image memory
+	stbi_image_free(data);
 
 	//Game loop
 	while (!glfwWindowShouldClose(window))
@@ -123,10 +181,18 @@ int main()
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		//draw triangle
+		//Send uniforms
 		//activate shader
 		myShader.use();
-		//myShader.setFloat("offset", 0);
+		myShader.setInt("texture1", 0);
+		myShader.setInt("texture2", 1);
+		// activate the texture unit first before binding texture
+		glActiveTexture(GL_TEXTURE0);
+		//bind texture
+		glBindTexture(GL_TEXTURE_2D, texture1);
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D, texture2);
+
 		//bind vao
 		glBindVertexArray(VAO);
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
