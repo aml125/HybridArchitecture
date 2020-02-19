@@ -1,14 +1,10 @@
-extern "C" {
-    #include <TinyPTC/src/tinyptc.h>
-}
-
 #include <sys/render.hpp>
 #include <iostream>
 #include <memory>
 #include <man/entitymanager.hpp>
 #include <algorithm>
 #include <util/gamecontext.hpp>
-// #include <cmp/entity.hpp>
+#include <cmp/entity.hpp>
 
 
 namespace ECS {
@@ -18,22 +14,23 @@ RenderSystem_t::RenderSystem_t(uint32_t w, uint32_t h)
       m_framebuffer{std::make_unique<uint32_t[]>(m_w*m_h)}
 {
     std::cout << "Starting render system" << std::endl;
-    ptc_open("window", w, h);
+    //ptc_open("window", w, h);
 }
 
 RenderSystem_t::~RenderSystem_t() {
-    ptc_close();
+    //ptc_close();
 }
 
 bool RenderSystem_t::update(const GameContext_t& g) const {
-    auto screen = m_framebuffer.get();
+    /*auto screen = m_framebuffer.get();
     auto size = m_w*m_h;
     std::fill(screen, screen + size, 0x00FF0000);
     drawAllEntities(g.getEntities());
     
     ptc_update(screen);
     
-    return !ptc_process_events();
+    return !ptc_process_events();*/
+	return true;
 }
 
 void RenderSystem_t::drawAllEntities(const VecEntities_t& entities) const {
@@ -67,7 +64,7 @@ void RenderSystem_t::drawAllEntities(const VecEntities_t& entities) const {
          screenPtr += 640 - 4;
      }
 
-     ptc_update(screen);
+     //ptc_update(screen);
 }
 
 // void RenderSystem_t::drawEntity(const Entity_t& e) const {
