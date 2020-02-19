@@ -1,0 +1,1621 @@
+mkdir -p  obj/  obj/TinyPTC
+g++ -Wall -pedantic   -c -o src/TinyPTC/xshm.o src/TinyPTC/xshm.c
+g++ -Wall -pedantic   -c -o src/TinyPTC/convert.o src/TinyPTC/convert.c
+g++ -Wall -pedantic   -c -o src/TinyPTC/xvshm.o src/TinyPTC/xvshm.c
+g++ -Wall -pedantic   -c -o src/TinyPTC/xlib.o src/TinyPTC/xlib.c
+g++ -Wall -pedantic   -c -o src/TinyPTC/xdbe.o src/TinyPTC/xdbe.c
+g++    -c -o src/main.o src/main.cpp
+g++ -o game  obj/main.o  obj/TinyPTC/xshm.o  obj/TinyPTC/convert.o  obj/TinyPTC/xvshm.o  obj/TinyPTC/xlib.o  obj/TinyPTC/xdbe.o -lX11
+# GNU Make 4.2.1
+# Este programa fue construido para x86_64-pc-linux-gnu
+# Copyright (C) 1988-2016 Free Software Foundation, Inc.
+# Licencia GPLv3+: GNU GPL versión 3 o posterior <http://gnu.org/licenses/gpl.html>
+# Este es software libre: cualquiera es libre para redistribuirlo y modificarlo.
+# No existe GARANTÍA ALGUNA, hasta los límites permitidos por las leyes aplicables.
+
+# Base de datos del Make, mostrada en Thu Jan 30 18:35:11 2020
+
+# Variables
+
+# automática/o
+<D = $(patsubst %/,%,$(dir $<))
+# por defecto
+COMPILE.m = $(OBJC) $(OBJCFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -c
+# automática/o
+?F = $(notdir $?)
+# entorno
+DESKTOP_SESSION = /usr/share/xsessions/xfce
+# por defecto
+.SHELLFLAGS := -c
+# makefile (de 'Makefile', línea 30):
+OBJ := obj
+# entorno
+XDG_SESSION_CLASS = user
+# makefile (de 'Makefile', línea 29):
+SRC := src
+# entorno
+XDG_SESSION_TYPE = x11
+# por defecto
+CWEAVE = cweave
+# makefile (de 'Makefile', línea 26):
+CCFLAGS := -Wall -pedantic
+# automática/o
+?D = $(patsubst %/,%,$(dir $?))
+# makefile (de 'Makefile', línea 25):
+C := gcc
+# automática/o
+@D = $(patsubst %/,%,$(dir $@))
+# entorno
+XAUTHORITY = /home/tonet/.Xauthority
+# automática/o
+@F = $(notdir $@)
+# por defecto
+MAKE_VERSION := 4.2.1
+# entorno
+CPCT_PATH = /home/tonet/cpctelera/cpctelera
+# makefile
+SHELL = /bin/sh
+# por defecto
+RM = rm -f
+# por defecto
+CO = co
+# entorno
+_ = /usr/bin/make
+# por defecto
+PREPROCESS.F = $(FC) $(FFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -F
+# por defecto
+LINK.m = $(OBJC) $(OBJCFLAGS) $(CPPFLAGS) $(LDFLAGS) $(TARGET_ARCH)
+# entorno
+XDG_CONFIG_DIRS = /etc/xdg
+# por defecto
+OUTPUT_OPTION = -o $@
+# makefile (de 'Makefile', línea 36):
+ALLCPPOBJ :=  src/main.o
+# por defecto
+COMPILE.cpp = $(COMPILE.cc)
+# makefile (de 'Makefile', línea 1):
+MAKEFILE_LIST :=  Makefile
+# directiva 'override'
+GNUMAKEFLAGS := 
+# por defecto
+LINK.p = $(PC) $(PFLAGS) $(CPPFLAGS) $(LDFLAGS) $(TARGET_ARCH)
+# entorno
+XDG_DATA_DIRS = /usr/local/share:/usr/share
+# makefile (de 'Makefile', línea 24):
+CC := g++
+# por defecto
+CHECKOUT,v = +$(if $(wildcard $@),,$(CO) $(COFLAGS) $< $@)
+# makefile (de 'Makefile', línea 28):
+APP := game
+# por defecto
+CPP = $(CC) -E
+# por defecto
+LINK.cc = $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(LDFLAGS) $(TARGET_ARCH)
+# entorno
+XDG_SESSION_PATH = /org/freedesktop/DisplayManager/Session1
+# makefile (de 'Makefile', línea 38):
+OBJFOLDERS :=  obj/  obj/TinyPTC
+# por defecto
+MAKE_HOST := x86_64-pc-linux-gnu
+# entorno
+PATH = /opt/anaconda/bin:/opt/anaconda/condabin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/tonet/cpctelera/cpctelera/tools/scripts:/opt/anaconda/bin
+# por defecto
+LD = ld
+# por defecto
+TEXI2DVI = texi2dvi
+# por defecto
+YACC = yacc
+# entorno
+LSCOLORS = Gxfxcxdxbxegedabagacad
+# entorno
+SESSION_MANAGER = local/archmachine:@/tmp/.ICE-unix/1002,unix/archmachine:/tmp/.ICE-unix/1002
+# makefile
+CURDIR := /home/tonet/aprender
+# por defecto
+COMPILE.mod = $(M2C) $(M2FLAGS) $(MODFLAGS) $(TARGET_ARCH)
+# entorno
+XDG_RUNTIME_DIR = /run/user/1000
+# makefile (de 'Makefile', línea 27):
+CFLAGS := -Wall -pedantic
+# por defecto
+ARFLAGS = rv
+# por defecto
+LINK.r = $(FC) $(FFLAGS) $(RFLAGS) $(LDFLAGS) $(TARGET_ARCH)
+# entorno
+WINDOWID = 0
+# por defecto
+COMPILE.f = $(FC) $(FFLAGS) $(TARGET_ARCH) -c
+# por defecto
+LINT.c = $(LINT) $(LINTFLAGS) $(CPPFLAGS) $(TARGET_ARCH)
+# por defecto
+YACC.m = $(YACC) $(YFLAGS)
+# por defecto
+LINT = lint
+# por defecto
+YACC.y = $(YACC) $(YFLAGS)
+# entorno
+CONDA_PREFIX = /opt/anaconda
+# por defecto
+AR = ar
+# entorno
+XDG_MENU_PREFIX = xfce-
+# makefile (de 'Makefile', línea 14):
+C2O = $(patsubst %.c,%.o,$(patsubst %.cpp,%.o,$(patsubst $(SRC)%,$(OBJ)%,$(1))))
+# por defecto
+.FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink guile load
+# por defecto
+TANGLE = tangle
+# entorno
+LS_COLORS = rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:
+# entorno
+XDG_SESSION_DESKTOP = XFCE
+# entorno
+SSH_AUTH_SOCK = /tmp/ssh-rXOzaR9HESPD/agent.1069
+# por defecto
+GET = get
+# automática/o
+%F = $(notdir $%)
+# entorno
+DISPLAY = :0.0
+# entorno
+CONDA_EXE = /opt/anaconda/bin/conda
+# por defecto
+COMPILE.F = $(FC) $(FFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -c
+# por defecto
+CTANGLE = ctangle
+# entorno
+HOME = /home/tonet
+# por defecto
+.LIBPATTERNS = lib%.so lib%.a
+# por defecto
+LINK.C = $(LINK.cc)
+# entorno
+PWD = /home/tonet/aprender
+# por defecto
+.LOADED := 
+# por defecto
+LINK.S = $(CC) $(ASFLAGS) $(CPPFLAGS) $(LDFLAGS) $(TARGET_MACH)
+# entorno
+XDG_SEAT = seat0
+# por defecto
+PREPROCESS.r = $(FC) $(FFLAGS) $(RFLAGS) $(TARGET_ARCH) -F
+# entorno
+SSH_AGENT_PID = 1070
+# por defecto
+LINK.c = $(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(TARGET_ARCH)
+# entorno
+GTK_MODULES = canberra-gtk-module:canberra-gtk-module
+# por defecto
+LINK.s = $(CC) $(ASFLAGS) $(LDFLAGS) $(TARGET_MACH)
+# entorno
+DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus
+# entorno
+LOGNAME = tonet
+# entorno
+CONDA_PROMPT_MODIFIER = (base) 
+# makefile (de 'Makefile', línea 8):
+define COMPILE
+$(2) : $(3) $(4)
+	$(1) -c -o $(2) $(3) $(5)
+endef
+# entorno
+ZSH = /home/tonet/.oh-my-zsh
+# automática/o
+^D = $(patsubst %/,%,$(dir $^))
+# makefile (de 'Makefile', línea 39):
+MKDIR := mkdir -p
+# entorno
+XDG_VTNR = 1
+# entorno
+MAKELEVEL := 0
+# entorno
+CONDA_DEFAULT_ENV = base
+# por defecto
+MAKE = $(MAKE_COMMAND)
+# entorno
+SHLVL = 1
+# por defecto
+AS = as
+# por defecto
+PREPROCESS.S = $(CC) -E $(CPPFLAGS)
+# por defecto
+COMPILE.p = $(PC) $(PFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -c
+# entorno
+XDG_SESSION_ID = 1
+# entorno
+USER = tonet
+# por defecto
+FC = f77
+# makefile
+.DEFAULT_GOAL := game
+# entorno
+XDG_CURRENT_DESKTOP = XFCE
+# entorno
+LESS = -R
+# automática/o
+%D = $(patsubst %/,%,$(dir $%))
+# makefile (de 'Makefile', línea 34):
+ALLC := src/TinyPTC/xshm.c src/TinyPTC/convert.c src/TinyPTC/xvshm.c src/TinyPTC/xlib.c src/TinyPTC/xdbe.c
+# entorno
+CONDA_SHLVL = 1
+# por defecto
+WEAVE = weave
+# por defecto
+MAKE_COMMAND := make
+# por defecto
+LINK.cpp = $(LINK.cc)
+# por defecto
+F77 = $(FC)
+# entorno
+OLDPWD = /home/tonet
+# por defecto
+.VARIABLES := 
+# por defecto
+PC = pc
+# automática/o
+*F = $(notdir $*)
+# entorno
+LANGUAGE = 
+# entorno
+XDG_SEAT_PATH = /org/freedesktop/DisplayManager/Seat0
+# por defecto
+COMPILE.def = $(M2C) $(M2FLAGS) $(DEFFLAGS) $(TARGET_ARCH)
+# por defecto
+LEX = lex
+# makefile
+MAKEFLAGS = p
+# entorno
+MFLAGS = -p
+# automática/o
+*D = $(patsubst %/,%,$(dir $*))
+# entorno
+MAIL = /var/spool/mail/tonet
+# por defecto
+LEX.l = $(LEX) $(LFLAGS) -t
+# por defecto
+LEX.m = $(LEX) $(LFLAGS) -t
+# automática/o
++D = $(patsubst %/,%,$(dir $+))
+# por defecto
+COMPILE.r = $(FC) $(FFLAGS) $(RFLAGS) $(TARGET_ARCH) -c
+# automática/o
++F = $(notdir $+)
+# por defecto
+M2C = m2c
+# entorno
+COLORFGBG = 15;0
+# makefile (de 'Makefile', línea 35):
+ALLCOBJ :=  src/TinyPTC/xshm.o  src/TinyPTC/convert.o  src/TinyPTC/xvshm.o  src/TinyPTC/xlib.o  src/TinyPTC/xdbe.o
+# directiva 'override'
+.SHELLSTATUS := 0
+# por defecto
+MAKEFILES := 
+# por defecto
+COMPILE.cc = $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -c
+# makefile (de 'Makefile', línea 33):
+ALLCPP := src/main.cpp
+# automática/o
+<F = $(notdir $<)
+# makefile (de 'Makefile', línea 19):
+C2H = $(patsubst %.c,%.h,$(patsubst %.cpp,%.hpp,$(1)))
+# por defecto
+CXX = g++
+# por defecto
+COFLAGS = 
+# entorno
+PAGER = less
+# entorno
+CONDA_PYTHON_EXE = /opt/anaconda/bin/python
+# por defecto
+COMPILE.C = $(COMPILE.cc)
+# makefile (de 'Makefile', línea 31):
+LIBS := -lX11
+# automática/o
+^F = $(notdir $^)
+# por defecto
+COMPILE.S = $(CC) $(ASFLAGS) $(CPPFLAGS) $(TARGET_MACH) -c
+# por defecto
+LINK.F = $(FC) $(FFLAGS) $(CPPFLAGS) $(LDFLAGS) $(TARGET_ARCH)
+# makefile (de 'Makefile', línea 37):
+SRCFOLDERS := src/ src/TinyPTC
+# por defecto
+SUFFIXES := .out .a .ln .o .c .cc .C .cpp .p .f .F .m .r .y .l .ym .yl .s .S .mod .sym .def .h .info .dvi .tex .texinfo .texi .txinfo .w .ch .web .sh .elc .el
+# por defecto
+COMPILE.c = $(CC) $(CFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -c
+# entorno
+_CE_M = 
+# por defecto
+COMPILE.s = $(AS) $(ASFLAGS) $(TARGET_MACH)
+# entorno
+MOZ_PLUGIN_PATH = /usr/lib/mozilla/plugins
+# por defecto
+.INCLUDE_DIRS = /usr/include /usr/local/include /usr/include
+# por defecto
+.RECIPEPREFIX := 
+# por defecto
+MAKEINFO = makeinfo
+# por defecto
+MAKE_TERMERR := /dev/pts/0
+# por defecto
+OBJC = cc
+# por defecto
+LINK.f = $(FC) $(FFLAGS) $(LDFLAGS) $(TARGET_ARCH)
+# por defecto
+TEX = tex
+# entorno
+LANG = es_ES.UTF-8
+# entorno
+TERM = xterm-256color
+# por defecto
+F77FLAGS = $(FFLAGS)
+# por defecto
+LINK.o = $(CC) $(LDFLAGS) $(TARGET_ARCH)
+# entorno
+_CE_CONDA = 
+# estadísticas del conjunto de variables de la tabla «hash»:
+# Carga=166/1024=16%, Rehash=0, Colisiones=45/297=15%
+
+# Valores de variables específicas al patrón
+
+# No hay valores de variables específicas al patrón.
+
+# Directorios
+
+# src/RCS: podría no estar establecido.
+# SCCS: podría no estar establecido.
+# src/TinyPTC/RCS: podría no estar establecido.
+# . (dispositivo 2054, nodo-i 3808012): 5 archivos, 19 imposibilidades.
+# src/TinyPTC (dispositivo 2054, nodo-i 3934292): 14 archivos, 15 imposibilidades.
+# src (dispositivo 2054, nodo-i 3808024): 4 archivos, no imposibilidades.
+# src/SCCS: podría no estar establecido.
+# src/TinyPTC/SCCS: podría no estar establecido.
+# RCS: podría no estar establecido.
+
+# 23 archivos, 34 imposibilidades en 9 directorios.
+
+# Reglas implícitas.
+
+%.out:
+
+%.a:
+
+%.ln:
+
+%.o:
+
+%: %.o
+#  las instrucciones para ejecutar (integrado):
+	$(LINK.o) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+%.c:
+
+%: %.c
+#  las instrucciones para ejecutar (integrado):
+	$(LINK.c) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+%.ln: %.c
+#  las instrucciones para ejecutar (integrado):
+	$(LINT.c) -C$* $<
+
+%.o: %.c
+#  las instrucciones para ejecutar (integrado):
+	$(COMPILE.c) $(OUTPUT_OPTION) $<
+
+%.cc:
+
+%: %.cc
+#  las instrucciones para ejecutar (integrado):
+	$(LINK.cc) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+%.o: %.cc
+#  las instrucciones para ejecutar (integrado):
+	$(COMPILE.cc) $(OUTPUT_OPTION) $<
+
+%.C:
+
+%: %.C
+#  las instrucciones para ejecutar (integrado):
+	$(LINK.C) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+%.o: %.C
+#  las instrucciones para ejecutar (integrado):
+	$(COMPILE.C) $(OUTPUT_OPTION) $<
+
+%.cpp:
+
+%: %.cpp
+#  las instrucciones para ejecutar (integrado):
+	$(LINK.cpp) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+%.o: %.cpp
+#  las instrucciones para ejecutar (integrado):
+	$(COMPILE.cpp) $(OUTPUT_OPTION) $<
+
+%.p:
+
+%: %.p
+#  las instrucciones para ejecutar (integrado):
+	$(LINK.p) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+%.o: %.p
+#  las instrucciones para ejecutar (integrado):
+	$(COMPILE.p) $(OUTPUT_OPTION) $<
+
+%.f:
+
+%: %.f
+#  las instrucciones para ejecutar (integrado):
+	$(LINK.f) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+%.o: %.f
+#  las instrucciones para ejecutar (integrado):
+	$(COMPILE.f) $(OUTPUT_OPTION) $<
+
+%.F:
+
+%: %.F
+#  las instrucciones para ejecutar (integrado):
+	$(LINK.F) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+%.o: %.F
+#  las instrucciones para ejecutar (integrado):
+	$(COMPILE.F) $(OUTPUT_OPTION) $<
+
+%.f: %.F
+#  las instrucciones para ejecutar (integrado):
+	$(PREPROCESS.F) $(OUTPUT_OPTION) $<
+
+%.m:
+
+%: %.m
+#  las instrucciones para ejecutar (integrado):
+	$(LINK.m) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+%.o: %.m
+#  las instrucciones para ejecutar (integrado):
+	$(COMPILE.m) $(OUTPUT_OPTION) $<
+
+%.r:
+
+%: %.r
+#  las instrucciones para ejecutar (integrado):
+	$(LINK.r) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+%.o: %.r
+#  las instrucciones para ejecutar (integrado):
+	$(COMPILE.r) $(OUTPUT_OPTION) $<
+
+%.f: %.r
+#  las instrucciones para ejecutar (integrado):
+	$(PREPROCESS.r) $(OUTPUT_OPTION) $<
+
+%.y:
+
+%.ln: %.y
+#  las instrucciones para ejecutar (integrado):
+	$(YACC.y) $< 
+	 $(LINT.c) -C$* y.tab.c 
+	 $(RM) y.tab.c
+
+%.c: %.y
+#  las instrucciones para ejecutar (integrado):
+	$(YACC.y) $< 
+	 mv -f y.tab.c $@
+
+%.l:
+
+%.ln: %.l
+#  las instrucciones para ejecutar (integrado):
+	@$(RM) $*.c
+	 $(LEX.l) $< > $*.c
+	$(LINT.c) -i $*.c -o $@
+	 $(RM) $*.c
+
+%.c: %.l
+#  las instrucciones para ejecutar (integrado):
+	@$(RM) $@ 
+	 $(LEX.l) $< > $@
+
+%.r: %.l
+#  las instrucciones para ejecutar (integrado):
+	$(LEX.l) $< > $@ 
+	 mv -f lex.yy.r $@
+
+%.ym:
+
+%.m: %.ym
+#  las instrucciones para ejecutar (integrado):
+	$(YACC.m) $< 
+	 mv -f y.tab.c $@
+
+%.yl:
+
+%.s:
+
+%: %.s
+#  las instrucciones para ejecutar (integrado):
+	$(LINK.s) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+%.o: %.s
+#  las instrucciones para ejecutar (integrado):
+	$(COMPILE.s) -o $@ $<
+
+%.S:
+
+%: %.S
+#  las instrucciones para ejecutar (integrado):
+	$(LINK.S) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+%.o: %.S
+#  las instrucciones para ejecutar (integrado):
+	$(COMPILE.S) -o $@ $<
+
+%.s: %.S
+#  las instrucciones para ejecutar (integrado):
+	$(PREPROCESS.S) $< > $@
+
+%.mod:
+
+%: %.mod
+#  las instrucciones para ejecutar (integrado):
+	$(COMPILE.mod) -o $@ -e $@ $^
+
+%.o: %.mod
+#  las instrucciones para ejecutar (integrado):
+	$(COMPILE.mod) -o $@ $<
+
+%.sym:
+
+%.def:
+
+%.sym: %.def
+#  las instrucciones para ejecutar (integrado):
+	$(COMPILE.def) -o $@ $<
+
+%.h:
+
+%.info:
+
+%.dvi:
+
+%.tex:
+
+%.dvi: %.tex
+#  las instrucciones para ejecutar (integrado):
+	$(TEX) $<
+
+%.texinfo:
+
+%.info: %.texinfo
+#  las instrucciones para ejecutar (integrado):
+	$(MAKEINFO) $(MAKEINFO_FLAGS) $< -o $@
+
+%.dvi: %.texinfo
+#  las instrucciones para ejecutar (integrado):
+	$(TEXI2DVI) $(TEXI2DVI_FLAGS) $<
+
+%.texi:
+
+%.info: %.texi
+#  las instrucciones para ejecutar (integrado):
+	$(MAKEINFO) $(MAKEINFO_FLAGS) $< -o $@
+
+%.dvi: %.texi
+#  las instrucciones para ejecutar (integrado):
+	$(TEXI2DVI) $(TEXI2DVI_FLAGS) $<
+
+%.txinfo:
+
+%.info: %.txinfo
+#  las instrucciones para ejecutar (integrado):
+	$(MAKEINFO) $(MAKEINFO_FLAGS) $< -o $@
+
+%.dvi: %.txinfo
+#  las instrucciones para ejecutar (integrado):
+	$(TEXI2DVI) $(TEXI2DVI_FLAGS) $<
+
+%.w:
+
+%.c: %.w
+#  las instrucciones para ejecutar (integrado):
+	$(CTANGLE) $< - $@
+
+%.tex: %.w
+#  las instrucciones para ejecutar (integrado):
+	$(CWEAVE) $< - $@
+
+%.ch:
+
+%.web:
+
+%.p: %.web
+#  las instrucciones para ejecutar (integrado):
+	$(TANGLE) $<
+
+%.tex: %.web
+#  las instrucciones para ejecutar (integrado):
+	$(WEAVE) $<
+
+%.sh:
+
+%: %.sh
+#  las instrucciones para ejecutar (integrado):
+	cat $< >$@ 
+	 chmod a+x $@
+
+%.elc:
+
+%.el:
+
+(%): %
+#  las instrucciones para ejecutar (integrado):
+	$(AR) $(ARFLAGS) $@ $<
+
+%.out: %
+#  las instrucciones para ejecutar (integrado):
+	@rm -f $@ 
+	 cp $< $@
+
+%.c: %.w %.ch
+#  las instrucciones para ejecutar (integrado):
+	$(CTANGLE) $^ $@
+
+%.tex: %.w %.ch
+#  las instrucciones para ejecutar (integrado):
+	$(CWEAVE) $^ $@
+
+%:: %,v
+#  las instrucciones para ejecutar (integrado):
+	$(CHECKOUT,v)
+
+%:: RCS/%,v
+#  las instrucciones para ejecutar (integrado):
+	$(CHECKOUT,v)
+
+%:: RCS/%
+#  las instrucciones para ejecutar (integrado):
+	$(CHECKOUT,v)
+
+%:: s.%
+#  las instrucciones para ejecutar (integrado):
+	$(GET) $(GFLAGS) $(SCCS_OUTPUT_OPTION) $<
+
+%:: SCCS/s.%
+#  las instrucciones para ejecutar (integrado):
+	$(GET) $(GFLAGS) $(SCCS_OUTPUT_OPTION) $<
+
+# 92 reglas implícitas, 5 (5,4%) terminal.
+
+# Archivos
+
+# No es un objetivo:
+.web.p:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+#  las instrucciones para ejecutar (integrado):
+	$(TANGLE) $<
+
+# No es un objetivo:
+.l.r:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+#  las instrucciones para ejecutar (integrado):
+	$(LEX.l) $< > $@ 
+	 mv -f lex.yy.r $@
+
+# No es un objetivo:
+.dvi:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+
+# No es un objetivo:
+.ym:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+
+# No es un objetivo:
+.f.o:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+#  las instrucciones para ejecutar (integrado):
+	$(COMPILE.f) $(OUTPUT_OPTION) $<
+
+# No es un objetivo:
+.l:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+
+# No es un objetivo:
+.m:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+#  las instrucciones para ejecutar (integrado):
+	$(LINK.m) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+# No es un objetivo:
+.ln:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+
+# No es un objetivo:
+.o:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+#  las instrucciones para ejecutar (integrado):
+	$(LINK.o) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+# No es un objetivo:
+.y:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+
+# No es un objetivo:
+.def.sym:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+#  las instrucciones para ejecutar (integrado):
+	$(COMPILE.def) -o $@ $<
+
+src/TinyPTC/xvshm.o: src/TinyPTC/xvshm.c
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  Tema del patrón implícita/estática: 'src/TinyPTC/xvshm'
+#  Última modificación 2020-01-30 18:35:11.028814772
+#  El archivo ha sido actualizado.
+#  Actualizado con éxito.
+# automática/o
+# @ := src/TinyPTC/xvshm.o
+# automática/o
+# % := 
+# automática/o
+# * := src/TinyPTC/xvshm
+# automática/o
+# + := src/TinyPTC/xvshm.c
+# automática/o
+# | := 
+# automática/o
+# < := src/TinyPTC/xvshm.c
+# automática/o
+# ^ := src/TinyPTC/xvshm.c
+# automática/o
+# ? := src/TinyPTC/xvshm.c
+# estadísticas del conjunto de variables de la tabla «hash»:
+# Carga=8/32=25%, Rehash=0, Colisiones=2/19=11%
+#  las instrucciones para ejecutar (integrado):
+	$(COMPILE.c) $(OUTPUT_OPTION) $<
+
+.PHONY: dir
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+
+# No es un objetivo:
+.p.o:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+#  las instrucciones para ejecutar (integrado):
+	$(COMPILE.p) $(OUTPUT_OPTION) $<
+
+# No es un objetivo:
+.p:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+#  las instrucciones para ejecutar (integrado):
+	$(LINK.p) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+# No es un objetivo:
+.txinfo.dvi:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+#  las instrucciones para ejecutar (integrado):
+	$(TEXI2DVI) $(TEXI2DVI_FLAGS) $<
+
+src/main.o: src/main.cpp
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  Tema del patrón implícita/estática: 'src/main'
+#  Última modificación 2020-01-30 18:35:11.185481431
+#  El archivo ha sido actualizado.
+#  Actualizado con éxito.
+# automática/o
+# @ := src/main.o
+# automática/o
+# % := 
+# automática/o
+# * := src/main
+# automática/o
+# + := src/main.cpp
+# automática/o
+# | := 
+# automática/o
+# < := src/main.cpp
+# automática/o
+# ^ := src/main.cpp
+# automática/o
+# ? := src/main.cpp
+# estadísticas del conjunto de variables de la tabla «hash»:
+# Carga=8/32=25%, Rehash=0, Colisiones=2/20=10%
+#  las instrucciones para ejecutar (integrado):
+	$(COMPILE.cpp) $(OUTPUT_OPTION) $<
+
+# No es un objetivo:
+.a:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+
+# No es un objetivo:
+.yl:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+
+# No es un objetivo:
+.l.ln:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+#  las instrucciones para ejecutar (integrado):
+	@$(RM) $*.c
+	 $(LEX.l) $< > $*.c
+	$(LINT.c) -i $*.c -o $@
+	 $(RM) $*.c
+
+# No es un objetivo:
+.F.o:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+#  las instrucciones para ejecutar (integrado):
+	$(COMPILE.F) $(OUTPUT_OPTION) $<
+
+# No es un objetivo:
+.texi.info:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+#  las instrucciones para ejecutar (integrado):
+	$(MAKEINFO) $(MAKEINFO_FLAGS) $< -o $@
+
+# No es un objetivo:
+.w.c:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+#  las instrucciones para ejecutar (integrado):
+	$(CTANGLE) $< - $@
+
+# No es un objetivo:
+.texi.dvi:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+#  las instrucciones para ejecutar (integrado):
+	$(TEXI2DVI) $(TEXI2DVI_FLAGS) $<
+
+# No es un objetivo:
+.ch:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+
+# No es un objetivo:
+.m.o:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+#  las instrucciones para ejecutar (integrado):
+	$(COMPILE.m) $(OUTPUT_OPTION) $<
+
+# No es un objetivo:
+.cc:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+#  las instrucciones para ejecutar (integrado):
+	$(LINK.cc) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+# No es un objetivo:
+.cc.o:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+#  las instrucciones para ejecutar (integrado):
+	$(COMPILE.cc) $(OUTPUT_OPTION) $<
+
+obj/main.o: src/main.cpp src/main.hpp
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+#  las instrucciones para ejecutar (de 'Makefile', linea 46):
+	g++ -c -o obj/main.o src/main.cpp 
+
+# No es un objetivo:
+.def:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+
+obj/TinyPTC:
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  Última modificación 2020-01-30 18:35:10.855481447
+#  El archivo ha sido actualizado.
+#  Actualizado con éxito.
+#  las instrucciones para ejecutar (de 'Makefile', linea 66):
+	$(MKDIR) $(OBJFOLDERS)
+
+# No es un objetivo:
+.SUFFIXES: .out .a .ln .o .c .cc .C .cpp .p .f .F .m .r .y .l .ym .yl .s .S .mod .sym .def .h .info .dvi .tex .texinfo .texi .txinfo .w .ch .web .sh .elc .el
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+
+# No es un objetivo:
+src/main.hpp:
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+
+# No es un objetivo:
+.c.o:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+#  las instrucciones para ejecutar (integrado):
+	$(COMPILE.c) $(OUTPUT_OPTION) $<
+
+# No es un objetivo:
+Makefile:
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  Última modificación 2020-01-30 18:34:24.162150422
+#  El archivo ha sido actualizado.
+#  Actualizado con éxito.
+
+src/TinyPTC/xdbe.o: src/TinyPTC/xdbe.c
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  Tema del patrón implícita/estática: 'src/TinyPTC/xdbe'
+#  Última modificación 2020-01-30 18:35:11.135481433
+#  El archivo ha sido actualizado.
+#  Actualizado con éxito.
+# automática/o
+# @ := src/TinyPTC/xdbe.o
+# automática/o
+# % := 
+# automática/o
+# * := src/TinyPTC/xdbe
+# automática/o
+# + := src/TinyPTC/xdbe.c
+# automática/o
+# | := 
+# automática/o
+# < := src/TinyPTC/xdbe.c
+# automática/o
+# ^ := src/TinyPTC/xdbe.c
+# automática/o
+# ? := src/TinyPTC/xdbe.c
+# estadísticas del conjunto de variables de la tabla «hash»:
+# Carga=8/32=25%, Rehash=0, Colisiones=2/19=11%
+#  las instrucciones para ejecutar (integrado):
+	$(COMPILE.c) $(OUTPUT_OPTION) $<
+
+# No es un objetivo:
+.r.o:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+#  las instrucciones para ejecutar (integrado):
+	$(COMPILE.r) $(OUTPUT_OPTION) $<
+
+# No es un objetivo:
+.r:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+#  las instrucciones para ejecutar (integrado):
+	$(LINK.r) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+src/TinyPTC/convert.o: src/TinyPTC/convert.c
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  Tema del patrón implícita/estática: 'src/TinyPTC/convert'
+#  Última modificación 2020-01-30 18:35:10.982148107
+#  El archivo ha sido actualizado.
+#  Actualizado con éxito.
+# automática/o
+# @ := src/TinyPTC/convert.o
+# automática/o
+# % := 
+# automática/o
+# * := src/TinyPTC/convert
+# automática/o
+# + := src/TinyPTC/convert.c
+# automática/o
+# | := 
+# automática/o
+# < := src/TinyPTC/convert.c
+# automática/o
+# ^ := src/TinyPTC/convert.c
+# automática/o
+# ? := src/TinyPTC/convert.c
+# estadísticas del conjunto de variables de la tabla «hash»:
+# Carga=8/32=25%, Rehash=0, Colisiones=2/19=11%
+#  las instrucciones para ejecutar (integrado):
+	$(COMPILE.c) $(OUTPUT_OPTION) $<
+
+# No es un objetivo:
+.ym.m:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+#  las instrucciones para ejecutar (integrado):
+	$(YACC.m) $< 
+	 mv -f y.tab.c $@
+
+# No es un objetivo:
+.y.ln:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+#  las instrucciones para ejecutar (integrado):
+	$(YACC.y) $< 
+	 $(LINT.c) -C$* y.tab.c 
+	 $(RM) y.tab.c
+
+src/TinyPTC/xlib.o: src/TinyPTC/xlib.c
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  Tema del patrón implícita/estática: 'src/TinyPTC/xlib'
+#  Última modificación 2020-01-30 18:35:11.085481436
+#  El archivo ha sido actualizado.
+#  Actualizado con éxito.
+# automática/o
+# @ := src/TinyPTC/xlib.o
+# automática/o
+# % := 
+# automática/o
+# * := src/TinyPTC/xlib
+# automática/o
+# + := src/TinyPTC/xlib.c
+# automática/o
+# | := 
+# automática/o
+# < := src/TinyPTC/xlib.c
+# automática/o
+# ^ := src/TinyPTC/xlib.c
+# automática/o
+# ? := src/TinyPTC/xlib.c
+# estadísticas del conjunto de variables de la tabla «hash»:
+# Carga=8/32=25%, Rehash=0, Colisiones=2/19=11%
+#  las instrucciones para ejecutar (integrado):
+	$(COMPILE.c) $(OUTPUT_OPTION) $<
+
+# No es un objetivo:
+.elc:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+
+# No es un objetivo:
+.l.c:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+#  las instrucciones para ejecutar (integrado):
+	@$(RM) $@ 
+	 $(LEX.l) $< > $@
+
+# No es un objetivo:
+.out:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+
+# No es un objetivo:
+.C:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+#  las instrucciones para ejecutar (integrado):
+	$(LINK.C) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+# No es un objetivo:
+.r.f:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+#  las instrucciones para ejecutar (integrado):
+	$(PREPROCESS.r) $(OUTPUT_OPTION) $<
+
+# No es un objetivo:
+.S:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+#  las instrucciones para ejecutar (integrado):
+	$(LINK.S) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+# No es un objetivo:
+.texinfo.info:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+#  las instrucciones para ejecutar (integrado):
+	$(MAKEINFO) $(MAKEINFO_FLAGS) $< -o $@
+
+# No es un objetivo:
+.c:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+#  las instrucciones para ejecutar (integrado):
+	$(LINK.c) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+# No es un objetivo:
+.w.tex:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+#  las instrucciones para ejecutar (integrado):
+	$(CWEAVE) $< - $@
+
+# No es un objetivo:
+.c.ln:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+#  las instrucciones para ejecutar (integrado):
+	$(LINT.c) -C$* $<
+
+# No es un objetivo:
+.s.o:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+#  las instrucciones para ejecutar (integrado):
+	$(COMPILE.s) -o $@ $<
+
+# No es un objetivo:
+.s:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+#  las instrucciones para ejecutar (integrado):
+	$(LINK.s) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+# No es un objetivo:
+src/TinyPTC/xvshm.c:
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  Última modificación 2019-11-22 10:28:15
+#  El archivo ha sido actualizado.
+#  Actualizado con éxito.
+
+obj/:
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  Tema del patrón implícita/estática: ''
+#  Última modificación 2020-01-30 18:35:10.855481447
+#  El archivo ha sido actualizado.
+#  Actualizado con éxito.
+# automática/o
+# @ := obj/
+# automática/o
+# % := 
+# automática/o
+# * := 
+# automática/o
+# + := 
+# automática/o
+# | := 
+# automática/o
+# < := 
+# automática/o
+# ^ := 
+# automática/o
+# ? := 
+# estadísticas del conjunto de variables de la tabla «hash»:
+# Carga=8/32=25%, Rehash=0, Colisiones=1/13=8%
+#  las instrucciones para ejecutar (de 'Makefile', linea 66):
+	$(MKDIR) $(OBJFOLDERS)
+
+dir:
+#  objetivo falso (dependencia de .PHONY).
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  El archivo no existe.
+#  El archivo ha sido actualizado.
+#  las instrucciones para ejecutar (de 'Makefile', linea 58):
+	$(info $(SRCFOLDERS))
+	$(info $(OBJFOLDERS))
+	$(info $(ALLCPP))
+	$(info $(ALLC))
+	$(info $(ALLCOBJ))
+	$(info $(ALLCOBJ))
+
+# No es un objetivo:
+.texinfo.dvi:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+#  las instrucciones para ejecutar (integrado):
+	$(TEXI2DVI) $(TEXI2DVI_FLAGS) $<
+
+# No es un objetivo:
+.el:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+
+# No es un objetivo:
+.lm.m:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+#  las instrucciones para ejecutar (integrado):
+	@$(RM) $@ 
+	 $(LEX.m) $< > $@
+
+# No es un objetivo:
+.y.c:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+#  las instrucciones para ejecutar (integrado):
+	$(YACC.y) $< 
+	 mv -f y.tab.c $@
+
+# No es un objetivo:
+.web.tex:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+#  las instrucciones para ejecutar (integrado):
+	$(WEAVE) $<
+
+# No es un objetivo:
+.texinfo:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+
+# No es un objetivo:
+.DEFAULT:
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+
+# No es un objetivo:
+.h:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+
+# No es un objetivo:
+src/TinyPTC/xdbe.c:
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  Última modificación 2019-11-22 10:28:15
+#  El archivo ha sido actualizado.
+#  Actualizado con éxito.
+
+src/TinyPTC/xshm.o: src/TinyPTC/xshm.c
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  Tema del patrón implícita/estática: 'src/TinyPTC/xshm'
+#  Última modificación 2020-01-30 18:35:10.918814777
+#  El archivo ha sido actualizado.
+#  Actualizado con éxito.
+# automática/o
+# @ := src/TinyPTC/xshm.o
+# automática/o
+# % := 
+# automática/o
+# * := src/TinyPTC/xshm
+# automática/o
+# + := src/TinyPTC/xshm.c
+# automática/o
+# | := 
+# automática/o
+# < := src/TinyPTC/xshm.c
+# automática/o
+# ^ := src/TinyPTC/xshm.c
+# automática/o
+# ? := src/TinyPTC/xshm.c
+# estadísticas del conjunto de variables de la tabla «hash»:
+# Carga=8/32=25%, Rehash=0, Colisiones=2/19=11%
+#  las instrucciones para ejecutar (integrado):
+	$(COMPILE.c) $(OUTPUT_OPTION) $<
+
+# No es un objetivo:
+src/TinyPTC/convert.c:
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  Última modificación 2019-11-22 10:28:15
+#  El archivo ha sido actualizado.
+#  Actualizado con éxito.
+
+# No es un objetivo:
+.tex.dvi:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+#  las instrucciones para ejecutar (integrado):
+	$(TEX) $<
+
+# No es un objetivo:
+.cpp.o:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+#  las instrucciones para ejecutar (integrado):
+	$(COMPILE.cpp) $(OUTPUT_OPTION) $<
+
+# No es un objetivo:
+.cpp:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+#  las instrucciones para ejecutar (integrado):
+	$(LINK.cpp) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+# No es un objetivo:
+.C.o:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+#  las instrucciones para ejecutar (integrado):
+	$(COMPILE.C) $(OUTPUT_OPTION) $<
+
+# No es un objetivo:
+.texi:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+
+# No es un objetivo:
+.txinfo:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+
+game: obj/ obj/TinyPTC src/TinyPTC/xshm.o src/TinyPTC/convert.o src/TinyPTC/xvshm.o src/TinyPTC/xlib.o src/TinyPTC/xdbe.o src/main.o
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  Tema del patrón implícita/estática: ''
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+#  Fallo al ser actualizado.
+# automática/o
+# @ := game
+# automática/o
+# % := 
+# automática/o
+# * := 
+# automática/o
+# + := obj/ obj/TinyPTC src/TinyPTC/xshm.o src/TinyPTC/convert.o src/TinyPTC/xvshm.o src/TinyPTC/xlib.o src/TinyPTC/xdbe.o src/main.o
+# automática/o
+# | := 
+# automática/o
+# < := obj/
+# automática/o
+# ^ := obj/ obj/TinyPTC src/TinyPTC/xshm.o src/TinyPTC/convert.o src/TinyPTC/xvshm.o src/TinyPTC/xlib.o src/TinyPTC/xdbe.o src/main.o
+# automática/o
+# ? := obj/ obj/TinyPTC src/TinyPTC/xshm.o src/TinyPTC/convert.o src/TinyPTC/xvshm.o src/TinyPTC/xlib.o src/TinyPTC/xdbe.o src/main.o
+# estadísticas del conjunto de variables de la tabla «hash»:
+# Carga=8/32=25%, Rehash=0, Colisiones=5/78=6%
+#  las instrucciones para ejecutar (de 'Makefile', linea 44):
+	$(CC) -o $(APP) $(patsubst $(SRC)%, $(OBJ)%, $(ALLCPPOBJ) $(ALLCOBJ)) $(LIBS)
+
+# No es un objetivo:
+.tex:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+
+# No es un objetivo:
+src/TinyPTC/xlib.c:
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  Última modificación 2019-11-22 10:28:15
+#  El archivo ha sido actualizado.
+#  Actualizado con éxito.
+
+# No es un objetivo:
+src/main.cpp:
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  Última modificación 2020-01-30 17:35:52.205657444
+#  El archivo ha sido actualizado.
+#  Actualizado con éxito.
+
+# No es un objetivo:
+.txinfo.info:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+#  las instrucciones para ejecutar (integrado):
+	$(MAKEINFO) $(MAKEINFO_FLAGS) $< -o $@
+
+# No es un objetivo:
+.sh:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+#  las instrucciones para ejecutar (integrado):
+	cat $< >$@ 
+	 chmod a+x $@
+
+# No es un objetivo:
+.S.s:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+#  las instrucciones para ejecutar (integrado):
+	$(PREPROCESS.S) $< > $@
+
+# No es un objetivo:
+.mod:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+#  las instrucciones para ejecutar (integrado):
+	$(COMPILE.mod) -o $@ -e $@ $^
+
+# No es un objetivo:
+.mod.o:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+#  las instrucciones para ejecutar (integrado):
+	$(COMPILE.mod) -o $@ $<
+
+# No es un objetivo:
+.F.f:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+#  las instrucciones para ejecutar (integrado):
+	$(PREPROCESS.F) $(OUTPUT_OPTION) $<
+
+# No es un objetivo:
+.w:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+
+# No es un objetivo:
+.S.o:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+#  las instrucciones para ejecutar (integrado):
+	$(COMPILE.S) -o $@ $<
+
+# No es un objetivo:
+.F:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+#  las instrucciones para ejecutar (integrado):
+	$(LINK.F) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+# No es un objetivo:
+.web:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+
+# No es un objetivo:
+.sym:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+
+# No es un objetivo:
+.f:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+#  las instrucciones para ejecutar (integrado):
+	$(LINK.f) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+# No es un objetivo:
+.info:
+#  Regla incorporada
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  La fecha de modificación no se comprobó.
+#  El archivo ha sido actualizado.
+
+# No es un objetivo:
+src/TinyPTC/xshm.c:
+#  La búsqueda de reglas implícitas ha sido efectuada.
+#  Última modificación 2019-11-22 10:28:15
+#  El archivo ha sido actualizado.
+#  Actualizado con éxito.
+
+# estadísticas de la tabla «hash» de los archivos:
+# Carga=92/1024=9%, Rehash=0, Colisiones=454/1674=27%
+# Rutas de búsqueda VPATH
+
+# No hay rutas de búsqueda 'vpath'.
+
+# No hay ruta de búsqueda general (variable 'VPATH').
+
+# «buffers» strcache: 1 (0) / cadenas = 423 / almacenamiento = 5960 B / promedio = 14 B
+# «buffer» actual: tamaño = 8162 B / utilizado = 5960 B / número = 423 / promedio = 14 B
+
+# rendimiento de strcache: búsquedas = 660 / coincidencias = 35%
+# estadísticas de la tabla «hash»:
+# Carga=423/8192=5%, Rehash=0, Colisiones=188/660=28%
+# Se termina la base de datos de Make en Thu Jan 30 18:35:11 2020
+

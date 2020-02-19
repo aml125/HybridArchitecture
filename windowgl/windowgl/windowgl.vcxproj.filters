@@ -16,6 +16,18 @@
     <Filter Include="Shaders">
       <UniqueIdentifier>{4b514def-739a-424b-be33-8529ad432e25}</UniqueIdentifier>
     </Filter>
+    <Filter Include="cmp">
+      <UniqueIdentifier>{1dabab1b-696d-4be3-bc99-4b410aeb88d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="man">
+      <UniqueIdentifier>{d8dd9744-caf0-4c49-b0bf-a15efe29b1d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sys">
+      <UniqueIdentifier>{6ee145ea-580e-4a26-9048-802f9bcdc667}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="util">
+      <UniqueIdentifier>{ce1b98ef-511b-40d3-985c-f7ef78340d16}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -30,6 +42,24 @@
     <ClCompile Include="stbImpl.cpp">
       <Filter>Archivos de recursos</Filter>
     </ClCompile>
+    <ClCompile Include="man\componentstorage.cpp">
+      <Filter>man</Filter>
+    </ClCompile>
+    <ClCompile Include="man\entitymanager.cpp">
+      <Filter>man</Filter>
+    </ClCompile>
+    <ClCompile Include="sys\collision.cpp">
+      <Filter>sys</Filter>
+    </ClCompile>
+    <ClCompile Include="sys\physics.cpp">
+      <Filter>sys</Filter>
+    </ClCompile>
+    <ClCompile Include="sys\render.cpp">
+      <Filter>sys</Filter>
+    </ClCompile>
+    <ClCompile Include="util\gamecontext.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Shader.h">
@@ -37,6 +67,36 @@
     </ClInclude>
     <ClInclude Include="stb_image.h">
       <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="cmp\component.hpp">
+      <Filter>cmp</Filter>
+    </ClInclude>
+    <ClInclude Include="cmp\entity.hpp">
+      <Filter>cmp</Filter>
+    </ClInclude>
+    <ClInclude Include="cmp\physics.hpp">
+      <Filter>cmp</Filter>
+    </ClInclude>
+    <ClInclude Include="man\componentstorage.hpp">
+      <Filter>man</Filter>
+    </ClInclude>
+    <ClInclude Include="man\entitymanager.hpp">
+      <Filter>man</Filter>
+    </ClInclude>
+    <ClInclude Include="sys\collision.hpp">
+      <Filter>sys</Filter>
+    </ClInclude>
+    <ClInclude Include="sys\physics.hpp">
+      <Filter>sys</Filter>
+    </ClInclude>
+    <ClInclude Include="sys\render.hpp">
+      <Filter>sys</Filter>
+    </ClInclude>
+    <ClInclude Include="util\typealiases.hpp">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="util\gamecontext.hpp">
+      <Filter>util</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
