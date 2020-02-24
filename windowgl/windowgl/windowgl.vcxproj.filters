@@ -5,10 +5,6 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="Archivos de recursos">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="Shaders">
       <UniqueIdentifier>{4b514def-739a-424b-be33-8529ad432e25}</UniqueIdentifier>
     </Filter>
@@ -24,19 +20,23 @@
     <Filter Include="util">
       <UniqueIdentifier>{ce1b98ef-511b-40d3-985c-f7ef78340d16}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Main">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
-      <Filter>Archivos de recursos</Filter>
+      <Filter>Main</Filter>
     </ClCompile>
     <ClCompile Include="..\OpenGLStuff\glad\src\glad.c">
-      <Filter>Archivos de recursos</Filter>
+      <Filter>Main</Filter>
     </ClCompile>
     <ClCompile Include="Shader.cpp">
-      <Filter>Archivos de recursos</Filter>
+      <Filter>Main</Filter>
     </ClCompile>
     <ClCompile Include="stbImpl.cpp">
-      <Filter>Archivos de recursos</Filter>
+      <Filter>Main</Filter>
     </ClCompile>
     <ClCompile Include="man\componentstorage.cpp">
       <Filter>man</Filter>
@@ -53,8 +53,14 @@
     <ClCompile Include="sys\render.cpp">
       <Filter>sys</Filter>
     </ClCompile>
-    <ClCompile Include="util\gamecontext.cpp">
-      <Filter>util</Filter>
+    <ClCompile Include="cmp\camera.cpp">
+      <Filter>cmp</Filter>
+    </ClCompile>
+    <ClCompile Include="cmp\entity.cpp">
+      <Filter>cmp</Filter>
+    </ClCompile>
+    <ClCompile Include="cmp\render.cpp">
+      <Filter>cmp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -93,6 +99,12 @@
     </ClInclude>
     <ClInclude Include="util\gamecontext.hpp">
       <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="cmp\camera.hpp">
+      <Filter>cmp</Filter>
+    </ClInclude>
+    <ClInclude Include="cmp\render.hpp">
+      <Filter>cmp</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

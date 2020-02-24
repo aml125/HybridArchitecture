@@ -1,4 +1,4 @@
-
+#pragma once
 #ifndef SHADER_H
 #define SHADER_H
 
@@ -28,9 +28,12 @@ public:
 	void setInt(const std::string &name, int value) const;
 	void setFloat(const std::string &name, float value) const;
 	void setMatrix4(const std::string &name, glm::mat4 &value) const;
+	void init();
 
 private:
 	void checkCompileErrors(unsigned int shader, std::string type);
+	const char* vertexPath;
+	const char* fragmentPath;
 };
 
 #endif
