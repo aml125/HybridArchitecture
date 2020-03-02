@@ -59,7 +59,7 @@
     <ClCompile Include="cmp\entity.cpp">
       <Filter>cmp</Filter>
     </ClCompile>
-    <ClCompile Include="cmp\render.cpp">
+    <ClCompile Include="cmp\render_cmp.cpp">
       <Filter>cmp</Filter>
     </ClCompile>
   </ItemGroup>
@@ -103,7 +103,7 @@
     <ClInclude Include="cmp\camera.hpp">
       <Filter>cmp</Filter>
     </ClInclude>
-    <ClInclude Include="cmp\render.hpp">
+    <ClInclude Include="cmp\render_cmp.hpp">
       <Filter>cmp</Filter>
     </ClInclude>
   </ItemGroup>

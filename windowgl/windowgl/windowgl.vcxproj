@@ -135,8 +135,10 @@
     <ClCompile Include="..\OpenGLStuff\glad\src\glad.c" />
     <ClCompile Include="cmp\camera.cpp" />
     <ClCompile Include="cmp\entity.cpp" />
-    <ClCompile Include="cmp\render.cpp" />
-    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="cmp\render_cmp.cpp" />
+    <ClCompile Include="Main.cpp">
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\tonet\Desktop\OpenGl\windowgl\windowgl\cmp;C:\Users\tonet\Desktop\OpenGl\windowgl\windowgl\man;C:\Users\tonet\Desktop\OpenGl\windowgl\windowgl\sys;C:\Users\tonet\Desktop\OpenGl\windowgl\windowgl\util;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
     <ClCompile Include="man\componentstorage.cpp" />
     <ClCompile Include="man\entitymanager.cpp" />
     <ClCompile Include="Shader.cpp" />
@@ -150,7 +152,7 @@
     <ClInclude Include="cmp\component.hpp" />
     <ClInclude Include="cmp\entity.hpp" />
     <ClInclude Include="cmp\physics.hpp" />
-    <ClInclude Include="cmp\render.hpp" />
+    <ClInclude Include="cmp\render_cmp.hpp" />
     <ClInclude Include="man\componentstorage.hpp" />
     <ClInclude Include="man\entitymanager.hpp" />
     <ClInclude Include="Shader.h" />

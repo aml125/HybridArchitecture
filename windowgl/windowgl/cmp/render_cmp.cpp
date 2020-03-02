@@ -1,8 +1,8 @@
-#include <cmp/render.hpp>
+#include <cmp/render_cmp.hpp>
 
 namespace ECS {
-RenderComponent_t::Render(glm::vec3 position, float &vertices[], float &texCoords[])
-	: this->position {position}, this->vertices = vertices, this->texCoords = texCoords
+RenderComponent_t::RenderComponent_t(glm::vec3 pos)
+	: position {pos}
 {
 	this->position = position;
 	//Create and bind Vertex buffer (VBO)
@@ -97,5 +97,20 @@ RenderComponent_t::Render(glm::vec3 position, float &vertices[], float &texCoord
 	}
 	//Free image memory
 	stbi_image_free(data);
+}
+
+/*glm::vec3 position;
+		unsigned int VBO;
+		unsigned int VAO;
+		
+		unsigned int texture1;
+		unsigned int texture2;
+		float angle = 20.0f;*/
+
+RenderComponent_t::RenderComponent_t(const RenderComponent_t& other) 
+	:	position { other.position }, VBO { other.VBO }, VAO { other.VAO },
+		texture1 { other.texture1 }, texture2 { other.texture2 }, angle { other.angle }
+{
+
 }
 }

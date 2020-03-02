@@ -189,13 +189,13 @@ bool RenderSystem_t::update(const GameContext_t& g) {
 }
 
 void RenderSystem_t::drawAllEntities(const VecEntities_t& entities) const {
-	for (Entity_t e : entities) {
+	for (const Entity_t& e : entities) {
 		// activate the texture unit first before binding texture
 		glActiveTexture(GL_TEXTURE0);
 		//bind texture
-		glBindTexture(GL_TEXTURE_2D, e.texture1);
+		glBindTexture(GL_TEXTURE_2D, e.ren.texture1);
 		glActiveTexture(GL_TEXTURE1);
-		glBindTexture(GL_TEXTURE_2D, e.texture2);
+		glBindTexture(GL_TEXTURE_2D, e.ren.texture2);
 
 		//transform object
 		/*glm::mat4 model = glm::mat4(1.0f);
@@ -206,11 +206,11 @@ void RenderSystem_t::drawAllEntities(const VecEntities_t& entities) const {
 		//glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
 		//bind vao AND DRAW
-		glBindVertexArray(e.VAO);
+		glBindVertexArray(e.ren.VAO);
 
 		glm::mat4 model = glm::mat4(1.0f);
-		model = glm::translate(model, e.position);
-		model = glm::rotate(model, glm::radians(e.angle), glm::vec3(1.0f, 0.3f, 0.5f));
+		model = glm::translate(model, e.ren.position);
+		model = glm::rotate(model, glm::radians(e.ren.angle), glm::vec3(1.0f, 0.3f, 0.5f));
 		myShader.setMatrix4("model", model);
 
 		glDrawArrays(GL_TRIANGLES, 0, 36);

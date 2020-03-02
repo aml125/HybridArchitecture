@@ -11,10 +11,19 @@
 #include <Shader.h>
 #include <glad\glad.h>
 #include <stb_image.h>
+#include <cmp/entity.hpp>
 
 namespace ECS {
-explicit Entity_t::Entity_t(glm::vec3 position)
+Entity_t::Entity_t(glm::vec3 position)
+	: ren { position }
 {
 	
+}
+
+Entity_t::Entity_t(const Entity_t& other) 
+	: ren { other.ren.position }
+{
+	phy = other.phy;
+	entityID = other.entityID;
 }
 }
