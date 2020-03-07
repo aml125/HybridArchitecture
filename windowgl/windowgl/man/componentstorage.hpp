@@ -20,7 +20,7 @@ struct ComponentStorage_t {
     ComponentStorage_t& operator=(ComponentStorage_t&) = delete;
     ComponentStorage_t& operator=(ComponentStorage_t&&) = delete;
 
-    const VecPhysics_t& getPhysicsComponents() const { return getPhysicsComponents(); };
+    const VecPhysics_t& getPhysicsComponents() const { return m_physicsComponents; };
     VecPhysics_t& getPhysicsComponents() { return m_physicsComponents; };
     PhysicsComponent_t& createPhysycsComponent();
 private:

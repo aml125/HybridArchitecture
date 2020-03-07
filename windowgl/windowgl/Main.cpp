@@ -13,6 +13,7 @@
 #include <sys\physics.hpp>
 #include <sys\collision.hpp>
 #include <sys/render.hpp>
+#include <cmp/model.hpp>
 
 
 
@@ -36,9 +37,9 @@ int main()
 {
 	ECS::RenderSystem_t Render(kSCRWIDTH, kSCRHEIGHT);
 	ECS::EntityManager_t EntityMan;
-	for (size_t i = 0; i < 10; i++)
+	for (size_t i = 0; i < 1; i++)
 	{
-		EntityMan.createEntity(cubePositions[i]);
+		EntityMan.createEntity(cubePositions[i], "C:\\Users\\tonet\\Desktop\\OpenGl\\windowgl\\x64\\Debug\\models\\nanosuit\\nanosuit.obj");
 	}
 	ECS::PhysicsSystem_t Physics;
 	ECS::CollisionSystem_t Collision;

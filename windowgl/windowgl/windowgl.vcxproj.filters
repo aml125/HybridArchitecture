@@ -56,10 +56,16 @@
     <ClCompile Include="cmp\camera.cpp">
       <Filter>cmp</Filter>
     </ClCompile>
+    <ClCompile Include="cmp\render_cmp.cpp">
+      <Filter>cmp</Filter>
+    </ClCompile>
+    <ClCompile Include="cmp\model.cpp">
+      <Filter>cmp</Filter>
+    </ClCompile>
     <ClCompile Include="cmp\entity.cpp">
       <Filter>cmp</Filter>
     </ClCompile>
-    <ClCompile Include="cmp\render_cmp.cpp">
+    <ClCompile Include="cmp\mesh.cpp">
       <Filter>cmp</Filter>
     </ClCompile>
   </ItemGroup>
@@ -71,9 +77,6 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="cmp\component.hpp">
-      <Filter>cmp</Filter>
-    </ClInclude>
-    <ClInclude Include="cmp\entity.hpp">
       <Filter>cmp</Filter>
     </ClInclude>
     <ClInclude Include="cmp\physics.hpp">
@@ -104,6 +107,21 @@
       <Filter>cmp</Filter>
     </ClInclude>
     <ClInclude Include="cmp\render_cmp.hpp">
+      <Filter>cmp</Filter>
+    </ClInclude>
+    <ClInclude Include="cmp\vertex.hpp">
+      <Filter>cmp</Filter>
+    </ClInclude>
+    <ClInclude Include="cmp\texture.hpp">
+      <Filter>cmp</Filter>
+    </ClInclude>
+    <ClInclude Include="cmp\model.hpp">
+      <Filter>cmp</Filter>
+    </ClInclude>
+    <ClInclude Include="cmp\entity.hpp">
+      <Filter>cmp</Filter>
+    </ClInclude>
+    <ClInclude Include="cmp\mesh.hpp">
       <Filter>cmp</Filter>
     </ClInclude>
   </ItemGroup>

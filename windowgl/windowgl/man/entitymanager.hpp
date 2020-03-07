@@ -16,7 +16,7 @@ struct EntityManager_t : GameContext_t {
 
     explicit EntityManager_t();
 
-    void createEntity(glm::vec3 pos);
+    void createEntity(glm::vec3 pos, std::string path);
     const VecEntities_t& getEntities() const override { return m_Entity; };
     VecEntities_t& getEntities() override { return m_Entity; };
     virtual VecPhysics_t& getPhysicsComponents() override {return m_components.getPhysicsComponents(); };

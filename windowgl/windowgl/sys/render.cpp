@@ -12,6 +12,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <util/gamecontext.hpp>
 #include <util/typealiases.hpp>
+#include <cmp/entity.hpp>
 
 
 namespace ECS {
@@ -190,30 +191,32 @@ bool RenderSystem_t::update(const GameContext_t& g) {
 
 void RenderSystem_t::drawAllEntities(const VecEntities_t& entities) const {
 	for (const Entity_t& e : entities) {
-		// activate the texture unit first before binding texture
-		glActiveTexture(GL_TEXTURE0);
-		//bind texture
-		glBindTexture(GL_TEXTURE_2D, e.ren.texture1);
-		glActiveTexture(GL_TEXTURE1);
-		glBindTexture(GL_TEXTURE_2D, e.ren.texture2);
+		for (const Mesh_t& m : e.getModel().getMeshes()) {
+			unsigned int diffuseNr = 1;
+			unsigned int specularNr = 1;
+			for (unsigned int i = 0; i < m.textures.size(); i++)
+			{
+				glActiveTexture(GL_TEXTURE0 + i); // activate proper texture unit before binding
+				// retrieve texture number (the N in diffuse_textureN)
+				std::string number;
+				std::string name = m.textures[i].type;
+				if (name == "texture_diffuse")
+					number = std::to_string(diffuseNr++);
+				else if (name == "texture_specular")
+					number = std::to_string(specularNr++);
 
-		//transform object
-		/*glm::mat4 model = glm::mat4(1.0f);
-		model = glm::rotate(model, (float)(glfwGetTime() * glm::radians(50.0f)), glm::vec3(0.5f, 1.0f, 0.0f));
-		myShader.setMatrix4("model", model);*/
-		////bind vao
-		//glBindVertexArray(VAO);
-		//glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+				myShader.setFloat(("material." + name + number).c_str(), i);
+				glBindTexture(GL_TEXTURE_2D, m.textures[i].id);
+			}
+			glActiveTexture(GL_TEXTURE0);
 
-		//bind vao AND DRAW
-		glBindVertexArray(e.ren.VAO);
-
-		glm::mat4 model = glm::mat4(1.0f);
-		model = glm::translate(model, e.ren.position);
-		model = glm::rotate(model, glm::radians(e.ren.angle), glm::vec3(1.0f, 0.3f, 0.5f));
-		myShader.setMatrix4("model", model);
-
-		glDrawArrays(GL_TRIANGLES, 0, 36);
+			// draw mesh
+			glBindVertexArray(m.VAO);
+			glm::mat4 model = glm::mat4(1.0f);
+			myShader.setMatrix4("model", model);
+			glDrawElements(GL_TRIANGLES, m.indices.size(), GL_UNSIGNED_INT, 0);
+			glBindVertexArray(0);
+		}
 	}
 }
 
