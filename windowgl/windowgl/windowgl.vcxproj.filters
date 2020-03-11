@@ -56,9 +56,6 @@
     <ClCompile Include="cmp\camera.cpp">
       <Filter>cmp</Filter>
     </ClCompile>
-    <ClCompile Include="cmp\render_cmp.cpp">
-      <Filter>cmp</Filter>
-    </ClCompile>
     <ClCompile Include="cmp\model.cpp">
       <Filter>cmp</Filter>
     </ClCompile>
@@ -66,6 +63,9 @@
       <Filter>cmp</Filter>
     </ClCompile>
     <ClCompile Include="cmp\mesh.cpp">
+      <Filter>cmp</Filter>
+    </ClCompile>
+    <ClCompile Include="cmp\light.cpp">
       <Filter>cmp</Filter>
     </ClCompile>
   </ItemGroup>
@@ -106,9 +106,6 @@
     <ClInclude Include="cmp\camera.hpp">
       <Filter>cmp</Filter>
     </ClInclude>
-    <ClInclude Include="cmp\render_cmp.hpp">
-      <Filter>cmp</Filter>
-    </ClInclude>
     <ClInclude Include="cmp\vertex.hpp">
       <Filter>cmp</Filter>
     </ClInclude>
@@ -124,12 +121,21 @@
     <ClInclude Include="cmp\mesh.hpp">
       <Filter>cmp</Filter>
     </ClInclude>
+    <ClInclude Include="cmp\light.hpp">
+      <Filter>cmp</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Fragment.glsl">
       <Filter>Shaders</Filter>
     </None>
     <None Include="Vertex.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="lightningVertex.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="lightningFragment.glsl">
       <Filter>Shaders</Filter>
     </None>
   </ItemGroup>

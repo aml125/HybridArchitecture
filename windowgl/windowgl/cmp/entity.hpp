@@ -26,8 +26,8 @@ struct Entity_t {
 	//Components
     //PhysicsComponent_t* phy {};
 	
-	Model model;
-	const Model& getModel() const { return model; };
+	Model_t model;
+	const Model_t& getModel() const { return model; };
     std::size_t entityID { ++nextID };
     inline static std::size_t nextID { 0 };
 };

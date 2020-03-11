@@ -16,4 +16,9 @@ namespace ECS {
 		LEFT,
 		RIGHT
 	};
+
+	constexpr glm::vec3 RGB_DARKOLIVE{ 0.33f, 0.42f, 0.18f };
+	constexpr glm::vec3 RGB_WHITE{ 1.0f, 1.0f, 1.0f };
+	constexpr glm::vec3 RGB_GREEN{ 0.0f, 1.0f, 0.0f };
+	constexpr glm::vec3 RGB_CORAL{ 1.0f, 0.5f, 0.31f };
 }

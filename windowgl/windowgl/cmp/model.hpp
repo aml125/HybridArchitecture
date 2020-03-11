@@ -39,10 +39,10 @@ namespace ECS {
 	//	void setupMesh();
 	//};
 
-	struct Model
+	struct Model_t
 	{
 		/*  Functions   */
-		Model(const char* path)
+		Model_t(const char* path)
 			: meshes{}, directory{}
 		{
 			loadModel(path);

@@ -33,13 +33,17 @@ constexpr glm::vec3 cubePositions[] = {
 constexpr uint32_t kSCRWIDTH{ 1024 };
 constexpr uint32_t kSCRHEIGHT{ 768 };
 
+const std::string MESA_PATH = "C:\\Users\\tonet\\Desktop\\OpenGl\\windowgl\\x64\\Debug\\models\\mesa\\mesa.fbx";
+const std::string NANOSUIT_PATH = "C:\\Users\\tonet\\Desktop\\OpenGl\\windowgl\\x64\\Debug\\models\\nanosuit\\nanosuit.obj";
+const std::string DICE_PATH = "C:\\Users\\tonet\\Desktop\\OpenGl\\windowgl\\x64\\Debug\\models\\dice\\dice.fbx";
+
 int main()
 {
 	ECS::RenderSystem_t Render(kSCRWIDTH, kSCRHEIGHT);
 	ECS::EntityManager_t EntityMan;
 	for (size_t i = 0; i < 1; i++)
 	{
-		EntityMan.createEntity(cubePositions[i], "C:\\Users\\tonet\\Desktop\\OpenGl\\windowgl\\x64\\Debug\\models\\nanosuit\\nanosuit.obj");
+		EntityMan.createEntity(cubePositions[i], DICE_PATH);
 	}
 	ECS::PhysicsSystem_t Physics;
 	ECS::CollisionSystem_t Collision;

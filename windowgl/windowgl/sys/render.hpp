@@ -4,6 +4,8 @@
 #include <util/typealiases.hpp>
 #include <GLFW/glfw3.h>
 #include <cmp\camera.hpp>
+#include <cmp\light.hpp>
+#include <vector>
 
 namespace ECS {
 
@@ -15,6 +17,7 @@ struct RenderSystem_t {
 
     bool update(const GameContext_t& g);
     void drawAllEntities(const VecEntities_t& entities) const;
+	void drawLightSource(const LightSource_t& light)  const;
     // void drawEntity(const Entity_t& e) const;
 
 	float vertices[180] = {
@@ -61,7 +64,7 @@ struct RenderSystem_t {
 		-0.5f,  0.5f, -0.5f,  0.0f, 1.0f
 	};
 
-	glm::vec3 lightPosition;
+	std::vector<LightSource_t> lights{};
 
 	/*static void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 	static void mouse_callback(GLFWwindow* window, double xpos, double ypos);
@@ -84,13 +87,16 @@ struct RenderSystem_t {
 private :
     const uint32_t m_w { 0 }, m_h { 0 };
 	void mouse_move(GLFWwindow* window);
+	void init();
 	bool firstMouse = true;
 	GLFWwindow* window;
 	//glm::mat4 model;
 	glm::mat4 view;
 	glm::mat4 projection;
+
 	//SHADERS
 	Shader myShader{ "Vertex.glsl", "Fragment.glsl" };
+	Shader lightShader{ "lightningVertex.glsl", "lightningFragment.glsl" };
 	
 };
 }

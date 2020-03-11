@@ -138,7 +138,7 @@
     <ClCompile Include="cmp\entity.cpp" />
     <ClCompile Include="cmp\mesh.cpp" />
     <ClCompile Include="cmp\model.cpp" />
-    <ClCompile Include="cmp\render_cmp.cpp" />
+    <ClCompile Include="cmp\light.cpp" />
     <ClCompile Include="Main.cpp">
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\tonet\Desktop\OpenGl\windowgl\windowgl\cmp;C:\Users\tonet\Desktop\OpenGl\windowgl\windowgl\man;C:\Users\tonet\Desktop\OpenGl\windowgl\windowgl\sys;C:\Users\tonet\Desktop\OpenGl\windowgl\windowgl\util;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
@@ -157,7 +157,7 @@
     <ClInclude Include="cmp\mesh.hpp" />
     <ClInclude Include="cmp\model.hpp" />
     <ClInclude Include="cmp\physics.hpp" />
-    <ClInclude Include="cmp\render_cmp.hpp" />
+    <ClInclude Include="cmp\light.hpp" />
     <ClInclude Include="cmp\texture.hpp" />
     <ClInclude Include="cmp\vertex.hpp" />
     <ClInclude Include="man\componentstorage.hpp" />
@@ -172,6 +172,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Fragment.glsl" />
+    <None Include="lightningFragment.glsl" />
+    <None Include="lightningVertex.glsl" />
     <None Include="Vertex.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

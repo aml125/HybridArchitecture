@@ -5,12 +5,12 @@
 #include <stb_image.h>
 
 namespace ECS {
-	const std::vector<Mesh_t>& Model::getMeshes() const
+	const std::vector<Mesh_t>& Model_t::getMeshes() const
 	{
 		return meshes;
 	}
 
-	void Model::loadModel(std::string path)
+	void Model_t::loadModel(std::string path)
 	{
 		Assimp::Importer importer;
 		const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs);
@@ -25,7 +25,7 @@ namespace ECS {
 		processNode(scene->mRootNode, scene);
 	}
 
-	void Model::processNode(aiNode* node, const aiScene* scene)
+	void Model_t::processNode(aiNode* node, const aiScene* scene)
 	{
 		// process all the node's meshes (if any)
 		for (unsigned int i = 0; i < node->mNumMeshes; i++)
@@ -40,7 +40,7 @@ namespace ECS {
 		}
 	}
 
-	Mesh_t Model::processMesh(aiMesh* mesh, const aiScene* scene)
+	Mesh_t Model_t::processMesh(aiMesh* mesh, const aiScene* scene)
 	{
 		std::vector<Vertex_t> vertices;
 		std::vector<unsigned int> indices;
@@ -97,7 +97,7 @@ namespace ECS {
 		return Mesh_t(vertices, indices, textures);
 	}
 
-	std::vector<Texture_t> Model::loadMaterialTextures(aiMaterial* mat, aiTextureType type, const std::string& typeName)
+	std::vector<Texture_t> Model_t::loadMaterialTextures(aiMaterial* mat, aiTextureType type, const std::string& typeName)
 	{
 		std::vector<Texture_t> textures;
 		for (unsigned int i = 0; i < mat->GetTextureCount(type); i++)
@@ -120,7 +120,7 @@ namespace ECS {
 		return textures;
 	}
 
-	unsigned int Model::textureFromFile(const char* path, const std::string& directory)
+	unsigned int Model_t::textureFromFile(const char* path, const std::string& directory)
 	{
 		std::string filename = std::string(path);
 		filename = directory + '/' + filename;
@@ -161,7 +161,7 @@ namespace ECS {
 		return textureID;
 	}
 
-	bool Model::textureIsPressent(const std::string& path, Texture_t& foundTexture)
+	bool Model_t::textureIsPressent(const std::string& path, Texture_t& foundTexture)
 	{
 		for (Texture_t& tex : texturesLoaded) {
 			if (tex.path == path) {
