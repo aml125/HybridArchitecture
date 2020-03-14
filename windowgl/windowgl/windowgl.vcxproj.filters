@@ -126,16 +126,28 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Fragment.glsl">
+    <None Include="lightningVertex.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="lightningFragment.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="sunVertex.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="sunFragment.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="pointFragment.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="pointVertex.glsl">
       <Filter>Shaders</Filter>
     </None>
     <None Include="Vertex.glsl">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="lightningVertex.glsl">
-      <Filter>Shaders</Filter>
-    </None>
-    <None Include="lightningFragment.glsl">
+    <None Include="Fragment.glsl">
       <Filter>Shaders</Filter>
     </None>
   </ItemGroup>

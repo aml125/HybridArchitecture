@@ -172,8 +172,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Fragment.glsl" />
+    <None Include="pointFragment.glsl" />
     <None Include="lightningFragment.glsl" />
     <None Include="lightningVertex.glsl" />
+    <None Include="sunFragment.glsl" />
+    <None Include="sunVertex.glsl" />
+    <None Include="pointVertex.glsl" />
     <None Include="Vertex.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
