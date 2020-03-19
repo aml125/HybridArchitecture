@@ -30,8 +30,8 @@ constexpr glm::vec3 cubePositions[] = {
   glm::vec3(-1.3f,  1.0f, -1.5f)
 };
 
-constexpr uint32_t kSCRWIDTH{ 1024 };
-constexpr uint32_t kSCRHEIGHT{ 768 };
+constexpr unsigned int kSCRWIDTH{ 1024 };
+constexpr unsigned int kSCRHEIGHT{ 768 };
 
 const std::string MESA_PATH = "C:\\Users\\tonet\\Desktop\\OpenGl\\windowgl\\x64\\Debug\\models\\mesa\\mesa.fbx";
 const std::string NANOSUIT_PATH = "C:\\Users\\tonet\\Desktop\\OpenGl\\windowgl\\x64\\Debug\\models\\nanosuit\\nanosuit.obj";
@@ -41,10 +41,17 @@ int main()
 {
 	ECS::RenderSystem_t Render(kSCRWIDTH, kSCRHEIGHT);
 	ECS::EntityManager_t EntityMan;
-	for (size_t i = 0; i < 1; i++)
-	{
-		EntityMan.createEntity(cubePositions[i], DICE_PATH);
-	}
+
+	EntityMan.createEntity(glm::vec3(0, 0, 0), MESA_PATH);
+	EntityMan.createEntity(glm::vec3(10, 0, 0), NANOSUIT_PATH);
+
+	ECS::VecEntities_t& vec = EntityMan.getEntities();
+	vec[0].collider.length.x = vec[0].collider.length.y = vec[0].collider.length.z = 2;
+	vec[0].phy->speed.x = 0.2f;
+	
+	vec[1].collider.length.x = vec[1].collider.length.y = vec[1].collider.length.z = 2;
+	vec[1].phy->speed.x = -0.2f;
+
 	ECS::PhysicsSystem_t Physics;
 	ECS::CollisionSystem_t Collision;
 	while (Render.update(EntityMan)) {

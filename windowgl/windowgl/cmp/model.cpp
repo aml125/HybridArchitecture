@@ -60,9 +60,7 @@ namespace ECS {
 			vector.x = mesh->mNormals[i].x;
 			vector.y = mesh->mNormals[i].y;
 			vector.z = mesh->mNormals[i].z;
-			vertex.Normal = vector;
-
-			vertices.push_back(vertex);
+			vertex.Normal = vector;		
 
 			if (mesh->mTextureCoords[0]) // does the mesh contain texture coordinates?
 			{
@@ -73,6 +71,8 @@ namespace ECS {
 			}
 			else
 				vertex.TexCoords = glm::vec2(0.0f, 0.0f);
+
+			vertices.push_back(vertex);
 		}
 		// process indices
 		for (unsigned int i = 0; i < mesh->mNumFaces; i++)

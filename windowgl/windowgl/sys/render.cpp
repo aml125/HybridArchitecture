@@ -129,10 +129,10 @@ void RenderSystem_t::init() {
 	glViewport(0, 0, m_w, m_h);
 }
 
-RenderSystem_t::RenderSystem_t(uint32_t w, uint32_t h) 
+RenderSystem_t::RenderSystem_t(unsigned int w, unsigned int h) 
     : m_w{w}, m_h{h}
 {
-    std::cout << "Starting render system" << std::endl;
+	std::cout << "Starting render system" << std::endl;
 
 	init();
 
@@ -148,11 +148,12 @@ RenderSystem_t::RenderSystem_t(uint32_t w, uint32_t h)
 	//activate shader
 	myShader.init();
 	lightShader.init();
+	//lightShader.use();
 	//myShader.use();
 
-	////Model matrix
-	//model = glm::mat4(1.0f);
-	//model = glm::rotate(model, glm::radians(-55.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+	//Model matrix
+	model = glm::mat4(1.0f);
+	model = glm::rotate(model, glm::radians(-55.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 
 	//View matrix
 	view = glm::mat4(1.0f);
@@ -163,20 +164,24 @@ RenderSystem_t::RenderSystem_t(uint32_t w, uint32_t h)
 	projection = glm::perspective(glm::radians(45.0f), m_w / m_h * 1.0f, 0.1f, 100.0f);
 
 
-	////Send uniforms
-	//myShader.setInt("texture1", 0);
-	//myShader.setInt("texture2", 1);
-	////myShader.setMatrix4("model", model);
-	//myShader.setMatrix4("view", view);
-	//myShader.setMatrix4("projection", projection);
+	//Send uniforms
+	myShader.setInt("texture1", 0);
+	myShader.setInt("texture2", 1);
+	//myShader.setMatrix4("model", model);
+	myShader.setMatrix4("view", view);
+	myShader.setMatrix4("projection", projection);
 
-	lights.emplace_back(glm::vec3(pointLightPositions[0]), RGB_WHITE );
-	lights.emplace_back(glm::vec3(5.0f, 5.0f, 5.0f), RGB_CORAL);
-	lights.emplace_back(glm::vec3(pointLightPositions[1]), RGB_WHITE );
-	lights.emplace_back(glm::vec3(pointLightPositions[2]), RGB_WHITE );
-	lights.emplace_back(glm::vec3(pointLightPositions[3]), RGB_WHITE );
+	PointLight_t pt(glm::vec3(pointLightPositions[0]), { 0.05f, 0.05f, 0.05f }, { 0.8f, 0.8f, 0.8f }, { 1.0f, 1.0f, 1.0f });
+	lights.push_back(pt);
+	/*PointLight_t pt2(glm::vec3(pointLightPositions[1]), { 0.05f, 0.05f, 0.05f }, { 0.8f, 0.8f, 0.8f }, { 1.0f, 1.0f, 1.0f });
+	lights.push_back(pt2);
+	PointLight_t pt3(glm::vec3(pointLightPositions[2]), { 0.05f, 0.05f, 0.05f }, { 0.8f, 0.8f, 0.8f }, { 1.0f, 1.0f, 1.0f });
+	lights.push_back(pt3);
+	PointLight_t pt4(glm::vec3(pointLightPositions[3]), { 0.05f, 0.05f, 0.05f }, { 0.8f, 0.8f, 0.8f }, { 1.0f, 1.0f, 1.0f });
+	lights.push_back(pt4);*/
 
 }
+
 
 RenderSystem_t::~RenderSystem_t() {
 	glfwTerminate();
@@ -197,16 +202,21 @@ bool RenderSystem_t::update(const GameContext_t& g) {
 	projection = glm::perspective(glm::radians(fov), 800.0f / 600.0f, 0.1f, 100.0f);
 
 	//Move light
-	lights[0].position.y = sin(glfwGetTime());
+	lights[0].position.y = sin(glfwGetTime()) + 10;
 
 	//RENDERING
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	drawLightSource(lights[0]);
-	drawLightSource(lights[2]);
-	drawLightSource(lights[3]);
-	drawLightSource(lights[4]);
+	//General shader information
+	myShader.setMatrix4("projection", projection);
+	myShader.setMatrix4("view", view);
+	myShader.setInt("material.diffuse", 0);
+	myShader.setVec3("material.specular", 0.5f, 0.5f, 0.5f);
+	myShader.setFloat("material.shininess", 32.0f);
+	myShader.setVec3("viewPos", camera.Position);
+
+	drawLights();
 	drawAllEntities(g.getEntities());
 
 	glfwSwapBuffers(window);
@@ -229,141 +239,90 @@ glm::vec3 cubePositions[] = {
 	glm::vec3(-1.3f,  1.0f, -1.5f)
 };
 
+void RenderSystem_t::setLightInformation() const
+{
+	//directional light
+	myShader.setVec3("dirLight.direction", sunLight.direction);
+	myShader.setVec3("dirLight.ambient", sunLight.ambient);
+	myShader.setVec3("dirLight.diffuse", sunLight.diffuse);
+	myShader.setVec3("dirLight.specular", sunLight.specular);
+	myShader.setInt("pointLightsSize", lights.size());
+
+	std::size_t i = 0;
+	// point lights
+	for (const PointLight_t& pl : lights) {
+		myShader.setVec3("pointLights["+std::to_string(i)+"].position", pl.position);
+		myShader.setVec3("pointLights[" + std::to_string(i) + "].ambient", pl.ambient);
+		myShader.setVec3("pointLights[" + std::to_string(i) + "].diffuse", pl.diffuse);
+		myShader.setVec3("pointLights[" + std::to_string(i) + "].specular", pl.specular);
+		myShader.setFloat("pointLights[" + std::to_string(i) + "].constant", pl.constantDecrease);
+		myShader.setFloat("pointLights[" + std::to_string(i) + "].linear", pl.linearDecrease);
+		myShader.setFloat("pointLights[" + std::to_string(i) + "].quadratic", pl.quadraticDecrease);
+		i++;
+	}
+}
+
 void RenderSystem_t::drawAllEntities(const VecEntities_t& entities) const {
 	myShader.use();
 	myShader.setMatrix4("projection", projection);
 	myShader.setMatrix4("view", view);
+	myShader.setFloat("material.shininess", 32);
 	for (const Entity_t& e : entities) {
 		for (const Mesh_t& m : e.getModel().getMeshes()) {
-			//unsigned int diffuseNr = 1;
-			//unsigned int specularNr = 1;
-			//for (unsigned int i = 0; i < m.textures.size(); i++)
-			//{
-			//	glActiveTexture(GL_TEXTURE0 + i); // activate proper texture unit before binding
-			//	// retrieve texture number (the N in diffuse_textureN)
-			//	std::string number;
-			//	std::string name = m.textures[i].type;
-			//	if (name == "texture_diffuse")
-			//		number = std::to_string(diffuseNr++);
-			//	else if (name == "texture_specular")
-			//		number = std::to_string(specularNr++);
+			unsigned int diffuseNr = 1;
+			unsigned int specularNr = 1;
+			for (std::size_t i = 0; i < m.textures.size(); i++)
+			{
+				glActiveTexture(GL_TEXTURE0 + i); // activate proper texture unit before binding
+				// retrieve texture number (the N in diffuse_textureN)
+				std::string number;
+				std::string name = m.textures[i].type;
+				if (name == "texture_diffuse")
+					number = std::to_string(diffuseNr++);
+				else if (name == "texture_specular")
+					number = std::to_string(specularNr++);
 
-			//	myShader.setFloat(("material." + name + number).c_str(), i);
-			//	glBindTexture(GL_TEXTURE_2D, m.textures[i].id);
-			//}
-			//glActiveTexture(GL_TEXTURE0);
+				std::string finalName = ("material." + name + number);
+				myShader.setFloat(finalName.c_str(), i);
+				glBindTexture(GL_TEXTURE_2D, m.textures[i].id);
+			}
+			glActiveTexture(GL_TEXTURE0);
 
-			//// draw mesh
-			//glBindVertexArray(m.VAO);
-			//glm::mat4 model = glm::mat4(1.0f);
-			//myShader.setMatrix4("model", model);
-			//
-			//myShader.setVec3("objectColor", RGB_CORAL);
-			//myShader.setVec3("lightColor", lights[0].color);
-			//myShader.setFloat("ambientStrength", lights[0].ambientStrength);
-			//glDrawElements(GL_TRIANGLES, m.indices.size(), GL_UNSIGNED_INT, 0);
-			//glBindVertexArray(0);
+			// draw mesh
+			glBindVertexArray(m.VAO);
+			glm::mat4 model = glm::mat4(1.0f);
+			model = glm::translate(model, e.phy->position);
+			myShader.setMatrix4("model", model);
+			
+			setLightInformation();
+			glDrawElements(GL_TRIANGLES, m.indices.size(), GL_UNSIGNED_INT, 0);
+			glBindVertexArray(0);
 
 		}
 	}
-
-	//DELETE THIS
-	myShader.use();
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, lights[1].textureID);
-	glActiveTexture(GL_TEXTURE1);
-	glBindTexture(GL_TEXTURE_2D, lights[1].specularID);
-
-	glm::vec3 diffuseColor = lights[0].color * glm::vec3(0.5f);
-	glm::vec3 ambientColor = diffuseColor * glm::vec3(0.2f);
-
-	myShader.setMatrix4("projection", projection);
-	myShader.setMatrix4("view", view);
-	myShader.setInt("material.diffuse", 0);
-	myShader.setInt("material.specular", 1);
-	myShader.setVec3("material.specular", 0.5f, 0.5f, 0.5f);
-	myShader.setFloat("material.shininess", 32.0f);
-	myShader.setVec3("viewPos", camera.Position);
-	// directional light
-	myShader.setVec3("dirLight.direction", -0.2f, -1.0f, -0.3f);
-	myShader.setVec3("dirLight.ambient", 0.05f, 0.05f, 0.05f);
-	myShader.setVec3("dirLight.diffuse", 0.4f, 0.4f, 0.4f);
-	myShader.setVec3("dirLight.specular", 0.5f, 0.5f, 0.5f);
-	// point light 1
-	myShader.setVec3("pointLights[0].position", pointLightPositions[0]);
-	myShader.setVec3("pointLights[0].ambient", 0.05f, 0.05f, 0.05f);
-	myShader.setVec3("pointLights[0].diffuse", 0.8f, 0.8f, 0.8f);
-	myShader.setVec3("pointLights[0].specular", 1.0f, 1.0f, 1.0f);
-	myShader.setFloat("pointLights[0].constant", 1.0f);
-	myShader.setFloat("pointLights[0].linear", 0.09);
-	myShader.setFloat("pointLights[0].quadratic", 0.032);
-	// point light 2
-	myShader.setVec3("pointLights[1].position", pointLightPositions[1]);
-	myShader.setVec3("pointLights[1].ambient", 0.05f, 0.05f, 0.05f);
-	myShader.setVec3("pointLights[1].diffuse", 0.8f, 0.8f, 0.8f);
-	myShader.setVec3("pointLights[1].specular", 1.0f, 1.0f, 1.0f);
-	myShader.setFloat("pointLights[1].constant", 1.0f);
-	myShader.setFloat("pointLights[1].linear", 0.09);
-	myShader.setFloat("pointLights[1].quadratic", 0.032);
-	// point light 3
-	myShader.setVec3("pointLights[2].position", pointLightPositions[2]);
-	myShader.setVec3("pointLights[2].ambient", 0.05f, 0.05f, 0.05f);
-	myShader.setVec3("pointLights[2].diffuse", 0.8f, 0.8f, 0.8f);
-	myShader.setVec3("pointLights[2].specular", 1.0f, 1.0f, 1.0f);
-	myShader.setFloat("pointLights[2].constant", 1.0f);
-	myShader.setFloat("pointLights[2].linear", 0.09);
-	myShader.setFloat("pointLights[2].quadratic", 0.032);
-	// point light 4
-	myShader.setVec3("pointLights[3].position", pointLightPositions[3]);
-	myShader.setVec3("pointLights[3].ambient", 0.05f, 0.05f, 0.05f);
-	myShader.setVec3("pointLights[3].diffuse", 0.8f, 0.8f, 0.8f);
-	myShader.setVec3("pointLights[3].specular", 1.0f, 1.0f, 1.0f);
-	myShader.setFloat("pointLights[3].constant", 1.0f);
-	myShader.setFloat("pointLights[3].linear", 0.09);
-	myShader.setFloat("pointLights[3].quadratic", 0.032);
-	//myShader.setVec3("light.direction", -0.2f, -1.0f, -0.3f);
-
-	glBindVertexArray(lights[1].VAO);
-	glm::mat4 model = glm::mat4(1.0f);
-	lightShader.setMatrix4("model", model);
-	glDrawArrays(GL_TRIANGLES, 0, 36);
-
-	for (unsigned int i = 0; i < 10; i++)
-	{
-		glm::mat4 model = glm::mat4(1.0f);
-		model = glm::translate(model, cubePositions[i]);
-		float angle = 20.0f * i;
-		model = glm::rotate(model, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
-		myShader.setMatrix4("model", model);
-
-		glDrawArrays(GL_TRIANGLES, 0, 36);
-	}
-
 }
 
-void RenderSystem_t::drawLightSource(const LightSource_t& light) const
+void RenderSystem_t::drawLights() const
+{
+	for (const PointLight_t& pl : lights) {
+		drawLightSource(pl);
+	}
+}
+
+void RenderSystem_t::drawLightSource(const PointLight_t& light) const
 {
 	lightShader.use();
 	lightShader.setMatrix4("projection", projection);
 	lightShader.setMatrix4("view", view);
-	lightShader.setVec3("objectColor", light.color);
-	lightShader.setVec3("lightColor", light.color);
+	lightShader.setVec3("objectColor", light.diffuse);
+	lightShader.setVec3("lightColor", light.diffuse);
 
-	glBindVertexArray(light.VAO);
+	glBindVertexArray(light.boxRenderer.VAO);
 	glm::mat4 model = glm::mat4(1.0f);
 	model = glm::translate(model, light.position);
 	model = glm::scale(model, glm::vec3(0.2f));
 	lightShader.setMatrix4("model", model);
 	glDrawArrays(GL_TRIANGLES, 0, 36);
-
-	//glBindVertexArray(light.VAO);
-	//model = glm::mat4(1.0f);
-	////glm::scale(model, glm::vec3(0.2f));
-	//glm::translate(model, { 8.0, 8.0, 8.0 });
-	//myShader.setMatrix4("projection", projection);
-	//myShader.setMatrix4("view", view);
-	//myShader.setMatrix4("model", model);
-	//glDrawArrays(GL_TRIANGLES, 0, 36);
+	glBindVertexArray(0);
 }
-
 }

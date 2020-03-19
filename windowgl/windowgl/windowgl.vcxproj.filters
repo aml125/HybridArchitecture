@@ -65,7 +65,13 @@
     <ClCompile Include="cmp\mesh.cpp">
       <Filter>cmp</Filter>
     </ClCompile>
-    <ClCompile Include="cmp\light.cpp">
+    <ClCompile Include="cmp\directionalLight.cpp">
+      <Filter>cmp</Filter>
+    </ClCompile>
+    <ClCompile Include="cmp\pointLight.cpp">
+      <Filter>cmp</Filter>
+    </ClCompile>
+    <ClCompile Include="cmp\boxrenderer.cpp">
       <Filter>cmp</Filter>
     </ClCompile>
   </ItemGroup>
@@ -121,7 +127,16 @@
     <ClInclude Include="cmp\mesh.hpp">
       <Filter>cmp</Filter>
     </ClInclude>
-    <ClInclude Include="cmp\light.hpp">
+    <ClInclude Include="cmp\directionalLight.hpp">
+      <Filter>cmp</Filter>
+    </ClInclude>
+    <ClInclude Include="cmp\pointLight.hpp">
+      <Filter>cmp</Filter>
+    </ClInclude>
+    <ClInclude Include="cmp\boxcollider.hpp">
+      <Filter>cmp</Filter>
+    </ClInclude>
+    <ClInclude Include="cmp\boxrenderer.hpp">
       <Filter>cmp</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,13 +1,13 @@
 #pragma once
 
-#include <cstdint>
+#include <glm\glm\ext\vector_float3.hpp>
 
 namespace ECS {
 
     struct PhysicsComponent_t {
         explicit PhysicsComponent_t() = default;
         
-        uint32_t x { 0 }, y { 0 };
-        uint32_t vx { 0 }, vy { 0 };
+		glm::vec3 position{};
+		glm::vec3 speed{};
     };
 }

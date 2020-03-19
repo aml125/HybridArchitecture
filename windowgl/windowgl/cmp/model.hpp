@@ -7,38 +7,6 @@
 #include <cmp/mesh.hpp>
 
 namespace ECS {
-
-	//struct Texture_t {
-	//	unsigned int id;
-	//	std::string type;
-	//	std::string path;
-	//};
-
-	//struct Vertex_t {
-	//	glm::vec3 Position;
-	//	glm::vec3 Normal;
-	//	glm::vec2 TexCoords;
-	//};
-
-	//struct Mesh_t {
-	//	/*  Mesh Data  */
-	//	std::vector<Vertex_t> vertices;
-	//	std::vector<unsigned int> indices;
-	//	std::vector<Texture_t> textures;
-
-	//	/*  Functions  */
-	//	Mesh_t(std::vector<Vertex_t> vertices, std::vector<unsigned int> indices, std::vector<Texture_t> textures)
-	//		: vertices{ vertices }, indices{ indices }, textures{ textures }
-	//	{ setupMesh(); };
-
-	//	/*  Render data  */
-	//	unsigned int VAO, VBO, EBO;
-
-	//private:
-	//	/*  Functions    */
-	//	void setupMesh();
-	//};
-
 	struct Model_t
 	{
 		/*  Functions   */

@@ -13,12 +13,11 @@ EntityManager_t::EntityManager_t() {
 
 void EntityManager_t::createEntity(glm::vec3 pos, std::string path) {
     Entity_t& e = m_Entity.emplace_back(path);
-  /*  auto& ph = m_components.createPhysycsComponent();
+    auto& ph = m_components.createPhysycsComponent();
     e.phy = &ph;
-    ph.x = 0; ph.y = 0;
-    ph.vx = 1; ph.vy = 1;*/
-    //Set color in all elements of sprite
-    // std::fill(begin(e.sprite), end(e.sprite), color);
+	ph.position = pos;
+	ph.speed.x = ph.speed.y = ph.speed.z = 0;
+
 }
 
 }
