@@ -97,50 +97,17 @@ void processInput(GLFWwindow* window)
 		RenderSystem_t::camera.ProcessKeyboard(Camera_Movement::RIGHT, RenderSystem_t::deltaTime);
 };
 
-void RenderSystem_t::init() {
-	glfwInit();
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 4);
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-	//MAC LOOSERS glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
-	//Create window
-	window = glfwCreateWindow(m_w, m_h,
-		"Primera ventana", NULL, NULL); //Resolution and name
-	if (window == NULL)
-	{
-		std::cout << "Failed to create GLFW window" << std::endl;
-		glfwTerminate();
-		char c = getchar();
-		return;
-	}
-	glfwMakeContextCurrent(window);
-	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
-	//Initialize glad
-	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-	{
-		std::cout << "Failed to initialize GLAD" << std::endl;
-		char c = getchar();
-		return;
-	}
-
-	//Tell glad windows size (1, 2, 3, 4) where 1, 2 is the left corner
-	glViewport(0, 0, m_w, m_h);
-}
-
-RenderSystem_t::RenderSystem_t(unsigned int w, unsigned int h) 
-    : m_w{w}, m_h{h}
+RenderSystem_t::RenderSystem_t(Window_t window)
+	: window{ window }
 {
 	std::cout << "Starting render system" << std::endl;
 
-	init();
-
-
 	//REGISTRAR CALLBACKS
 	//If window size changed, call glviewport
-	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-	glfwSetScrollCallback(window, scroll_callback);
+	glfwSetFramebufferSizeCallback(window.window, framebuffer_size_callback);
+	glfwSetScrollCallback(window.window, scroll_callback);
 
 	//Enable depth buffer
 	glEnable(GL_DEPTH_TEST);
@@ -161,7 +128,7 @@ RenderSystem_t::RenderSystem_t(unsigned int w, unsigned int h)
 	view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
 
 	//Perspective projection matrix
-	projection = glm::perspective(glm::radians(45.0f), m_w / m_h * 1.0f, 0.1f, 100.0f);
+	projection = glm::perspective(glm::radians(45.0f), window.width / window.height * 1.0f, 0.1f, 100.0f);
 
 
 	//Send uniforms
@@ -194,8 +161,8 @@ bool RenderSystem_t::update(const GameContext_t& g) {
 	lastFrame = currentFrame;
 
 	//INPUT
-	processInput(window);
-	mouse_move(window);
+	processInput(window.window);
+	mouse_move(window.window);
 
 	//Look at matrix
 	view = camera.GetViewMatrix();
@@ -216,28 +183,15 @@ bool RenderSystem_t::update(const GameContext_t& g) {
 	myShader.setFloat("material.shininess", 32.0f);
 	myShader.setVec3("viewPos", camera.Position);
 
-	drawLights();
 	drawAllEntities(g.getEntities());
+	drawLights();
+	drawCollisionBoxes(g.getEntities());
 
-	glfwSwapBuffers(window);
+	glfwSwapBuffers(window.window);
 	glfwPollEvents();
     
-	return !glfwWindowShouldClose(window);
+	return !glfwWindowShouldClose(window.window);
 }
-
-//DELETE THIS
-glm::vec3 cubePositions[] = {
-	glm::vec3(0.0f,  0.0f,  0.0f),
-	glm::vec3(2.0f,  5.0f, -15.0f),
-	glm::vec3(-1.5f, -2.2f, -2.5f),
-	glm::vec3(-3.8f, -2.0f, -12.3f),
-	glm::vec3(2.4f, -0.4f, -3.5f),
-	glm::vec3(-1.7f,  3.0f, -7.5f),
-	glm::vec3(1.3f, -2.0f, -2.5f),
-	glm::vec3(1.5f,  2.0f, -2.5f),
-	glm::vec3(1.5f,  0.2f, -1.5f),
-	glm::vec3(-1.3f,  1.0f, -1.5f)
-};
 
 void RenderSystem_t::setLightInformation() const
 {
@@ -307,6 +261,33 @@ void RenderSystem_t::drawLights() const
 	for (const PointLight_t& pl : lights) {
 		drawLightSource(pl);
 	}
+}
+
+void RenderSystem_t::drawCollisionBoxes(const VecEntities_t& entities) const
+{
+	for (const Entity_t& bc : entities) {
+		drawCollisionBox(bc.collider, bc.phy->position);
+	}
+}
+
+void RenderSystem_t::drawCollisionBox(const BoxCollider_t& box, const glm::vec3 position) const
+{
+	glm::vec3 auxPos{ position.x+box.offset.x, position.y+box.offset.y, position.z+box.offset.z };
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	lightShader.use();
+	lightShader.setMatrix4("projection", projection);
+	lightShader.setMatrix4("view", view);
+	lightShader.setVec3("objectColor", RGB_GREEN);
+	lightShader.setVec3("lightColor", RGB_GREEN);
+
+	glBindVertexArray(collisionRenderer.VAO);
+	glm::mat4 model = glm::mat4(1.0f);
+	model = glm::translate(model, auxPos);
+	model = glm::scale(model, glm::vec3(box.length));
+	lightShader.setMatrix4("model", model);
+	glDrawArrays(GL_TRIANGLES, 0, 36);
+	glBindVertexArray(0);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 }
 
 void RenderSystem_t::drawLightSource(const PointLight_t& light) const

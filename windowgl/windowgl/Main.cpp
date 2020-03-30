@@ -39,9 +39,10 @@ const std::string DICE_PATH = "C:\\Users\\tonet\\Desktop\\OpenGl\\windowgl\\x64\
 
 int main()
 {
-	ECS::RenderSystem_t Render(kSCRWIDTH, kSCRHEIGHT);
+	ECS::Window_t window{ kSCRWIDTH, kSCRHEIGHT };
+	ECS::RenderSystem_t Render(window);
 	ECS::EntityManager_t EntityMan;
-
+	
 	EntityMan.createEntity(glm::vec3(0, 0, 0), MESA_PATH);
 	EntityMan.createEntity(glm::vec3(10, 0, 0), NANOSUIT_PATH);
 
@@ -49,7 +50,10 @@ int main()
 	vec[0].collider.length.x = vec[0].collider.length.y = vec[0].collider.length.z = 2;
 	vec[0].phy->speed.x = 0.2f;
 	
-	vec[1].collider.length.x = vec[1].collider.length.y = vec[1].collider.length.z = 2;
+	vec[1].collider.offset.y = 7.5;
+	vec[1].collider.length.x = 4;
+	vec[1].collider.length.y = 15;
+	vec[1].collider.length.z = 1;
 	vec[1].phy->speed.x = -0.2f;
 
 	ECS::PhysicsSystem_t Physics;

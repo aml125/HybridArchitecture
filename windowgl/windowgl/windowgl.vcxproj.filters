@@ -74,6 +74,9 @@
     <ClCompile Include="cmp\boxrenderer.cpp">
       <Filter>cmp</Filter>
     </ClCompile>
+    <ClCompile Include="cmp\window.cpp">
+      <Filter>cmp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Shader.h">
@@ -137,6 +140,9 @@
       <Filter>cmp</Filter>
     </ClInclude>
     <ClInclude Include="cmp\boxrenderer.hpp">
+      <Filter>cmp</Filter>
+    </ClInclude>
+    <ClInclude Include="cmp\window.hpp">
       <Filter>cmp</Filter>
     </ClInclude>
   </ItemGroup>

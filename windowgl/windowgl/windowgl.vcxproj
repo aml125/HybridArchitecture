@@ -141,6 +141,7 @@
     <ClCompile Include="cmp\model.cpp" />
     <ClCompile Include="cmp\directionalLight.cpp" />
     <ClCompile Include="cmp\pointLight.cpp" />
+    <ClCompile Include="cmp\window.cpp" />
     <ClCompile Include="Main.cpp">
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\tonet\Desktop\OpenGl\windowgl\windowgl\cmp;C:\Users\tonet\Desktop\OpenGl\windowgl\windowgl\man;C:\Users\tonet\Desktop\OpenGl\windowgl\windowgl\sys;C:\Users\tonet\Desktop\OpenGl\windowgl\windowgl\util;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
@@ -165,6 +166,7 @@
     <ClInclude Include="cmp\pointLight.hpp" />
     <ClInclude Include="cmp\texture.hpp" />
     <ClInclude Include="cmp\vertex.hpp" />
+    <ClInclude Include="cmp\window.hpp" />
     <ClInclude Include="man\componentstorage.hpp" />
     <ClInclude Include="man\entitymanager.hpp" />
     <ClInclude Include="Shader.h" />
