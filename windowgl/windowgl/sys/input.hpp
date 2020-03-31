@@ -17,5 +17,6 @@ namespace ECS {
 		void (*leftKeyDown)();
 		void (*rightKeyDown)();
 		void (*spaceKeyDown)();
+		void (*cKeyDown)();
 	};
 }

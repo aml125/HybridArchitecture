@@ -84,6 +84,7 @@ bool RenderSystem_t::update(const GameContext_t& g) {
 	float currentFrame = glfwGetTime();
 	deltaTime = currentFrame - lastFrame;
 	lastFrame = currentFrame;
+	time += deltaTime;
 
 	//Look at matrix
 	view = camera.GetViewMatrix();
@@ -106,7 +107,9 @@ bool RenderSystem_t::update(const GameContext_t& g) {
 
 	drawAllEntities(g.getEntities());
 	drawLights();
-	drawCollisionBoxes(g.getEntities());
+	if (drawCollisions) {
+		drawCollisionBoxes(g.getEntities());
+	}
 
 	glfwSwapBuffers(window.window);
 	glfwPollEvents();

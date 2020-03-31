@@ -27,10 +27,12 @@ struct RenderSystem_t {
 	inline static Camera camera{};
 
 	inline static float deltaTime = 0.0f;	// Time between current frame and last frame
+	inline static float time = 0.0f;
 	double lastFrame = 0.0f; // Time of last frame
 	inline static float yaw = 0;
 	inline static float pitch = 0;
 	inline static float fov = 45.0;
+	inline static bool drawCollisions = false;
 
 private :
     

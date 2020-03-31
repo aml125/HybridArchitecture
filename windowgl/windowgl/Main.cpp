@@ -65,6 +65,14 @@ void space() {
 	player->phy->speed.y = 0.6;
 }
 
+float lastPushTime = 0.0f;
+void c() {
+	if (ECS::RenderSystem_t::time > lastPushTime + 2) {
+		ECS::RenderSystem_t::drawCollisions = !ECS::RenderSystem_t::drawCollisions;
+		lastPushTime = ECS::RenderSystem_t::time;
+	}
+}
+
 int main()
 {
 	ECS::Window_t window{ kSCRWIDTH, kSCRHEIGHT };
@@ -78,6 +86,7 @@ int main()
 	Input.leftKeyDown = left;
 	Input.rightKeyDown = right;
 	Input.spaceKeyDown = space;
+	Input.cKeyDown = c;
 	
 	EntityMan.createEntity(glm::vec3(0, 0, 0), SUELO_PATH);
 	EntityMan.createEntity(glm::vec3(10, 2, 0), NANOSUIT_PATH);
