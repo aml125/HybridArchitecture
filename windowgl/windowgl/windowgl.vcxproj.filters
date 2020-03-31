@@ -77,6 +77,9 @@
     <ClCompile Include="cmp\window.cpp">
       <Filter>cmp</Filter>
     </ClCompile>
+    <ClCompile Include="sys\input.cpp">
+      <Filter>sys</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Shader.h">
@@ -144,6 +147,9 @@
     </ClInclude>
     <ClInclude Include="cmp\window.hpp">
       <Filter>cmp</Filter>
+    </ClInclude>
+    <ClInclude Include="sys\input.hpp">
+      <Filter>sys</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

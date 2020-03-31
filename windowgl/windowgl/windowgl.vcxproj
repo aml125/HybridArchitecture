@@ -150,6 +150,7 @@
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="stbImpl.cpp" />
     <ClCompile Include="sys\collision.cpp" />
+    <ClCompile Include="sys\input.cpp" />
     <ClCompile Include="sys\physics.cpp" />
     <ClCompile Include="sys\render.cpp" />
   </ItemGroup>
@@ -172,6 +173,7 @@
     <ClInclude Include="Shader.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="sys\collision.hpp" />
+    <ClInclude Include="sys\input.hpp" />
     <ClInclude Include="sys\physics.hpp" />
     <ClInclude Include="sys\render.hpp" />
     <ClInclude Include="util\gamecontext.hpp" />

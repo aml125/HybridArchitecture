@@ -9,5 +9,8 @@ namespace ECS {
         
 		glm::vec3 position{};
 		glm::vec3 speed{};
+        glm::vec3 scale{1, 1, 1};
+        glm::vec3 gravityAcell{ 0, -0.25f, 0 };
+        bool gravity = false;
     };
 }

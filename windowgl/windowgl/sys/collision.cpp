@@ -14,6 +14,8 @@ bool CollisionSystem_t::update(GameContext_t& g) const {
 			if (collide(e1, e2)) {
 				e1.phy->position -= e1.phy->speed * RenderSystem_t::deltaTime;
 				e2.phy->position -= e2.phy->speed * RenderSystem_t::deltaTime;
+				e1.phy->speed = { 0, 0, 0 };
+				e2.phy->speed = { 0, 0, 0 };
 			}
         }
     }

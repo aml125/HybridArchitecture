@@ -29,76 +29,6 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 	glViewport(0, 0, width, height);
 };
 
-void RenderSystem_t::mouse_move(GLFWwindow* window)
-{
-	double xpos, ypos;
-	glfwGetCursorPos(window, &xpos, &ypos);
-	if (firstMouse) // this bool variable is initially set to true
-	{
-		lastX = xpos;
-		lastY = ypos;
-		firstMouse = false;
-	}
-
-	//Get the distance of the mouse compared to last
-	float xoffset = xpos - lastX;
-	float yoffset = lastY - ypos; // reversed since y-coordinates range from bottom to top
-	lastX = xpos;
-	lastY = ypos;
-
-	float sensitivity = 0.05f;
-	xoffset *= sensitivity;
-	yoffset *= sensitivity;
-
-
-	yaw += xoffset;
-	pitch += yoffset;
-
-
-	if (pitch > 89.0f)
-		pitch = 89.0f;
-	if (pitch < -89.0f)
-		pitch = -89.0f;
-
-	//Calculate direction vector, using the cos and sin function to calculate de pitch and yaw
-	glm::vec3 front;
-	front.x = cos(glm::radians(pitch)) * cos(glm::radians(yaw));
-	front.y = sin(glm::radians(pitch));
-	front.z = cos(glm::radians(pitch)) * sin(glm::radians(yaw));
-	camera.Front = glm::normalize(front);
-};
-
-void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
-{
-	if (RenderSystem_t::fov >= 1.0f && RenderSystem_t::fov <= 45.0f)
-		RenderSystem_t::fov -= yoffset;
-	if (RenderSystem_t::fov <= 1.0f)
-		RenderSystem_t::fov = 1.0f;
-	if (RenderSystem_t::fov >= 45.0f)
-		RenderSystem_t::fov = 45.0f;
-};
-
-void processInput(GLFWwindow* window)
-{
-	float cameraSpeed = 2.5f * RenderSystem_t::deltaTime; // adjust accordingly
-	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-		glfwSetWindowShouldClose(window, true);
-	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-		/*RenderSystem_t::camera.Position += cameraSpeed * RenderSystem_t::camera.Front;*/
-		RenderSystem_t::camera.ProcessKeyboard(Camera_Movement::FORWARD, RenderSystem_t::deltaTime);
-	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-		//RenderSystem_t::camera.Position -= cameraSpeed * RenderSystem_t::camera.Front;
-		RenderSystem_t::camera.ProcessKeyboard(Camera_Movement::BACKWARD, RenderSystem_t::deltaTime);
-	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-		//RenderSystem_t::camera.Position -= glm::normalize(glm::cross(RenderSystem_t::camera.Front, RenderSystem_t::camera.Up)) * cameraSpeed;
-		RenderSystem_t::camera.ProcessKeyboard(Camera_Movement::LEFT, RenderSystem_t::deltaTime);
-	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-		//RenderSystem_t::camera.Position += glm::normalize(glm::cross(RenderSystem_t::camera.Front, RenderSystem_t::camera.Up)) * cameraSpeed;
-		RenderSystem_t::camera.ProcessKeyboard(Camera_Movement::RIGHT, RenderSystem_t::deltaTime);
-};
-
-
-
 RenderSystem_t::RenderSystem_t(Window_t window)
 	: window{ window }
 {
@@ -107,7 +37,6 @@ RenderSystem_t::RenderSystem_t(Window_t window)
 	//REGISTRAR CALLBACKS
 	//If window size changed, call glviewport
 	glfwSetFramebufferSizeCallback(window.window, framebuffer_size_callback);
-	glfwSetScrollCallback(window.window, scroll_callback);
 
 	//Enable depth buffer
 	glEnable(GL_DEPTH_TEST);
@@ -117,10 +46,6 @@ RenderSystem_t::RenderSystem_t(Window_t window)
 	lightShader.init();
 	//lightShader.use();
 	//myShader.use();
-
-	//Model matrix
-	model = glm::mat4(1.0f);
-	model = glm::rotate(model, glm::radians(-55.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 
 	//View matrix
 	view = glm::mat4(1.0f);
@@ -159,10 +84,6 @@ bool RenderSystem_t::update(const GameContext_t& g) {
 	float currentFrame = glfwGetTime();
 	deltaTime = currentFrame - lastFrame;
 	lastFrame = currentFrame;
-
-	//INPUT
-	processInput(window.window);
-	mouse_move(window.window);
 
 	//Look at matrix
 	view = camera.GetViewMatrix();
@@ -246,6 +167,7 @@ void RenderSystem_t::drawAllEntities(const VecEntities_t& entities) const {
 			glBindVertexArray(m.VAO);
 			glm::mat4 model = glm::mat4(1.0f);
 			model = glm::translate(model, e.phy->position);
+			model = glm::scale(model, e.phy->scale);
 			myShader.setMatrix4("model", model);
 			
 			setLightInformation();

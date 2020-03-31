@@ -28,15 +28,12 @@ struct RenderSystem_t {
 
 	inline static float deltaTime = 0.0f;	// Time between current frame and last frame
 	double lastFrame = 0.0f; // Time of last frame
-	double lastX = 400, lastY = 300;
 	inline static float yaw = 0;
 	inline static float pitch = 0;
 	inline static float fov = 45.0;
 
 private :
     
-	void mouse_move(GLFWwindow* window);
-	bool firstMouse = true;
 	void setLightInformation() const;
 	void drawAllEntities(const VecEntities_t& entities) const;
 	void drawLightSource(const PointLight_t& light)  const;
@@ -48,7 +45,6 @@ private :
 	BoxRenderer_t collisionRenderer;
 
 	
-	glm::mat4 model;
 	glm::mat4 view;
 	glm::mat4 projection;
 

@@ -10,5 +10,9 @@ struct PhysicsSystem_t {
     explicit PhysicsSystem_t() =default;
 
     bool update(GameContext_t& g) const;
+
+private:
+    void aplyGravity(PhysicsComponent_t& cmp) const;
+    void moveObject(PhysicsComponent_t& phy) const;
 };
 }
