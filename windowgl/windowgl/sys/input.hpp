@@ -12,11 +12,12 @@ namespace ECS {
 		Window_t& window;
 
 		//Function pointers
-		void (*upKeyDown)();
-		void (*downKeyDown)();
-		void (*leftKeyDown)();
-		void (*rightKeyDown)();
-		void (*spaceKeyDown)();
-		void (*cKeyDown)();
+		void (*upKeyDown)() = nullptr;
+		void (*downKeyDown)() = nullptr;
+		void (*leftKeyDown)() = nullptr;
+		void (*rightKeyDown)() = nullptr;
+		void (*spaceKeyDown)() = nullptr;
+		void (*cKeyDown)() = nullptr;
+		void (*lKeyDown)() = nullptr;
 	};
 }

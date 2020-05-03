@@ -1,0 +1,50 @@
+#
+## Alias OBJ Material File
+# Exported from SketchUp, (c) 2000-2012 Trimble Navigation Limited
+
+newmtl Field_Rectangle_Tile
+Ka 0.000000 0.000000 0.000000
+Kd 0.768627 0.741176 0.701961
+Ks 0.330000 0.330000 0.330000
+map_Kd torre/Field_Rectangle_Tile.jpg
+
+newmtl Roofing_Slate_Tan
+Ka 0.000000 0.000000 0.000000
+Kd 0.886275 0.776471 0.568627
+Ks 0.330000 0.330000 0.330000
+map_Kd torre/Roofing_Slate_Tan.jpg
+
+newmtl FrontColor
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.330000 0.330000 0.330000
+
+newmtl _Roofing_Slate_Tan_1
+Ka 0.000000 0.000000 0.000000
+Kd 0.784314 0.686275 0.501961
+Ks 0.330000 0.330000 0.330000
+map_Kd torre/_Roofing_Slate_Tan_1.jpg
+
+newmtl Color_M09
+Ka 0.000000 0.000000 0.000000
+Kd 0.000000 0.000000 0.000000
+Ks 0.330000 0.330000 0.330000
+
+newmtl Wood_Floor
+Ka 0.000000 0.000000 0.000000
+Kd 0.607843 0.411765 0.239216
+Ks 0.330000 0.330000 0.330000
+map_Kd torre/Wood_Floor.jpg
+
+newmtl _Field_Rectangle_Tile_1
+Ka 0.000000 0.000000 0.000000
+Kd 0.768627 0.741176 0.701961
+Ks 0.330000 0.330000 0.330000
+map_Kd torre/_Field_Rectangle_Tile_1.jpg
+
+newmtl _Field_Rectangle_Tile_2
+Ka 0.000000 0.000000 0.000000
+Kd 0.768627 0.741176 0.701961
+Ks 0.330000 0.330000 0.330000
+map_Kd torre/_Field_Rectangle_Tile_2.jpg
+

@@ -15,6 +15,7 @@
 #include <sys/render.hpp>
 #include <cmp/model.hpp>
 #include <input.hpp>
+#include <cmp/pointLight.hpp>
 
 
 
@@ -42,23 +43,32 @@ const std::string MESA_PATH = "models\\mesa\\mesa.fbx";
 const std::string NANOSUIT_PATH = "models\\nanosuit\\nanosuit.obj";
 const std::string DICE_PATH = "models\\dice\\dice.fbx";
 const std::string SUELO_PATH = "models\\suelo\\suelo.obj";
+const std::string TORRE_PATH = "models\\torre\\torre.obj";
+
+// positions of the point lights
+glm::vec3 pointLightPositions[] = {
+	glm::vec3(0.7f,  0.2f,  2.0f),
+	glm::vec3(2.3f, -3.3f, -4.0f),
+	glm::vec3(-4.0f,  2.0f, -12.0f),
+	glm::vec3(0.0f,  0.0f, -3.0f)
+};
 
 ECS::Entity_t* player;
 
 void up() {
-	player->phy->speed.z = 0.4;
+	player->phy->speed.z = 0.5;
 }
 
 void left() {
-	player->phy->speed.x = 0.4;
+	player->phy->speed.x = 0.5;
 }
 
 void right() {
-	player->phy->speed.x = -0.4;
+	player->phy->speed.x = -0.5;
 }
 
 void down() {
-	player->phy->speed.z = -0.4;
+	player->phy->speed.z = -0.5;
 }
 
 void space() {
@@ -69,6 +79,13 @@ float lastPushTime = 0.0f;
 void c() {
 	if (ECS::RenderSystem_t::time > lastPushTime + 2) {
 		ECS::RenderSystem_t::drawCollisions = !ECS::RenderSystem_t::drawCollisions;
+		lastPushTime = ECS::RenderSystem_t::time;
+	}
+}
+
+void l() {
+	if (ECS::RenderSystem_t::time > lastPushTime + 2) {
+		ECS::RenderSystem_t::drawPointLights = !ECS::RenderSystem_t::drawPointLights;
 		lastPushTime = ECS::RenderSystem_t::time;
 	}
 }
@@ -87,9 +104,11 @@ int main()
 	Input.rightKeyDown = right;
 	Input.spaceKeyDown = space;
 	Input.cKeyDown = c;
+	Input.lKeyDown = l;
 	
 	EntityMan.createEntity(glm::vec3(0, 0, 0), SUELO_PATH);
-	EntityMan.createEntity(glm::vec3(10, 2, 0), NANOSUIT_PATH);
+	EntityMan.createEntity(glm::vec3(10, 20, 0), NANOSUIT_PATH);
+	EntityMan.createEntity(glm::vec3(0, 30, 0), TORRE_PATH);
 
 	ECS::VecEntities_t& vec = EntityMan.getEntities();
 	vec[0].collider.length.x = 20.75f;
@@ -103,10 +122,19 @@ int main()
 	vec[1].collider.length.x = 1;
 	vec[1].collider.length.y = 1.55f;
 	vec[1].collider.length.z = 0.5f;
-	vec[1].phy->speed.y = 1.0f;
 	vec[1].phy->scale.x = vec[1].phy->scale.y = vec[1].phy->scale.z = 0.1f;
 	vec[1].phy->gravity = true;
 	player = &vec[1];
+
+	vec[2].phy->gravity = true;
+	vec[2].collider.length.x = 1.25;
+	vec[2].collider.length.y = 3;
+	vec[2].collider.length.z = 2;
+	vec[2].collider.offset = { 0.625f, 1.5f, -1.0f };
+	vec[2].phy->scale = { 0.0015f, 0.0015f, 0.0015f };
+
+	ECS::PointLight_t pt({3, 1.7, -1.5}, { 0.05f, 0.05f, 0.05f }, { 0.8f, 0.8f, 0.8f }, { 1.0f, 1.0f, 1.0f });
+	Render.lights.push_back(pt);
 
 	ECS::PhysicsSystem_t Physics;
 	ECS::CollisionSystem_t Collision;

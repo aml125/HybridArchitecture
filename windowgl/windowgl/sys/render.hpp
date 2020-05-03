@@ -33,6 +33,7 @@ struct RenderSystem_t {
 	inline static float pitch = 0;
 	inline static float fov = 45.0;
 	inline static bool drawCollisions = false;
+	inline static bool drawPointLights = true;
 
 private :
     

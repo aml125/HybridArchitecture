@@ -16,13 +16,6 @@
 
 
 namespace ECS {
-	// positions of the point lights
-	glm::vec3 pointLightPositions[] = {
-		glm::vec3(0.7f,  0.2f,  2.0f),
-		glm::vec3(2.3f, -3.3f, -4.0f),
-		glm::vec3(-4.0f,  2.0f, -12.0f),
-		glm::vec3(0.0f,  0.0f, -3.0f)
-	};
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
@@ -63,8 +56,8 @@ RenderSystem_t::RenderSystem_t(Window_t window)
 	myShader.setMatrix4("view", view);
 	myShader.setMatrix4("projection", projection);
 
-	PointLight_t pt(glm::vec3(pointLightPositions[0]), { 0.05f, 0.05f, 0.05f }, { 0.8f, 0.8f, 0.8f }, { 1.0f, 1.0f, 1.0f });
-	lights.push_back(pt);
+	/*PointLight_t pt(glm::vec3(pointLightPositions[0]), { 0.05f, 0.05f, 0.05f }, { 0.8f, 0.8f, 0.8f }, { 1.0f, 1.0f, 1.0f });
+	lights.push_back(pt);*/
 	/*PointLight_t pt2(glm::vec3(pointLightPositions[1]), { 0.05f, 0.05f, 0.05f }, { 0.8f, 0.8f, 0.8f }, { 1.0f, 1.0f, 1.0f });
 	lights.push_back(pt2);
 	PointLight_t pt3(glm::vec3(pointLightPositions[2]), { 0.05f, 0.05f, 0.05f }, { 0.8f, 0.8f, 0.8f }, { 1.0f, 1.0f, 1.0f });
@@ -91,7 +84,7 @@ bool RenderSystem_t::update(const GameContext_t& g) {
 	projection = glm::perspective(glm::radians(fov), 800.0f / 600.0f, 0.1f, 100.0f);
 
 	//Move light
-	lights[0].position.y = sin(glfwGetTime()) + 10;
+	/*lights[0].position.y = sin(glfwGetTime()) + 10;*/
 
 	//RENDERING
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
@@ -128,15 +121,17 @@ void RenderSystem_t::setLightInformation() const
 
 	std::size_t i = 0;
 	// point lights
-	for (const PointLight_t& pl : lights) {
-		myShader.setVec3("pointLights["+std::to_string(i)+"].position", pl.position);
-		myShader.setVec3("pointLights[" + std::to_string(i) + "].ambient", pl.ambient);
-		myShader.setVec3("pointLights[" + std::to_string(i) + "].diffuse", pl.diffuse);
-		myShader.setVec3("pointLights[" + std::to_string(i) + "].specular", pl.specular);
-		myShader.setFloat("pointLights[" + std::to_string(i) + "].constant", pl.constantDecrease);
-		myShader.setFloat("pointLights[" + std::to_string(i) + "].linear", pl.linearDecrease);
-		myShader.setFloat("pointLights[" + std::to_string(i) + "].quadratic", pl.quadraticDecrease);
-		i++;
+	if (drawPointLights) {
+		for (const PointLight_t& pl : lights) {
+			myShader.setVec3("pointLights[" + std::to_string(i) + "].position", pl.position);
+			myShader.setVec3("pointLights[" + std::to_string(i) + "].ambient", pl.ambient);
+			myShader.setVec3("pointLights[" + std::to_string(i) + "].diffuse", pl.diffuse);
+			myShader.setVec3("pointLights[" + std::to_string(i) + "].specular", pl.specular);
+			myShader.setFloat("pointLights[" + std::to_string(i) + "].constant", pl.constantDecrease);
+			myShader.setFloat("pointLights[" + std::to_string(i) + "].linear", pl.linearDecrease);
+			myShader.setFloat("pointLights[" + std::to_string(i) + "].quadratic", pl.quadraticDecrease);
+			i++;
+		}
 	}
 }
 

@@ -93,6 +93,10 @@ void InputSystem_t::processInput(GLFWwindow* window)
 	if ((cKeyDown != nullptr) && glfwGetKey(window, GLFW_KEY_C) == GLFW_PRESS) {
 		cKeyDown();
 	}
+
+	if ((lKeyDown != nullptr) && glfwGetKey(window, GLFW_KEY_L) == GLFW_PRESS) {
+		lKeyDown();
+	}
 };
 
 InputSystem_t::InputSystem_t(Window_t& win)
