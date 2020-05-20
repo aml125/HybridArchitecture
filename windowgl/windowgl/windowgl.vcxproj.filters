@@ -8,21 +8,12 @@
     <Filter Include="Shaders">
       <UniqueIdentifier>{4b514def-739a-424b-be33-8529ad432e25}</UniqueIdentifier>
     </Filter>
-    <Filter Include="cmp">
-      <UniqueIdentifier>{1dabab1b-696d-4be3-bc99-4b410aeb88d7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="man">
-      <UniqueIdentifier>{d8dd9744-caf0-4c49-b0bf-a15efe29b1d3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="sys">
-      <UniqueIdentifier>{6ee145ea-580e-4a26-9048-802f9bcdc667}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="util">
-      <UniqueIdentifier>{ce1b98ef-511b-40d3-985c-f7ef78340d16}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Main">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="nuevo">
+      <UniqueIdentifier>{2ee736dc-3157-413f-9be6-bb964f63d808}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -38,47 +29,47 @@
     <ClCompile Include="stbImpl.cpp">
       <Filter>Main</Filter>
     </ClCompile>
-    <ClCompile Include="man\componentstorage.cpp">
-      <Filter>man</Filter>
+    <ClCompile Include="ecs\man\componentstorage.cpp">
+      <Filter>nuevo</Filter>
     </ClCompile>
-    <ClCompile Include="man\entitymanager.cpp">
-      <Filter>man</Filter>
+    <ClCompile Include="ecs\man\entitymanager.cpp">
+      <Filter>nuevo</Filter>
     </ClCompile>
-    <ClCompile Include="sys\collision.cpp">
-      <Filter>sys</Filter>
+    <ClCompile Include="game\cmp\boxrenderer.cpp">
+      <Filter>nuevo</Filter>
     </ClCompile>
-    <ClCompile Include="sys\physics.cpp">
-      <Filter>sys</Filter>
+    <ClCompile Include="game\cmp\directionalLight.cpp">
+      <Filter>nuevo</Filter>
     </ClCompile>
-    <ClCompile Include="sys\render.cpp">
-      <Filter>sys</Filter>
+    <ClCompile Include="game\cmp\model.cpp">
+      <Filter>nuevo</Filter>
     </ClCompile>
-    <ClCompile Include="cmp\camera.cpp">
-      <Filter>cmp</Filter>
+    <ClCompile Include="game\cmp\pointLight.cpp">
+      <Filter>nuevo</Filter>
     </ClCompile>
-    <ClCompile Include="cmp\model.cpp">
-      <Filter>cmp</Filter>
+    <ClCompile Include="game\rcmp\camera.cpp">
+      <Filter>nuevo</Filter>
     </ClCompile>
-    <ClCompile Include="cmp\entity.cpp">
-      <Filter>cmp</Filter>
+    <ClCompile Include="game\rcmp\mesh.cpp">
+      <Filter>nuevo</Filter>
     </ClCompile>
-    <ClCompile Include="cmp\mesh.cpp">
-      <Filter>cmp</Filter>
+    <ClCompile Include="game\rcmp\window.cpp">
+      <Filter>nuevo</Filter>
     </ClCompile>
-    <ClCompile Include="cmp\directionalLight.cpp">
-      <Filter>cmp</Filter>
+    <ClCompile Include="game\sys\collision.cpp">
+      <Filter>nuevo</Filter>
     </ClCompile>
-    <ClCompile Include="cmp\pointLight.cpp">
-      <Filter>cmp</Filter>
+    <ClCompile Include="game\sys\input.cpp">
+      <Filter>nuevo</Filter>
     </ClCompile>
-    <ClCompile Include="cmp\boxrenderer.cpp">
-      <Filter>cmp</Filter>
+    <ClCompile Include="game\sys\physics.cpp">
+      <Filter>nuevo</Filter>
     </ClCompile>
-    <ClCompile Include="cmp\window.cpp">
-      <Filter>cmp</Filter>
+    <ClCompile Include="game\sys\render.cpp">
+      <Filter>nuevo</Filter>
     </ClCompile>
-    <ClCompile Include="sys\input.cpp">
-      <Filter>sys</Filter>
+    <ClCompile Include="game\util\entitybuilder.cpp">
+      <Filter>nuevo</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -88,68 +79,74 @@
     <ClInclude Include="stb_image.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="cmp\component.hpp">
-      <Filter>cmp</Filter>
+    <ClInclude Include="ecs\cmp\component.hpp">
+      <Filter>nuevo</Filter>
     </ClInclude>
-    <ClInclude Include="cmp\physics.hpp">
-      <Filter>cmp</Filter>
+    <ClInclude Include="ecs\cmp\entity.hpp">
+      <Filter>nuevo</Filter>
     </ClInclude>
-    <ClInclude Include="man\componentstorage.hpp">
-      <Filter>man</Filter>
+    <ClInclude Include="ecs\man\componentstorage.hpp">
+      <Filter>nuevo</Filter>
     </ClInclude>
-    <ClInclude Include="man\entitymanager.hpp">
-      <Filter>man</Filter>
+    <ClInclude Include="ecs\man\entitymanager.hpp">
+      <Filter>nuevo</Filter>
     </ClInclude>
-    <ClInclude Include="sys\collision.hpp">
-      <Filter>sys</Filter>
+    <ClInclude Include="ecs\util\gamecontext.hpp">
+      <Filter>nuevo</Filter>
     </ClInclude>
-    <ClInclude Include="sys\physics.hpp">
-      <Filter>sys</Filter>
+    <ClInclude Include="ecs\util\typealiases.hpp">
+      <Filter>nuevo</Filter>
     </ClInclude>
-    <ClInclude Include="sys\render.hpp">
-      <Filter>sys</Filter>
+    <ClInclude Include="game\cmp\boxcollider.hpp">
+      <Filter>nuevo</Filter>
     </ClInclude>
-    <ClInclude Include="util\typealiases.hpp">
-      <Filter>util</Filter>
+    <ClInclude Include="game\cmp\boxrenderer.hpp">
+      <Filter>nuevo</Filter>
     </ClInclude>
-    <ClInclude Include="util\gamecontext.hpp">
-      <Filter>util</Filter>
+    <ClInclude Include="game\cmp\directionalLight.hpp">
+      <Filter>nuevo</Filter>
     </ClInclude>
-    <ClInclude Include="cmp\camera.hpp">
-      <Filter>cmp</Filter>
+    <ClInclude Include="game\cmp\model.hpp">
+      <Filter>nuevo</Filter>
     </ClInclude>
-    <ClInclude Include="cmp\vertex.hpp">
-      <Filter>cmp</Filter>
+    <ClInclude Include="game\cmp\physics.hpp">
+      <Filter>nuevo</Filter>
     </ClInclude>
-    <ClInclude Include="cmp\texture.hpp">
-      <Filter>cmp</Filter>
+    <ClInclude Include="game\cmp\pointLight.hpp">
+      <Filter>nuevo</Filter>
     </ClInclude>
-    <ClInclude Include="cmp\model.hpp">
-      <Filter>cmp</Filter>
+    <ClInclude Include="game\rcmp\camera.hpp">
+      <Filter>nuevo</Filter>
     </ClInclude>
-    <ClInclude Include="cmp\entity.hpp">
-      <Filter>cmp</Filter>
+    <ClInclude Include="game\rcmp\mesh.hpp">
+      <Filter>nuevo</Filter>
     </ClInclude>
-    <ClInclude Include="cmp\mesh.hpp">
-      <Filter>cmp</Filter>
+    <ClInclude Include="game\rcmp\texture.hpp">
+      <Filter>nuevo</Filter>
     </ClInclude>
-    <ClInclude Include="cmp\directionalLight.hpp">
-      <Filter>cmp</Filter>
+    <ClInclude Include="game\rcmp\vertex.hpp">
+      <Filter>nuevo</Filter>
     </ClInclude>
-    <ClInclude Include="cmp\pointLight.hpp">
-      <Filter>cmp</Filter>
+    <ClInclude Include="game\rcmp\window.hpp">
+      <Filter>nuevo</Filter>
     </ClInclude>
-    <ClInclude Include="cmp\boxcollider.hpp">
-      <Filter>cmp</Filter>
+    <ClInclude Include="game\sys\collision.hpp">
+      <Filter>nuevo</Filter>
     </ClInclude>
-    <ClInclude Include="cmp\boxrenderer.hpp">
-      <Filter>cmp</Filter>
+    <ClInclude Include="game\sys\input.hpp">
+      <Filter>nuevo</Filter>
     </ClInclude>
-    <ClInclude Include="cmp\window.hpp">
-      <Filter>cmp</Filter>
+    <ClInclude Include="game\sys\physics.hpp">
+      <Filter>nuevo</Filter>
     </ClInclude>
-    <ClInclude Include="sys\input.hpp">
-      <Filter>sys</Filter>
+    <ClInclude Include="game\sys\render.hpp">
+      <Filter>nuevo</Filter>
+    </ClInclude>
+    <ClInclude Include="game\util\entitybuilder.hpp">
+      <Filter>nuevo</Filter>
+    </ClInclude>
+    <ClInclude Include="game\util\typealiases.hpp">
+      <Filter>nuevo</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -41,7 +41,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>ClangCL</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
@@ -94,7 +94,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <ConformanceMode>true</ConformanceMode>
+      <ConformanceMode>false</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)windowgl\glm;$(SolutionDir)windowgl\cmp;$(SolutionDir)windowgl\sys;$(SolutionDir)windowgl\util;$(SolutionDir)windowgl\man;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <CompileAsWinRT>false</CompileAsWinRT>
@@ -134,50 +134,52 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\OpenGLStuff\glad\src\glad.c" />
-    <ClCompile Include="cmp\boxrenderer.cpp" />
-    <ClCompile Include="cmp\camera.cpp" />
-    <ClCompile Include="cmp\entity.cpp" />
-    <ClCompile Include="cmp\mesh.cpp" />
-    <ClCompile Include="cmp\model.cpp" />
-    <ClCompile Include="cmp\directionalLight.cpp" />
-    <ClCompile Include="cmp\pointLight.cpp" />
-    <ClCompile Include="cmp\window.cpp" />
+    <ClCompile Include="ecs\man\componentstorage.cpp" />
+    <ClCompile Include="ecs\man\entitymanager.cpp" />
+    <ClCompile Include="game\cmp\boxrenderer.cpp" />
+    <ClCompile Include="game\cmp\directionalLight.cpp" />
+    <ClCompile Include="game\cmp\model.cpp" />
+    <ClCompile Include="game\cmp\pointLight.cpp" />
+    <ClCompile Include="game\rcmp\camera.cpp" />
+    <ClCompile Include="game\rcmp\mesh.cpp" />
+    <ClCompile Include="game\rcmp\window.cpp" />
+    <ClCompile Include="game\sys\collision.cpp" />
+    <ClCompile Include="game\sys\input.cpp" />
+    <ClCompile Include="game\sys\physics.cpp" />
+    <ClCompile Include="game\sys\render.cpp" />
+    <ClCompile Include="game\util\entitybuilder.cpp" />
     <ClCompile Include="Main.cpp">
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\tonet\Desktop\OpenGl\windowgl\windowgl\cmp;C:\Users\tonet\Desktop\OpenGl\windowgl\windowgl\man;C:\Users\tonet\Desktop\OpenGl\windowgl\windowgl\sys;C:\Users\tonet\Desktop\OpenGl\windowgl\windowgl\util;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
-    <ClCompile Include="man\componentstorage.cpp" />
-    <ClCompile Include="man\entitymanager.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="stbImpl.cpp" />
-    <ClCompile Include="sys\collision.cpp" />
-    <ClCompile Include="sys\input.cpp" />
-    <ClCompile Include="sys\physics.cpp" />
-    <ClCompile Include="sys\render.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="cmp\boxcollider.hpp" />
-    <ClInclude Include="cmp\boxrenderer.hpp" />
-    <ClInclude Include="cmp\camera.hpp" />
-    <ClInclude Include="cmp\component.hpp" />
-    <ClInclude Include="cmp\entity.hpp" />
-    <ClInclude Include="cmp\mesh.hpp" />
-    <ClInclude Include="cmp\model.hpp" />
-    <ClInclude Include="cmp\physics.hpp" />
-    <ClInclude Include="cmp\directionalLight.hpp" />
-    <ClInclude Include="cmp\pointLight.hpp" />
-    <ClInclude Include="cmp\texture.hpp" />
-    <ClInclude Include="cmp\vertex.hpp" />
-    <ClInclude Include="cmp\window.hpp" />
-    <ClInclude Include="man\componentstorage.hpp" />
-    <ClInclude Include="man\entitymanager.hpp" />
+    <ClInclude Include="ecs\cmp\component.hpp" />
+    <ClInclude Include="ecs\cmp\entity.hpp" />
+    <ClInclude Include="ecs\man\componentstorage.hpp" />
+    <ClInclude Include="ecs\man\entitymanager.hpp" />
+    <ClInclude Include="ecs\util\gamecontext.hpp" />
+    <ClInclude Include="ecs\util\typealiases.hpp" />
+    <ClInclude Include="game\cmp\boxcollider.hpp" />
+    <ClInclude Include="game\cmp\boxrenderer.hpp" />
+    <ClInclude Include="game\cmp\directionalLight.hpp" />
+    <ClInclude Include="game\cmp\model.hpp" />
+    <ClInclude Include="game\cmp\physics.hpp" />
+    <ClInclude Include="game\cmp\pointLight.hpp" />
+    <ClInclude Include="game\rcmp\camera.hpp" />
+    <ClInclude Include="game\rcmp\mesh.hpp" />
+    <ClInclude Include="game\rcmp\texture.hpp" />
+    <ClInclude Include="game\rcmp\vertex.hpp" />
+    <ClInclude Include="game\rcmp\window.hpp" />
+    <ClInclude Include="game\sys\collision.hpp" />
+    <ClInclude Include="game\sys\input.hpp" />
+    <ClInclude Include="game\sys\physics.hpp" />
+    <ClInclude Include="game\sys\render.hpp" />
+    <ClInclude Include="game\util\entitybuilder.hpp" />
+    <ClInclude Include="game\util\typealiases.hpp" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="stb_image.h" />
-    <ClInclude Include="sys\collision.hpp" />
-    <ClInclude Include="sys\input.hpp" />
-    <ClInclude Include="sys\physics.hpp" />
-    <ClInclude Include="sys\render.hpp" />
-    <ClInclude Include="util\gamecontext.hpp" />
-    <ClInclude Include="util\typealiases.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Fragment.glsl" />
