@@ -114,18 +114,18 @@ int main()
 	
 	glm::vec3 cLength1{ 1, 1.55f, 0.5f };
 	glm::vec3 cOffset1{ 0, 0.78f, 0 };
-	ECS::Entity_t& e1 = GM::EntityBuilder::buildFullEntity(EntityMan, glm::vec3(10, 20, 0), NANOSUIT_PATH, cLength1, cOffset1);
+	ECS::Entity_t& e1 = GM::EntityBuilder::buildFullEntity(EntityMan, glm::vec3(10, 1, 0), NANOSUIT_PATH, cLength1, cOffset1);
 	auto* phy1 = e1.getComponent<GM::PhysicsComponent_t>();
 	phy1->scale.x = phy1->scale.y = phy1->scale.z = 0.1f;
 	phy1->gravity = true;
 	player = phy1;
 
-	//glm::vec3 cLength2{ 1.25f, 3, 2 };
-	//glm::vec3 cOffset2{ 0.625f, 1.5f, -1.0f };
-	//ECS::Entity_t& e2 = GM::EntityBuilder::buildFullEntity(EntityMan, glm::vec3(10, 20, 0), NANOSUIT_PATH, cLength2, cOffset2);
-	//auto* phy2 = e2.getComponent<GM::PhysicsComponent_t>();
-	//phy2->gravity = true;
-	//phy2->scale = { 0.0015f, 0.0015f, 0.0015f };
+	glm::vec3 cLength2{ 1.25f, 3, 2 };
+	glm::vec3 cOffset2{ 0.625f, 1.5f, -1.0f };
+	ECS::Entity_t& e2 = GM::EntityBuilder::buildFullEntity(EntityMan, glm::vec3(0, 1, 0), TORRE_PATH, cLength2, cOffset2);
+	auto* phy2 = e2.getComponent<GM::PhysicsComponent_t>();
+	phy2->gravity = true;
+	phy2->scale = { 0.0015f, 0.0015f, 0.0015f };
 
 	GM::PointLight_t pt({3, 1.7, -1.5}, { 0.05f, 0.05f, 0.05f }, { 0.8f, 0.8f, 0.8f }, { 1.0f, 1.0f, 1.0f });
 	Render.lights.push_back(pt);

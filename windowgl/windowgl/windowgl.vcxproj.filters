@@ -148,6 +148,9 @@
     <ClInclude Include="game\util\typealiases.hpp">
       <Filter>nuevo</Filter>
     </ClInclude>
+    <ClInclude Include="game\man\gamemanager.hpp">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="lightningVertex.glsl">

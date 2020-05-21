@@ -167,6 +167,7 @@
     <ClInclude Include="game\cmp\model.hpp" />
     <ClInclude Include="game\cmp\physics.hpp" />
     <ClInclude Include="game\cmp\pointLight.hpp" />
+    <ClInclude Include="game\man\gamemanager.hpp" />
     <ClInclude Include="game\rcmp\camera.hpp" />
     <ClInclude Include="game\rcmp\mesh.hpp" />
     <ClInclude Include="game\rcmp\texture.hpp" />

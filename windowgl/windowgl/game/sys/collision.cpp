@@ -11,7 +11,7 @@ bool CollisionSystem_t::update(ECS::EntityManager_t& g) const {
 		for (size_t j = i+1; j < vec.size(); ++j) {
 			auto& coll2 = vec[j];
 			auto* phy1 = g.getEntity(coll1.entityID).getComponent<PhysicsComponent_t>();
-			auto* phy2 = g.getEntity(coll1.entityID).getComponent<PhysicsComponent_t>();
+			auto* phy2 = g.getEntity(coll2.entityID).getComponent<PhysicsComponent_t>();
 			if (phy1 == nullptr || phy2 == nullptr) {
 				std::cout << "CollisionSystem_t::collide ERROR A collider entity MUST have a physics component\n";
 				exit(-1);

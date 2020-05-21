@@ -1,0 +1,7 @@
+
+namespace GM {
+
+	struct GameManager {
+
+	};
+}

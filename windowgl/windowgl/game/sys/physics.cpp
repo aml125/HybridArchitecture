@@ -3,7 +3,11 @@
 
 namespace GM {
 
-    bool PhysicsSystem_t::update(ECS::EntityManager_t& g) const {
+bool PhysicsSystem_t::update(ECS::EntityManager_t& g) {
+    if (firstTime) {
+        firstTime = false;
+        return true;
+    }
     for (auto& phy : g.getComponents<PhysicsComponent_t>()) {
         if (phy.gravity) {
             aplyGravity(phy);
@@ -18,6 +22,7 @@ void PhysicsSystem_t::aplyGravity(PhysicsComponent_t& cmp) const {
 }
 void PhysicsSystem_t::moveObject(PhysicsComponent_t& phy) const
 {
+
     phy.position += phy.speed * RenderSystem_t::deltaTime;
 }
 }
