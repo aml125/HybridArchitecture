@@ -1,5 +1,5 @@
 #pragma once
-#include <Shader.h>
+#include <game/rcmp/shader.hpp>
 //#include <cmp\mesh.hpp>
 #include <assimp\scene.h>
 #include <vector>

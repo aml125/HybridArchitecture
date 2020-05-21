@@ -3,9 +3,9 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-#include <Shader.h>
+#include <game/rcmp/shader.hpp>
 #include <glad\glad.h>
-#include <stb_image.h>
+#include <game/util/stb_image.h>
 #include <memory>
 
 namespace GM {

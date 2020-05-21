@@ -3,7 +3,7 @@
 
 namespace GM {
 
-bool CollisionSystem_t::update(ECS::EntityManager_t& g) const {
+void CollisionSystem_t::update(ECS::EntityManager_t& g) {
 	auto& vec = g.getComponents<BoxCollider_t>();
     for (size_t i = 0; i < vec.size(); ++i) {
 		auto& coll1 = vec[i];
@@ -27,7 +27,6 @@ bool CollisionSystem_t::update(ECS::EntityManager_t& g) const {
 			}
         }
     }
-    return true;
 }
 
 bool CollisionSystem_t::collide(const PhysicsComponent_t& phy1, const PhysicsComponent_t& phy2,

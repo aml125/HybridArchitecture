@@ -3,8 +3,8 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-#include <Shader.h>
-#include <stb_image.h>
+#include <game/rcmp/shader.hpp>
+#include <game/util/stb_image.h>
 #include <memory>
 #include <game/cmp/boxrenderer.hpp>
 

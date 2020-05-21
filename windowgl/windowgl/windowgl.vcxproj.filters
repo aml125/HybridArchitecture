@@ -23,12 +23,6 @@
     <ClCompile Include="..\OpenGLStuff\glad\src\glad.c">
       <Filter>Main</Filter>
     </ClCompile>
-    <ClCompile Include="Shader.cpp">
-      <Filter>Main</Filter>
-    </ClCompile>
-    <ClCompile Include="stbImpl.cpp">
-      <Filter>Main</Filter>
-    </ClCompile>
     <ClCompile Include="ecs\man\componentstorage.cpp">
       <Filter>nuevo</Filter>
     </ClCompile>
@@ -71,14 +65,17 @@
     <ClCompile Include="game\util\entitybuilder.cpp">
       <Filter>nuevo</Filter>
     </ClCompile>
+    <ClCompile Include="game\util\stbImpl.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="game\rcmp\shader.cpp">
+      <Filter>nuevo</Filter>
+    </ClCompile>
+    <ClCompile Include="game\man\gamemanager.cpp">
+      <Filter>nuevo</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Shader.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="stb_image.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="ecs\cmp\component.hpp">
       <Filter>nuevo</Filter>
     </ClInclude>
@@ -151,30 +148,39 @@
     <ClInclude Include="game\man\gamemanager.hpp">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="game\sys\system.hpp">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="game\util\stb_image.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="game\rcmp\shader.hpp">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="lightningVertex.glsl">
+    <None Include="shaders\Fragment.glsl">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="lightningFragment.glsl">
+    <None Include="shaders\lightningFragment.glsl">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="sunVertex.glsl">
+    <None Include="shaders\lightningVertex.glsl">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="sunFragment.glsl">
+    <None Include="shaders\pointFragment.glsl">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="pointFragment.glsl">
+    <None Include="shaders\pointVertex.glsl">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="pointVertex.glsl">
+    <None Include="shaders\sunFragment.glsl">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="Vertex.glsl">
+    <None Include="shaders\sunVertex.glsl">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="Fragment.glsl">
+    <None Include="shaders\Vertex.glsl">
       <Filter>Shaders</Filter>
     </None>
   </ItemGroup>

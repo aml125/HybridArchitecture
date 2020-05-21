@@ -1,4 +1,4 @@
-#include <Shader.h>
+#include <game/rcmp/shader.hpp>
 
 Shader::Shader(const char* vertexP, const char* fragmentP)
 	:	vertexPath{ vertexP }, fragmentPath { fragmentP }

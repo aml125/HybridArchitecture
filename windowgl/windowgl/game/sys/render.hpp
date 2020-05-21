@@ -10,17 +10,21 @@
 #include <ecs/man/entitymanager.hpp>
 #include <game\cmp\boxcollider.hpp>
 #include <game/cmp/model.hpp>
+#include <game/sys/system.hpp>
 #include <GLFW/glfw3.h>
 
 namespace GM {
 
 struct GameContext_t;
 
-struct RenderSystem_t {
+struct RenderSystem_t : System_t {
     explicit RenderSystem_t(Window_t window);
     ~RenderSystem_t();
 
-    bool update(const ECS::EntityManager_t& g);
+    void update(ECS::EntityManager_t& g) override;
+	void terminateWindow();
+
+	inline static bool windowShouldClose = false;
 
 	//Lights
 	std::vector<PointLight_t> lights{};
@@ -55,8 +59,8 @@ private :
 	glm::mat4 projection;
 
 	//SHADERS
-	Shader myShader{ "Vertex.glsl", "Fragment.glsl" };
-	Shader lightShader{ "lightningVertex.glsl", "lightningFragment.glsl" };
+	Shader myShader{ "shaders/Vertex.glsl", "shaders/Fragment.glsl" };
+	Shader lightShader{ "shaders/lightningVertex.glsl", "shaders/lightningFragment.glsl" };
 	
 };
 }

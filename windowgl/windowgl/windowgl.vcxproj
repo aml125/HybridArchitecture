@@ -41,7 +41,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>ClangCL</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
@@ -140,8 +140,10 @@
     <ClCompile Include="game\cmp\directionalLight.cpp" />
     <ClCompile Include="game\cmp\model.cpp" />
     <ClCompile Include="game\cmp\pointLight.cpp" />
+    <ClCompile Include="game\man\gamemanager.cpp" />
     <ClCompile Include="game\rcmp\camera.cpp" />
     <ClCompile Include="game\rcmp\mesh.cpp" />
+    <ClCompile Include="game\rcmp\shader.cpp" />
     <ClCompile Include="game\rcmp\window.cpp" />
     <ClCompile Include="game\sys\collision.cpp" />
     <ClCompile Include="game\sys\input.cpp" />
@@ -151,8 +153,7 @@
     <ClCompile Include="Main.cpp">
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\tonet\Desktop\OpenGl\windowgl\windowgl\cmp;C:\Users\tonet\Desktop\OpenGl\windowgl\windowgl\man;C:\Users\tonet\Desktop\OpenGl\windowgl\windowgl\sys;C:\Users\tonet\Desktop\OpenGl\windowgl\windowgl\util;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
-    <ClCompile Include="Shader.cpp" />
-    <ClCompile Include="stbImpl.cpp" />
+    <ClCompile Include="game\util\stbImpl.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ecs\cmp\component.hpp" />
@@ -170,6 +171,7 @@
     <ClInclude Include="game\man\gamemanager.hpp" />
     <ClInclude Include="game\rcmp\camera.hpp" />
     <ClInclude Include="game\rcmp\mesh.hpp" />
+    <ClInclude Include="game\rcmp\shader.hpp" />
     <ClInclude Include="game\rcmp\texture.hpp" />
     <ClInclude Include="game\rcmp\vertex.hpp" />
     <ClInclude Include="game\rcmp\window.hpp" />
@@ -177,20 +179,20 @@
     <ClInclude Include="game\sys\input.hpp" />
     <ClInclude Include="game\sys\physics.hpp" />
     <ClInclude Include="game\sys\render.hpp" />
+    <ClInclude Include="game\sys\system.hpp" />
     <ClInclude Include="game\util\entitybuilder.hpp" />
     <ClInclude Include="game\util\typealiases.hpp" />
-    <ClInclude Include="Shader.h" />
-    <ClInclude Include="stb_image.h" />
+    <ClInclude Include="game\util\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Fragment.glsl" />
-    <None Include="pointFragment.glsl" />
-    <None Include="lightningFragment.glsl" />
-    <None Include="lightningVertex.glsl" />
-    <None Include="sunFragment.glsl" />
-    <None Include="sunVertex.glsl" />
-    <None Include="pointVertex.glsl" />
-    <None Include="Vertex.glsl" />
+    <None Include="shaders\Fragment.glsl" />
+    <None Include="shaders\pointFragment.glsl" />
+    <None Include="shaders\lightningFragment.glsl" />
+    <None Include="shaders\lightningVertex.glsl" />
+    <None Include="shaders\sunFragment.glsl" />
+    <None Include="shaders\sunVertex.glsl" />
+    <None Include="shaders\pointVertex.glsl" />
+    <None Include="shaders\Vertex.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

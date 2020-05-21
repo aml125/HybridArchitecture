@@ -4,8 +4,8 @@
 #include <windows.h>
 #include <stdio.h>
 #include <conio.h>
-#include <Shader.h>
-#include <stb_image.h>
+#include <game/rcmp/shader.hpp>
+#include <game/util/stb_image.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -68,10 +68,14 @@ RenderSystem_t::RenderSystem_t(Window_t window)
 
 
 RenderSystem_t::~RenderSystem_t() {
+	
+}
+
+void RenderSystem_t::terminateWindow() {
 	glfwTerminate();
 }
 
-bool RenderSystem_t::update(const ECS::EntityManager_t& g) {
+void RenderSystem_t::update(ECS::EntityManager_t& g) {
 	//frame delta time
 	float currentFrame = glfwGetTime();
 	deltaTime = currentFrame - lastFrame;
@@ -105,8 +109,12 @@ bool RenderSystem_t::update(const ECS::EntityManager_t& g) {
 
 	glfwSwapBuffers(window.window);
 	glfwPollEvents();
-    
-	return !glfwWindowShouldClose(window.window);
+
+	windowShouldClose = glfwWindowShouldClose(window.window);
+
+	if (windowShouldClose) {
+		terminateWindow();
+	}
 }
 
 void RenderSystem_t::setLightInformation() const

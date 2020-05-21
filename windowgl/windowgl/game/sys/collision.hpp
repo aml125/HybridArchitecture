@@ -2,16 +2,17 @@
 #include <ecs/man/entitymanager.hpp>
 #include <game\cmp\boxcollider.hpp>
 #include <game\cmp\physics.hpp>
+#include <game/sys/system.hpp>
 
 namespace GM {
 
 // Forward delaration
 struct GameContext_t;
 
-struct CollisionSystem_t {
+struct CollisionSystem_t : System_t{
     explicit CollisionSystem_t() =default;
 
-    bool update(ECS::EntityManager_t& g) const;
+    void update(ECS::EntityManager_t& g) override;
 
 private :
 	bool collide(const PhysicsComponent_t& phy1, const PhysicsComponent_t& phy2, const BoxCollider_t& e1, const BoxCollider_t& e2) const;

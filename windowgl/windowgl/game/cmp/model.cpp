@@ -2,7 +2,7 @@
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
-#include <stb_image.h>
+#include <game/util/stb_image.h>
 
 namespace GM {
 	const std::vector<Mesh_t>& Model_t::getMeshes() const

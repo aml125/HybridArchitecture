@@ -1,12 +1,14 @@
 #pragma once
 #include <game\rcmp\window.hpp>
+#include <game/sys/system.hpp>
+#include <ecs/man/entitymanager.hpp>
 
 namespace GM {
-	struct InputSystem_t {
+	struct InputSystem_t : System_t {
 		void processInput(GLFWwindow* window);
 		InputSystem_t(Window_t& window);
 		void mouse_move(GLFWwindow* window);
-		bool update();
+		void update(ECS::EntityManager_t& em) override;
 
 		bool firstMouse = true;
 		double lastX = 400, lastY = 300;

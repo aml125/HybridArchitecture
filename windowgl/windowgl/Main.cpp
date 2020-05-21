@@ -2,8 +2,8 @@
 #include <windows.h>
 #include <stdio.h>
 #include <conio.h>
-#include <Shader.h>
-#include <stb_image.h>
+#include <game/rcmp/shader.hpp>
+#include <game/util/stb_image.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -16,6 +16,7 @@
 #include <game\sys\render.hpp>
 #include <game\sys\input.hpp>
 #include <game\util\entitybuilder.hpp>
+#include <game\man\gamemanager.hpp>
 
 
 
@@ -92,29 +93,39 @@ void l() {
 
 int main()
 {
+	GM::GameManager gameManager;
 	GM::Window_t window{ kSCRWIDTH, kSCRHEIGHT };
-	GM::RenderSystem_t Render(window);
-	GM::InputSystem_t Input(window);
-	ECS::EntityManager_t EntityMan;
+
+	GM::RenderSystem_t render(window);
+	GM::InputSystem_t input(window);
+	GM::PhysicsSystem_t physics;
+	GM::CollisionSystem_t collision;
+
+	//Should be in order of execution
+	gameManager.addSystem(&render);
+	gameManager.addSystem(&input);
+	gameManager.addSystem(&physics);
+	gameManager.addSystem(&collision);
+	
 
 	//Set callbacks
-	Input.upKeyDown = up;
-	Input.downKeyDown = down;
-	Input.leftKeyDown = left;
-	Input.rightKeyDown = right;
-	Input.spaceKeyDown = space;
-	Input.cKeyDown = c;
-	Input.lKeyDown = l;
+	input.upKeyDown = up;
+	input.downKeyDown = down;
+	input.leftKeyDown = left;
+	input.rightKeyDown = right;
+	input.spaceKeyDown = space;
+	input.cKeyDown = c;
+	input.lKeyDown = l;
 	
 
 	glm::vec3 cLength0{ 20.75f, 0.75f,  23.66f };
 	glm::vec3 cOffset0{ 0.375f, 0.375f, -0.495 };
-	ECS::Entity_t& e0 = GM::EntityBuilder::buildFullEntity(EntityMan, glm::vec3(0, 0, 0), SUELO_PATH, cLength0, cOffset0);
+	ECS::Entity_t& e0 = GM::EntityBuilder::buildFullEntity(gameManager, glm::vec3(0, 0, 0), SUELO_PATH, cLength0, cOffset0);
 
 	
 	glm::vec3 cLength1{ 1, 1.55f, 0.5f };
 	glm::vec3 cOffset1{ 0, 0.78f, 0 };
-	ECS::Entity_t& e1 = GM::EntityBuilder::buildFullEntity(EntityMan, glm::vec3(10, 1, 0), NANOSUIT_PATH, cLength1, cOffset1);
+	ECS::Entity_t& e1 = GM::EntityBuilder::buildFullEntity(gameManager, glm::vec3(10, 1, 0), NANOSUIT_PATH, cLength1, cOffset1);
 	auto* phy1 = e1.getComponent<GM::PhysicsComponent_t>();
 	phy1->scale.x = phy1->scale.y = phy1->scale.z = 0.1f;
 	phy1->gravity = true;
@@ -122,22 +133,18 @@ int main()
 
 	glm::vec3 cLength2{ 1.25f, 3, 2 };
 	glm::vec3 cOffset2{ 0.625f, 1.5f, -1.0f };
-	ECS::Entity_t& e2 = GM::EntityBuilder::buildFullEntity(EntityMan, glm::vec3(0, 1, 0), TORRE_PATH, cLength2, cOffset2);
+	ECS::Entity_t& e2 = GM::EntityBuilder::buildFullEntity(gameManager, glm::vec3(0, 1, 0), TORRE_PATH, cLength2, cOffset2);
 	auto* phy2 = e2.getComponent<GM::PhysicsComponent_t>();
 	phy2->gravity = true;
 	phy2->scale = { 0.0015f, 0.0015f, 0.0015f };
 
 	GM::PointLight_t pt({3, 1.7, -1.5}, { 0.05f, 0.05f, 0.05f }, { 0.8f, 0.8f, 0.8f }, { 1.0f, 1.0f, 1.0f });
-	Render.lights.push_back(pt);
+	render.lights.push_back(pt);
 
-	GM::PhysicsSystem_t Physics;
-	GM::CollisionSystem_t Collision;
-	while (Render.update(EntityMan)) {
-		Input.update();
-		Physics.update(EntityMan);
-		Collision.update(EntityMan);
+
+	//GAME LOOP
+	while (gameManager.update()) {
 	}
-	Render.~RenderSystem_t();
 	char c = getchar();
 	return 0;
 }

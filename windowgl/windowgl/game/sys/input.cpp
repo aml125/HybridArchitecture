@@ -105,11 +105,10 @@ InputSystem_t::InputSystem_t(Window_t& win)
 	glfwSetScrollCallback(window.window, scroll_callback);
 }
 
-bool InputSystem_t::update()
+void InputSystem_t::update(ECS::EntityManager_t& em)
 {
 	//INPUT
 	processInput(window.window);
 	mouse_move(window.window);
-	return true;
 }
 }

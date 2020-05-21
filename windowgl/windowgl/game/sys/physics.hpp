@@ -1,16 +1,14 @@
 #pragma once
 #include <ecs/man/entitymanager.hpp>
 #include <game\cmp\physics.hpp>
+#include <game/sys/system.hpp>
 
 namespace GM {
 
-// Forward delaration
-struct GameContext_t;
-
-struct PhysicsSystem_t {
+struct PhysicsSystem_t : System_t {
     explicit PhysicsSystem_t() =default;
 
-    bool update(ECS::EntityManager_t& g);
+    void update(ECS::EntityManager_t& g) override;
 
 private:
     void aplyGravity(PhysicsComponent_t& cmp) const;
