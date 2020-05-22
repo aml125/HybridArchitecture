@@ -21,7 +21,7 @@ void PhysicsSystem_t::aplyGravity(PhysicsComponent_t& cmp) const {
 }
 void PhysicsSystem_t::moveObject(PhysicsComponent_t& phy) const
 {
-
+    phy.speed += phy.aceleration * RenderSystem_t::deltaTime;
     phy.position += phy.speed * RenderSystem_t::deltaTime;
 }
 }

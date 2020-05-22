@@ -74,6 +74,8 @@
     <ClCompile Include="game\man\gamemanager.cpp">
       <Filter>nuevo</Filter>
     </ClCompile>
+    <ClCompile Include="game\rcmp\loadedmodel.cpp" />
+    <ClCompile Include="game\sys\ia.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ecs\cmp\component.hpp">
@@ -155,6 +157,15 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="game\rcmp\shader.hpp">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="game\rcmp\loadedmodel.hpp">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="game\cmp\ia.hpp">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="game\sys\ia.hpp">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

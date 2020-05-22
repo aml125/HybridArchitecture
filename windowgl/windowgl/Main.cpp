@@ -17,6 +17,8 @@
 #include <game\sys\input.hpp>
 #include <game\util\entitybuilder.hpp>
 #include <game\man\gamemanager.hpp>
+#include <game\cmp\ia.hpp>
+#include <game/sys/ia.hpp>
 
 
 
@@ -98,14 +100,16 @@ int main()
 
 	GM::RenderSystem_t render(window);
 	GM::InputSystem_t input(window);
+	GM::IASystem_t iaSystem{};
 	GM::PhysicsSystem_t physics;
 	GM::CollisionSystem_t collision;
 
 	//Should be in order of execution
-	gameManager.addSystem(&render);
-	gameManager.addSystem(&input);
-	gameManager.addSystem(&physics);
-	gameManager.addSystem(&collision);
+	gameManager.addSystem(render);
+	gameManager.addSystem(input);
+	gameManager.addSystem(iaSystem);
+	gameManager.addSystem(physics);
+	gameManager.addSystem(collision);
 	
 
 	//Set callbacks
@@ -122,15 +126,19 @@ int main()
 	glm::vec3 cOffset0{ 0.375f, 0.375f, -0.495 };
 	ECS::Entity_t& e0 = GM::EntityBuilder::buildFullEntity(gameManager, glm::vec3(0, 0, 0), SUELO_PATH, cLength0, cOffset0);
 
-	
+	//Player
 	glm::vec3 cLength1{ 1, 1.55f, 0.5f };
 	glm::vec3 cOffset1{ 0, 0.78f, 0 };
-	ECS::Entity_t& e1 = GM::EntityBuilder::buildFullEntity(gameManager, glm::vec3(10, 1, 0), NANOSUIT_PATH, cLength1, cOffset1);
+	ECS::Entity_t& e1 = GM::EntityBuilder::buildFullEntity(gameManager, glm::vec3(-10, 1, -10), NANOSUIT_PATH, cLength1, cOffset1);
+	GM::IA_t& ia = gameManager.entityMan.createComponent<GM::IA_t>(e1.entityID);
+	ia.target.position = { 10, 0, 10 };
+	
 	auto* phy1 = e1.getComponent<GM::PhysicsComponent_t>();
 	phy1->scale.x = phy1->scale.y = phy1->scale.z = 0.1f;
 	phy1->gravity = true;
 	player = phy1;
 
+	//Tower
 	glm::vec3 cLength2{ 1.25f, 3, 2 };
 	glm::vec3 cOffset2{ 0.625f, 1.5f, -1.0f };
 	ECS::Entity_t& e2 = GM::EntityBuilder::buildFullEntity(gameManager, glm::vec3(0, 1, 0), TORRE_PATH, cLength2, cOffset2);

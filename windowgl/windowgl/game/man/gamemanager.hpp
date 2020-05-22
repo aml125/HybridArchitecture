@@ -12,8 +12,8 @@ namespace GM {
 
         bool update();
 
-        void addSystem(System_t* sys) {
-            systems.push_back(sys);
+        void addSystem(System_t& sys) {
+            systems.push_back(&sys);
         }
 
         ECS::EntityManager_t entityMan;
