@@ -20,5 +20,6 @@ namespace GM {
 		float targetRadius = 3;
 		float slowRadius = 7;
 		float timeToTarget = 0.1;
+		unsigned int slotNumber;
 	};
 }

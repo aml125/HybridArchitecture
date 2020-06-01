@@ -76,6 +76,8 @@
     </ClCompile>
     <ClCompile Include="game\rcmp\loadedmodel.cpp" />
     <ClCompile Include="game\sys\ia.cpp" />
+    <ClCompile Include="game\cmp\formation.hpp" />
+    <ClCompile Include="game\sys\formation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ecs\cmp\component.hpp">
@@ -166,6 +168,9 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="game\sys\ia.hpp">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="game\sys\formation.hpp">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

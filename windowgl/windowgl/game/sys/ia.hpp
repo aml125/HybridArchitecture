@@ -10,6 +10,10 @@ namespace GM {
 		glm::vec3 rotation{};
 	};
 
+	struct SlotAssignment {
+
+	};
+
 	struct IASystem_t : System_t {
 		void update(ECS::EntityManager_t& em) override;
 		Steering arrive(const IA_t& ia, const PhysicsComponent_t& phy);

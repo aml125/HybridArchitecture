@@ -138,6 +138,7 @@
     <ClCompile Include="ecs\man\entitymanager.cpp" />
     <ClCompile Include="game\cmp\boxrenderer.cpp" />
     <ClCompile Include="game\cmp\directionalLight.cpp" />
+    <ClCompile Include="game\cmp\formation.hpp" />
     <ClCompile Include="game\cmp\model.cpp" />
     <ClCompile Include="game\cmp\pointLight.cpp" />
     <ClCompile Include="game\man\gamemanager.cpp" />
@@ -147,6 +148,7 @@
     <ClCompile Include="game\rcmp\shader.cpp" />
     <ClCompile Include="game\rcmp\window.cpp" />
     <ClCompile Include="game\sys\collision.cpp" />
+    <ClCompile Include="game\sys\formation.cpp" />
     <ClCompile Include="game\sys\ia.cpp" />
     <ClCompile Include="game\sys\input.cpp" />
     <ClCompile Include="game\sys\physics.cpp" />
@@ -180,6 +182,7 @@
     <ClInclude Include="game\rcmp\vertex.hpp" />
     <ClInclude Include="game\rcmp\window.hpp" />
     <ClInclude Include="game\sys\collision.hpp" />
+    <ClInclude Include="game\sys\formation.hpp" />
     <ClInclude Include="game\sys\ia.hpp" />
     <ClInclude Include="game\sys\input.hpp" />
     <ClInclude Include="game\sys\physics.hpp" />
