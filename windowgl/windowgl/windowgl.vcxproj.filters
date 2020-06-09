@@ -32,13 +32,7 @@
     <ClCompile Include="game\cmp\boxrenderer.cpp">
       <Filter>nuevo</Filter>
     </ClCompile>
-    <ClCompile Include="game\cmp\directionalLight.cpp">
-      <Filter>nuevo</Filter>
-    </ClCompile>
     <ClCompile Include="game\cmp\model.cpp">
-      <Filter>nuevo</Filter>
-    </ClCompile>
-    <ClCompile Include="game\cmp\pointLight.cpp">
       <Filter>nuevo</Filter>
     </ClCompile>
     <ClCompile Include="game\rcmp\camera.cpp">
@@ -77,7 +71,14 @@
     <ClCompile Include="game\rcmp\loadedmodel.cpp" />
     <ClCompile Include="game\sys\ia.cpp" />
     <ClCompile Include="game\cmp\formation.hpp" />
-    <ClCompile Include="game\sys\formation.cpp" />
+    <ClCompile Include="game\man\formation.cpp" />
+    <ClCompile Include="game\rcmp\pointLight.cpp">
+      <Filter>nuevo</Filter>
+    </ClCompile>
+    <ClCompile Include="game\rcmp\directionalLight.cpp">
+      <Filter>nuevo</Filter>
+    </ClCompile>
+    <ClCompile Include="game\icmp\pattern.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ecs\cmp\component.hpp">
@@ -104,16 +105,10 @@
     <ClInclude Include="game\cmp\boxrenderer.hpp">
       <Filter>nuevo</Filter>
     </ClInclude>
-    <ClInclude Include="game\cmp\directionalLight.hpp">
-      <Filter>nuevo</Filter>
-    </ClInclude>
     <ClInclude Include="game\cmp\model.hpp">
       <Filter>nuevo</Filter>
     </ClInclude>
     <ClInclude Include="game\cmp\physics.hpp">
-      <Filter>nuevo</Filter>
-    </ClInclude>
-    <ClInclude Include="game\cmp\pointLight.hpp">
       <Filter>nuevo</Filter>
     </ClInclude>
     <ClInclude Include="game\rcmp\camera.hpp">
@@ -170,7 +165,19 @@
     <ClInclude Include="game\sys\ia.hpp">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="game\sys\formation.hpp">
+    <ClInclude Include="game\man\formation.hpp">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="game\rcmp\pointLight.hpp">
+      <Filter>nuevo</Filter>
+    </ClInclude>
+    <ClInclude Include="game\rcmp\directionalLight.hpp">
+      <Filter>nuevo</Filter>
+    </ClInclude>
+    <ClInclude Include="game\icmp\pattern.hpp">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="game\icmp\datatypes.hpp">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

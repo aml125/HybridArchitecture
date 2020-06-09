@@ -1,4 +1,4 @@
-#include <game/cmp/pointLight.hpp>
+#include <game/rcmp/pointLight.hpp>
 
 namespace GM {
 	PointLight_t::PointLight_t(const glm::vec3& pos,

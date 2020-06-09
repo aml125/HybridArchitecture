@@ -23,5 +23,7 @@ void PhysicsSystem_t::moveObject(PhysicsComponent_t& phy) const
 {
     phy.speed += phy.aceleration * RenderSystem_t::deltaTime;
     phy.position += phy.speed * RenderSystem_t::deltaTime;
+    phy.rotationSpeed += phy.rotationAceleration * RenderSystem_t::deltaTime;
+    phy.rotation += phy.rotationSpeed * RenderSystem_t::deltaTime;
 }
 }

@@ -4,8 +4,8 @@
 #include <game/util/typealiases.hpp>
 #include <game/rcmp/camera.hpp>
 #include <vector>
-#include <game/cmp/pointLight.hpp>
-#include <game/cmp/directionalLight.hpp>
+#include <game/rcmp/pointLight.hpp>
+#include <game/rcmp/directionalLight.hpp>
 #include <game/rcmp/window.hpp>
 #include <ecs/man/entitymanager.hpp>
 #include <game\cmp\boxcollider.hpp>

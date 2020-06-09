@@ -112,7 +112,7 @@ int main()
 	gameManager.addSystem(collision);
 	
 
-	//Set callbacks
+	//Set key callbacks
 	input.upKeyDown = up;
 	input.downKeyDown = down;
 	input.leftKeyDown = left;
@@ -120,20 +120,48 @@ int main()
 	input.spaceKeyDown = space;
 	input.cKeyDown = c;
 	input.lKeyDown = l;
+
+	//Set formation slots
+	iaSystem.fm.pattern.slots.emplace_back(GM::Location{ { 2, 0, 0 }, { 0, 0, 0 } });
+	iaSystem.fm.pattern.slots.emplace_back(GM::Location{ { 0, 0, 0 }, { 0, 0, 0 } });
+	iaSystem.fm.pattern.slots.emplace_back(GM::Location{ { -2, 0, 0 }, { 0, 0, 0 } });
+
+	iaSystem.fm.pattern.anchorPoint.ia.target.position = { 15, 1, 10 };
+	iaSystem.fm.pattern.anchorPoint.ia.target.orientation = { 90, 0, 0 };
 	
 
 	glm::vec3 cLength0{ 20.75f, 0.75f,  23.66f };
 	glm::vec3 cOffset0{ 0.375f, 0.375f, -0.495 };
 	ECS::Entity_t& e0 = GM::EntityBuilder::buildFullEntity(gameManager, glm::vec3(0, 0, 0), SUELO_PATH, cLength0, cOffset0);
 
-	//Player
+	//Player 1
 	glm::vec3 cLength1{ 1, 1.55f, 0.5f };
 	glm::vec3 cOffset1{ 0, 0.78f, 0 };
-	ECS::Entity_t& e1 = GM::EntityBuilder::buildFullEntity(gameManager, glm::vec3(-10, 1, -10), NANOSUIT_PATH, cLength1, cOffset1);
+	ECS::Entity_t& e1 = GM::EntityBuilder::buildFullEntity(gameManager, glm::vec3(0, 1, -10), NANOSUIT_PATH, cLength1, cOffset1);
 	GM::IA_t& ia = gameManager.entityMan.createComponent<GM::IA_t>(e1.entityID);
-	ia.target.position = { 10, 0, 10 };
+	iaSystem.fm.addCharacter(ia, gameManager.entityMan.getComponents<GM::IA_t>());
 	
 	auto* phy1 = e1.getComponent<GM::PhysicsComponent_t>();
+	phy1->scale.x = phy1->scale.y = phy1->scale.z = 0.1f;
+	phy1->gravity = true;
+	//player = phy1;
+	
+	//Player 2
+	ECS::Entity_t& e2 = GM::EntityBuilder::buildFullEntity(gameManager, glm::vec3(-5, 1, -10), NANOSUIT_PATH, cLength1, cOffset1);
+	GM::IA_t& ia2 = gameManager.entityMan.createComponent<GM::IA_t>(e2.entityID);
+	iaSystem.fm.addCharacter(ia2, gameManager.entityMan.getComponents<GM::IA_t>());
+	
+	phy1 = e2.getComponent<GM::PhysicsComponent_t>();
+	phy1->scale.x = phy1->scale.y = phy1->scale.z = 0.1f;
+	phy1->gravity = true;
+	//player = phy1;
+	
+	//Player 3
+	ECS::Entity_t& e3 = GM::EntityBuilder::buildFullEntity(gameManager, glm::vec3(-10, 1, -10), NANOSUIT_PATH, cLength1, cOffset1);
+	GM::IA_t& ia3 = gameManager.entityMan.createComponent<GM::IA_t>(e3.entityID);
+	iaSystem.fm.addCharacter(ia3, gameManager.entityMan.getComponents<GM::IA_t>());
+	
+	phy1 = e3.getComponent<GM::PhysicsComponent_t>();
 	phy1->scale.x = phy1->scale.y = phy1->scale.z = 0.1f;
 	phy1->gravity = true;
 	player = phy1;
@@ -141,8 +169,8 @@ int main()
 	//Tower
 	glm::vec3 cLength2{ 1.25f, 3, 2 };
 	glm::vec3 cOffset2{ 0.625f, 1.5f, -1.0f };
-	ECS::Entity_t& e2 = GM::EntityBuilder::buildFullEntity(gameManager, glm::vec3(0, 1, 0), TORRE_PATH, cLength2, cOffset2);
-	auto* phy2 = e2.getComponent<GM::PhysicsComponent_t>();
+	auto& torre = GM::EntityBuilder::buildFullEntity(gameManager, glm::vec3(0, 1, 0), TORRE_PATH, cLength2, cOffset2);
+	auto* phy2 = torre.getComponent<GM::PhysicsComponent_t>();
 	phy2->gravity = true;
 	phy2->scale = { 0.0015f, 0.0015f, 0.0015f };
 

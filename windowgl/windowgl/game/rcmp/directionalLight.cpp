@@ -1,4 +1,4 @@
-#include <game/cmp/directionalLight.hpp>
+#include <game/rcmp/directionalLight.hpp>
 
 namespace GM {
 	DirectionalLight_t::DirectionalLight_t(const glm::vec3& dir, 

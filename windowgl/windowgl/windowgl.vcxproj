@@ -41,7 +41,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>ClangCL</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
@@ -98,10 +98,12 @@
       <AdditionalIncludeDirectories>$(SolutionDir)windowgl\glm;$(SolutionDir)windowgl\cmp;$(SolutionDir)windowgl\sys;$(SolutionDir)windowgl\util;$(SolutionDir)windowgl\man;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <CompileAsWinRT>false</CompileAsWinRT>
+      <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
     </ClCompile>
     <Link>
       <AdditionalDependencies>opengl32.lib;glfw3.lib;assimp-vc140-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>C:\Users\tonet\Desktop\OpenGl\windowgl\OpenGLStuff\libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -137,10 +139,11 @@
     <ClCompile Include="ecs\man\componentstorage.cpp" />
     <ClCompile Include="ecs\man\entitymanager.cpp" />
     <ClCompile Include="game\cmp\boxrenderer.cpp" />
-    <ClCompile Include="game\cmp\directionalLight.cpp" />
+    <ClCompile Include="game\icmp\pattern.cpp" />
+    <ClCompile Include="game\rcmp\directionalLight.cpp" />
     <ClCompile Include="game\cmp\formation.hpp" />
     <ClCompile Include="game\cmp\model.cpp" />
-    <ClCompile Include="game\cmp\pointLight.cpp" />
+    <ClCompile Include="game\rcmp\pointLight.cpp" />
     <ClCompile Include="game\man\gamemanager.cpp" />
     <ClCompile Include="game\rcmp\camera.cpp" />
     <ClCompile Include="game\rcmp\loadedmodel.cpp" />
@@ -148,7 +151,7 @@
     <ClCompile Include="game\rcmp\shader.cpp" />
     <ClCompile Include="game\rcmp\window.cpp" />
     <ClCompile Include="game\sys\collision.cpp" />
-    <ClCompile Include="game\sys\formation.cpp" />
+    <ClCompile Include="game\man\formation.cpp" />
     <ClCompile Include="game\sys\ia.cpp" />
     <ClCompile Include="game\sys\input.cpp" />
     <ClCompile Include="game\sys\physics.cpp" />
@@ -168,11 +171,13 @@
     <ClInclude Include="ecs\util\typealiases.hpp" />
     <ClInclude Include="game\cmp\boxcollider.hpp" />
     <ClInclude Include="game\cmp\boxrenderer.hpp" />
-    <ClInclude Include="game\cmp\directionalLight.hpp" />
+    <ClInclude Include="game\icmp\datatypes.hpp" />
+    <ClInclude Include="game\icmp\pattern.hpp" />
+    <ClInclude Include="game\rcmp\directionalLight.hpp" />
     <ClInclude Include="game\cmp\ia.hpp" />
     <ClInclude Include="game\cmp\model.hpp" />
     <ClInclude Include="game\cmp\physics.hpp" />
-    <ClInclude Include="game\cmp\pointLight.hpp" />
+    <ClInclude Include="game\rcmp\pointLight.hpp" />
     <ClInclude Include="game\man\gamemanager.hpp" />
     <ClInclude Include="game\rcmp\camera.hpp" />
     <ClInclude Include="game\rcmp\loadedmodel.hpp" />
@@ -182,7 +187,7 @@
     <ClInclude Include="game\rcmp\vertex.hpp" />
     <ClInclude Include="game\rcmp\window.hpp" />
     <ClInclude Include="game\sys\collision.hpp" />
-    <ClInclude Include="game\sys\formation.hpp" />
+    <ClInclude Include="game\man\formation.hpp" />
     <ClInclude Include="game\sys\ia.hpp" />
     <ClInclude Include="game\sys\input.hpp" />
     <ClInclude Include="game\sys\physics.hpp" />
