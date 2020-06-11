@@ -16,10 +16,7 @@ namespace GM {
 		Steering arrive(const IA_t& ia, const PhysicsComponent_t& phy);
 		FormationManager fm{};
 
-		//WARNING Makes a full copy of the slots
-		std::vector<Location>& setPatternSlots(std::vector<Location>& sp) {
-			fm.pattern.slots = sp;
-			return fm.pattern.slots;
-		}
+	private:
+		void setOrientation(glm::vec3& orientation, const glm::vec3& velocity);
 	};
 }

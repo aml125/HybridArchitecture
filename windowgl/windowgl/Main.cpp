@@ -56,26 +56,26 @@ glm::vec3 pointLightPositions[] = {
 	glm::vec3(0.0f,  0.0f, -3.0f)
 };
 
-GM::PhysicsComponent_t* player;
+glm::vec3* player;
 
 void up() {
-	player->speed.z = 0.5;
+	player->z += 2 * GM::RenderSystem_t::deltaTime;
 }
 
 void left() {
-	player->speed.x = 0.5;
+	player->x += 2 * GM::RenderSystem_t::deltaTime;
 }
 
 void right() {
-	player->speed.x = -0.5;
+	player->x += -2 * GM::RenderSystem_t::deltaTime;
 }
 
 void down() {
-	player->speed.z = -0.5;
+	player->z += -2 * GM::RenderSystem_t::deltaTime;
 }
 
 void space() {
-	player->speed.y = 0.6;
+	/*player->y = 0.6 * GM::RenderSystem_t::deltaTime;*/
 }
 
 float lastPushTime = 0.0f;
@@ -121,13 +121,15 @@ int main()
 	input.cKeyDown = c;
 	input.lKeyDown = l;
 
-	//Set formation slots
-	iaSystem.fm.pattern.slots.emplace_back(GM::Location{ { 2, 0, 0 }, { 0, 0, 0 } });
-	iaSystem.fm.pattern.slots.emplace_back(GM::Location{ { 0, 0, 0 }, { 0, 0, 0 } });
-	iaSystem.fm.pattern.slots.emplace_back(GM::Location{ { -2, 0, 0 }, { 0, 0, 0 } });
+	auto& pattern1 = iaSystem.fm.createPattern(gameManager.entityMan);
 
-	iaSystem.fm.pattern.anchorPoint.ia.target.position = { 15, 1, 10 };
-	iaSystem.fm.pattern.anchorPoint.ia.target.orientation = { 90, 0, 0 };
+	//Set formation slots
+	pattern1.slots.emplace_back(GM::Location{ { 2, 0, 0 }, { 0, 0, 0 } });
+	pattern1.slots.emplace_back(GM::Location{ { 0, 0, 0 }, { 0, 0, 0 } });
+	pattern1.slots.emplace_back(GM::Location{ { -2, 0, 0 }, { 0, 0, 0 } });
+
+	pattern1.anchorPoint->getComponent<GM::IA_t>()->target.position = { 0, 1, -10 };
+	player = &pattern1.anchorPoint->getComponent<GM::IA_t>()->target.position;
 	
 
 	glm::vec3 cLength0{ 20.75f, 0.75f,  23.66f };
@@ -139,32 +141,32 @@ int main()
 	glm::vec3 cOffset1{ 0, 0.78f, 0 };
 	ECS::Entity_t& e1 = GM::EntityBuilder::buildFullEntity(gameManager, glm::vec3(0, 1, -10), NANOSUIT_PATH, cLength1, cOffset1);
 	GM::IA_t& ia = gameManager.entityMan.createComponent<GM::IA_t>(e1.entityID);
+	ia.patternNumber = 0;
 	iaSystem.fm.addCharacter(ia, gameManager.entityMan.getComponents<GM::IA_t>());
 	
 	auto* phy1 = e1.getComponent<GM::PhysicsComponent_t>();
 	phy1->scale.x = phy1->scale.y = phy1->scale.z = 0.1f;
 	phy1->gravity = true;
-	//player = phy1;
 	
 	//Player 2
 	ECS::Entity_t& e2 = GM::EntityBuilder::buildFullEntity(gameManager, glm::vec3(-5, 1, -10), NANOSUIT_PATH, cLength1, cOffset1);
 	GM::IA_t& ia2 = gameManager.entityMan.createComponent<GM::IA_t>(e2.entityID);
+	ia2.patternNumber = 0;
 	iaSystem.fm.addCharacter(ia2, gameManager.entityMan.getComponents<GM::IA_t>());
 	
 	phy1 = e2.getComponent<GM::PhysicsComponent_t>();
 	phy1->scale.x = phy1->scale.y = phy1->scale.z = 0.1f;
 	phy1->gravity = true;
-	//player = phy1;
 	
 	//Player 3
 	ECS::Entity_t& e3 = GM::EntityBuilder::buildFullEntity(gameManager, glm::vec3(-10, 1, -10), NANOSUIT_PATH, cLength1, cOffset1);
 	GM::IA_t& ia3 = gameManager.entityMan.createComponent<GM::IA_t>(e3.entityID);
+	ia3.patternNumber = 0;
 	iaSystem.fm.addCharacter(ia3, gameManager.entityMan.getComponents<GM::IA_t>());
 	
 	phy1 = e3.getComponent<GM::PhysicsComponent_t>();
 	phy1->scale.x = phy1->scale.y = phy1->scale.z = 0.1f;
 	phy1->gravity = true;
-	player = phy1;
 
 	//Tower
 	glm::vec3 cLength2{ 1.25f, 3, 2 };

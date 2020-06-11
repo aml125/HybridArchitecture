@@ -17,5 +17,7 @@ namespace GM {
 		float slowRadius = 2;
 		float timeToTarget = 0.1;
 		unsigned int slotNumber=999999;
+		bool isAnchorPoint = false;
+		unsigned int patternNumber = 999999;
 	};
 }

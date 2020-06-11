@@ -177,11 +177,11 @@ void RenderSystem_t::drawAllModels(const ECS::EntityManager_t& em, const std::ve
 				exit(-1);
 			}
 
+			model = glm::translate(model, phy->position);
+			model = glm::scale(model, phy->scale);
 			if (phy->rotation.x != 0 || phy->rotation.y != 0 || phy->rotation.z != 0) {
 				model = glm::rotate(model, glm::length(phy->rotation), glm::normalize(phy->rotation)); //Rotate only if there is rotation, because if all are 0 it gliches
 			}
-			model = glm::translate(model, phy->position);
-			model = glm::scale(model, phy->scale);
 			myShader.setMatrix4("model", model);
 			
 			setLightInformation();
