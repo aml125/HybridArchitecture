@@ -137,36 +137,13 @@ int main()
 	ECS::Entity_t& e0 = GM::EntityBuilder::buildFullEntity(gameManager, glm::vec3(0, 0, 0), SUELO_PATH, cLength0, cOffset0);
 
 	//Player 1
-	glm::vec3 cLength1{ 1, 1.55f, 0.5f };
-	glm::vec3 cOffset1{ 0, 0.78f, 0 };
-	ECS::Entity_t& e1 = GM::EntityBuilder::buildFullEntity(gameManager, glm::vec3(0, 1, -10), NANOSUIT_PATH, cLength1, cOffset1);
-	GM::IA_t& ia = gameManager.entityMan.createComponent<GM::IA_t>(e1.entityID);
-	ia.patternNumber = 0;
-	iaSystem.fm.addCharacter(ia, gameManager.entityMan.getComponents<GM::IA_t>());
-	
-	auto* phy1 = e1.getComponent<GM::PhysicsComponent_t>();
-	phy1->scale.x = phy1->scale.y = phy1->scale.z = 0.1f;
-	phy1->gravity = true;
+	ECS::Entity_t& e1 = GM::EntityBuilder::buildNPC(gameManager, glm::vec3(0, 1, -10), NANOSUIT_PATH, 0, iaSystem);
 	
 	//Player 2
-	ECS::Entity_t& e2 = GM::EntityBuilder::buildFullEntity(gameManager, glm::vec3(-5, 1, -10), NANOSUIT_PATH, cLength1, cOffset1);
-	GM::IA_t& ia2 = gameManager.entityMan.createComponent<GM::IA_t>(e2.entityID);
-	ia2.patternNumber = 0;
-	iaSystem.fm.addCharacter(ia2, gameManager.entityMan.getComponents<GM::IA_t>());
-	
-	phy1 = e2.getComponent<GM::PhysicsComponent_t>();
-	phy1->scale.x = phy1->scale.y = phy1->scale.z = 0.1f;
-	phy1->gravity = true;
+	ECS::Entity_t& e2 = GM::EntityBuilder::buildNPC(gameManager, glm::vec3(-5, 1, -10), NANOSUIT_PATH, 0, iaSystem);
 	
 	//Player 3
-	ECS::Entity_t& e3 = GM::EntityBuilder::buildFullEntity(gameManager, glm::vec3(-10, 1, -10), NANOSUIT_PATH, cLength1, cOffset1);
-	GM::IA_t& ia3 = gameManager.entityMan.createComponent<GM::IA_t>(e3.entityID);
-	ia3.patternNumber = 0;
-	iaSystem.fm.addCharacter(ia3, gameManager.entityMan.getComponents<GM::IA_t>());
-	
-	phy1 = e3.getComponent<GM::PhysicsComponent_t>();
-	phy1->scale.x = phy1->scale.y = phy1->scale.z = 0.1f;
-	phy1->gravity = true;
+	ECS::Entity_t& e3 = GM::EntityBuilder::buildNPC(gameManager, glm::vec3(-10, 1, -10), NANOSUIT_PATH, 0, iaSystem);
 
 	//Tower
 	glm::vec3 cLength2{ 1.25f, 3, 2 };

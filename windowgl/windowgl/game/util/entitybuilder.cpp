@@ -59,9 +59,16 @@ namespace GM {
 		constexpr glm::vec3 cLength1{ 1, 1.55f, 0.5f };
 		constexpr glm::vec3 cOffset1{ 0, 0.78f, 0 };
 		ECS::Entity_t& e1 = GM::EntityBuilder::buildFullEntity(gm, position, modelPath, cLength1, cOffset1);
+		
+		//IA
 		GM::IA_t& ia = gm.entityMan.createComponent<GM::IA_t>(e1.entityID);
 		ia.patternNumber = 0;
 		iaSystem.fm.addCharacter(ia, gm.entityMan.getComponents<GM::IA_t>());
+
+		//Physics
+		auto* phy1 = e1.getComponent<GM::PhysicsComponent_t>();
+		phy1->scale.x = phy1->scale.y = phy1->scale.z = 0.1f;
+		phy1->gravity = true;
 		return e1;
 	}
 }
