@@ -1,17 +1,10 @@
 #include <game/man/formation.hpp>
 #include <game\cmp\physics.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include <game\cmp\model.hpp>
 
 namespace GM {
-	//void FormationManager::update(ECS::EntityManager_t& em)
-	//{
-	//	auto& a = em.getComponents<IA_t>();
-	//	updateSlots(a);
-
-	//	//Set anchor position at the center of mass
-	//	pattern->anchorPoint.position = pattern->realMassCenter.position;
-	//	pattern->anchorPoint.orientation = pattern->realMassCenter.orientation;
-	//}
+	const std::string FLAG_PATH = "assets\\models\\bandera\\bandera.obj";
 
 	bool FormationManager::addCharacter(IA_t& ia, std::vector<IA_t>& assignments)
 	{
@@ -112,6 +105,12 @@ namespace GM {
 		ap->addComponent(aia);
 		Pattern& pat = patterns.emplace_back();
 		pat.anchorPoint = ap;
+
+		//Set flag as the model
+		Model_t& mod = em.createComponent<Model_t>(ap->entityID);
+		mod.loadModel(FLAG_PATH);
+		ap->addComponent(mod);
+		phy.scale = { 0.01, 0.01, 0.01 };
 		return pat;
 	}
 
