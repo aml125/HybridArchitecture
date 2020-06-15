@@ -15,40 +15,33 @@ namespace GM {
 				std::cout << "IASystem_t::update() ERROR cant have ia without Physics System\n";
 				return;
 			}
-			auto steering = arrive(ia, *phy); //TODO, It may be copying the values, but compiler nowadays optimizes return values
-			phy->aceleration = steering.aceleration;
-			if (!ia.isAnchorPoint)
-				phy->rotation = steering.rotation; //TODO Don set the rotation directly, but with a target and acceleration
+			stateMachineUpdate(em, ia, *phy);
+			
 		}
 
-		//std::cout << std::endl;
+		if (totalArrived < 2) {
+			//Execute the pattern manager to set the new targets of the formation
+			fm.updateSlots(em.getComponents<IA_t>());
 
-		//fm.pattern.anchorPoint.phy.rotation = steering.rotation; //TODO ¿Anchor point should rotate?
-
-		/*std::cout << "AnchorPos: x:" << fm.getPattern(0).anchorPoint->getComponent<PhysicsComponent_t>()->position.x << " y:" << fm.getPattern(0).anchorPoint->getComponent<PhysicsComponent_t>()->position.y << " z:" << fm.getPattern(0).anchorPoint->getComponent<PhysicsComponent_t>()->position.z << std::endl;
-		std::cout << "AnchorPos: x:" << fm.getPattern(0).anchorPoint->getComponent<IA_t>()->target.position.x << " y:" << fm.getPattern(0).anchorPoint->getComponent<IA_t>()->target.position.y << " z:" << fm.getPattern(0).anchorPoint->getComponent<IA_t>()->target.position.z << std::endl << std::endl;*/
-
-		//Execute the pattern manager to set the new targets of the formation
-		fm.updateSlots(em.getComponents<IA_t>());
-
-		//std::cout << "\n------------------------------------------\n";
-
-		//Reset the anchor point to the center of mass of the formation
-		fm.ressetAnchorsToCenterOfMass(em.getComponents <IA_t>(), em);
+			//Reset the anchor point to the center of mass of the formation
+			fm.ressetAnchorsToCenterOfMass(em.getComponents <IA_t>(), em);
+		}
 	}
 
-	Steering IASystem_t::arrive(const IA_t& ia, const PhysicsComponent_t& phy)
+	Steering IASystem_t::arrive(const IA_t& ia, const PhysicsComponent_t& phy, bool& arrived)
 	{
 		Steering steering; //Return data
+		arrived = false;
 		
 		glm::vec3 direction = ia.target.position - phy.position;
 		float distance = glm::length(direction);
 		//std::cout << "Distance: " << distance << std::endl;
 
 		//If we are in the target radius, we arived
-		if (distance < ia.targetRadius) {
+		if (distance <= ia.targetRadius) {
 			steering.aceleration = -phy.speed;
 			//std::cout << "arrived" << std::endl;
+			arrived = true;
 			return steering;
 		}
 
@@ -91,5 +84,149 @@ namespace GM {
 		}
 	}
 
-	
+	void IASystem_t::stateMachineUpdate(ECS::EntityManager_t& em, IA_t& ia, PhysicsComponent_t& phy)
+	{
+		bool arrived = false;
+		Steering* steering;
+		//Hard coded state machine
+		switch (ia.state) {
+		case ARRIVE:
+			steering = &arrive(ia, phy, arrived);
+			phy.aceleration = steering->aceleration;
+			phy.rotation = steering->rotation; //TODO Don set the rotation directly, but with a target and acceleration
+
+			if (arrived) {
+				ia.state = WAIT;
+			}
+			break;
+		case ANCHOR_WAIT:
+
+			break;
+		case ANCHOR_ARRIVE:
+		{
+			bool setFormation = setFormationTarget(em, ia, findOtherFormation(em, ia));
+			bool arrived = false;
+			steering = &arrive(ia, phy, arrived);
+			phy.aceleration = steering->aceleration;
+			if (setFormation && arrived) {
+				std::cout << "Anchor arrived\n";
+				ia.state = ANCHOR_WAIT;
+				totalArrived++;
+				//Cancel aceleration and speed of the formation anchor
+				phy.aceleration = { 0, 0, 0 };
+				phy.speed = { 0, 0, 0 };
+			}
+			break;
+		}
+		case WAIT:
+			if (ia.isAnchorPoint) {
+				ia.state = ANCHOR_ARRIVE;
+			}
+			else if (totalArrived == 2) {
+				//find closest enemy
+				ia.enemyID = findClosestEnemy(em, phy.position, ia.patternNumber);
+				ia.state = GO;
+			}
+			else if (targetHasMoved(ia, phy)) {
+				ia.state = ARRIVE;
+			}
+			break;
+		case GO:
+			//Chase the enemy
+			setTargetOnRangeOfAttack(em, ia);
+			steering = &arrive(ia, phy, arrived);
+			phy.aceleration = steering->aceleration;
+			phy.rotation = steering->rotation;
+			if (arrived) {
+				ia.state = ATTACK;
+			}
+			break;
+		case ATTACK:
+			ia.state = BACK;
+			break;
+		case BACK:
+			fm.updateSlot(ia);
+			steering = &arrive(ia, phy, arrived);
+			phy.aceleration = steering->aceleration;
+			phy.rotation = steering->rotation;
+			if (arrived) {
+				ia.state = GO;
+			}
+			break;
+		}
+	}
+	bool IASystem_t::targetHasMoved(IA_t& ia, PhysicsComponent_t& phy)
+	{
+		glm::vec3 direction = ia.target.position - phy.position;
+		float distance = glm::length(direction);
+		return distance > ia.targetRadius;
+	}
+
+	//Sets the target for the formation and returns true if already arrived
+	bool IASystem_t::setFormationTarget(ECS::EntityManager_t& em, IA_t& ia, const PhysicsComponent_t& targetPhy)
+	{
+		auto* myPhy = em.getEntity(ia.entityID).getComponent<PhysicsComponent_t>();
+		glm::vec3 direction = targetPhy.position - myPhy->position;
+		ia.target.position.x = targetPhy.position.x;
+		if (direction.z > 0) {
+			ia.target.position.z = targetPhy.position.z - 3; //- or + x to let x space between formations
+		}
+		else {
+			ia.target.position.z = targetPhy.position.z + 3;
+		}
+
+		if (myPhy->position.x == targetPhy.position.x) {
+			return true;
+		}
+		return false;
+	}
+
+	//TODO: Optimize to dont search through all ia list every time
+	PhysicsComponent_t& IASystem_t::findOtherFormation(ECS::EntityManager_t& em, IA_t& myFormation)
+	{
+		for (IA_t& ia : em.getComponents<IA_t>()) {
+			if (ia.isAnchorPoint && ia.entityID != myFormation.entityID) {
+				return *em.getEntity(ia.entityID).getComponent<PhysicsComponent_t>();
+			}
+		}
+		std::cout << "EROR: PhysicsComponent_t& IASystem_t::findOtherFormation(...) No other formation found\n";
+		exit(-1);
+		return *em.getEntity(myFormation.entityID).getComponent<PhysicsComponent_t>(); //JUST TO AVOID NON RETURN ERROR
+	}
+
+	unsigned int IASystem_t::findClosestEnemy(const ECS::EntityManager_t& em, const glm::vec3& pos, unsigned int formation) {
+		bool first = true;
+		float min = 0;
+		unsigned int targetID = 999;
+		for (auto& ia : em.getComponents<IA_t>()) {
+			if (ia.patternNumber != formation && ia.patternNumber < 2) {
+				auto* phy = em.getEntity(ia.entityID).getComponent<PhysicsComponent_t>();
+				float distance = std::abs(glm::length(phy->position - pos));
+				if (first || distance < min) {
+					min = distance;
+					targetID = phy->entityID;
+					first = false;
+				}
+			}
+		}
+		std::cout << "TARGET: " << targetID << std::endl;
+		return targetID;
+	}
+
+	void IASystem_t::setTargetOnRangeOfAttack(const ECS::EntityManager_t& em, IA_t& ia) {
+		auto* enemyPhy = em.getEntity(ia.enemyID).getComponent<PhysicsComponent_t>();
+		auto* myPhy = em.getEntity(ia.entityID).getComponent<PhysicsComponent_t>();
+		if (enemyPhy == nullptr || myPhy == nullptr) {
+			std::cout << "ERROR: void setTargetOnRangeOfAttack(const ECS::EntityManager_t& em, IA_t& ia) IA of enemy has no physic component\n";
+			exit(-1);
+		}
+		glm::vec3 distance = enemyPhy->position - myPhy->position;
+		if (distance.z > 0) {
+			ia.target.position.z = enemyPhy->position.z - 0.5;
+		}
+		else {
+			ia.target.position.z = enemyPhy->position.z + 0.5;
+		}
+		ia.target.position.x = enemyPhy->position.x;
+	}
 }

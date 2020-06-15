@@ -4,7 +4,7 @@
 #include <game\cmp\model.hpp>
 
 namespace GM {
-	const std::string FLAG_PATH = "assets\\models\\bandera\\bandera.obj";
+	const std::string FLAG_PATH = "assets\\models\\center\\center.obj";
 
 	bool FormationManager::addCharacter(IA_t& ia, std::vector<IA_t>& assignments)
 	{
@@ -13,6 +13,10 @@ namespace GM {
 			ia.slotNumber = pattern.addSlot();
 			pattern.calculateDriftOffset(assignments);
 			return true;
+		}
+		else {
+			std::cout << "ERROR: bool FormationManager::addCharacter(...) Formation is full, no available slots" << std::endl;
+			exit(-1);
 		}
 		return false;
 	}
@@ -35,27 +39,32 @@ namespace GM {
 	void FormationManager::updateSlots(std::vector<IA_t>& assignments)
 	{
 		for (auto& a : assignments) {
-			if (!a.isAnchorPoint) {
-				auto& pattern = getPattern(a.patternNumber);
-				auto* anchorPhy = pattern.anchorPoint->getComponent<PhysicsComponent_t>();
-				if (anchorPhy == nullptr) {
-					std::cout << "ERROR: void FormationManager::updateSlots(...) pattern has no phisycs component";
-					exit(-1);
-				}
-				Location location{};
-				Location& slotRelPos = pattern.getSlotLocation(a.slotNumber); //Get slot relative position
+			updateSlot(a);
+		}
+	}
 
-				//Transform slot relative position with the position of the anchor
-				location.position = slotRelPos.position //TODO workout how to put rotation
-					+ anchorPhy->position;
-				location.orientation = anchorPhy->rotation + slotRelPos.orientation;
-
-				//Aply the offset drift
-				location.position -= pattern.driftOffset.position;
-				location.orientation -= pattern.driftOffset.orientation;
-
-				setTarget(a.target, location);
+	//Updates one slot
+	void FormationManager::updateSlot(IA_t& a) {
+		if (!a.isAnchorPoint) {
+			auto& pattern = getPattern(a.patternNumber);
+			auto* anchorPhy = pattern.anchorPoint->getComponent<PhysicsComponent_t>();
+			if (anchorPhy == nullptr) {
+				std::cout << "ERROR: void FormationManager::updateSlots(...) pattern has no phisycs component";
+				exit(-1);
 			}
+			Location location{};
+			Location& slotRelPos = pattern.getSlotLocation(a.slotNumber); //Get slot relative position
+
+			//Transform slot relative position with the position of the anchor
+			location.position = slotRelPos.position //TODO workout how to put rotation
+				+ anchorPhy->position;
+			location.orientation = anchorPhy->rotation + slotRelPos.orientation;
+
+			//Aply the offset drift
+			location.position -= pattern.driftOffset.position;
+			location.orientation -= pattern.driftOffset.orientation;
+
+			setTarget(a.target, location);
 		}
 	}
 
@@ -101,6 +110,7 @@ namespace GM {
 		auto& phy = em.createComponent<PhysicsComponent_t>(ap->entityID);
 		IA_t& aia = em.createComponent<IA_t>(ap->entityID);
 		aia.isAnchorPoint = true;
+		aia.targetRadius = 3;
 		ap->addComponent(phy);
 		ap->addComponent(aia);
 		Pattern& pat = patterns.emplace_back();
@@ -110,7 +120,7 @@ namespace GM {
 		Model_t& mod = em.createComponent<Model_t>(ap->entityID);
 		mod.loadModel(FLAG_PATH);
 		ap->addComponent(mod);
-		phy.scale = { 0.01, 0.01, 0.01 };
+		phy.scale = { 10, 10, 10 };
 		return pat;
 	}
 

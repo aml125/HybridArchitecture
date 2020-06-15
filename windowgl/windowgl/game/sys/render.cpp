@@ -64,6 +64,7 @@ RenderSystem_t::RenderSystem_t(Window_t window)
 	PointLight_t pt4(glm::vec3(pointLightPositions[3]), { 0.05f, 0.05f, 0.05f }, { 0.8f, 0.8f, 0.8f }, { 1.0f, 1.0f, 1.0f });
 	lights.push_back(pt4);*/
 
+	flag.loadModel("assets\\models\\bandera\\bandera.obj");
 }
 
 
@@ -102,6 +103,7 @@ void RenderSystem_t::update(ECS::EntityManager_t& g) {
 	myShader.setVec3("viewPos", camera.Position);
 
 	drawAllModels(g, g.getComponents<Model_t>());
+	drawFormationTargets(g.getComponents<IA_t>());
 	drawLights();
 	if (drawCollisions) {
 		drawCollisionBoxes(g, g.getComponents<BoxCollider_t>());
@@ -196,6 +198,49 @@ void RenderSystem_t::drawLights() const
 {
 	for (const PointLight_t& pl : lights) {
 		drawLightSource(pl);
+	}
+}
+
+void RenderSystem_t::drawFormationTargets(const std::vector<IA_t> ias) {
+	for (auto& ia : ias) {
+		if (ia.isAnchorPoint) {
+			for (const Mesh_t& m : flag.getMeshes()) {
+				unsigned int diffuseNr = 1;
+				unsigned int specularNr = 1;
+				for (std::size_t i = 0; i < m.textures.size(); i++)
+				{
+					glActiveTexture(GL_TEXTURE0 + i); // activate proper texture unit before binding
+					// retrieve texture number (the N in diffuse_textureN)
+					std::string number;
+					std::string name = m.textures[i].type;
+					if (name == "texture_diffuse")
+						number = std::to_string(diffuseNr++);
+					else if (name == "texture_specular")
+						number = std::to_string(specularNr++);
+
+					std::string finalName = ("material." + name + number);
+					myShader.setFloat(finalName.c_str(), i);
+					glBindTexture(GL_TEXTURE_2D, m.textures[i].id);
+				}
+				glActiveTexture(GL_TEXTURE0);
+
+				// draw mesh
+				glBindVertexArray(m.VAO);
+				glm::mat4 model = glm::mat4(1.0f);
+
+				model = glm::translate(model, ia.target.position);
+				model = glm::scale(model, { 0.01, 0.01, 0.01 });
+				if (ia.target.orientation.x != 0 || ia.target.orientation.y != 0 || ia.target.orientation.z != 0) {
+					model = glm::rotate(model, glm::length(ia.target.orientation), glm::normalize(ia.target.orientation)); //Rotate only if there is rotation, because if all are 0 it gliches
+				}
+				myShader.setMatrix4("model", model);
+
+				setLightInformation();
+				glDrawElements(GL_TRIANGLES, m.indices.size(), GL_UNSIGNED_INT, 0);
+				glBindVertexArray(0);
+
+			}
+		}
 	}
 }
 

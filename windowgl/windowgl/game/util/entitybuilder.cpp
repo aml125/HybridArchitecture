@@ -62,7 +62,7 @@ namespace GM {
 		
 		//IA
 		GM::IA_t& ia = gm.entityMan.createComponent<GM::IA_t>(e1.entityID);
-		ia.patternNumber = 0;
+		ia.patternNumber = patternNumber;
 		iaSystem.fm.addCharacter(ia, gm.entityMan.getComponents<GM::IA_t>());
 
 		//Physics

@@ -6,8 +6,8 @@
 
 namespace GM {
 	struct IA_t : ECS::Component_t {
-		explicit IA_t(std::size_t eid) 
-			:	Component_t{eid}
+		explicit IA_t(std::size_t eid)
+			: Component_t{ eid }
 		{}
 
 		Target target{};
@@ -16,8 +16,10 @@ namespace GM {
 		float targetRadius = 0.1;
 		float slowRadius = 2;
 		float timeToTarget = 0.1;
-		unsigned int slotNumber=999999;
+		unsigned int slotNumber = 999999;
 		bool isAnchorPoint = false;
 		unsigned int patternNumber = 999999;
+		StateTypes state = WAIT;
+		unsigned int enemyID;
 	};
 }

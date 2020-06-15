@@ -13,10 +13,17 @@ namespace GM {
 
 	struct IASystem_t : System_t {
 		void update(ECS::EntityManager_t& em) override;
-		Steering arrive(const IA_t& ia, const PhysicsComponent_t& phy);
+		Steering arrive(const IA_t& ia, const PhysicsComponent_t& phy, bool& arrived);
 		FormationManager fm{};
 
 	private:
 		void setOrientation(glm::vec3& orientation, const glm::vec3& velocity);
+		void stateMachineUpdate(ECS::EntityManager_t& em, IA_t& ia, PhysicsComponent_t& phy);
+		bool targetHasMoved(IA_t& ia, PhysicsComponent_t& phy);
+		bool setFormationTarget(ECS::EntityManager_t& em, IA_t& ia, const PhysicsComponent_t& targetPhy);
+		PhysicsComponent_t& findOtherFormation(ECS::EntityManager_t& em, IA_t& myFormation);
+		unsigned int findClosestEnemy(const ECS::EntityManager_t& em, const glm::vec3& pos, unsigned int formation);
+		void setTargetOnRangeOfAttack(const ECS::EntityManager_t& em, IA_t& ia);
+		int totalArrived = 0;
 	};
 }

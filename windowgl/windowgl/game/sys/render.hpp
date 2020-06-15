@@ -12,6 +12,7 @@
 #include <game/cmp/model.hpp>
 #include <game/sys/system.hpp>
 #include <GLFW/glfw3.h>
+#include <game\cmp\ia.hpp>
 
 namespace GM {
 
@@ -41,18 +42,20 @@ struct RenderSystem_t : System_t {
 	inline static float fov = 45.0;
 	inline static bool drawCollisions = false;
 	inline static bool drawPointLights = true;
-
+	 
 private :
     
 	void setLightInformation() const;
 	void drawAllModels(const ECS::EntityManager_t&, const std::vector<Model_t>& entities) const;
 	void drawLightSource(const PointLight_t& light)  const;
 	void drawLights() const;
+	void drawFormationTargets(const std::vector<IA_t> ias);
 	void drawCollisionBoxes(const ECS::EntityManager_t& em, const std::vector<BoxCollider_t>& entities) const;
 	void drawCollisionBox(const BoxCollider_t& box, const glm::vec3 position) const;
 	
 	Window_t& window;
 	BoxRenderer_t collisionRenderer;
+	Model_t flag{ 999 };
 
 	
 	glm::mat4 view;

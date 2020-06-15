@@ -12,6 +12,7 @@ namespace GM {
 		bool addCharacter(IA_t& ia, std::vector<IA_t>& assignments);
 		void removeCharacter(IA_t& ia, std::vector<IA_t>& assignments);
 		void updateSlots(std::vector<IA_t>& assignments);
+		void updateSlot(IA_t& a);
 		void ressetAnchorsToCenterOfMass(const std::vector<IA_t>& assignments, const ECS::EntityManager_t& em);
 
 		Pattern& createPattern(ECS::EntityManager_t& em);

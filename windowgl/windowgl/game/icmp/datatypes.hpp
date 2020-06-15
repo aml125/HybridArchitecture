@@ -17,4 +17,6 @@ namespace GM {
 		glm::vec3 position{};
 		glm::vec3 orientation{};
 	};
+
+	enum StateTypes {ARRIVE, WAIT, GO, ATTACK, BACK, ANCHOR_ARRIVE, ANCHOR_WAIT};
 }
