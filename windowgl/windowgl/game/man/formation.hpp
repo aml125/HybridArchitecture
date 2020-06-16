@@ -24,6 +24,7 @@ namespace GM {
 				return patterns[index];
 			}
 		}
+		unsigned int patternCount = 0;
 
 	private:
 		std::vector<Pattern> patterns;

@@ -10,7 +10,7 @@ namespace GM {
 
 		//Calculate (Anchor point) each slot contribution to the center
 		for (auto& a : assignments) {
-			if (!a.isAnchorPoint) {
+			if (!a.isAnchorPoint && a.patternNumber == patternNumber) {
 				auto& location = getSlotLocation(a.slotNumber);
 				driftOffset.position += location.position;
 				driftOffset.orientation += location.orientation;

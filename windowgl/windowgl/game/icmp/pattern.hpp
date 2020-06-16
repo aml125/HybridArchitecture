@@ -13,6 +13,7 @@ namespace GM {
 		DriftOffset driftOffset{};
 		ECS::Entity_t* anchorPoint;
 		unsigned int ocupiedSlots = 0;
+		unsigned int patternNumber = 0;
 		bool supportsSlots() const
 		{
 			return slots.size() > ocupiedSlots;

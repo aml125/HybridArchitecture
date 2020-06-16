@@ -17,5 +17,6 @@ namespace GM {
 		static ECS::Entity_t& buildEntityWithModelAndCollision(GM::GameManager& em, const std::string& modelPath, const glm::vec3& colliderLength, const glm::vec3& colliderOffset);
 		static ECS::Entity_t& buildFullEntity(GM::GameManager& em, const glm::vec3& position, const std::string& modelPath, const glm::vec3& colliderLength, const glm::vec3& colliderOffset);
 		static ECS::Entity_t& buildNPC(GameManager& gm, const glm::vec3& position, const std::string& modelPath, unsigned int patternNumber, IASystem_t& iaSystem);
+		static GM::Pattern& buildPattern(GameManager& gm, IASystem_t& iaSys, unsigned int totalSlots, unsigned int depth, float separation, const std::string& modelPath, const glm::vec3& initialPosition);
 	};
 }

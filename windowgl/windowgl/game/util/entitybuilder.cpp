@@ -71,4 +71,32 @@ namespace GM {
 		phy1->gravity = true;
 		return e1;
 	}
+	GM::Pattern& EntityBuilder::buildPattern(GameManager& gm, IASystem_t& iaSys, unsigned int totalSlots, unsigned int depth, float separation, const std::string& modelPath, const glm::vec3& initialPosition)
+	{
+		Pattern& pat = iaSys.fm.createPattern(gm.entityMan);
+		int rowSlots = totalSlots / depth;
+		int auxRow = rowSlots;
+		int auxDepth = depth;
+		if (rowSlots % 2 == 1) {
+			auxRow--;
+		}
+		if (depth % 2 == 1) {
+			auxDepth--;
+		}
+		float xPos = -(separation * auxRow / 2);
+		float zPos = -(separation * auxDepth / 2);
+		float initXPos = xPos;
+		float initZPos = zPos;
+		for (int i = 0; i < depth; i++) {
+			for (int j = 0; j < rowSlots; j++) {
+				auto& loc = pat.slots.emplace_back();
+				loc.position = { xPos, 0, zPos };
+				buildNPC(gm, (initialPosition + glm::vec3{ xPos, 0, zPos }), modelPath, pat.patternNumber, iaSys);
+				xPos += separation;
+			}
+			xPos = initXPos;
+			zPos += separation;
+		}
+		return pat;
+	}
 }

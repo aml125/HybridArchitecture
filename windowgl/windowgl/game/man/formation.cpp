@@ -115,12 +115,14 @@ namespace GM {
 		ap->addComponent(aia);
 		Pattern& pat = patterns.emplace_back();
 		pat.anchorPoint = ap;
+		pat.patternNumber = patternCount;
 
 		//Set flag as the model
 		Model_t& mod = em.createComponent<Model_t>(ap->entityID);
 		mod.loadModel(FLAG_PATH);
 		ap->addComponent(mod);
 		phy.scale = { 10, 10, 10 };
+		patternCount++;
 		return pat;
 	}
 
