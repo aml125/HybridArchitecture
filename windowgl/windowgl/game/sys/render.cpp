@@ -13,6 +13,9 @@
 #include <game\rcmp\mesh.hpp>
 #include <game\cmp\physics.hpp>
 #include <GLFW/glfw3.h>
+#include <game\util\TimeMeasure.hpp>
+
+#define TIMEMEASURE
 
 namespace GM {
 
@@ -55,16 +58,11 @@ RenderSystem_t::RenderSystem_t(Window_t window)
 	myShader.setMatrix4("view", view);
 	myShader.setMatrix4("projection", projection);
 
-	/*PointLight_t pt(glm::vec3(pointLightPositions[0]), { 0.05f, 0.05f, 0.05f }, { 0.8f, 0.8f, 0.8f }, { 1.0f, 1.0f, 1.0f });
-	lights.push_back(pt);*/
-	/*PointLight_t pt2(glm::vec3(pointLightPositions[1]), { 0.05f, 0.05f, 0.05f }, { 0.8f, 0.8f, 0.8f }, { 1.0f, 1.0f, 1.0f });
-	lights.push_back(pt2);
-	PointLight_t pt3(glm::vec3(pointLightPositions[2]), { 0.05f, 0.05f, 0.05f }, { 0.8f, 0.8f, 0.8f }, { 1.0f, 1.0f, 1.0f });
-	lights.push_back(pt3);
-	PointLight_t pt4(glm::vec3(pointLightPositions[3]), { 0.05f, 0.05f, 0.05f }, { 0.8f, 0.8f, 0.8f }, { 1.0f, 1.0f, 1.0f });
-	lights.push_back(pt4);*/
-
 	flag.loadModel("assets\\models\\bandera\\bandera.obj");
+
+#ifdef TIMEMEASURE
+	TimeMeasure::StartCounter();
+#endif
 }
 
 
@@ -77,6 +75,10 @@ void RenderSystem_t::terminateWindow() {
 }
 
 void RenderSystem_t::update(ECS::EntityManager_t& g) {
+	#ifdef TIMEMEASURE
+	 std::cout << "Non graphic computing: " << TimeMeasure::GetCounter() << std::endl;
+	 TimeMeasure::StartCounter();
+	#endif
 	//frame delta time
 	float currentFrame = glfwGetTime();
 	deltaTime = currentFrame - lastFrame;
@@ -117,6 +119,11 @@ void RenderSystem_t::update(ECS::EntityManager_t& g) {
 	if (windowShouldClose) {
 		terminateWindow();
 	}
+
+#ifdef TIMEMEASURE
+	std::cout << "Graphic computing: " << TimeMeasure::GetCounter() << std::endl;
+	TimeMeasure::StartCounter();
+#endif
 }
 
 void RenderSystem_t::setLightInformation() const

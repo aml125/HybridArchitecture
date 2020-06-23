@@ -16,12 +16,15 @@ namespace GM {
 				driftOffset.orientation += location.orientation;
 			}
 		}
-		formationMassCenter.position = driftOffset.position;
-		formationMassCenter.orientation = driftOffset.orientation;
+		/*formationMassCenter.position = driftOffset.position;
+		formationMassCenter.orientation = driftOffset.orientation;*/
 
-		auto numAss = assignments.size();
+		auto numAss = slots.size();
 		driftOffset.position /= numAss;
 		driftOffset.orientation /= numAss;
+
+		formationMassCenter.position = driftOffset.position;
+		formationMassCenter.orientation = driftOffset.orientation;
 	}
 
 	//Gives slot relative position and orientation

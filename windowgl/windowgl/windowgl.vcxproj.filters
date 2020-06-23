@@ -180,6 +180,9 @@
     <ClInclude Include="game\icmp\datatypes.hpp">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="game\util\TimeMeasure.hpp">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\Fragment.glsl">

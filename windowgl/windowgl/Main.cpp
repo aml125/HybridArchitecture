@@ -21,7 +21,6 @@
 #include <game/sys/ia.hpp>
 
 
-
 constexpr glm::vec3 cubePositions[] = {
   glm::vec3(0.0f,  0.0f,  0.0f),
   glm::vec3(2.0f,  5.0f, -15.0f),
@@ -125,24 +124,14 @@ int main()
 
 	//Formation 1
 	//Set formation 1 slots
-	auto& pattern1 = GM::EntityBuilder::buildPattern(gameManager, iaSystem, 100, 2, 2, NANOSUIT_PATH, { -5, 1, -10 });
-	//pattern1.slots.emplace_back(GM::Location{ { 2, 0, 0 }, { 0, 0, 0 } });
-	//pattern1.slots.emplace_back(GM::Location{ { 0, 0, 0 }, { 0, 0, 0 } });
-	//pattern1.slots.emplace_back(GM::Location{ { -2, 0, 0 }, { 0, 0, 0 } });
+	auto& pattern1 = GM::EntityBuilder::buildPattern(gameManager, iaSystem, 500, 3, 2, NANOSUIT_PATH, { -5, 1, -10 });
 
 	pattern1.anchorPoint->getComponent<GM::IA_t>()->target.position = { 0, 1, -10 };
 	player = &pattern1.anchorPoint->getComponent<GM::IA_t>()->target.position;
 	
 	//Formation 2
-	auto& pattern2 = GM::EntityBuilder::buildPattern(gameManager, iaSystem, 100, 2, 2, NANOSUIT_PATH, { -5, 1, 10 });
-	/*pattern2 = iaSystem.fm.createPattern(gameManager.entityMan);*/
-
-	////Set formation 2 slots
-	//pattern2.slots.emplace_back(GM::Location{ { 2, 0, 0 }, { 0, 0, 0 } });
-	//pattern2.slots.emplace_back(GM::Location{ { 0, 0, 0 }, { 0, 0, 0 } });
-	//pattern2.slots.emplace_back(GM::Location{ { -2, 0, 0 }, { 0, 0, 0 } });
-
-	pattern2.anchorPoint->getComponent<GM::IA_t>()->target.position = { 10, 1, 10 };
+	auto& pattern2 = GM::EntityBuilder::buildPattern(gameManager, iaSystem, 500, 3, 2, NANOSUIT_PATH, { -5, 1, 10 });
+	pattern2.anchorPoint->getComponent<GM::IA_t>()->target.position = { 10, 1, -10 };
 	
 
 	glm::vec3 cLength0{ 20.75f, 0.75f,  23.66f };

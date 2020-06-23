@@ -79,7 +79,7 @@ namespace GM {
 		
 
 		//Calculate the average position and orientation of all patterns
-		std::vector<float> positions(patterns.size());
+		//std::vector<float> positions(patterns.size());
 		for (const auto& a : assignments) {
 			if (!a.isAnchorPoint) {
 				auto& pattern = getPattern(a.patternNumber);
@@ -110,7 +110,8 @@ namespace GM {
 		auto& phy = em.createComponent<PhysicsComponent_t>(ap->entityID);
 		IA_t& aia = em.createComponent<IA_t>(ap->entityID);
 		aia.isAnchorPoint = true;
-		aia.targetRadius = 3;
+		aia.targetRadius = 1;
+		aia.slowRadius = 2;
 		ap->addComponent(phy);
 		ap->addComponent(aia);
 		Pattern& pat = patterns.emplace_back();

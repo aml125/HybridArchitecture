@@ -194,6 +194,7 @@
     <ClInclude Include="game\sys\render.hpp" />
     <ClInclude Include="game\sys\system.hpp" />
     <ClInclude Include="game\util\entitybuilder.hpp" />
+    <ClInclude Include="game\util\TimeMeasure.hpp" />
     <ClInclude Include="game\util\typealiases.hpp" />
     <ClInclude Include="game\util\stb_image.h" />
   </ItemGroup>

@@ -15,7 +15,7 @@ namespace GM {
 		float maxSpeed = 10;
 		float targetRadius = 0.1;
 		float slowRadius = 2;
-		float timeToTarget = 0.1;
+		float timeToTarget = 0.5;
 		unsigned int slotNumber = 999999;
 		bool isAnchorPoint = false;
 		unsigned int patternNumber = 999999;
