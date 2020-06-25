@@ -14,8 +14,9 @@
 #include <game\cmp\physics.hpp>
 #include <GLFW/glfw3.h>
 #include <game\util\TimeMeasure.hpp>
+#include <game\util\log.hpp>
 
-#define TIMEMEASURE
+//#define TIMEMEASURE
 
 namespace GM {
 
@@ -27,7 +28,7 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 RenderSystem_t::RenderSystem_t(Window_t window)
 	: window{ window }
 {
-	std::cout << "Starting render system" << std::endl;
+	GM::Log::log("Starting render system");
 
 	//REGISTRAR CALLBACKS
 	//If window size changed, call glviewport
@@ -61,7 +62,7 @@ RenderSystem_t::RenderSystem_t(Window_t window)
 	flag.loadModel("assets\\models\\bandera\\bandera.obj");
 
 #ifdef TIMEMEASURE
-	TimeMeasure::StartCounter();
+	tm.StartCounter();
 #endif
 }
 
@@ -76,8 +77,8 @@ void RenderSystem_t::terminateWindow() {
 
 void RenderSystem_t::update(ECS::EntityManager_t& g) {
 	#ifdef TIMEMEASURE
-	 std::cout << "Non graphic computing: " << TimeMeasure::GetCounter() << std::endl;
-	 TimeMeasure::StartCounter();
+	 Log::log("Non graphic computing: " + std::to_string(tm.GetCounter()));
+	 tm.StartCounter();
 	#endif
 	//frame delta time
 	float currentFrame = glfwGetTime();
@@ -121,8 +122,8 @@ void RenderSystem_t::update(ECS::EntityManager_t& g) {
 	}
 
 #ifdef TIMEMEASURE
-	std::cout << "Graphic computing: " << TimeMeasure::GetCounter() << std::endl;
-	TimeMeasure::StartCounter();
+	Log::log("Graphic computing: " + std::to_string(tm.GetCounter()));
+	tm.StartCounter();
 #endif
 }
 
@@ -182,7 +183,7 @@ void RenderSystem_t::drawAllModels(const ECS::EntityManager_t& em, const std::ve
 			glm::mat4 model = glm::mat4(1.0f);
 			auto* phy = em.getEntity(mod.entityID).getComponent<PhysicsComponent_t>();
 			if (phy == nullptr) {
-				std::cout << "render.cpp ERROR to draw a model its entity needs a PhysicsComponent_t\n";
+				Log::log("render.cpp ERROR to draw a model its entity needs a PhysicsComponent_t");
 				exit(-1);
 			}
 

@@ -1,5 +1,6 @@
 #include "entitybuilder.hpp"
 #include <game\cmp\model.hpp>
+#include <game\util\log.hpp>
 //
 //ECS::Entity_t& GM::EntityBuilder::buildSoldier(ECS::EntityManager_t& em)
 //{
@@ -46,7 +47,7 @@ namespace GM {
 		auto& e = buildEntityWithModelAndCollision(gm, modelPath, colliderLength, colliderOffset);
 		auto* phy = e.getComponent<PhysicsComponent_t>();
 		if (phy == nullptr) {
-			std::cout << "EntityBuilder__buildFullEntity() ERROR created entity has no physics system. SOMETHING GONE TERRIBLY WRONG\n";
+			GM::Log::log("EntityBuilder__buildFullEntity() ERROR created entity has no physics system. SOMETHING GONE TERRIBLY WRONG");
 			exit(-1);
 		}
 		//Set position
@@ -54,6 +55,7 @@ namespace GM {
 		return e;
 	}
 
+	//NANOSUIT Scale: 0.1
 	ECS::Entity_t& EntityBuilder::buildNPC(GameManager& gm, const glm::vec3& position,
 		const std::string& modelPath, unsigned int patternNumber, IASystem_t& iaSystem) {
 		constexpr glm::vec3 cLength1{ 1, 1.55f, 0.5f };
@@ -67,7 +69,7 @@ namespace GM {
 
 		//Physics
 		auto* phy1 = e1.getComponent<GM::PhysicsComponent_t>();
-		phy1->scale.x = phy1->scale.y = phy1->scale.z = 0.1f;
+		phy1->scale.x = phy1->scale.y = phy1->scale.z = 1.0f;
 		phy1->gravity = true;
 		return e1;
 	}

@@ -22,5 +22,8 @@ namespace GM {
 		void (*spaceKeyDown)() = nullptr;
 		void (*cKeyDown)() = nullptr;
 		void (*lKeyDown)() = nullptr;
+
+	private:
+		TimeMeasure tm;
 	};
 }

@@ -2,6 +2,7 @@
 #include <game\cmp\physics.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <game\cmp\model.hpp>
+#include <game\util\log.hpp>
 
 namespace GM {
 	const std::string FLAG_PATH = "assets\\models\\center\\center.obj";
@@ -15,7 +16,7 @@ namespace GM {
 			return true;
 		}
 		else {
-			std::cout << "ERROR: bool FormationManager::addCharacter(...) Formation is full, no available slots" << std::endl;
+			GM::Log::log("ERROR: bool FormationManager::addCharacter(...) Formation is full, no available slots");
 			exit(-1);
 		}
 		return false;
@@ -49,7 +50,7 @@ namespace GM {
 			auto& pattern = getPattern(a.patternNumber);
 			auto* anchorPhy = pattern.anchorPoint->getComponent<PhysicsComponent_t>();
 			if (anchorPhy == nullptr) {
-				std::cout << "ERROR: void FormationManager::updateSlots(...) pattern has no phisycs component";
+				Log::log("ERROR: void FormationManager::updateSlots(...) pattern has no phisycs component");
 				exit(-1);
 			}
 			Location location{};
@@ -85,7 +86,7 @@ namespace GM {
 				auto& pattern = getPattern(a.patternNumber);
 				auto* phy = em.getEntity(a.entityID).getComponent<PhysicsComponent_t>();
 				if (phy == nullptr) {
-					std::cout << "ERROR: An entity with pattern must have PhysicsSystem\n";
+					Log::log("ERROR: An entity with pattern must have PhysicsSystem");
 					exit(-1);
 				}
 				pattern.realMassCenter.position += phy->position;

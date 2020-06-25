@@ -19,6 +19,7 @@
 #include <game\man\gamemanager.hpp>
 #include <game\cmp\ia.hpp>
 #include <game/sys/ia.hpp>
+#include <game\util\Log.hpp>
 
 
 constexpr glm::vec3 cubePositions[] = {
@@ -46,6 +47,9 @@ const std::string NANOSUIT_PATH = "assets\\models\\nanosuit\\nanosuit.obj";
 const std::string DICE_PATH = "assets\\models\\dice\\dice.fbx";
 const std::string SUELO_PATH = "assets\\models\\suelo\\suelo.obj";
 const std::string TORRE_PATH = "assets\\models\\torre\\torre.obj";
+const std::string CAJA_PATH = "assets\\models\\caja\\caja.obj";
+const std::string PINK_KNIGHT_PATH = "assets\\models\\pink_knight\\pink_knight.obj";
+const std::string ALABARDERO_PATH = "assets\\models\\alabardero\\alabardero.obj";
 
 // positions of the point lights
 glm::vec3 pointLightPositions[] = {
@@ -124,13 +128,13 @@ int main()
 
 	//Formation 1
 	//Set formation 1 slots
-	auto& pattern1 = GM::EntityBuilder::buildPattern(gameManager, iaSystem, 500, 3, 2, NANOSUIT_PATH, { -5, 1, -10 });
+	auto& pattern1 = GM::EntityBuilder::buildPattern(gameManager, iaSystem, 125, 1, 2, ALABARDERO_PATH, { -5, 1, -10 });
 
 	pattern1.anchorPoint->getComponent<GM::IA_t>()->target.position = { 0, 1, -10 };
 	player = &pattern1.anchorPoint->getComponent<GM::IA_t>()->target.position;
 	
 	//Formation 2
-	auto& pattern2 = GM::EntityBuilder::buildPattern(gameManager, iaSystem, 500, 3, 2, NANOSUIT_PATH, { -5, 1, 10 });
+	auto& pattern2 = GM::EntityBuilder::buildPattern(gameManager, iaSystem, 125, 1, 2, ALABARDERO_PATH, { -5, 1, 10 });
 	pattern2.anchorPoint->getComponent<GM::IA_t>()->target.position = { 10, 1, -10 };
 	
 
@@ -171,6 +175,6 @@ int main()
 	//GAME LOOP
 	while (gameManager.update()) {
 	}
-	char c = getchar();
+	GM::Log::flush("Log.txt");
 	return 0;
 }

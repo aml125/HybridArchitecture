@@ -1,9 +1,13 @@
 #include <game/sys/collision.hpp>
 #include <game/sys/render.hpp>
+#include <game\util\log.hpp>
 
 namespace GM {
 
 void CollisionSystem_t::update(ECS::EntityManager_t& g) {
+#ifdef TIMEMEASURE
+	tm.StartCounter();
+#endif
 	auto& vec = g.getComponents<BoxCollider_t>();
     for (size_t i = 0; i < vec.size(); ++i) {
 		auto& coll1 = vec[i];
@@ -13,7 +17,7 @@ void CollisionSystem_t::update(ECS::EntityManager_t& g) {
 			auto* phy1 = g.getEntity(coll1.entityID).getComponent<PhysicsComponent_t>();
 			auto* phy2 = g.getEntity(coll2.entityID).getComponent<PhysicsComponent_t>();
 			if (phy1 == nullptr || phy2 == nullptr) {
-				std::cout << "CollisionSystem_t::collide ERROR A collider entity MUST have a physics component\n";
+				GM::Log::log("CollisionSystem_t::collide ERROR A collider entity MUST have a physics component");
 				exit(-1);
 			}
 			if (collide(*phy1, *phy2, coll1, coll2)) {
@@ -27,6 +31,9 @@ void CollisionSystem_t::update(ECS::EntityManager_t& g) {
 			}
         }
     }
+#ifdef TIMEMEASURE
+	Log::log("Collisions: " + std::to_string(tm.GetCounter()));
+#endif
 }
 
 bool CollisionSystem_t::collide(const PhysicsComponent_t& phy1, const PhysicsComponent_t& phy2,

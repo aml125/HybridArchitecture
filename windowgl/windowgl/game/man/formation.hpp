@@ -6,6 +6,7 @@
 #include <game\cmp\ia.hpp>
 #include <ecs/man/entitymanager.hpp>
 #include <game\icmp\pattern.hpp>
+#include <game/util/log.hpp>
 
 namespace GM {
 	struct FormationManager {
@@ -18,7 +19,7 @@ namespace GM {
 		Pattern& createPattern(ECS::EntityManager_t& em);
 		Pattern& getPattern(unsigned int index) {
 			if (index >= patterns.size()) {
-				std::cout << "ERROR: Pattern& FormationManager::getPattern(...) Index (" << std::to_string(index) << ") out of range" << std::endl;
+				Log::log("ERROR: Pattern& FormationManager::getPattern(...) Index (" + std::to_string(index) + ") out of range");
 			}
 			else {
 				return patterns[index];

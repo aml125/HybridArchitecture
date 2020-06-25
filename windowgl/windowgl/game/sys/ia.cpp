@@ -3,16 +3,20 @@
 #include <glm\glm\ext\vector_float3.hpp>
 #include <glm\glm\geometric.hpp>
 #include <game\sys\physics.hpp>
+#include <game\util\log.hpp>
 
 //TODO Refactor: All entities should't have to have a pattern assigned
 //TODO make formations not count on y axis, so they walk on the terrain
 namespace GM {
 	void IASystem_t::update(ECS::EntityManager_t& em) {
+#ifdef TIMEMEASURE
+		tm.StartCounter();
+#endif
 		//Execute the steering behaviours to get to the targets
 		for (IA_t& ia : em.getComponents<IA_t>()) {
 			auto* phy = em.getEntity(ia.entityID).getComponent<PhysicsComponent_t>();
 			if (phy == nullptr) {
-				std::cout << "IASystem_t::update() ERROR cant have ia without Physics System\n";
+				GM::Log::log("IASystem_t::update() ERROR cant have ia without Physics System");
 				return;
 			}
 			stateMachineUpdate(em, ia, *phy);
@@ -26,6 +30,9 @@ namespace GM {
 			//Reset the anchor point to the center of mass of the formation
 			fm.ressetAnchorsToCenterOfMass(em.getComponents <IA_t>(), em);
 		}
+#ifdef TIMEMEASURE
+		Log::log("IA: " + std::to_string(tm.GetCounter()));
+#endif
 	}
 
 	Steering IASystem_t::arrive(const IA_t& ia, const PhysicsComponent_t& phy, bool& arrived)
@@ -73,7 +80,7 @@ namespace GM {
 		setOrientation(steering.rotation, phy.speed); //TODO Don set the rotation directly, but with a target and acceleration
 		/*std::cout << "Position: x:" << phy.position.x << " y:" << phy.position.y << " z:" << phy.position.z << std::endl;
 		std::cout << "Target: x:" << ia.target.position.x << " y:" << ia.target.position.y << " z:" << ia.target.position.z << std::endl;
-		std::cout << "Acell: x:" << steering.aceleration.x << " y:" << steering.aceleration.y << " z:" << steering.aceleration.z << std::endl << std::endl;*/
+		<< "Acell: x:" << steering.aceleration.x << " y:" << steering.aceleration.y << " z:" << steering.aceleration.z << std::endl << std::endl;*/
 		return steering;
 	}
 
@@ -109,7 +116,7 @@ namespace GM {
 			steering = &arrive(ia, phy, arrived);
 			phy.aceleration = steering->aceleration;
 			if (setFormation && arrived) {
-				std::cout << "Anchor arrived\n";
+				Log::log("Anchor arrived");
 				ia.state = ANCHOR_WAIT;
 				totalArrived++;
 				//Cancel aceleration and speed of the formation anchor
@@ -189,7 +196,7 @@ namespace GM {
 				return *em.getEntity(ia.entityID).getComponent<PhysicsComponent_t>();
 			}
 		}
-		std::cout << "EROR: PhysicsComponent_t& IASystem_t::findOtherFormation(...) No other formation found\n";
+		Log::log("EROR: PhysicsComponent_t& IASystem_t::findOtherFormation(...) No other formation found");
 		exit(-1);
 		return *em.getEntity(myFormation.entityID).getComponent<PhysicsComponent_t>(); //JUST TO AVOID NON RETURN ERROR
 	}
@@ -209,7 +216,7 @@ namespace GM {
 				}
 			}
 		}
-		std::cout << "TARGET: " << targetID << std::endl;
+		Log::log("TARGET: " + std::to_string(targetID));
 		return targetID;
 	}
 
@@ -217,7 +224,7 @@ namespace GM {
 		auto* enemyPhy = em.getEntity(ia.enemyID).getComponent<PhysicsComponent_t>();
 		auto* myPhy = em.getEntity(ia.entityID).getComponent<PhysicsComponent_t>();
 		if (enemyPhy == nullptr || myPhy == nullptr) {
-			std::cout << "ERROR: void setTargetOnRangeOfAttack(const ECS::EntityManager_t& em, IA_t& ia) IA of enemy has no physic component\n";
+			Log::log("ERROR: void setTargetOnRangeOfAttack(const ECS::EntityManager_t& em, IA_t& ia) IA of enemy has no physic component");
 			exit(-1);
 		}
 		glm::vec3 distance = enemyPhy->position - myPhy->position;

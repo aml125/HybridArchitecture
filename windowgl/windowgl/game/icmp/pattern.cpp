@@ -1,6 +1,7 @@
 #include <game/icmp/pattern.hpp>
 #include <iostream>
 #include <string>
+#include <game\util\log.hpp>
 
 namespace GM {
 	void Pattern::calculateDriftOffset(const std::vector<IA_t>& assignments)
@@ -31,7 +32,7 @@ namespace GM {
 	Location& Pattern::getSlotLocation(unsigned int slotNumber)
 	{
 		if (slots.size() <= slotNumber) {
-			std::cout << "ERROR: getSlotLocation(slotNumber) The number of slot (" + std::to_string(slotNumber) + ") does not exist." << std::endl;
+			GM::Log::log("ERROR: getSlotLocation(slotNumber) The number of slot (" + std::to_string(slotNumber) + ") does not exist.");
 			exit(-1);
 		}
 		return slots[slotNumber];
@@ -41,7 +42,7 @@ namespace GM {
 	const Location& Pattern::getSlotLocation(unsigned int slotNumber) const
 	{
 		if (slots.size() <= slotNumber) {
-			std::cout << "ERROR: getSlotLocation(slotNumber) The number of slot (" + std::to_string(slotNumber) + ") has not been created." << std::endl;
+			Log::log("ERROR: getSlotLocation(slotNumber) The number of slot (" + std::to_string(slotNumber) + ") has not been created.");
 			exit(-1);
 		}
 		return slots[slotNumber];

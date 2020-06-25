@@ -1,0 +1,20 @@
+#include "Log.hpp"
+#include <fstream>
+
+namespace GM {
+	void Log::log(const std::string& message)
+	{
+		messages.push_back(message);
+	}
+	void Log::flush(const std::string& filename)
+	{
+		log("Writting logs to a file");
+		std::ofstream myfile;
+		myfile.open(filename);
+		for (size_t i = 0; i < messages.size(); i++)
+		{
+			myfile << "[" << std::to_string(i) << "] " << messages[i] << std::endl;
+		}
+		myfile.close();
+	}
+}

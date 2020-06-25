@@ -3,6 +3,7 @@
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
 #include <game/util/stb_image.h>
+#include <game\util\log.hpp>
 
 namespace GM {
 	const std::vector<Mesh_t>& LoadedModel_t::getMeshes() const
@@ -17,7 +18,7 @@ namespace GM {
 
 		if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
 		{
-			std::cout << "ERROR::ASSIMP::" << importer.GetErrorString() << std::endl;
+			GM::Log::log("ERROR::ASSIMP::" + std::string(importer.GetErrorString()));
 			return;
 		}
 		auto end = path.find_last_of('\\');
@@ -58,9 +59,12 @@ namespace GM {
 			vector.z = mesh->mVertices[i].z;
 			vertex.Position = vector;
 
-			vector.x = mesh->mNormals[i].x;
-			vector.y = mesh->mNormals[i].y;
-			vector.z = mesh->mNormals[i].z;
+			vector = glm::vec3{};
+			if (mesh->mNormals != nullptr) {
+				vector.x = mesh->mNormals[i].x;
+				vector.y = mesh->mNormals[i].y;
+				vector.z = mesh->mNormals[i].z;
+			}
 			vertex.Normal = vector;
 
 			if (mesh->mTextureCoords[0]) // does the mesh contain texture coordinates?
@@ -125,7 +129,7 @@ namespace GM {
 	{
 		std::string filename = std::string(path);
 		filename = directory + '/' + filename;
-		std::cout << "Searching for texture: " << filename << std::endl;
+		Log::log("Searching for texture: " + filename);
 
 		unsigned int textureID;
 		glGenTextures(1, &textureID);
@@ -155,7 +159,7 @@ namespace GM {
 		}
 		else
 		{
-			std::cout << "Texture failed to load at path: " << path << std::endl;
+			Log::log("Texture failed to load at path: " + std::string(path));
 			stbi_image_free(data);
 		}
 

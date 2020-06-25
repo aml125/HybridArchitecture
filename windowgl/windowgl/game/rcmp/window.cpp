@@ -1,5 +1,6 @@
 #include <game/rcmp/window.hpp>
 #include <iostream>
+#include <game\util\log.hpp>
 
 namespace GM {
 	Window_t::Window_t(unsigned int w, unsigned int h) 
@@ -20,7 +21,7 @@ namespace GM {
 			"Primera ventana", NULL, NULL); //Resolution and name
 		if (window == NULL)
 		{
-			std::cout << "Failed to create GLFW window" << std::endl;
+			GM::Log::log("Failed to create GLFW window");
 			glfwTerminate();
 			char c = getchar();
 			return;
@@ -31,7 +32,7 @@ namespace GM {
 		//Initialize glad
 		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 		{
-			std::cout << "Failed to initialize GLAD" << std::endl;
+			GM::Log::log("Failed to initialize GLAD");
 			char c = getchar();
 			return;
 		}

@@ -3,6 +3,7 @@
 #include <game\cmp\boxcollider.hpp>
 #include <game\cmp\physics.hpp>
 #include <game/sys/system.hpp>
+#include <game/util/timemeasure.hpp>
 
 namespace GM {
 
@@ -20,5 +21,6 @@ private :
 	glm::vec3 calculatePosition(const glm::vec3& position, const glm::vec3& length, const glm::vec3& offset) const;
 	void modifySpeedAndVelocityOnCollision(PhysicsComponent_t& phy1, PhysicsComponent_t& phy2,
 		const BoxCollider_t& coll1, const BoxCollider_t& coll2) const;
+	TimeMeasure tm{};
 };
 }

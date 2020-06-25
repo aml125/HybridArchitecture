@@ -1,5 +1,6 @@
 #include <game/sys/render.hpp>
 #include <game/sys/input.hpp>
+#include <game\util\log.hpp>
 
 namespace GM {
 void InputSystem_t::mouse_move(GLFWwindow* window)
@@ -107,8 +108,14 @@ InputSystem_t::InputSystem_t(Window_t& win)
 
 void InputSystem_t::update(ECS::EntityManager_t& em)
 {
+#ifdef TIMEMEASURE
+	tm.StartCounter();
+#endif
 	//INPUT
 	processInput(window.window);
 	mouse_move(window.window);
+#ifdef TIMEMEASURE
+	GM::Log::log("Input: " + std::to_string(tm.GetCounter()));
+#endif
 }
 }

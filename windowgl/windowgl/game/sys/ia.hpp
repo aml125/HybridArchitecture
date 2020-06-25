@@ -4,6 +4,7 @@
 #include <game\cmp\ia.hpp>
 #include <game\cmp\physics.hpp>
 #include <game/man/formation.hpp>
+#include <game\util\timemeasure.hpp>
 
 namespace GM {
 	struct Steering {
@@ -25,5 +26,6 @@ namespace GM {
 		unsigned int findClosestEnemy(const ECS::EntityManager_t& em, const glm::vec3& pos, unsigned int formation);
 		void setTargetOnRangeOfAttack(const ECS::EntityManager_t& em, IA_t& ia);
 		int totalArrived = 0;
+		TimeMeasure tm;
 	};
 }

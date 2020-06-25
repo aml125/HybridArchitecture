@@ -13,6 +13,7 @@
 #include <game/sys/system.hpp>
 #include <GLFW/glfw3.h>
 #include <game\cmp\ia.hpp>
+#include <game/util/timemeasure.hpp>
 
 namespace GM {
 
@@ -54,7 +55,7 @@ private :
 	void drawCollisionBox(const BoxCollider_t& box, const glm::vec3 position) const;
 	
 	Window_t& window;
-	BoxRenderer_t collisionRenderer;
+	BoxRenderer_t collisionRenderer; 
 	Model_t flag{ 999 };
 
 	
@@ -64,6 +65,8 @@ private :
 	//SHADERS
 	Shader myShader{ "shaders/Vertex.glsl", "shaders/Fragment.glsl" };
 	Shader lightShader{ "shaders/lightningVertex.glsl", "shaders/lightningFragment.glsl" };
+
+	TimeMeasure tm{}; 
 	
 };
 }
