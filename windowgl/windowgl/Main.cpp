@@ -128,37 +128,18 @@ int main()
 
 	//Formation 1
 	//Set formation 1 slots
-	auto& pattern1 = GM::EntityBuilder::buildPattern(gameManager, iaSystem, 125, 1, 2, ALABARDERO_PATH, { -5, 1, -10 });
-
+	auto& pattern1 = GM::EntityBuilder::buildPattern(gameManager, iaSystem, 10, 2, 2, ALABARDERO_PATH, { -5, 1, -10 });
 	pattern1.anchorPoint->getComponent<GM::IA_t>()->target.position = { 0, 1, -10 };
 	player = &pattern1.anchorPoint->getComponent<GM::IA_t>()->target.position;
 	
 	//Formation 2
-	auto& pattern2 = GM::EntityBuilder::buildPattern(gameManager, iaSystem, 125, 1, 2, ALABARDERO_PATH, { -5, 1, 10 });
+	auto& pattern2 = GM::EntityBuilder::buildPattern(gameManager, iaSystem, 10, 2, 2, ALABARDERO_PATH, { -5, 1, 10 });
 	pattern2.anchorPoint->getComponent<GM::IA_t>()->target.position = { 10, 1, -10 };
 	
 
 	glm::vec3 cLength0{ 20.75f, 0.75f,  23.66f };
 	glm::vec3 cOffset0{ 0.375f, 0.375f, -0.495 };
 	ECS::Entity_t& e0 = GM::EntityBuilder::buildFullEntity(gameManager, glm::vec3(0, 0, 0), SUELO_PATH, cLength0, cOffset0);
-
-	////Player 1
-	//GM::EntityBuilder::buildNPC(gameManager, glm::vec3(0, 1, -10), NANOSUIT_PATH, 0, iaSystem);
-	//
-	////Player 2
-	//GM::EntityBuilder::buildNPC(gameManager, glm::vec3(-5, 1, -10), NANOSUIT_PATH, 0, iaSystem);
-	//
-	////Player 3
-	//GM::EntityBuilder::buildNPC(gameManager, glm::vec3(-10, 1, -10), NANOSUIT_PATH, 0, iaSystem);
-	//
-	////Player 4
-	//GM::EntityBuilder::buildNPC(gameManager, glm::vec3(0, 1, 10), NANOSUIT_PATH, 1, iaSystem);
-	//
-	////Player 5
-	//GM::EntityBuilder::buildNPC(gameManager, glm::vec3(-5, 1, 10), NANOSUIT_PATH, 1, iaSystem);
-	//
-	////Player 6
-	//GM::EntityBuilder::buildNPC(gameManager, glm::vec3(-10, 1, 10), NANOSUIT_PATH, 1, iaSystem);
 
 	//Tower
 	glm::vec3 cLength2{ 1.25f, 3, 2 };

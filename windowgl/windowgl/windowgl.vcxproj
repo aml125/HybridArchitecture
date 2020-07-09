@@ -95,15 +95,15 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>false</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)windowgl\glm;$(SolutionDir)windowgl\cmp;$(SolutionDir)windowgl\sys;$(SolutionDir)windowgl\util;$(SolutionDir)windowgl\man;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)windowgl\glm;$(INTELOCLSDKROOT)include;$(SolutionDir)windowgl\cmp;$(SolutionDir)windowgl\sys;$(SolutionDir)windowgl\util;$(SolutionDir)windowgl\man;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <CompileAsWinRT>false</CompileAsWinRT>
       <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
       <PreprocessorDefinitions>TIMEMEASURE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>opengl32.lib;glfw3.lib;assimp-vc140-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Users\tonet\Desktop\OpenGl\windowgl\OpenGLStuff\libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;assimp-vc140-mt.lib;OpenCL.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\tonet\Desktop\OpenGl\windowgl\OpenGLStuff\libs;$(INTELOCLSDKROOT)lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>
@@ -159,6 +159,7 @@
     <ClCompile Include="game\sys\render.cpp" />
     <ClCompile Include="game\util\entitybuilder.cpp" />
     <ClCompile Include="game\util\log.cpp" />
+    <ClCompile Include="game\util\opencl-utils.cpp" />
     <ClCompile Include="game\util\timemeasure.cpp" />
     <ClCompile Include="Main.cpp">
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\tonet\Desktop\OpenGl\windowgl\windowgl\cmp;C:\Users\tonet\Desktop\OpenGl\windowgl\windowgl\man;C:\Users\tonet\Desktop\OpenGl\windowgl\windowgl\sys;C:\Users\tonet\Desktop\OpenGl\windowgl\windowgl\util;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -198,11 +199,13 @@
     <ClInclude Include="game\sys\system.hpp" />
     <ClInclude Include="game\util\entitybuilder.hpp" />
     <ClInclude Include="game\util\log.hpp" />
+    <ClInclude Include="game\util\opencl-utils.hpp" />
     <ClInclude Include="game\util\timemeasure.hpp" />
     <ClInclude Include="game\util\typealiases.hpp" />
     <ClInclude Include="game\util\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="game\sys\OpenCLFile.cl" />
     <None Include="shaders\Fragment.glsl" />
     <None Include="shaders\pointFragment.glsl" />
     <None Include="shaders\lightningFragment.glsl" />

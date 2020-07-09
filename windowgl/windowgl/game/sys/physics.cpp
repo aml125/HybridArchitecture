@@ -12,6 +12,7 @@ void PhysicsSystem_t::update(ECS::EntityManager_t& g) {
         firstTime = false;
         return;
     }
+
     for (auto& phy : g.getComponents<PhysicsComponent_t>()) {
         if (phy.gravity) {
             aplyGravity(phy);

@@ -3,7 +3,7 @@
 #include <cstdint>
 #include <cstddef>
 namespace ECS {
-    struct Component_t {
+struct Component_t {
     explicit Component_t(std::size_t eid)
         : entityID { eid }
     {}
