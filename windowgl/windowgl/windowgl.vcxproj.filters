@@ -218,6 +218,7 @@
     <None Include="shaders\Vertex.glsl">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="game\sys\OpenCLFile.cl" />
+    <None Include="game\ocl\physics_ocl.cl" />
+    <None Include="game\ocl\ocl_structs.cl" />
   </ItemGroup>
 </Project>

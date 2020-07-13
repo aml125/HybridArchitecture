@@ -30,20 +30,41 @@ namespace GM {
     };
 
 
-    int SetupOpenCL(ocl_args_d_t* ocl, const std::string& platformName);
-    int CreateAndBuildProgram(ocl_args_d_t* ocl, const std::string& kernelFile);
+    int setupOpenCL(ocl_args_d_t* ocl, const std::string& platformName);
+    int createAndBuildProgram(ocl_args_d_t* ocl, const std::string& kernelFile);
 
     /*
         Creates a link between main memory and device memory for the selected devices
     */
     template <typename T>
-    void setParameters(ocl_args_d_t& ocl, const std::vector<T>& data) {
+    void createBuffer(ocl_args_d_t& ocl, const std::vector<T>& data) {
         ocl.buffer = clCreateBuffer(ocl.context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR,
             data.size() * sizeof(T), (void*)data.data(), NULL);
     }
 
+
+
     void createKernelFromProgram(ocl_args_d_t& ocl, const std::string& functionName);
-    void copyParameters(ocl_args_d_t& ocl);
+
+    /*
+        Copies the data onto the device memory
+    */
+    template <typename T>
+    void copyParameters(ocl_args_d_t& ocl, unsigned int argumentIndex, std::vector<T>& data) {
+        cl_int status = clEnqueueWriteBuffer(ocl.commandQueue, ocl.buffer, true, 0, data.size() * sizeof(T), data.data(), NULL, NULL, NULL);
+        if (CL_SUCCESS != status)
+        {
+            Log::log("error: Failed to copy data to device memory, returned %s\n" + std::string(TranslateOpenCLError(status)));
+            exit(-1);
+        }
+        status = clSetKernelArg(ocl.kernel, argumentIndex, sizeof(cl_mem), (void*)&ocl.buffer);
+        if (CL_SUCCESS != status)
+        {
+            Log::log("error: Failed to set argument buffer, returned %s\n" + std::string(TranslateOpenCLError(status)));
+            exit(-1);
+        }
+    }
+
     void executeKernel(const ocl_args_d_t& ocl, const unsigned int dataSize);
     const char* TranslateOpenCLError(cl_int errorCode);
 
@@ -60,4 +81,7 @@ namespace GM {
             exit(-1);
         }
     }
+
+    cl_mem createFloatParam(ocl_args_d_t& ocl, float& value);
+    void copyFloatParam(ocl_args_d_t& ocl, unsigned int argumentIndex, cl_mem& buffer, float& value);
 }

@@ -58,7 +58,7 @@ bool CollisionSystem_t::collide(const PhysicsComponent_t& phy1, const PhysicsCom
 }
 bool CollisionSystem_t::linearOverlap(float x1, float w1, float x2, float w2) const
 {
-	return (x1 + w1 >= x2&& x1 + w1 <= x2 + w2) || (x2 + w2 >= x1&& x2 + w2 <= x1 + w1);
+	return (x1 + w1 >= x2 && x1 + w1 <= x2 + w2) || (x2 + w2 >= x1 && x2 + w2 <= x1 + w1);
 }
 
 glm::vec3 CollisionSystem_t::calculatePosition(const glm::vec3& position, const glm::vec3& length, const glm::vec3& offset) const {

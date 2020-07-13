@@ -2,9 +2,18 @@
 #include <game/sys/render.hpp>
 #include <game\util\log.hpp>
 
-namespace GM {
 
-void PhysicsSystem_t::update(ECS::EntityManager_t& g) {
+namespace GM {
+    PhysicsSystem_t::PhysicsSystem_t()
+    {
+        setupOpenCL(&ocl, "Intel");
+        createAndBuildProgram(&ocl, "game/ocl/physics_ocl.cl");
+        createKernelFromProgram(ocl, "update");
+        deltaTimeBuffer = createFloatParam(ocl, RenderSystem_t::deltaTime);
+    }
+
+
+    void PhysicsSystem_t::update(ECS::EntityManager_t& g) {
 #ifdef TIMEMEASURE
     tm.StartCounter();
 #endif
@@ -12,13 +21,23 @@ void PhysicsSystem_t::update(ECS::EntityManager_t& g) {
         firstTime = false;
         return;
     }
+    //GPU Implementation
+    std::vector<PhysicsComponent_t>& vecPhy = g.getComponents<PhysicsComponent_t>();
+    if (vecPhy.size() != lastPhysicsVectorSize) {
+        createBuffer(ocl, vecPhy);
+    }
+    copyParameters(ocl, 0, vecPhy);
+    copyFloatParam(ocl, 1, deltaTimeBuffer, RenderSystem_t::deltaTime);
+    executeKernel(ocl, vecPhy.size());
+    readBuffer(ocl, vecPhy);
 
-    for (auto& phy : g.getComponents<PhysicsComponent_t>()) {
+    //CPU Implementation
+    /*for (auto& phy : g.getComponents<PhysicsComponent_t>()) {
         if (phy.gravity) {
             aplyGravity(phy);
         }
         moveObject(phy);
-    }
+    }*/
 #ifdef TIMEMEASURE
     Log::log("Physics: " + std::to_string(tm.GetCounter()));
 #endif

@@ -170,7 +170,7 @@ namespace GM {
          * Check whether an OpenCL platform is the required platform
          * (based on the platform's name)
          */
-    bool CheckPreferredPlatformMatch(cl_platform_id platform, const char* preferredPlatform)
+    bool checkPreferredPlatformMatch(cl_platform_id platform, const char* preferredPlatform)
     {
         size_t stringLength = 0;
         cl_int err = CL_SUCCESS;
@@ -255,7 +255,7 @@ namespace GM {
             if ((NULL != preferredPlatform) && (strlen(preferredPlatform) > 0))
             {
                 // In case we're looking for a specific platform
-                match = CheckPreferredPlatformMatch(platforms[i], preferredPlatform);
+                match = checkPreferredPlatformMatch(platforms[i], preferredPlatform);
             }
 
             // match is true if the platform's name is the required one or don't care (NULL)
@@ -288,7 +288,7 @@ namespace GM {
          * Later it will enable us to support both OpenCL 1.2 and 2.0 platforms and devices
          * in the same program.
          */
-    int GetPlatformAndDeviceVersion(cl_platform_id platformId, ocl_args_d_t* ocl)
+    int getPlatformAndDeviceVersion(cl_platform_id platformId, ocl_args_d_t* ocl)
     {
         cl_int err = CL_SUCCESS;
 
@@ -408,7 +408,7 @@ namespace GM {
          * Please, consider reviewing the fields before going further.
          * The structure definition is right in the beginning of this file.
          */
-    int SetupOpenCL(ocl_args_d_t* ocl, const std::string& platformName)
+    int setupOpenCL(ocl_args_d_t* ocl, const std::string& platformName)
     {
         cl_device_type deviceType = CL_DEVICE_TYPE_GPU;
 
@@ -445,7 +445,7 @@ namespace GM {
         }
 
         // Read the OpenCL platform's version and the device OpenCL and OpenCL C versions
-        GetPlatformAndDeviceVersion(platformId, ocl);
+        getPlatformAndDeviceVersion(platformId, ocl);
 
         // Create command queue.
         // OpenCL kernels are enqueued for execution to a particular device through special objects called command queues.
@@ -480,7 +480,7 @@ namespace GM {
     // Upload the OpenCL C source code to output argument source
         // The memory resource is implicitly allocated in the function
         // and should be deallocated by the caller
-    int ReadSourceFromFile(const char* fileName, char** source, size_t* sourceSize)
+    int readSourceFromFile(const char* fileName, char** source, size_t* sourceSize)
     {
         int errorCode = CL_SUCCESS;
 
@@ -512,7 +512,7 @@ namespace GM {
     /*
          * Create and build OpenCL program from its source code
          */
-    int CreateAndBuildProgram(ocl_args_d_t* ocl, const std::string& kernelFile)
+    int createAndBuildProgram(ocl_args_d_t* ocl, const std::string& kernelFile)
     {
         cl_int err = CL_SUCCESS;
 
@@ -520,7 +520,7 @@ namespace GM {
         // The size of the C program is returned in sourceSize
         char* source = NULL;
         size_t src_size = 0;
-        err = ReadSourceFromFile(kernelFile.c_str(), &source, &src_size);
+        err = readSourceFromFile(kernelFile.c_str(), &source, &src_size);
         if (CL_SUCCESS != err)
         {
             Log::log("Error: ReadSourceFromFile returned %s.\n" + std::string(TranslateOpenCLError(err)));
@@ -603,6 +603,33 @@ namespace GM {
             Log::log("Error: Failed to run kernel, return %s\n" + std::string(TranslateOpenCLError(status)));
             exit(-1);
         }
+    }
+
+    /*
+    Copies the value to memory and sets the argument
+*/
+    void copyFloatParam(ocl_args_d_t& ocl, unsigned int argumentIndex, cl_mem& buffer, float& value) {
+        cl_int status = clEnqueueWriteBuffer(ocl.commandQueue, buffer, true, 0, sizeof(float), &value, NULL, NULL, NULL);
+        if (CL_SUCCESS != status)
+        {
+            Log::log("error: Failed to copy float to memory, returned %s\n" + std::string(TranslateOpenCLError(status)));
+            exit(-1);
+        }
+        status = clSetKernelArg(ocl.kernel, argumentIndex, sizeof(cl_mem), (void*)&buffer);
+        if (CL_SUCCESS != status)
+        {
+            Log::log("error: Failed to set float argument buffer, returned %s\n" + std::string(TranslateOpenCLError(status)));
+            exit(-1);
+        }
+    }
+
+    /*
+        Creates a float argument for the kernel
+    */
+    cl_mem createFloatParam(ocl_args_d_t& ocl, float& value) {
+        cl_mem newBuffer = clCreateBuffer(ocl.context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR,
+            sizeof(float), (void*)&value, NULL);
+        return newBuffer;
     }
 }
 #pragma warning ( pop )

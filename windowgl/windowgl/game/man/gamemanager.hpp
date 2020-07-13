@@ -8,7 +8,7 @@
 namespace GM {
 
 	struct GameManager {
-        explicit GameManager() = default;
+        explicit GameManager();
 
         bool update();
 

@@ -17,4 +17,8 @@ namespace GM {
 		}
 		myfile.close();
 	}
+	void Log::flush()
+	{
+		flush("Log.txt");
+	}
 }
