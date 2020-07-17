@@ -6,9 +6,8 @@
 namespace GM {
     PhysicsSystem_t::PhysicsSystem_t()
     {
-        setupOpenCL(&ocl, "Intel");
-        createAndBuildProgram(&ocl, "game/ocl/physics_ocl.cl");
-        createKernelFromProgram(ocl, "update");
+        createAndBuildProgram(&ocl, program, "game/ocl/physics_ocl.cl");
+        createKernelFromProgram(ocl, program, kernel, "update");
         deltaTimeBuffer = createFloatParam(ocl, RenderSystem_t::deltaTime);
     }
 
@@ -24,12 +23,14 @@ namespace GM {
     //GPU Implementation
     std::vector<PhysicsComponent_t>& vecPhy = g.getComponents<PhysicsComponent_t>();
     if (vecPhy.size() != lastPhysicsVectorSize) {
-        createBuffer(ocl, vecPhy);
+        createBuffer(ocl, phyBuffer, true, vecPhy);
+        lastPhysicsVectorSize = vecPhy.size();
     }
-    copyParameters(ocl, 0, vecPhy);
-    copyFloatParam(ocl, 1, deltaTimeBuffer, RenderSystem_t::deltaTime);
-    executeKernel(ocl, vecPhy.size());
-    readBuffer(ocl, vecPhy);
+    copyParameters(ocl, kernel, 0, phyBuffer, vecPhy);
+    copyFloatParam(ocl, kernel, 1, deltaTimeBuffer, RenderSystem_t::deltaTime);
+    unsigned int dimensionSizes[] = { vecPhy.size() };
+    executeKernel(ocl, kernel, 1, dimensionSizes);
+    readBuffer(ocl, phyBuffer, vecPhy);
 
     //CPU Implementation
     /*for (auto& phy : g.getComponents<PhysicsComponent_t>()) {

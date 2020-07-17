@@ -20,25 +20,63 @@ struct PhysicsComponent_ocl_t {
     bool gravity;
 };
 
-struct Entity_ocl_t {
-    struct PhysicsComponent_ocl_t;
-    //ETC
+struct AuxPhy_ocl_t {
+    struct mivec3_t position;
+    struct mivec3_t speed;
 };
 
-/*
-    Multiplies vector a by b
-*//*
-void multiplyVectors(mivec3 a, mivec3 b) {
-    a.x *
-}*/
+struct BoxCollider_ocl_t {
+    ulong ComponentId;
+    ulong entityId;
+    struct mivec3_t length; //Width length height, tamaño del lado de la caja
+    struct mivec3_t offset;
+};
+
+
 
 /*
     Copies vector source to target
 */
-void copyVector(__global struct mivec3_t* source, __global struct mivec3_t* target) {
-    source->x = target->x;
-    source->y = target->y;
-    source->z = target->z;
+void copyVectorGG(__global struct mivec3_t* source, __global struct mivec3_t* target) {
+    target->x = source->x;
+    target->y = source->y;
+    target->z = source->z;
+}
+
+/*
+    Copies vector source to target
+*/
+void copyVectorGL(__global struct mivec3_t* source, struct mivec3_t* target) {
+    target->x = source->x;
+    target->y = source->y;
+    target->z = source->z;
+}
+
+/*
+    Copies vector source to target
+*/
+void copyVectorLG(struct mivec3_t* source, __global struct mivec3_t* target) {
+    target->x = source->x;
+    target->y = source->y;
+    target->z = source->z;
+}
+
+/*
+    Copies vector source to target
+*/
+void copyVectorLL(struct mivec3_t* source, struct mivec3_t* target) {
+    target->x = source->x;
+    target->y = source->y;
+    target->z = source->z;
+}
+
+/*
+    Substracts vector B to A and puts the result in target
+*/
+void substractVectorsLL(struct mivec3_t* a, struct mivec3_t* b, struct mivec3_t* target) {
+    target->x = a->x - b->x;
+    target->y = a->y - b->y;
+    target->z = a->z - b->z;
 }
 
 /*
@@ -111,4 +149,70 @@ void addVectorLL(struct mivec3_t* source,  struct mivec3_t* target) {
     target->x += source->x;
     target->y += source->y;
     target->z += source->z;
+}
+
+/*
+    Copies BoxCollider_ocl_t source to target
+*/
+void copyBxGG(__global struct BoxCollider_ocl_t* source, __global struct BoxCollider_ocl_t* target) {
+    target->ComponentId = source->ComponentId;
+    target->entityId = source->entityId;
+    copyVectorGG(&source->length, &target->length);
+    copyVectorGG(&source->offset, &target->offset);
+}
+
+/*
+    Copies BoxCollider_ocl_t source to target
+*/
+void copyBxGL(__global struct BoxCollider_ocl_t* source, struct BoxCollider_ocl_t* target) {
+    target->ComponentId = source->ComponentId;
+    target->entityId = source->entityId;
+    copyVectorGL(&source->length, &target->length);
+    copyVectorGL(&source->offset, &target->offset);
+}
+
+/*
+    Copies BoxCollider_ocl_t source to target
+*/
+void copyBxLG(struct BoxCollider_ocl_t* source, __global struct BoxCollider_ocl_t* target) {
+    target->ComponentId = source->ComponentId;
+    target->entityId = source->entityId;
+    copyVectorLG(&source->length, &target->length);
+    copyVectorLG(&source->offset, &target->offset);
+}
+
+/*
+    Copies PhysicsComponent_ocl_t source to target
+*/
+void copyPhyGG(__global struct PhysicsComponent_ocl_t* source, __global struct PhysicsComponent_ocl_t* target) {
+    target->ComponentId = source->ComponentId;
+    target->entityId = source->entityId;
+    copyVectorGG(&source->position, &target->position);
+    copyVectorGG(&source->rotation, &target->rotation);
+    copyVectorGG(&source->speed, &target->speed);
+    copyVectorGG(&source->rotationAceleration, &target->rotationAceleration);
+    copyVectorGG(&source->rotationSpeed, &target->rotationSpeed);
+    copyVectorGG(&source->scale, &target->scale);
+    copyVectorGG(&source->gravityAcell, &target->gravityAcell);
+    copyVectorGG(&source->aceleration, &target->aceleration);
+    target->gravity = source->gravity;
+
+}
+
+/*
+    Copies PhysicsComponent_ocl_t source to target
+*/
+void copyPhyGL(__global struct PhysicsComponent_ocl_t* source, struct AuxPhy_ocl_t* target) {
+    copyVectorGL(&source->position, &target->position);
+    copyVectorGL(&source->speed, &target->speed);
+    //copyVectorGL(&source->scale, &target->scale);
+
+}
+
+/*
+    Copies PhysicsComponent_ocl_t source to target
+*/
+void copyPhyLG(struct AuxPhy_ocl_t* source, __global struct PhysicsComponent_ocl_t* target) {
+    copyVectorLG(&source->position, &target->position);
+    copyVectorLG(&source->speed, &target->speed);
 }

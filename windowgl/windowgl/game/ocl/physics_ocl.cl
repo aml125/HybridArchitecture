@@ -20,8 +20,7 @@ void moveObject(__global struct PhysicsComponent_ocl_t* phy, float deltaTime) {
 	addVectorLG(&aux, &phy->rotation);
 }
 
-__kernel void update(__global struct PhysicsComponent_ocl_t* phy, __constant float* deltaTime)
-{
+__kernel void update(__global struct PhysicsComponent_ocl_t* phy, __constant float* deltaTime) {
 	int i = get_global_id(0);
 	if (phy->gravity) {
 		aplyGravity(&phy[i], *deltaTime);

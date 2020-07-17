@@ -87,13 +87,11 @@ namespace GM {
         context(NULL),
         device(NULL),
         commandQueue(NULL),
-        program(NULL),
-        kernel(NULL),
         platformVersion(OPENCL_VERSION_1_2),
         deviceVersion(OPENCL_VERSION_1_2),
-        compilerVersion(OPENCL_VERSION_1_2),
-        buffer(NULL)
+        compilerVersion(OPENCL_VERSION_1_2)
     {
+        setupOpenCL(this, "");
     }
 
     /*
@@ -111,30 +109,6 @@ namespace GM {
     {
         cl_int err = CL_SUCCESS;
 
-        if (kernel)
-        {
-            err = clReleaseKernel(kernel);
-            if (CL_SUCCESS != err)
-            {
-                //GM::Log::log("Error: clReleaseKernel returned '%s'.\n" + std::string(TranslateOpenCLError(err)));
-            }
-        }
-        if (program)
-        {
-            err = clReleaseProgram(program);
-            if (CL_SUCCESS != err)
-            {
-                Log::log("Error: clReleaseProgram returned '%s'.\n" + std::string(TranslateOpenCLError(err)));
-            }
-        }
-        if (buffer)
-        {
-            err = clReleaseMemObject(buffer);
-            if (CL_SUCCESS != err)
-            {
-                Log::log("Error: clReleaseMemObject returned '%s'.\n" + std::string(TranslateOpenCLError(err)));
-            }
-        }
         if (commandQueue)
         {
             err = clReleaseCommandQueue(commandQueue);
@@ -170,7 +144,7 @@ namespace GM {
          * Check whether an OpenCL platform is the required platform
          * (based on the platform's name)
          */
-    bool checkPreferredPlatformMatch(cl_platform_id platform, const char* preferredPlatform)
+    bool CheckPreferredPlatformMatch(cl_platform_id platform, const char* preferredPlatform)
     {
         size_t stringLength = 0;
         cl_int err = CL_SUCCESS;
@@ -255,7 +229,7 @@ namespace GM {
             if ((NULL != preferredPlatform) && (strlen(preferredPlatform) > 0))
             {
                 // In case we're looking for a specific platform
-                match = checkPreferredPlatformMatch(platforms[i], preferredPlatform);
+                match = CheckPreferredPlatformMatch(platforms[i], preferredPlatform);
             }
 
             // match is true if the platform's name is the required one or don't care (NULL)
@@ -288,7 +262,7 @@ namespace GM {
          * Later it will enable us to support both OpenCL 1.2 and 2.0 platforms and devices
          * in the same program.
          */
-    int getPlatformAndDeviceVersion(cl_platform_id platformId, ocl_args_d_t* ocl)
+    int GetPlatformAndDeviceVersion(cl_platform_id platformId, ocl_args_d_t* ocl)
     {
         cl_int err = CL_SUCCESS;
 
@@ -445,7 +419,7 @@ namespace GM {
         }
 
         // Read the OpenCL platform's version and the device OpenCL and OpenCL C versions
-        getPlatformAndDeviceVersion(platformId, ocl);
+        GetPlatformAndDeviceVersion(platformId, ocl);
 
         // Create command queue.
         // OpenCL kernels are enqueued for execution to a particular device through special objects called command queues.
@@ -475,12 +449,12 @@ namespace GM {
         }
 
         return CL_SUCCESS;
-    }
+        }
 
     // Upload the OpenCL C source code to output argument source
         // The memory resource is implicitly allocated in the function
         // and should be deallocated by the caller
-    int readSourceFromFile(const char* fileName, char** source, size_t* sourceSize)
+    int ReadSourceFromFile(const char* fileName, char** source, size_t* sourceSize)
     {
         int errorCode = CL_SUCCESS;
 
@@ -512,7 +486,7 @@ namespace GM {
     /*
          * Create and build OpenCL program from its source code
          */
-    int createAndBuildProgram(ocl_args_d_t* ocl, const std::string& kernelFile)
+    int createAndBuildProgram(ocl_args_d_t* ocl, cl_program& program, const std::string& kernelFile)
     {
         cl_int err = CL_SUCCESS;
 
@@ -520,7 +494,7 @@ namespace GM {
         // The size of the C program is returned in sourceSize
         char* source = NULL;
         size_t src_size = 0;
-        err = readSourceFromFile(kernelFile.c_str(), &source, &src_size);
+        err = ReadSourceFromFile(kernelFile.c_str(), &source, &src_size);
         if (CL_SUCCESS != err)
         {
             Log::log("Error: ReadSourceFromFile returned %s.\n" + std::string(TranslateOpenCLError(err)));
@@ -528,7 +502,7 @@ namespace GM {
         }
 
         // And now after you obtained a regular C string call clCreateProgramWithSource to create OpenCL program object.
-        ocl->program = clCreateProgramWithSource(ocl->context, 1, (const char**)&source, &src_size, &err);
+        program = clCreateProgramWithSource(ocl->context, 1, (const char**)&source, &src_size, &err);
         if (CL_SUCCESS != err)
         {
             Log::log("Error: clCreateProgramWithSource returned %s.\n" + std::string(TranslateOpenCLError(err)));
@@ -541,7 +515,7 @@ namespace GM {
         // but there are also other possibilities when program consist of several parts,
         // some of which are libraries, and you may want to consider using clCompileProgram and clLinkProgram as
         // alternatives.
-        err = clBuildProgram(ocl->program, 1, &ocl->device, "", NULL, NULL);
+        err = clBuildProgram(program, 1, &ocl->device, "", NULL, NULL);
         if (CL_SUCCESS != err)
         {
             Log::log("Error: clBuildProgram() for source program returned %s.\n" + std::string(TranslateOpenCLError(err)));
@@ -552,10 +526,10 @@ namespace GM {
             if (err == CL_BUILD_PROGRAM_FAILURE)
             {
                 size_t log_size = 0;
-                clGetProgramBuildInfo(ocl->program, ocl->device, CL_PROGRAM_BUILD_LOG, 0, NULL, &log_size);
+                clGetProgramBuildInfo(program, ocl->device, CL_PROGRAM_BUILD_LOG, 0, NULL, &log_size);
 
                 std::vector<char> build_log(log_size);
-                clGetProgramBuildInfo(ocl->program, ocl->device, CL_PROGRAM_BUILD_LOG, log_size, &build_log[0], NULL);
+                clGetProgramBuildInfo(program, ocl->device, CL_PROGRAM_BUILD_LOG, log_size, &build_log[0], NULL);
 
                 Log::log("Error happened during the build of OpenCL program.\nBuild log:%s" + std::string(&build_log[0]));
             }
@@ -574,29 +548,27 @@ namespace GM {
     /*
         Creates a kernel from a named function on the .cl file
     */
-    void createKernelFromProgram(ocl_args_d_t& ocl, const std::string& functionName) {
-        ocl.kernel = clCreateKernel(ocl.program, functionName.c_str(), NULL);
-    }
-
-    /*
-        Copies the data onto the device memory
-    */
-    void copyParameters(ocl_args_d_t& ocl) {
-        cl_int status = clSetKernelArg(ocl.kernel, 0, sizeof(cl_mem), (void*)&ocl.buffer);
-        if (CL_SUCCESS != status)
-        {
-            Log::log("error: Failed to set argument srcA, returned %s\n" + std::string(TranslateOpenCLError(status)));
-            exit(-1);
-        }
+    void createKernelFromProgram(ocl_args_d_t& ocl, cl_program& program, cl_kernel& kernel, const std::string& functionName) {
+        kernel = clCreateKernel(program, functionName.c_str(), NULL);
     }
 
     /*
         Execute the kernel. Must have been set all parameters before
     */
-    void executeKernel(const ocl_args_d_t& ocl, const unsigned int dataSize) {
+    void executeKernel(const ocl_args_d_t& ocl, cl_kernel& kernel, const unsigned int dimensions, const unsigned int* dimensionSizes) {
+        if (dimensionSizes == nullptr) {
+            Log::log("Error: Failed to run kernel, dimensionSizes is null");
+            exit(-1);
+        }
         /*Step 10: Running the kernel.*/
-        size_t global_work_size[1] = { dataSize };
-        cl_int status = clEnqueueNDRangeKernel(ocl.commandQueue, ocl.kernel, 1, NULL,
+        //Setup work sizes for every dimension
+        size_t* global_work_size = new size_t[dimensions];
+        for (size_t i = 0; i < dimensions; i++)
+        {
+            global_work_size[i] = dimensionSizes[i];
+        }
+
+        cl_int status = clEnqueueNDRangeKernel(ocl.commandQueue, kernel, dimensions, NULL,
             global_work_size, NULL, 0, NULL, NULL);
         if (CL_SUCCESS != status)
         {
@@ -606,19 +578,19 @@ namespace GM {
     }
 
     /*
-    Copies the value to memory and sets the argument
-*/
-    void copyFloatParam(ocl_args_d_t& ocl, unsigned int argumentIndex, cl_mem& buffer, float& value) {
+        Copies the value to memory and sets the argument
+    */
+    void copyFloatParam(ocl_args_d_t& ocl, cl_kernel& kernel, unsigned int argumentIndex, cl_mem& buffer, float& value) {
         cl_int status = clEnqueueWriteBuffer(ocl.commandQueue, buffer, true, 0, sizeof(float), &value, NULL, NULL, NULL);
         if (CL_SUCCESS != status)
         {
-            Log::log("error: Failed to copy float to memory, returned %s\n" + std::string(TranslateOpenCLError(status)));
+            Log::log("error: Failed to set argument buffer, returned %s\n" + std::string(TranslateOpenCLError(status)));
             exit(-1);
         }
-        status = clSetKernelArg(ocl.kernel, argumentIndex, sizeof(cl_mem), (void*)&buffer);
+        status = clSetKernelArg(kernel, argumentIndex, sizeof(cl_mem), (void*)&buffer);
         if (CL_SUCCESS != status)
         {
-            Log::log("error: Failed to set float argument buffer, returned %s\n" + std::string(TranslateOpenCLError(status)));
+            Log::log("error: Failed to set argument buffer, returned %s\n" + std::string(TranslateOpenCLError(status)));
             exit(-1);
         }
     }
@@ -631,5 +603,6 @@ namespace GM {
             sizeof(float), (void*)&value, NULL);
         return newBuffer;
     }
+#pragma warning ( pop )
 }
 #pragma warning ( pop )

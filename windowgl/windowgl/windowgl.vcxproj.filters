@@ -220,5 +220,6 @@
     </None>
     <None Include="game\ocl\physics_ocl.cl" />
     <None Include="game\ocl\ocl_structs.cl" />
+    <None Include="game\ocl\collision_ocl.cl" />
   </ItemGroup>
 </Project>

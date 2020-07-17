@@ -18,8 +18,10 @@ private:
     bool firstTime = true;
 
     //Opencl stuff
-    ocl_args_d_t ocl{};
     size_t lastPhysicsVectorSize = 0;
+    cl_mem phyBuffer{};
     cl_mem deltaTimeBuffer{};
+    cl_program       program;           // hold the program handler
+    cl_kernel        kernel;            // hold the kernel handler
 };
 }

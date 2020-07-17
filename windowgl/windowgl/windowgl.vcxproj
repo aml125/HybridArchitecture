@@ -205,6 +205,7 @@
     <ClInclude Include="game\util\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="game\ocl\collision_ocl.cl" />
     <None Include="game\ocl\ocl_structs.cl" />
     <None Include="game\ocl\physics_ocl.cl" />
     <None Include="shaders\Fragment.glsl" />
