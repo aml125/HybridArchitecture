@@ -98,17 +98,17 @@ void l() {
 
 int main()
 {
-	GM::GameManager gameManager;
 	GM::Window_t window{ kSCRWIDTH, kSCRHEIGHT };
-
 	GM::RenderSystem_t render(window);
+	GM::GameManager gameManager{ &render };
+
 	GM::InputSystem_t input(window);
 	GM::IASystem_t iaSystem{};
 	GM::PhysicsSystem_t physics;
 	GM::CollisionSystem_t collision;
 
 	//Should be in order of execution
-	gameManager.addSystem(render);
+	//gameManager.addSystem(render);
 	gameManager.addSystem(input);
 	gameManager.addSystem(iaSystem);
 	gameManager.addSystem(physics);
@@ -128,12 +128,12 @@ int main()
 
 	//Formation 1
 	//Set formation 1 slots
-	auto& pattern1 = GM::EntityBuilder::buildPattern(gameManager, iaSystem, 2, 1, 2, ALABARDERO_PATH, { -5, 1, -10 });
+	auto& pattern1 = GM::EntityBuilder::buildPattern(gameManager, iaSystem, 200, 1, 2, ALABARDERO_PATH, { -5, 1, -10 });
 	pattern1.anchorPoint->getComponent<GM::IA_t>()->target.position = { 0, 1, -10 };
 	player = &pattern1.anchorPoint->getComponent<GM::IA_t>()->target.position;
 	
 	//Formation 2
-	auto& pattern2 = GM::EntityBuilder::buildPattern(gameManager, iaSystem, 2, 1, 2, ALABARDERO_PATH, { -5, 1, 10 });
+	auto& pattern2 = GM::EntityBuilder::buildPattern(gameManager, iaSystem, 200, 1, 2, ALABARDERO_PATH, { -5, 1, 10 });
 	pattern2.anchorPoint->getComponent<GM::IA_t>()->target.position = { 10, 1, -10 };
 	
 

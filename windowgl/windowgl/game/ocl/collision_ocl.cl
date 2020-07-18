@@ -56,7 +56,7 @@ void modifySpeedAndVelocityOnCollision(struct AuxPhy_ocl_t* phy1, struct AuxPhy_
 	substractVectorsLL(&phy1->position, &auxVec, &phy1->position);
 
 	//Check X
-	float auxspeed = phy1->speed.x;
+	/*float auxspeed = phy1->speed.x;
 	phy1->position.x += phy1->speed.x;
 	if (collide(phy1, phy2, coll1, coll2)) {
 		oneCollides = true;
@@ -82,11 +82,11 @@ void modifySpeedAndVelocityOnCollision(struct AuxPhy_ocl_t* phy1, struct AuxPhy_
 	}
 	phy1->position.z -= auxspeed;
 
-	if (!oneCollides) {
+	if (!oneCollides) {*/
 		phy1->speed.x = 0;
 		phy1->speed.y = 0;
 		phy1->speed.z = 0;
-	}
+	//}
 
 	//Return position to the new positiojn
 	multiplyVectorByScalarLL(&phy1->speed, deltaTime, &auxVec);

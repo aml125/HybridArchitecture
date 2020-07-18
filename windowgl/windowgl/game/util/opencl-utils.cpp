@@ -91,7 +91,7 @@ namespace GM {
         deviceVersion(OPENCL_VERSION_1_2),
         compilerVersion(OPENCL_VERSION_1_2)
     {
-        setupOpenCL(this, "");
+        setupOpenCL(this, "Intel");
     }
 
     /*

@@ -4,11 +4,12 @@
 #include <vector>
 #include <game\sys\system.hpp>
 #include <ecs/man/entitymanager.hpp>
+#include <game/sys/render.hpp>
 
 namespace GM {
 
 	struct GameManager {
-        explicit GameManager();
+        explicit GameManager(RenderSystem_t* ren);
 
         bool update();
 
@@ -17,6 +18,7 @@ namespace GM {
         }
 
         ECS::EntityManager_t entityMan;
+        RenderSystem_t* render{};
         std::vector<System_t*> systems;
 	};
 }
