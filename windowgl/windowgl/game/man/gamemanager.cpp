@@ -21,6 +21,7 @@ namespace GM {
 	{
 		
 		std::thread thread(executeRender, &systems, &entityMan);
+		//executeRender(&systems, &entityMan);
 		render->update(entityMan);
 		thread.join();
 

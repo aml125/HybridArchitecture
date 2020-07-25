@@ -1,10 +1,12 @@
 #include "Log.hpp"
 #include <fstream>
+#include <iostream>
 
 namespace GM {
 	void Log::log(const std::string& message)
 	{
 		messages.push_back(message);
+		//std::cout << message << std::endl;
 	}
 	void Log::flush(const std::string& filename)
 	{
