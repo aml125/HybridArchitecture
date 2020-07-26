@@ -11,7 +11,11 @@ namespace GM {
 		std::atexit(GM::Log::flush);
 	}
 
-	void executeRender(std::vector<System_t*>* systems, ECS::EntityManager_t* entityMan) {
+	void executeRender(RenderSystem_t* render, ECS::EntityManager_t* entityMan) {
+		render->update(*entityMan);
+	}
+
+	void executeSystems(std::vector<System_t*>* systems, ECS::EntityManager_t* entityMan) {
 		for (auto* sys : *systems) {
 			sys->update(*entityMan);
 		}
@@ -20,12 +24,11 @@ namespace GM {
 	bool GameManager::update()
 	{
 		
-		std::thread thread(executeRender, &systems, &entityMan);
-		//executeRender(&systems, &entityMan);
-		render->update(entityMan);
-		thread.join();
-
+		//std::thread thread(executeSystems, &systems, &entityMan);
 		
+		executeRender(render, &entityMan);
+		executeSystems(&systems, &entityMan);
+		//thread.join();
 
 		return !RenderSystem_t::windowShouldClose;
 	}

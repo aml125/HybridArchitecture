@@ -1,0 +1,880 @@
+[0] Number of available platforms: %u
+2
+[1] %s
+GeForce GTX 960
+[2] Starting render system
+[3] Searching for texture: assets\models\bandera/bandera/Wood_Veneer_02.jpg
+[4] Searching for texture: assets\models\alabardero/Weps.png
+[5] Searching for texture: assets\models\alabardero/DoneWeps_Spec.png
+[6] Searching for texture: assets\models\alabardero/Texture-1024.png
+[7] Searching for texture: assets\models\alabardero/Spec.png
+[8] Searching for texture: assets\models\alabardero/Texture-1024.png
+[9] Searching for texture: assets\models\alabardero/Spec.png
+[10] Searching for texture: assets\models\suelo/suelo/_.jpg
+[11] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[12] Searching for texture: assets\models\torre/torre/Roofing_Slate_Tan.jpg
+[13] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[14] Searching for texture: assets\models\torre/torre/Roofing_Slate_Tan.jpg
+[15] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[16] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[17] Searching for texture: assets\models\torre/torre/Roofing_Slate_Tan.jpg
+[18] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[19] Searching for texture: assets\models\torre/torre/Roofing_Slate_Tan.jpg
+[20] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[21] Searching for texture: assets\models\torre/torre/Roofing_Slate_Tan.jpg
+[22] Searching for texture: assets\models\torre/torre/Wood_Floor.jpg
+[23] Searching for texture: assets\models\torre/torre/Roofing_Slate_Tan.jpg
+[24] Searching for texture: assets\models\torre/torre/Wood_Floor.jpg
+[25] Searching for texture: assets\models\torre/torre/Roofing_Slate_Tan.jpg
+[26] Searching for texture: assets\models\torre/torre/Wood_Floor.jpg
+[27] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[28] Searching for texture: assets\models\torre/torre/Roofing_Slate_Tan.jpg
+[29] Searching for texture: assets\models\torre/torre/Wood_Floor.jpg
+[30] Searching for texture: assets\models\torre/torre/_Field_Rectangle_Tile_2.jpg
+[31] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[32] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[33] Searching for texture: assets\models\torre/torre/Roofing_Slate_Tan.jpg
+[34] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[35] Searching for texture: assets\models\torre/torre/Roofing_Slate_Tan.jpg
+[36] Searching for texture: assets\models\torre/torre/_Roofing_Slate_Tan_1.jpg
+[37] Searching for texture: assets\models\torre/torre/Roofing_Slate_Tan.jpg
+[38] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[39] Searching for texture: assets\models\torre/torre/Roofing_Slate_Tan.jpg
+[40] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[41] Searching for texture: assets\models\torre/torre/Roofing_Slate_Tan.jpg
+[42] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[43] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[44] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[45] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[46] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[47] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[48] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[49] Searching for texture: assets\models\torre/torre/Roofing_Slate_Tan.jpg
+[50] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[51] Searching for texture: assets\models\torre/torre/Roofing_Slate_Tan.jpg
+[52] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[53] Searching for texture: assets\models\torre/torre/Roofing_Slate_Tan.jpg
+[54] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[55] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[56] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[57] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[58] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[59] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[60] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[61] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[62] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[63] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[64] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[65] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[66] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[67] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[68] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[69] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[70] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[71] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[72] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[73] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[74] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[75] Searching for texture: assets\models\torre/torre/_Roofing_Slate_Tan_1.jpg
+[76] Searching for texture: assets\models\torre/torre/Roofing_Slate_Tan.jpg
+[77] Searching for texture: assets\models\torre/torre/_Roofing_Slate_Tan_1.jpg
+[78] Searching for texture: assets\models\torre/torre/Roofing_Slate_Tan.jpg
+[79] Searching for texture: assets\models\torre/torre/_Roofing_Slate_Tan_1.jpg
+[80] Searching for texture: assets\models\torre/torre/Roofing_Slate_Tan.jpg
+[81] Searching for texture: assets\models\torre/torre/_Roofing_Slate_Tan_1.jpg
+[82] Searching for texture: assets\models\torre/torre/Roofing_Slate_Tan.jpg
+[83] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[84] Searching for texture: assets\models\torre/torre/Wood_Floor.jpg
+[85] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[86] Searching for texture: assets\models\torre/torre/_Field_Rectangle_Tile_1.jpg
+[87] Searching for texture: assets\models\torre/torre/Roofing_Slate_Tan.jpg
+[88] Searching for texture: assets\models\torre/torre/Wood_Floor.jpg
+[89] Searching for texture: assets\models\torre/torre/Wood_Floor.jpg
+[90] Searching for texture: assets\models\torre/torre/_Field_Rectangle_Tile_2.jpg
+[91] Non graphic computing: 5417.022500
+[92] Input: 0.013600
+[93] IA: 3.588000
+[94] Collisions: 2.856700
+[95] Graphic computing: 356.367700
+[96] Non graphic computing: 0.072500
+[97] Input: 0.005000
+[98] IA: 5.316700
+[99] Physics: 0.650900
+[100] Collisions: 0.586600
+[101] Graphic computing: 411.791700
+[102] Non graphic computing: 0.075000
+[103] Input: 0.009500
+[104] IA: 4.407100
+[105] Physics: 0.541000
+[106] Collisions: 0.612700
+[107] Graphic computing: 376.364400
+[108] Non graphic computing: 0.093400
+[109] Input: 0.005100
+[110] IA: 4.734500
+[111] Physics: 0.583700
+[112] Collisions: 0.565000
+[113] Graphic computing: 425.148800
+[114] Non graphic computing: 0.067300
+[115] Input: 0.003000
+[116] IA: 4.484100
+[117] Physics: 0.607700
+[118] Collisions: 0.738100
+[119] Graphic computing: 373.273300
+[120] Non graphic computing: 0.102900
+[121] Input: 0.006500
+[122] IA: 4.967100
+[123] Physics: 0.576600
+[124] Collisions: 0.572600
+[125] Graphic computing: 428.494400
+[126] Non graphic computing: 0.098100
+[127] Input: 0.013100
+[128] IA: 4.612700
+[129] Physics: 0.597900
+[130] Collisions: 0.658500
+[131] Graphic computing: 365.579900
+[132] Non graphic computing: 0.087100
+[133] Input: 0.014000
+[134] IA: 4.867200
+[135] Physics: 0.857800
+[136] Collisions: 0.603200
+[137] Graphic computing: 425.954700
+[138] Non graphic computing: 0.098600
+[139] Input: 0.018600
+[140] Anchor arrived
+[141] Anchor arrived
+[142] IA: 2.432100
+[143] Physics: 0.492500
+[144] Collisions: 0.571400
+[145] Graphic computing: 370.786000
+[146] Non graphic computing: 0.097000
+[147] Input: 0.005600
+[148] IA: 2.133000
+[149] Physics: 0.820000
+[150] Collisions: 0.747100
+[151] Graphic computing: 409.209300
+[152] Non graphic computing: 0.113300
+[153] Input: 0.012400
+[154] IA: 2.109100
+[155] Physics: 0.518100
+[156] Collisions: 0.525000
+[157] Graphic computing: 245.437700
+[158] Non graphic computing: 0.080700
+[159] Input: 0.014000
+[160] IA: 1.380100
+[161] Physics: 0.603700
+[162] Collisions: 0.611400
+[163] Graphic computing: 230.246800
+[164] Non graphic computing: 0.095600
+[165] Input: 0.004100
+[166] TARGET: 302
+[167] TARGET: 303
+[168] TARGET: 304
+[169] TARGET: 305
+[170] TARGET: 306
+[171] TARGET: 307
+[172] TARGET: 308
+[173] TARGET: 309
+[174] TARGET: 310
+[175] TARGET: 311
+[176] TARGET: 312
+[177] TARGET: 313
+[178] TARGET: 314
+[179] TARGET: 315
+[180] TARGET: 316
+[181] TARGET: 317
+[182] TARGET: 318
+[183] TARGET: 319
+[184] TARGET: 320
+[185] TARGET: 321
+[186] TARGET: 322
+[187] TARGET: 323
+[188] TARGET: 324
+[189] TARGET: 325
+[190] TARGET: 326
+[191] TARGET: 327
+[192] TARGET: 328
+[193] TARGET: 329
+[194] TARGET: 330
+[195] TARGET: 331
+[196] TARGET: 332
+[197] TARGET: 333
+[198] TARGET: 334
+[199] TARGET: 335
+[200] TARGET: 336
+[201] TARGET: 337
+[202] TARGET: 339
+[203] TARGET: 340
+[204] TARGET: 341
+[205] TARGET: 342
+[206] TARGET: 343
+[207] TARGET: 344
+[208] TARGET: 345
+[209] TARGET: 346
+[210] TARGET: 347
+[211] TARGET: 348
+[212] TARGET: 349
+[213] TARGET: 350
+[214] TARGET: 351
+[215] TARGET: 352
+[216] TARGET: 353
+[217] TARGET: 354
+[218] TARGET: 355
+[219] TARGET: 356
+[220] TARGET: 357
+[221] TARGET: 358
+[222] TARGET: 359
+[223] TARGET: 360
+[224] TARGET: 361
+[225] TARGET: 362
+[226] TARGET: 363
+[227] TARGET: 364
+[228] TARGET: 365
+[229] TARGET: 366
+[230] TARGET: 367
+[231] TARGET: 368
+[232] TARGET: 369
+[233] TARGET: 370
+[234] TARGET: 371
+[235] TARGET: 372
+[236] TARGET: 373
+[237] TARGET: 374
+[238] TARGET: 375
+[239] TARGET: 376
+[240] TARGET: 377
+[241] TARGET: 378
+[242] TARGET: 379
+[243] TARGET: 380
+[244] TARGET: 381
+[245] TARGET: 382
+[246] TARGET: 383
+[247] TARGET: 384
+[248] TARGET: 386
+[249] TARGET: 387
+[250] TARGET: 388
+[251] TARGET: 389
+[252] TARGET: 390
+[253] TARGET: 391
+[254] TARGET: 392
+[255] TARGET: 393
+[256] TARGET: 394
+[257] TARGET: 395
+[258] TARGET: 396
+[259] TARGET: 397
+[260] TARGET: 398
+[261] TARGET: 399
+[262] TARGET: 400
+[263] TARGET: 401
+[264] TARGET: 402
+[265] TARGET: 403
+[266] TARGET: 404
+[267] TARGET: 405
+[268] TARGET: 406
+[269] TARGET: 407
+[270] TARGET: 408
+[271] TARGET: 409
+[272] TARGET: 410
+[273] TARGET: 411
+[274] TARGET: 412
+[275] TARGET: 413
+[276] TARGET: 414
+[277] TARGET: 415
+[278] TARGET: 416
+[279] TARGET: 417
+[280] TARGET: 418
+[281] TARGET: 419
+[282] TARGET: 420
+[283] TARGET: 421
+[284] TARGET: 422
+[285] TARGET: 423
+[286] TARGET: 424
+[287] TARGET: 425
+[288] TARGET: 426
+[289] TARGET: 427
+[290] TARGET: 428
+[291] TARGET: 429
+[292] TARGET: 430
+[293] TARGET: 431
+[294] TARGET: 432
+[295] TARGET: 433
+[296] TARGET: 434
+[297] TARGET: 435
+[298] TARGET: 436
+[299] TARGET: 437
+[300] TARGET: 438
+[301] TARGET: 439
+[302] TARGET: 440
+[303] TARGET: 441
+[304] TARGET: 442
+[305] TARGET: 443
+[306] TARGET: 444
+[307] TARGET: 445
+[308] TARGET: 446
+[309] TARGET: 447
+[310] TARGET: 448
+[311] TARGET: 449
+[312] TARGET: 450
+[313] TARGET: 451
+[314] TARGET: 452
+[315] TARGET: 454
+[316] TARGET: 455
+[317] TARGET: 456
+[318] TARGET: 457
+[319] TARGET: 458
+[320] TARGET: 459
+[321] TARGET: 460
+[322] TARGET: 461
+[323] TARGET: 462
+[324] TARGET: 463
+[325] TARGET: 464
+[326] TARGET: 465
+[327] TARGET: 466
+[328] TARGET: 467
+[329] TARGET: 468
+[330] TARGET: 469
+[331] TARGET: 470
+[332] TARGET: 471
+[333] TARGET: 472
+[334] TARGET: 473
+[335] TARGET: 474
+[336] TARGET: 475
+[337] TARGET: 476
+[338] TARGET: 477
+[339] TARGET: 478
+[340] TARGET: 479
+[341] TARGET: 480
+[342] TARGET: 481
+[343] TARGET: 482
+[344] TARGET: 483
+[345] TARGET: 484
+[346] TARGET: 485
+[347] TARGET: 486
+[348] TARGET: 487
+[349] TARGET: 488
+[350] TARGET: 489
+[351] TARGET: 490
+[352] TARGET: 491
+[353] TARGET: 492
+[354] TARGET: 493
+[355] TARGET: 494
+[356] TARGET: 495
+[357] TARGET: 496
+[358] TARGET: 497
+[359] TARGET: 498
+[360] TARGET: 499
+[361] TARGET: 500
+[362] TARGET: 501
+[363] TARGET: 502
+[364] TARGET: 503
+[365] TARGET: 504
+[366] TARGET: 505
+[367] TARGET: 506
+[368] TARGET: 507
+[369] TARGET: 508
+[370] TARGET: 509
+[371] TARGET: 510
+[372] TARGET: 511
+[373] TARGET: 512
+[374] TARGET: 513
+[375] TARGET: 514
+[376] TARGET: 515
+[377] TARGET: 516
+[378] TARGET: 517
+[379] TARGET: 518
+[380] TARGET: 519
+[381] TARGET: 520
+[382] TARGET: 521
+[383] TARGET: 522
+[384] TARGET: 523
+[385] TARGET: 524
+[386] TARGET: 525
+[387] TARGET: 526
+[388] TARGET: 527
+[389] TARGET: 528
+[390] TARGET: 529
+[391] TARGET: 530
+[392] TARGET: 531
+[393] TARGET: 532
+[394] TARGET: 533
+[395] TARGET: 534
+[396] TARGET: 535
+[397] TARGET: 536
+[398] TARGET: 537
+[399] TARGET: 538
+[400] TARGET: 539
+[401] TARGET: 540
+[402] TARGET: 541
+[403] TARGET: 542
+[404] TARGET: 543
+[405] TARGET: 544
+[406] TARGET: 545
+[407] TARGET: 546
+[408] TARGET: 547
+[409] TARGET: 548
+[410] TARGET: 549
+[411] TARGET: 550
+[412] TARGET: 551
+[413] TARGET: 552
+[414] TARGET: 553
+[415] TARGET: 554
+[416] TARGET: 555
+[417] TARGET: 556
+[418] TARGET: 557
+[419] TARGET: 558
+[420] TARGET: 559
+[421] TARGET: 560
+[422] TARGET: 561
+[423] TARGET: 562
+[424] TARGET: 563
+[425] TARGET: 564
+[426] TARGET: 565
+[427] TARGET: 566
+[428] TARGET: 567
+[429] TARGET: 568
+[430] TARGET: 569
+[431] TARGET: 570
+[432] TARGET: 571
+[433] TARGET: 572
+[434] TARGET: 573
+[435] TARGET: 574
+[436] TARGET: 575
+[437] TARGET: 576
+[438] TARGET: 577
+[439] TARGET: 578
+[440] TARGET: 579
+[441] TARGET: 580
+[442] TARGET: 581
+[443] TARGET: 582
+[444] TARGET: 583
+[445] TARGET: 584
+[446] TARGET: 585
+[447] TARGET: 586
+[448] TARGET: 587
+[449] TARGET: 588
+[450] TARGET: 589
+[451] TARGET: 590
+[452] TARGET: 591
+[453] TARGET: 592
+[454] TARGET: 593
+[455] TARGET: 594
+[456] TARGET: 595
+[457] TARGET: 596
+[458] TARGET: 597
+[459] TARGET: 598
+[460] TARGET: 599
+[461] TARGET: 600
+[462] TARGET: 601
+[463] TARGET: 1
+[464] TARGET: 2
+[465] TARGET: 3
+[466] TARGET: 4
+[467] TARGET: 5
+[468] TARGET: 6
+[469] TARGET: 7
+[470] TARGET: 8
+[471] TARGET: 9
+[472] TARGET: 10
+[473] TARGET: 11
+[474] TARGET: 12
+[475] TARGET: 13
+[476] TARGET: 14
+[477] TARGET: 15
+[478] TARGET: 16
+[479] TARGET: 17
+[480] TARGET: 18
+[481] TARGET: 19
+[482] TARGET: 20
+[483] TARGET: 21
+[484] TARGET: 22
+[485] TARGET: 23
+[486] TARGET: 24
+[487] TARGET: 25
+[488] TARGET: 26
+[489] TARGET: 27
+[490] TARGET: 28
+[491] TARGET: 29
+[492] TARGET: 30
+[493] TARGET: 31
+[494] TARGET: 32
+[495] TARGET: 33
+[496] TARGET: 34
+[497] TARGET: 35
+[498] TARGET: 36
+[499] TARGET: 38
+[500] TARGET: 39
+[501] TARGET: 40
+[502] TARGET: 41
+[503] TARGET: 42
+[504] TARGET: 43
+[505] TARGET: 44
+[506] TARGET: 45
+[507] TARGET: 46
+[508] TARGET: 47
+[509] TARGET: 48
+[510] TARGET: 49
+[511] TARGET: 50
+[512] TARGET: 51
+[513] TARGET: 52
+[514] TARGET: 53
+[515] TARGET: 54
+[516] TARGET: 55
+[517] TARGET: 56
+[518] TARGET: 57
+[519] TARGET: 58
+[520] TARGET: 59
+[521] TARGET: 60
+[522] TARGET: 61
+[523] TARGET: 62
+[524] TARGET: 63
+[525] TARGET: 64
+[526] TARGET: 65
+[527] TARGET: 66
+[528] TARGET: 67
+[529] TARGET: 68
+[530] TARGET: 69
+[531] TARGET: 70
+[532] TARGET: 71
+[533] TARGET: 72
+[534] TARGET: 73
+[535] TARGET: 74
+[536] TARGET: 75
+[537] TARGET: 76
+[538] TARGET: 77
+[539] TARGET: 78
+[540] TARGET: 79
+[541] TARGET: 80
+[542] TARGET: 81
+[543] TARGET: 82
+[544] TARGET: 83
+[545] TARGET: 85
+[546] Graphic computing: 231.744500
+[547] TARGET: 86
+[548] TARGET: 87
+[549] TARGET: 88
+[550] TARGET: 89
+[551] TARGET: 90
+[552] TARGET: 91
+[553] TARGET: 92
+[554] TARGET: 93
+[555] TARGET: 94
+[556] TARGET: 95
+[557] TARGET: 96
+[558] TARGET: 97
+[559] TARGET: 98
+[560] TARGET: 99
+[561] TARGET: 100
+[562] TARGET: 101
+[563] TARGET: 102
+[564] TARGET: 103
+[565] TARGET: 104
+[566] TARGET: 105
+[567] TARGET: 106
+[568] TARGET: 107
+[569] TARGET: 108
+[570] TARGET: 109
+[571] TARGET: 110
+[572] TARGET: 111
+[573] TARGET: 112
+[574] TARGET: 113
+[575] TARGET: 114
+[576] TARGET: 115
+[577] TARGET: 116
+[578] TARGET: 117
+[579] TARGET: 118
+[580] TARGET: 119
+[581] TARGET: 120
+[582] TARGET: 121
+[583] TARGET: 122
+[584] TARGET: 123
+[585] TARGET: 124
+[586] TARGET: 125
+[587] TARGET: 126
+[588] TARGET: 127
+[589] TARGET: 128
+[590] TARGET: 129
+[591] TARGET: 130
+[592] TARGET: 131
+[593] TARGET: 132
+[594] TARGET: 133
+[595] TARGET: 134
+[596] TARGET: 135
+[597] TARGET: 136
+[598] TARGET: 137
+[599] TARGET: 138
+[600] TARGET: 139
+[601] TARGET: 140
+[602] TARGET: 141
+[603] TARGET: 142
+[604] TARGET: 143
+[605] TARGET: 144
+[606] TARGET: 145
+[607] TARGET: 146
+[608] TARGET: 147
+[609] TARGET: 148
+[610] TARGET: 149
+[611] TARGET: 150
+[612] TARGET: 151
+[613] TARGET: 152
+[614] TARGET: 152
+[615] TARGET: 154
+[616] TARGET: 155
+[617] TARGET: 156
+[618] TARGET: 157
+[619] TARGET: 158
+[620] TARGET: 159
+[621] TARGET: 160
+[622] TARGET: 161
+[623] TARGET: 162
+[624] TARGET: 163
+[625] TARGET: 164
+[626] TARGET: 165
+[627] TARGET: 166
+[628] TARGET: 167
+[629] TARGET: 168
+[630] TARGET: 169
+[631] TARGET: 170
+[632] TARGET: 171
+[633] TARGET: 172
+[634] TARGET: 173
+[635] TARGET: 174
+[636] TARGET: 175
+[637] TARGET: 176
+[638] TARGET: 177
+[639] TARGET: 178
+[640] TARGET: 179
+[641] TARGET: 180
+[642] TARGET: 181
+[643] TARGET: 182
+[644] TARGET: 183
+[645] TARGET: 184
+[646] TARGET: 185
+[647] TARGET: 186
+[648] TARGET: 187
+[649] TARGET: 188
+[650] TARGET: 189
+[651] TARGET: 190
+[652] TARGET: 191
+[653] TARGET: 192
+[654] TARGET: 193
+[655] TARGET: 194
+[656] TARGET: 195
+[657] TARGET: 196
+[658] TARGET: 197
+[659] TARGET: 198
+[660] TARGET: 199
+[661] TARGET: 200
+[662] TARGET: 201
+[663] TARGET: 202
+[664] TARGET: 203
+[665] TARGET: 204
+[666] TARGET: 205
+[667] TARGET: 206
+[668] TARGET: 207
+[669] TARGET: 208
+[670] TARGET: 209
+[671] TARGET: 210
+[672] TARGET: 211
+[673] TARGET: 212
+[674] TARGET: 213
+[675] TARGET: 214
+[676] TARGET: 215
+[677] TARGET: 216
+[678] TARGET: 217
+[679] TARGET: 218
+[680] TARGET: 219
+[681] TARGET: 220
+[682] TARGET: 221
+[683] TARGET: 222
+[684] TARGET: 223
+[685] TARGET: 224
+[686] TARGET: 225
+[687] TARGET: 226
+[688] TARGET: 227
+[689] TARGET: 228
+[690] TARGET: 229
+[691] TARGET: 230
+[692] TARGET: 231
+[693] TARGET: 232
+[694] TARGET: 233
+[695] TARGET: 234
+[696] TARGET: 235
+[697] TARGET: 236
+[698] TARGET: 237
+[699] TARGET: 238
+[700] TARGET: 239
+[701] TARGET: 240
+[702] TARGET: 241
+[703] TARGET: 242
+[704] TARGET: 243
+[705] TARGET: 244
+[706] TARGET: 245
+[707] TARGET: 246
+[708] TARGET: 247
+[709] TARGET: 248
+[710] TARGET: 249
+[711] TARGET: 250
+[712] TARGET: 251
+[713] TARGET: 252
+[714] TARGET: 253
+[715] TARGET: 254
+[716] TARGET: 255
+[717] TARGET: 256
+[718] TARGET: 257
+[719] TARGET: 258
+[720] TARGET: 259
+[721] TARGET: 260
+[722] TARGET: 261
+[723] TARGET: 262
+[724] TARGET: 263
+[725] TARGET: 264
+[726] TARGET: 265
+[727] TARGET: 266
+[728] TARGET: 267
+[729] TARGET: 268
+[730] TARGET: 269
+[731] TARGET: 270
+[732] TARGET: 271
+[733] TARGET: 272
+[734] TARGET: 273
+[735] TARGET: 274
+[736] TARGET: 275
+[737] TARGET: 276
+[738] TARGET: 277
+[739] TARGET: 278
+[740] TARGET: 279
+[741] TARGET: 280
+[742] TARGET: 281
+[743] TARGET: 282
+[744] TARGET: 283
+[745] TARGET: 284
+[746] TARGET: 285
+[747] TARGET: 286
+[748] TARGET: 287
+[749] TARGET: 288
+[750] TARGET: 289
+[751] TARGET: 290
+[752] TARGET: 291
+[753] TARGET: 292
+[754] TARGET: 293
+[755] TARGET: 294
+[756] TARGET: 295
+[757] TARGET: 296
+[758] TARGET: 297
+[759] TARGET: 298
+[760] TARGET: 299
+[761] TARGET: 300
+[762] IA: 359.753700
+[763] Physics: 0.511100
+[764] Collisions: 0.573200
+[765] Non graphic computing: 130.409300
+[766] Input: 0.012800
+[767] IA: 4.116300
+[768] Physics: 0.486700
+[769] Collisions: 0.625700
+[770] Graphic computing: 239.702700
+[771] Non graphic computing: 0.083200
+[772] Input: 0.013200
+[773] IA: 4.146200
+[774] Physics: 0.594400
+[775] Collisions: 0.596000
+[776] Graphic computing: 241.397600
+[777] Non graphic computing: 0.079400
+[778] Input: 0.004000
+[779] IA: 4.079600
+[780] Physics: 0.726800
+[781] Collisions: 0.697800
+[782] Graphic computing: 242.477200
+[783] Non graphic computing: 0.085700
+[784] Input: 0.003300
+[785] IA: 4.261600
+[786] Physics: 0.532100
+[787] Collisions: 0.576200
+[788] Graphic computing: 226.062600
+[789] Non graphic computing: 0.085900
+[790] Input: 0.003600
+[791] IA: 4.064200
+[792] Physics: 0.576200
+[793] Collisions: 0.636900
+[794] Graphic computing: 234.131800
+[795] Non graphic computing: 0.099200
+[796] Input: 0.015200
+[797] IA: 4.145800
+[798] Physics: 0.669100
+[799] Collisions: 0.631600
+[800] Graphic computing: 236.579600
+[801] Non graphic computing: 0.079700
+[802] Input: 0.012700
+[803] IA: 4.291300
+[804] Physics: 0.701800
+[805] Collisions: 0.540000
+[806] Graphic computing: 234.435000
+[807] Non graphic computing: 0.093400
+[808] Input: 0.012200
+[809] TARGET: 337
+[810] TARGET: 384
+[811] IA: 5.432700
+[812] Physics: 0.534500
+[813] Collisions: 0.570800
+[814] Graphic computing: 231.427400
+[815] Non graphic computing: 0.085000
+[816] Input: 0.012700
+[817] IA: 4.117900
+[818] Physics: 0.560800
+[819] Collisions: 0.589000
+[820] Graphic computing: 233.192100
+[821] Non graphic computing: 0.083300
+[822] Input: 0.009700
+[823] IA: 4.000700
+[824] Physics: 0.564500
+[825] Collisions: 0.639600
+[826] Graphic computing: 234.502100
+[827] Non graphic computing: 0.097200
+[828] Input: 0.003500
+[829] IA: 4.169600
+[830] Physics: 0.553500
+[831] Collisions: 0.628400
+[832] Graphic computing: 230.072100
+[833] Non graphic computing: 0.062100
+[834] Input: 0.012100
+[835] IA: 4.016700
+[836] Physics: 0.757000
+[837] Collisions: 0.775400
+[838] Graphic computing: 233.178300
+[839] Non graphic computing: 0.077100
+[840] Input: 0.003000
+[841] IA: 4.251200
+[842] Physics: 0.562200
+[843] Collisions: 0.554600
+[844] Graphic computing: 230.089100
+[845] Non graphic computing: 0.087200
+[846] Input: 0.003500
+[847] IA: 3.971700
+[848] Physics: 0.660000
+[849] Collisions: 0.784300
+[850] Graphic computing: 235.092300
+[851] Non graphic computing: 0.075600
+[852] Input: 0.010600
+[853] TARGET: 37
+[854] TARGET: 84
+[855] IA: 5.163000
+[856] Physics: 0.666700
+[857] Collisions: 0.807200
+[858] Graphic computing: 225.440800
+[859] Non graphic computing: 0.079600
+[860] Input: 0.021900
+[861] IA: 3.940000
+[862] Physics: 0.674100
+[863] Collisions: 0.801200
+[864] Graphic computing: 232.239300
+[865] Non graphic computing: 0.081400
+[866] Input: 0.002900
+[867] IA: 3.913400
+[868] Physics: 0.536300
+[869] Collisions: 0.695700
+[870] Graphic computing: 223.524200
+[871] Non graphic computing: 0.080000
+[872] Input: 0.003500
+[873] IA: 4.077700
+[874] Physics: 0.581500
+[875] Collisions: 0.651500
+[876] Graphic computing: 249.323800
+[877] Writting logs to a file

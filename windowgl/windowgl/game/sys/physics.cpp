@@ -33,7 +33,7 @@ namespace GM {
     readBuffer(ocl, phyBuffer, vecPhy);
 
     //CPU Implementation
-    /*for (auto& phy : g.getComponents<PhysicsComponent_t>()) {
+   /* for (auto& phy : g.getComponents<PhysicsComponent_t>()) {
         if (phy.gravity) {
             aplyGravity(phy);
         }

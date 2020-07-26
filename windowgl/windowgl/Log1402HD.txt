@@ -5,7 +5,7 @@ NVIDIA CUDA
 [2] %s
 Intel(R) OpenCL
 [3] %s
-       Intel(R) Core(TM) i5-3570K CPU @ 3.40GHz
+Intel(R) HD Graphics 4000
 [4] Starting render system
 [5] Searching for texture: assets\models\bandera/bandera/Wood_Veneer_02.jpg
 [6] Searching for texture: assets\models\alabardero/Weps.png
@@ -95,195 +95,237 @@ Intel(R) OpenCL
 [90] Searching for texture: assets\models\torre/torre/Wood_Floor.jpg
 [91] Searching for texture: assets\models\torre/torre/Wood_Floor.jpg
 [92] Searching for texture: assets\models\torre/torre/_Field_Rectangle_Tile_2.jpg
-[93] Non graphic computing: 6209.322600
-[94] Input: 0.003800
-[95] IA: 9.925100
-[96] Collisions: 20.508800
-[97] Graphic computing: 972.998800
-[98] Non graphic computing: 0.088800
-[99] Input: 0.005400
-[100] IA: 14.859400
-[101] Physics: 0.907100
-[102] Collisions: 18.322600
-[103] Graphic computing: 1021.227500
-[104] Non graphic computing: 0.074700
-[105] Input: 0.003500
-[106] IA: 11.977200
-[107] Physics: 0.733000
-[108] Collisions: 10.824300
-[109] Graphic computing: 1010.197100
-[110] Non graphic computing: 0.092600
+[93] Non graphic computing: 5898.552500
+[94] Input: 0.003600
+[95] IA: 8.447400
+[96] Collisions: 10.772900
+[97] Graphic computing: 865.251800
+[98] Non graphic computing: 0.089000
+[99] Input: 0.005000
+[100] IA: 13.590000
+[101] Physics: 0.800900
+[102] Collisions: 7.781100
+[103] Graphic computing: 907.678400
+[104] Non graphic computing: 0.077400
+[105] Input: 0.003700
+[106] IA: 10.497700
+[107] Physics: 0.654400
+[108] Collisions: 7.295000
+[109] Graphic computing: 893.251900
+[110] Non graphic computing: 0.088000
 [111] Input: 0.003800
-[112] IA: 14.597100
-[113] Physics: 0.909300
-[114] Collisions: 18.389500
-[115] Graphic computing: 1060.897500
-[116] Non graphic computing: 0.129600
-[117] Input: 0.003800
-[118] IA: 12.002900
-[119] Physics: 0.736600
-[120] Collisions: 11.150600
-[121] Graphic computing: 1024.818400
-[122] Non graphic computing: 0.080900
-[123] Input: 0.004400
-[124] IA: 15.056800
-[125] Physics: 0.909400
-[126] Collisions: 18.596300
-[127] Graphic computing: 1059.891100
-[128] Non graphic computing: 0.111900
-[129] Input: 0.004700
-[130] IA: 14.588000
-[131] Physics: 1.558300
-[132] Collisions: 19.179300
-[133] Graphic computing: 1068.830400
-[134] Non graphic computing: 0.073100
-[135] Input: 0.003500
-[136] IA: 12.176800
-[137] Physics: 0.736900
-[138] Collisions: 11.203500
-[139] Graphic computing: 1001.708400
-[140] Non graphic computing: 0.088600
-[141] Input: 0.004300
-[142] IA: 14.697600
-[143] Physics: 0.907000
-[144] Collisions: 18.159800
-[145] Graphic computing: 1038.433900
-[146] Non graphic computing: 0.083100
-[147] Input: 0.004100
-[148] IA: 12.357600
-[149] Physics: 0.736900
-[150] Collisions: 11.079100
-[151] Graphic computing: 1022.849800
-[152] Non graphic computing: 0.087800
-[153] Input: 0.004700
-[154] IA: 14.909300
-[155] Physics: 0.896800
-[156] Collisions: 19.791300
-[157] Graphic computing: 682.041000
-[158] Non graphic computing: 0.110700
-[159] Input: 0.003300
-[160] IA: 12.092200
-[161] Physics: 0.740800
-[162] Collisions: 14.660700
-[163] Graphic computing: 625.732900
-[164] Non graphic computing: 0.078300
-[165] Input: 0.003700
-[166] IA: 12.132900
-[167] Physics: 0.812900
-[168] Collisions: 18.824700
-[169] Graphic computing: 627.562700
-[170] Non graphic computing: 0.117900
-[171] Input: 0.003700
-[172] IA: 12.069500
-[173] Physics: 0.732400
-[174] Collisions: 15.245100
-[175] Graphic computing: 625.501600
-[176] Non graphic computing: 0.091000
-[177] Input: 0.003800
-[178] IA: 12.151800
-[179] Physics: 0.740000
-[180] Collisions: 14.986800
-[181] Graphic computing: 624.141900
-[182] Non graphic computing: 0.080800
-[183] Input: 0.003400
-[184] IA: 11.953000
-[185] Physics: 0.735800
-[186] Collisions: 15.813200
-[187] Graphic computing: 583.931100
-[188] Non graphic computing: 0.100900
-[189] Input: 0.003800
-[190] IA: 12.024300
-[191] Physics: 0.729000
-[192] Collisions: 15.325100
-[193] Graphic computing: 625.847300
-[194] Non graphic computing: 0.078600
-[195] Input: 0.003800
-[196] IA: 12.036400
-[197] Physics: 0.735000
-[198] Collisions: 18.851800
-[199] Graphic computing: 622.793400
-[200] Non graphic computing: 0.112200
-[201] Input: 0.003600
-[202] IA: 12.003200
-[203] Physics: 0.792600
-[204] Collisions: 14.601100
-[205] Graphic computing: 623.122200
-[206] Non graphic computing: 0.085300
-[207] Input: 0.003600
-[208] IA: 12.045700
-[209] Physics: 0.738000
-[210] Collisions: 14.645300
-[211] Graphic computing: 589.356800
-[212] Non graphic computing: 0.086200
-[213] Input: 0.003500
-[214] IA: 12.113900
-[215] Physics: 0.738400
-[216] Collisions: 14.888800
-[217] Graphic computing: 622.042100
-[218] Non graphic computing: 0.082800
-[219] Input: 0.003200
-[220] IA: 12.017700
-[221] Physics: 0.730400
-[222] Collisions: 14.944700
-[223] Graphic computing: 623.946400
-[224] Non graphic computing: 0.081000
+[112] IA: 13.118600
+[113] Physics: 0.803100
+[114] Collisions: 7.475500
+[115] Graphic computing: 936.010100
+[116] Non graphic computing: 0.106500
+[117] Input: 0.012500
+[118] IA: 10.564400
+[119] Physics: 0.625600
+[120] Collisions: 7.428700
+[121] Graphic computing: 895.821500
+[122] Non graphic computing: 0.073900
+[123] Input: 0.004000
+[124] IA: 13.021400
+[125] Physics: 0.801900
+[126] Collisions: 7.444700
+[127] Graphic computing: 941.195200
+[128] Non graphic computing: 0.081800
+[129] Input: 0.004300
+[130] IA: 10.451400
+[131] Physics: 0.647200
+[132] Collisions: 7.371500
+[133] Graphic computing: 886.818400
+[134] Non graphic computing: 0.082500
+[135] Input: 0.004600
+[136] IA: 12.869700
+[137] Physics: 0.796800
+[138] Collisions: 7.614900
+[139] Graphic computing: 946.832900
+[140] Non graphic computing: 0.077500
+[141] Input: 0.004400
+[142] IA: 10.493100
+[143] Physics: 0.636100
+[144] Collisions: 7.460100
+[145] Graphic computing: 896.071800
+[146] Non graphic computing: 0.104200
+[147] Input: 0.011400
+[148] IA: 12.709000
+[149] Physics: 0.799000
+[150] Collisions: 7.559600
+[151] Graphic computing: 950.618100
+[152] Non graphic computing: 0.122100
+[153] Input: 0.011700
+[154] IA: 10.561400
+[155] Physics: 0.644600
+[156] Collisions: 7.274500
+[157] Graphic computing: 567.295600
+[158] Non graphic computing: 0.109500
+[159] Input: 0.004500
+[160] IA: 10.504400
+[161] Physics: 0.643600
+[162] Collisions: 7.219500
+[163] Graphic computing: 565.896000
+[164] Non graphic computing: 0.084200
+[165] Input: 0.015600
+[166] IA: 10.598300
+[167] Physics: 0.653400
+[168] Collisions: 7.189200
+[169] Graphic computing: 566.059600
+[170] Non graphic computing: 0.087500
+[171] Input: 0.003300
+[172] IA: 10.826700
+[173] Physics: 0.645500
+[174] Collisions: 7.352900
+[175] Graphic computing: 567.059800
+[176] Non graphic computing: 0.084200
+[177] Input: 0.011400
+[178] IA: 10.508000
+[179] Physics: 0.644900
+[180] Collisions: 7.387600
+[181] Graphic computing: 535.639500
+[182] Non graphic computing: 0.087900
+[183] Input: 0.003000
+[184] IA: 10.316800
+[185] Physics: 0.646400
+[186] Collisions: 7.152500
+[187] Graphic computing: 563.222100
+[188] Non graphic computing: 0.073700
+[189] Input: 0.010800
+[190] IA: 10.654500
+[191] Physics: 0.652700
+[192] Collisions: 7.341000
+[193] Graphic computing: 531.881100
+[194] Non graphic computing: 0.085900
+[195] Input: 0.003100
+[196] IA: 10.592900
+[197] Physics: 0.737400
+[198] Collisions: 7.575200
+[199] Graphic computing: 564.602100
+[200] Non graphic computing: 0.083300
+[201] Input: 0.003000
+[202] IA: 11.132300
+[203] Physics: 0.646200
+[204] Collisions: 7.333200
+[205] Graphic computing: 566.277700
+[206] Non graphic computing: 0.083000
+[207] Input: 0.003500
+[208] IA: 10.605500
+[209] Physics: 0.646400
+[210] Collisions: 7.505500
+[211] Graphic computing: 565.225800
+[212] Non graphic computing: 0.079900
+[213] Input: 0.003100
+[214] IA: 10.771600
+[215] Physics: 0.639400
+[216] Collisions: 7.517100
+[217] Graphic computing: 562.107900
+[218] Non graphic computing: 0.085800
+[219] Input: 0.003100
+[220] IA: 10.552500
+[221] Physics: 0.649900
+[222] Collisions: 7.711100
+[223] Graphic computing: 566.698200
+[224] Non graphic computing: 0.094600
 [225] Input: 0.003000
-[226] IA: 12.194300
-[227] Physics: 0.741200
-[228] Collisions: 18.837500
-[229] Graphic computing: 621.261000
-[230] Non graphic computing: 0.088800
-[231] Input: 0.003100
-[232] IA: 12.319800
-[233] Physics: 0.769700
-[234] Collisions: 14.600600
-[235] Graphic computing: 620.986300
-[236] Non graphic computing: 0.085600
-[237] Input: 0.003100
-[238] IA: 11.978500
-[239] Physics: 0.730600
-[240] Collisions: 14.729200
-[241] Graphic computing: 623.579100
-[242] Non graphic computing: 0.086000
-[243] Input: 0.003300
-[244] IA: 12.119000
-[245] Physics: 0.731700
-[246] Collisions: 14.739000
-[247] Graphic computing: 624.248600
-[248] Non graphic computing: 0.087100
-[249] Input: 0.003300
-[250] IA: 12.037700
-[251] Physics: 0.731100
-[252] Collisions: 14.815700
-[253] Graphic computing: 624.822100
-[254] Non graphic computing: 0.086500
-[255] Input: 0.003300
-[256] IA: 12.145800
-[257] Physics: 0.782200
-[258] Collisions: 14.872800
-[259] Graphic computing: 623.802600
-[260] Non graphic computing: 0.083800
+[226] IA: 10.514100
+[227] Physics: 0.624500
+[228] Collisions: 7.350700
+[229] Graphic computing: 564.072700
+[230] Non graphic computing: 0.078200
+[231] Input: 0.002900
+[232] IA: 10.561500
+[233] Physics: 0.660100
+[234] Collisions: 7.223300
+[235] Graphic computing: 561.438600
+[236] Non graphic computing: 0.080300
+[237] Input: 0.003000
+[238] IA: 10.701900
+[239] Physics: 0.654000
+[240] Collisions: 7.391100
+[241] Graphic computing: 562.475200
+[242] Non graphic computing: 0.068900
+[243] Input: 0.002700
+[244] IA: 10.647300
+[245] Physics: 0.668700
+[246] Collisions: 7.711600
+[247] Graphic computing: 560.001500
+[248] Non graphic computing: 0.083000
+[249] Input: 0.002900
+[250] IA: 10.609000
+[251] Physics: 0.651100
+[252] Collisions: 7.445100
+[253] Graphic computing: 559.966900
+[254] Non graphic computing: 0.095300
+[255] Input: 0.003000
+[256] IA: 10.678000
+[257] Physics: 0.625900
+[258] Collisions: 7.463400
+[259] Graphic computing: 561.994500
+[260] Non graphic computing: 0.096700
 [261] Input: 0.003100
-[262] IA: 12.208900
-[263] Physics: 0.735200
-[264] Collisions: 14.376300
-[265] Graphic computing: 625.013300
-[266] Non graphic computing: 0.079100
-[267] Input: 0.003300
-[268] IA: 12.097400
-[269] Physics: 0.763500
-[270] Collisions: 14.700200
-[271] Graphic computing: 623.742600
-[272] Non graphic computing: 0.082200
-[273] Input: 0.003300
-[274] IA: 12.058300
-[275] Physics: 0.737200
-[276] Collisions: 14.876000
-[277] Graphic computing: 620.246800
-[278] Non graphic computing: 0.084400
-[279] Input: 0.003100
-[280] IA: 12.003900
-[281] Physics: 0.730300
-[282] Collisions: 14.863800
-[283] Graphic computing: 654.564600
-[284] Writting logs to a file
+[262] IA: 11.291700
+[263] Physics: 0.646600
+[264] Collisions: 7.403400
+[265] Graphic computing: 561.510300
+[266] Non graphic computing: 0.082400
+[267] Input: 0.003000
+[268] IA: 10.524500
+[269] Physics: 0.646600
+[270] Collisions: 7.570200
+[271] Graphic computing: 561.066100
+[272] Non graphic computing: 0.081500
+[273] Input: 0.002800
+[274] IA: 10.486500
+[275] Physics: 0.642600
+[276] Collisions: 7.540200
+[277] Graphic computing: 528.538500
+[278] Non graphic computing: 0.083900
+[279] Input: 0.002800
+[280] IA: 10.678300
+[281] Physics: 0.625100
+[282] Collisions: 7.210400
+[283] Graphic computing: 562.335600
+[284] Non graphic computing: 0.083000
+[285] Input: 0.002900
+[286] IA: 10.795200
+[287] Physics: 0.648700
+[288] Collisions: 7.602900
+[289] Graphic computing: 562.552300
+[290] Non graphic computing: 0.081500
+[291] Input: 0.009300
+[292] IA: 10.686000
+[293] Physics: 0.655300
+[294] Collisions: 7.166700
+[295] Graphic computing: 563.487000
+[296] Non graphic computing: 0.081400
+[297] Input: 0.002900
+[298] IA: 10.630500
+[299] Physics: 0.646700
+[300] Collisions: 7.262500
+[301] Graphic computing: 562.640600
+[302] Non graphic computing: 0.099000
+[303] Input: 0.002800
+[304] IA: 12.170600
+[305] Physics: 0.702800
+[306] Collisions: 7.287000
+[307] Graphic computing: 562.422400
+[308] Non graphic computing: 0.075300
+[309] Input: 0.012800
+[310] IA: 10.875400
+[311] Physics: 0.658600
+[312] Collisions: 7.209600
+[313] Graphic computing: 560.088700
+[314] Non graphic computing: 0.082500
+[315] Input: 0.002800
+[316] IA: 10.508300
+[317] Physics: 0.662000
+[318] Collisions: 7.459400
+[319] Graphic computing: 561.889800
+[320] Non graphic computing: 0.073500
+[321] Input: 0.020900
+[322] IA: 10.421400
+[323] Physics: 0.643600
+[324] Collisions: 7.371600
+[325] Graphic computing: 592.541800
+[326] Writting logs to a file

@@ -1,4 +1,4 @@
-#include <game/sys/render.hpp>
+﻿#include <game/sys/render.hpp>
 #include <glad/glad.h>
 #include <iostream>
 #include <windows.h>
@@ -15,7 +15,6 @@
 #include <GLFW/glfw3.h>
 #include <game\util\TimeMeasure.hpp>
 #include <game\util\log.hpp>
-
 //#define TIMEMEASURE
 
 namespace GM {

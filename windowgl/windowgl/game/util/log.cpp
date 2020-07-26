@@ -3,9 +3,11 @@
 #include <iostream>
 
 namespace GM {
-	void Log::log(const std::string& message)
+	void Log::log(const std::string message)
 	{
+		myLock.lock();
 		messages.push_back(message);
+		myLock.unlock();
 		//std::cout << message << std::endl;
 	}
 	void Log::flush(const std::string& filename)
