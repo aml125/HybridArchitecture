@@ -11,6 +11,8 @@ struct PhysicsComponent_ocl_t {
     ulong entityId;
     struct mivec3_t position;
     struct mivec3_t rotation;
+    struct mivec3_t nextPosition;
+    struct mivec3_t nextRotation;
     struct mivec3_t speed;
     struct mivec3_t rotationAceleration;
     struct mivec3_t rotationSpeed;
@@ -203,7 +205,7 @@ void copyPhyGG(__global struct PhysicsComponent_ocl_t* source, __global struct P
     Copies PhysicsComponent_ocl_t source to target
 */
 void copyPhyGL(__global struct PhysicsComponent_ocl_t* source, struct AuxPhy_ocl_t* target) {
-    copyVectorGL(&source->position, &target->position);
+    copyVectorGL(&source->nextPosition, &target->position);
     copyVectorGL(&source->speed, &target->speed);
     //copyVectorGL(&source->scale, &target->scale);
 
@@ -213,6 +215,6 @@ void copyPhyGL(__global struct PhysicsComponent_ocl_t* source, struct AuxPhy_ocl
     Copies PhysicsComponent_ocl_t source to target
 */
 void copyPhyLG(struct AuxPhy_ocl_t* source, __global struct PhysicsComponent_ocl_t* target) {
-    copyVectorLG(&source->position, &target->position);
+    copyVectorLG(&source->position, &target->nextPosition);
     copyVectorLG(&source->speed, &target->speed);
 }

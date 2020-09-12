@@ -29,7 +29,7 @@ namespace GM {
 
 		BoxRenderer_t boxRenderer;
 
-	private:
-		void bindVertexArray();
+	/*private:
+		void bindVertexArray();*/
 	};
 }

@@ -20,25 +20,25 @@ namespace GM {
         firstTime = false;
         return;
     }
-    //GPU Implementation
-    std::vector<PhysicsComponent_t>& vecPhy = g.getComponents<PhysicsComponent_t>();
-    if (vecPhy.size() != lastPhysicsVectorSize) {
-        createBuffer(ocl, phyBuffer, true, vecPhy);
-        lastPhysicsVectorSize = vecPhy.size();
-    }
-    copyParameters(ocl, kernel, 0, phyBuffer, vecPhy);
-    copyFloatParam(ocl, kernel, 1, deltaTimeBuffer, RenderSystem_t::deltaTime);
-    unsigned int dimensionSizes[] = { vecPhy.size() };
-    executeKernel(ocl, kernel, 1, dimensionSizes);
-    readBuffer(ocl, phyBuffer, vecPhy);
+    ////GPU Implementation
+    //std::vector<PhysicsComponent_t>& vecPhy = g.getComponents<PhysicsComponent_t>();
+    //if (vecPhy.size() != lastPhysicsVectorSize) {
+    //    createBuffer(ocl, phyBuffer, true, vecPhy);
+    //    lastPhysicsVectorSize = vecPhy.size();
+    //}
+    //copyParameters(ocl, kernel, 0, phyBuffer, vecPhy);
+    //copyFloatParam(ocl, kernel, 1, deltaTimeBuffer, RenderSystem_t::deltaTime);
+    //unsigned int dimensionSizes[] = { vecPhy.size() };
+    //executeKernel(ocl, kernel, 1, dimensionSizes);
+    //readBuffer(ocl, phyBuffer, vecPhy);
 
     //CPU Implementation
-   /* for (auto& phy : g.getComponents<PhysicsComponent_t>()) {
+    for (auto& phy : g.getComponents<PhysicsComponent_t>()) {
         if (phy.gravity) {
             aplyGravity(phy);
         }
         moveObject(phy);
-    }*/
+    }
 #ifdef TIMEMEASURE
     Log::log("Physics: " + std::to_string(tm.GetCounter()));
 #endif
@@ -50,8 +50,8 @@ void PhysicsSystem_t::aplyGravity(PhysicsComponent_t& cmp) const {
 void PhysicsSystem_t::moveObject(PhysicsComponent_t& phy) const
 {
     phy.speed += phy.aceleration * RenderSystem_t::deltaTime;
-    phy.position += phy.speed * RenderSystem_t::deltaTime;
+    phy.nextPosition = phy.position + phy.speed * RenderSystem_t::deltaTime;
     phy.rotationSpeed += phy.rotationAceleration * RenderSystem_t::deltaTime;
-    phy.rotation += phy.rotationSpeed * RenderSystem_t::deltaTime;
+    phy.nextRotation = phy.rotation + phy.rotationSpeed * RenderSystem_t::deltaTime;
 }
 }

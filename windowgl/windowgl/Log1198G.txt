@@ -1,0 +1,543 @@
+[0] Number of available platforms: %u
+2
+[1] %s
+GeForce GTX 960
+[2] Starting render system
+[3] Searching for texture: assets\models\bandera/bandera/Wood_Veneer_02.jpg
+[4] Searching for texture: assets\models\alabardero/Weps.png
+[5] Searching for texture: assets\models\alabardero/DoneWeps_Spec.png
+[6] Searching for texture: assets\models\alabardero/Texture-1024.png
+[7] Searching for texture: assets\models\alabardero/Spec.png
+[8] Searching for texture: assets\models\alabardero/Texture-1024.png
+[9] Searching for texture: assets\models\alabardero/Spec.png
+[10] Searching for texture: assets\models\suelo/suelo/_.jpg
+[11] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[12] Searching for texture: assets\models\torre/torre/Roofing_Slate_Tan.jpg
+[13] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[14] Searching for texture: assets\models\torre/torre/Roofing_Slate_Tan.jpg
+[15] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[16] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[17] Searching for texture: assets\models\torre/torre/Roofing_Slate_Tan.jpg
+[18] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[19] Searching for texture: assets\models\torre/torre/Roofing_Slate_Tan.jpg
+[20] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[21] Searching for texture: assets\models\torre/torre/Roofing_Slate_Tan.jpg
+[22] Searching for texture: assets\models\torre/torre/Wood_Floor.jpg
+[23] Searching for texture: assets\models\torre/torre/Roofing_Slate_Tan.jpg
+[24] Searching for texture: assets\models\torre/torre/Wood_Floor.jpg
+[25] Searching for texture: assets\models\torre/torre/Roofing_Slate_Tan.jpg
+[26] Searching for texture: assets\models\torre/torre/Wood_Floor.jpg
+[27] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[28] Searching for texture: assets\models\torre/torre/Roofing_Slate_Tan.jpg
+[29] Searching for texture: assets\models\torre/torre/Wood_Floor.jpg
+[30] Searching for texture: assets\models\torre/torre/_Field_Rectangle_Tile_2.jpg
+[31] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[32] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[33] Searching for texture: assets\models\torre/torre/Roofing_Slate_Tan.jpg
+[34] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[35] Searching for texture: assets\models\torre/torre/Roofing_Slate_Tan.jpg
+[36] Searching for texture: assets\models\torre/torre/_Roofing_Slate_Tan_1.jpg
+[37] Searching for texture: assets\models\torre/torre/Roofing_Slate_Tan.jpg
+[38] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[39] Searching for texture: assets\models\torre/torre/Roofing_Slate_Tan.jpg
+[40] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[41] Searching for texture: assets\models\torre/torre/Roofing_Slate_Tan.jpg
+[42] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[43] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[44] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[45] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[46] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[47] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[48] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[49] Searching for texture: assets\models\torre/torre/Roofing_Slate_Tan.jpg
+[50] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[51] Searching for texture: assets\models\torre/torre/Roofing_Slate_Tan.jpg
+[52] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[53] Searching for texture: assets\models\torre/torre/Roofing_Slate_Tan.jpg
+[54] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[55] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[56] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[57] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[58] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[59] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[60] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[61] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[62] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[63] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[64] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[65] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[66] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[67] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[68] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[69] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[70] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[71] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[72] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[73] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[74] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[75] Searching for texture: assets\models\torre/torre/_Roofing_Slate_Tan_1.jpg
+[76] Searching for texture: assets\models\torre/torre/Roofing_Slate_Tan.jpg
+[77] Searching for texture: assets\models\torre/torre/_Roofing_Slate_Tan_1.jpg
+[78] Searching for texture: assets\models\torre/torre/Roofing_Slate_Tan.jpg
+[79] Searching for texture: assets\models\torre/torre/_Roofing_Slate_Tan_1.jpg
+[80] Searching for texture: assets\models\torre/torre/Roofing_Slate_Tan.jpg
+[81] Searching for texture: assets\models\torre/torre/_Roofing_Slate_Tan_1.jpg
+[82] Searching for texture: assets\models\torre/torre/Roofing_Slate_Tan.jpg
+[83] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[84] Searching for texture: assets\models\torre/torre/Wood_Floor.jpg
+[85] Searching for texture: assets\models\torre/torre/Field_Rectangle_Tile.jpg
+[86] Searching for texture: assets\models\torre/torre/_Field_Rectangle_Tile_1.jpg
+[87] Searching for texture: assets\models\torre/torre/Roofing_Slate_Tan.jpg
+[88] Searching for texture: assets\models\torre/torre/Wood_Floor.jpg
+[89] Searching for texture: assets\models\torre/torre/Wood_Floor.jpg
+[90] Searching for texture: assets\models\torre/torre/_Field_Rectangle_Tile_2.jpg
+[91] Input: 0.005200
+[92] Non graphic computing: 6313.320200
+[93] IA: 7.564700
+[94] Collisions: 9.554500
+[95] Graphic computing: 1161.081600
+[96] Non graphic computing: 0.065200
+[97] Input: 0.005700
+[98] IA: 11.270300
+[99] Physics: 0.787300
+[100] Collisions: 1.038000
+[101] Graphic computing: 1202.460100
+[102] Non graphic computing: 0.086900
+[103] Input: 0.013300
+[104] IA: 9.289800
+[105] Physics: 0.602500
+[106] Collisions: 0.954000
+[107] Graphic computing: 1178.411700
+[108] Non graphic computing: 0.080300
+[109] Input: 0.013300
+[110] IA: 10.837200
+[111] Physics: 0.714000
+[112] Collisions: 1.117300
+[113] Graphic computing: 1228.575000
+[114] Non graphic computing: 0.086500
+[115] Input: 0.004400
+[116] IA: 8.888800
+[117] Physics: 0.566200
+[118] Collisions: 0.962400
+[119] Graphic computing: 1178.835300
+[120] Non graphic computing: 0.076600
+[121] Input: 0.020300
+[122] IA: 10.578100
+[123] Physics: 0.580600
+[124] Collisions: 0.921800
+[125] Graphic computing: 1227.706700
+[126] Non graphic computing: 0.077900
+[127] Input: 0.003400
+[128] IA: 8.863800
+[129] Physics: 0.618300
+[130] Collisions: 1.111800
+[131] Graphic computing: 1170.877200
+[132] Non graphic computing: 0.086200
+[133] Input: 0.011200
+[134] IA: 10.517000
+[135] Physics: 0.590700
+[136] Collisions: 0.939700
+[137] Graphic computing: 1240.240100
+[138] Non graphic computing: 0.076700
+[139] Input: 0.003900
+[140] IA: 8.787600
+[141] Physics: 0.564700
+[142] Collisions: 0.939500
+[143] Graphic computing: 1154.293900
+[144] Non graphic computing: 0.084300
+[145] Input: 0.004600
+[146] IA: 10.825500
+[147] Physics: 0.712800
+[148] Collisions: 1.117600
+[149] Graphic computing: 1235.087100
+[150] Non graphic computing: 0.080600
+[151] Input: 0.010700
+[152] IA: 10.550800
+[153] Physics: 0.740800
+[154] Collisions: 1.015900
+[155] Graphic computing: 531.822700
+[156] Non graphic computing: 0.092100
+[157] Input: 0.002900
+[158] IA: 8.858400
+[159] Physics: 0.600800
+[160] Collisions: 1.043500
+[161] Graphic computing: 477.292300
+[162] Non graphic computing: 0.089900
+[163] Input: 0.003000
+[164] IA: 8.988600
+[165] Physics: 0.602000
+[166] Collisions: 0.974500
+[167] Graphic computing: 474.865400
+[168] Non graphic computing: 0.077200
+[169] Input: 0.008900
+[170] IA: 8.936500
+[171] Physics: 0.511800
+[172] Collisions: 0.848700
+[173] Graphic computing: 471.726600
+[174] Non graphic computing: 0.074100
+[175] Input: 0.013300
+[176] IA: 9.049800
+[177] Physics: 0.691600
+[178] Collisions: 1.118300
+[179] Graphic computing: 471.389100
+[180] Non graphic computing: 0.083000
+[181] Input: 0.011300
+[182] IA: 9.123800
+[183] Physics: 0.596200
+[184] Collisions: 0.972100
+[185] Graphic computing: 472.913800
+[186] Non graphic computing: 0.081500
+[187] Input: 0.011300
+[188] IA: 9.237700
+[189] Physics: 0.552300
+[190] Collisions: 0.950200
+[191] Graphic computing: 475.523500
+[192] Non graphic computing: 0.085700
+[193] Input: 0.012900
+[194] IA: 8.968800
+[195] Physics: 0.579700
+[196] Collisions: 0.957000
+[197] Graphic computing: 478.940300
+[198] Non graphic computing: 0.080100
+[199] Input: 0.003600
+[200] IA: 9.543500
+[201] Physics: 0.631300
+[202] Collisions: 1.153400
+[203] Graphic computing: 500.944500
+[204] Non graphic computing: 0.091000
+[205] Input: 0.003600
+[206] IA: 9.195900
+[207] Physics: 0.549100
+[208] Collisions: 0.954800
+[209] Graphic computing: 474.500900
+[210] Non graphic computing: 0.070600
+[211] Input: 0.003900
+[212] IA: 9.166000
+[213] Physics: 0.588300
+[214] Collisions: 0.885600
+[215] Graphic computing: 476.181200
+[216] Non graphic computing: 0.077500
+[217] Input: 0.003000
+[218] IA: 8.847600
+[219] Physics: 0.593600
+[220] Collisions: 1.433500
+[221] Graphic computing: 473.435300
+[222] Non graphic computing: 0.082600
+[223] Input: 0.003100
+[224] IA: 9.084600
+[225] Physics: 0.606700
+[226] Collisions: 0.956200
+[227] Graphic computing: 476.436900
+[228] Non graphic computing: 0.097300
+[229] Input: 0.003300
+[230] IA: 8.969700
+[231] Physics: 0.584600
+[232] Collisions: 1.301900
+[233] Graphic computing: 476.384300
+[234] Non graphic computing: 0.088200
+[235] Input: 0.009700
+[236] IA: 8.988100
+[237] Physics: 0.557200
+[238] Collisions: 0.899900
+[239] Graphic computing: 472.061400
+[240] Non graphic computing: 0.080200
+[241] Input: 0.013600
+[242] IA: 8.896900
+[243] Physics: 0.635900
+[244] Collisions: 0.860200
+[245] Graphic computing: 474.888300
+[246] Non graphic computing: 0.082700
+[247] Input: 0.003900
+[248] IA: 9.074500
+[249] Physics: 0.587500
+[250] Collisions: 0.908300
+[251] Graphic computing: 486.689600
+[252] Non graphic computing: 0.102300
+[253] Input: 0.002900
+[254] IA: 9.183500
+[255] Physics: 0.654200
+[256] Collisions: 1.113000
+[257] Graphic computing: 471.448100
+[258] Non graphic computing: 0.114300
+[259] Input: 0.003100
+[260] IA: 8.861500
+[261] Physics: 0.718000
+[262] Collisions: 1.116700
+[263] Graphic computing: 469.617200
+[264] Non graphic computing: 0.098200
+[265] Input: 0.014300
+[266] IA: 8.862200
+[267] Physics: 0.612100
+[268] Collisions: 0.928000
+[269] Graphic computing: 477.484300
+[270] Non graphic computing: 0.092400
+[271] Input: 0.003300
+[272] IA: 8.892700
+[273] Physics: 0.599800
+[274] Collisions: 1.021200
+[275] Graphic computing: 470.368300
+[276] Non graphic computing: 0.079800
+[277] Input: 0.013200
+[278] IA: 8.843600
+[279] Physics: 0.596200
+[280] Collisions: 1.021600
+[281] Graphic computing: 472.590100
+[282] Non graphic computing: 0.078500
+[283] Input: 0.009900
+[284] IA: 9.096400
+[285] Physics: 0.620800
+[286] Collisions: 0.953800
+[287] Graphic computing: 471.830000
+[288] Non graphic computing: 0.077100
+[289] Input: 0.003100
+[290] IA: 8.913000
+[291] Physics: 0.635600
+[292] Collisions: 0.955300
+[293] Graphic computing: 472.123300
+[294] Non graphic computing: 0.080700
+[295] Input: 0.003000
+[296] IA: 8.769900
+[297] Physics: 0.620100
+[298] Collisions: 1.223300
+[299] Graphic computing: 471.623200
+[300] Non graphic computing: 0.083600
+[301] Input: 0.012100
+[302] IA: 9.074100
+[303] Physics: 0.704100
+[304] Collisions: 1.003600
+[305] Graphic computing: 469.540100
+[306] Non graphic computing: 0.088700
+[307] Input: 0.003100
+[308] IA: 8.993800
+[309] Physics: 0.605000
+[310] Collisions: 1.036700
+[311] Graphic computing: 469.364400
+[312] Non graphic computing: 0.081200
+[313] Input: 0.013300
+[314] IA: 8.877200
+[315] Physics: 0.625500
+[316] Collisions: 0.971500
+[317] Graphic computing: 471.299200
+[318] Non graphic computing: 0.091700
+[319] Input: 0.021700
+[320] IA: 8.849700
+[321] Physics: 0.595300
+[322] Collisions: 1.256800
+[323] Graphic computing: 445.008500
+[324] Non graphic computing: 0.093700
+[325] Input: 0.003600
+[326] IA: 9.051700
+[327] Physics: 0.556300
+[328] Collisions: 1.025800
+[329] Graphic computing: 473.859100
+[330] Non graphic computing: 0.120400
+[331] Input: 0.003400
+[332] IA: 8.946300
+[333] Physics: 0.508200
+[334] Collisions: 0.854400
+[335] Graphic computing: 478.324100
+[336] Non graphic computing: 0.082200
+[337] Input: 0.003100
+[338] IA: 8.943000
+[339] Physics: 0.643700
+[340] Collisions: 0.989800
+[341] Graphic computing: 471.412200
+[342] Non graphic computing: 0.083700
+[343] Input: 0.003600
+[344] IA: 8.976800
+[345] Physics: 0.757700
+[346] Collisions: 0.971000
+[347] Graphic computing: 479.647800
+[348] Non graphic computing: 0.105900
+[349] Input: 0.003200
+[350] IA: 8.878100
+[351] Physics: 0.516700
+[352] Collisions: 0.884600
+[353] Graphic computing: 470.970000
+[354] Non graphic computing: 0.078800
+[355] Input: 0.009600
+[356] IA: 9.144800
+[357] Physics: 0.563800
+[358] Collisions: 0.999600
+[359] Graphic computing: 473.737400
+[360] Non graphic computing: 0.082500
+[361] Input: 0.003400
+[362] IA: 9.038200
+[363] Physics: 0.619500
+[364] Collisions: 1.022000
+[365] Graphic computing: 469.396500
+[366] Non graphic computing: 0.077700
+[367] Input: 0.003000
+[368] IA: 8.853800
+[369] Physics: 0.600400
+[370] Collisions: 1.023800
+[371] Graphic computing: 472.073900
+[372] Non graphic computing: 0.073200
+[373] Input: 0.003000
+[374] IA: 8.974100
+[375] Physics: 0.610900
+[376] Collisions: 0.964200
+[377] Graphic computing: 471.465300
+[378] Non graphic computing: 0.080400
+[379] Input: 0.014500
+[380] IA: 8.977800
+[381] Physics: 0.616200
+[382] Collisions: 0.987200
+[383] Graphic computing: 470.287800
+[384] Non graphic computing: 0.084000
+[385] Input: 0.002800
+[386] IA: 8.935700
+[387] Physics: 0.646900
+[388] Collisions: 0.911800
+[389] Graphic computing: 468.772500
+[390] Non graphic computing: 0.068700
+[391] Input: 0.003000
+[392] IA: 8.790800
+[393] Physics: 0.592800
+[394] Collisions: 1.040300
+[395] Graphic computing: 471.205500
+[396] Non graphic computing: 0.079500
+[397] Input: 0.003400
+[398] IA: 9.594900
+[399] Physics: 0.561400
+[400] Collisions: 0.918800
+[401] Graphic computing: 470.960200
+[402] Non graphic computing: 0.078000
+[403] Input: 0.003100
+[404] IA: 8.997400
+[405] Physics: 0.617900
+[406] Collisions: 0.921800
+[407] Graphic computing: 474.192300
+[408] Non graphic computing: 0.095900
+[409] Input: 0.016000
+[410] IA: 8.843200
+[411] Physics: 0.835700
+[412] Collisions: 0.916400
+[413] Graphic computing: 473.977400
+[414] Non graphic computing: 0.075800
+[415] Input: 0.013100
+[416] IA: 9.257300
+[417] Physics: 0.559000
+[418] Collisions: 0.874500
+[419] Graphic computing: 475.065300
+[420] Non graphic computing: 0.081000
+[421] Input: 0.003300
+[422] IA: 8.805800
+[423] Physics: 0.583700
+[424] Collisions: 0.997600
+[425] Graphic computing: 471.139500
+[426] Non graphic computing: 0.070500
+[427] Input: 0.009700
+[428] IA: 9.015500
+[429] Physics: 0.557100
+[430] Collisions: 0.926300
+[431] Graphic computing: 470.222200
+[432] Non graphic computing: 0.138000
+[433] Input: 0.011600
+[434] IA: 9.025600
+[435] Physics: 0.574200
+[436] Collisions: 0.929600
+[437] Graphic computing: 471.827400
+[438] Non graphic computing: 0.094400
+[439] Input: 0.010100
+[440] IA: 8.836900
+[441] Physics: 0.634100
+[442] Collisions: 1.034700
+[443] Graphic computing: 472.583400
+[444] Non graphic computing: 0.091900
+[445] Input: 0.010800
+[446] IA: 8.921700
+[447] Physics: 0.600000
+[448] Collisions: 0.955600
+[449] Graphic computing: 470.018300
+[450] Non graphic computing: 0.086500
+[451] Input: 0.003300
+[452] IA: 9.131400
+[453] Physics: 0.648400
+[454] Collisions: 0.967400
+[455] Graphic computing: 475.562600
+[456] Non graphic computing: 0.089200
+[457] Input: 0.011200
+[458] IA: 9.162400
+[459] Physics: 0.704200
+[460] Collisions: 1.162600
+[461] Graphic computing: 467.850600
+[462] Non graphic computing: 0.081200
+[463] Input: 0.009700
+[464] IA: 8.953600
+[465] Physics: 0.566300
+[466] Collisions: 0.944600
+[467] Graphic computing: 474.737100
+[468] Non graphic computing: 0.082400
+[469] Input: 0.003500
+[470] IA: 8.876200
+[471] Physics: 0.635600
+[472] Collisions: 1.044000
+[473] Graphic computing: 494.727400
+[474] Non graphic computing: 0.081800
+[475] Input: 0.004300
+[476] IA: 8.905200
+[477] Physics: 0.605400
+[478] Collisions: 1.038000
+[479] Graphic computing: 442.623700
+[480] Non graphic computing: 0.116500
+[481] Input: 0.013800
+[482] IA: 8.895300
+[483] Physics: 0.586000
+[484] Collisions: 0.965200
+[485] Graphic computing: 470.343800
+[486] Non graphic computing: 0.079000
+[487] Input: 0.003800
+[488] IA: 9.077900
+[489] Physics: 0.555100
+[490] Collisions: 0.953100
+[491] Graphic computing: 476.972900
+[492] Non graphic computing: 0.113200
+[493] Input: 0.011800
+[494] IA: 8.854100
+[495] Physics: 0.614900
+[496] Collisions: 1.022300
+[497] Graphic computing: 471.261800
+[498] Non graphic computing: 0.097800
+[499] Input: 0.012900
+[500] IA: 8.975400
+[501] Physics: 0.605700
+[502] Collisions: 0.990400
+[503] Graphic computing: 471.670400
+[504] Non graphic computing: 0.079600
+[505] Input: 0.002800
+[506] IA: 9.000400
+[507] Physics: 0.614300
+[508] Collisions: 0.982200
+[509] Graphic computing: 469.322100
+[510] Non graphic computing: 0.077900
+[511] Input: 0.004100
+[512] IA: 8.784600
+[513] Physics: 0.612600
+[514] Collisions: 1.008200
+[515] Graphic computing: 448.001400
+[516] Non graphic computing: 0.085100
+[517] Input: 0.003000
+[518] IA: 8.926300
+[519] Physics: 0.510100
+[520] Collisions: 0.853100
+[521] Graphic computing: 472.818300
+[522] Non graphic computing: 0.080300
+[523] Input: 0.009400
+[524] IA: 8.770300
+[525] Physics: 0.600700
+[526] Collisions: 0.991500
+[527] Graphic computing: 442.244000
+[528] Non graphic computing: 0.089900
+[529] Input: 0.012000
+[530] IA: 8.853900
+[531] Physics: 0.622600
+[532] Collisions: 1.033700
+[533] Graphic computing: 476.837300
+[534] Non graphic computing: 0.094500
+[535] Input: 0.003600
+[536] IA: 8.954800
+[537] Physics: 0.567800
+[538] Collisions: 1.026800
+[539] Graphic computing: 498.994400
+[540] Writting logs to a file

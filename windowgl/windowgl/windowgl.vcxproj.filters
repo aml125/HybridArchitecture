@@ -96,9 +96,6 @@
     <ClInclude Include="ecs\man\entitymanager.hpp">
       <Filter>nuevo</Filter>
     </ClInclude>
-    <ClInclude Include="ecs\util\gamecontext.hpp">
-      <Filter>nuevo</Filter>
-    </ClInclude>
     <ClInclude Include="ecs\util\typealiases.hpp">
       <Filter>nuevo</Filter>
     </ClInclude>

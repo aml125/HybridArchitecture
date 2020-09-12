@@ -171,7 +171,6 @@
     <ClInclude Include="ecs\cmp\entity.hpp" />
     <ClInclude Include="ecs\man\componentstorage.hpp" />
     <ClInclude Include="ecs\man\entitymanager.hpp" />
-    <ClInclude Include="ecs\util\gamecontext.hpp" />
     <ClInclude Include="ecs\util\typealiases.hpp" />
     <ClInclude Include="game\cmp\boxcollider.hpp" />
     <ClInclude Include="game\cmp\boxrenderer.hpp" />
