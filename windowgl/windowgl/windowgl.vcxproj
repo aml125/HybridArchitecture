@@ -211,6 +211,7 @@
     <None Include="game\ocl\ocl_structs.cl" />
     <None Include="game\ocl\physics_ocl.cl" />
     <None Include="shaders\Fragment.glsl" />
+    <None Include="shaders\instancingVertex.glsl" />
     <None Include="shaders\pointFragment.glsl" />
     <None Include="shaders\lightningFragment.glsl" />
     <None Include="shaders\lightningVertex.glsl" />

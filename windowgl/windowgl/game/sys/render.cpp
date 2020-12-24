@@ -39,6 +39,7 @@ RenderSystem_t::RenderSystem_t(Window_t window)
 	//activate shader
 	myShader.init();
 	lightShader.init();
+	instancingShader.init();
 	//lightShader.use();
 	//myShader.use();
 
@@ -60,6 +61,9 @@ RenderSystem_t::RenderSystem_t(Window_t window)
 
 	flag.loadModel("assets\\models\\bandera\\bandera.obj");
 
+	//Create instance buffer
+	glGenBuffers(1, &instanceVBO);
+
 #ifdef TIMEMEASURE
 	tm.StartCounter();
 #endif
@@ -67,7 +71,8 @@ RenderSystem_t::RenderSystem_t(Window_t window)
 
 
 RenderSystem_t::~RenderSystem_t() {
-	
+	//Free memory
+	delete(modelMatrixArray);
 }
 
 void RenderSystem_t::terminateWindow() {
@@ -105,6 +110,7 @@ void RenderSystem_t::update(ECS::EntityManager_t& g) {
 	myShader.setVec3("viewPos", camera.Position);
 
 	drawAllModels(g, g.getComponents<Model_t>());
+	drawAllInstantiatedModels(g, g.getComponents<InstantiatedModel_t>());
 	drawFormationTargets(g.getComponents<IA_t>());
 	drawLights();
 	if (drawCollisions) {
@@ -198,6 +204,106 @@ void RenderSystem_t::drawAllModels(const ECS::EntityManager_t& em, const std::ve
 			glBindVertexArray(0);
 
 		}
+	}
+}
+
+void RenderSystem_t::drawAllInstantiatedModels(const ECS::EntityManager_t& em, const std::vector<InstantiatedModel_t>& models) {
+	instancingShader.use();
+	instancingShader.setMatrix4("projection", projection);
+	instancingShader.setMatrix4("view", view);
+	instancingShader.setFloat("material.shininess", 32);
+
+	//Check if number of models changed
+	bool changed = false;
+
+	if (totalInstances != models.size()) {
+		changed = true;
+		totalInstances = models.size();
+	}
+
+	if (changed) {
+		modelMatrixArray = new glm::mat4[models.size()];
+	}
+
+	int i = 0;
+
+	for (const auto& mod : models) {
+
+		glm::mat4 model = glm::mat4(1.0f);
+		auto* phy = em.getEntity(mod.entityID).getComponent<PhysicsComponent_t>();
+		if (phy == nullptr) {
+			Log::log("render.cpp ERROR to draw a model its entity needs a PhysicsComponent_t");
+			exit(-1);
+		}
+
+		model = glm::translate(model, phy->position);
+		model = glm::scale(model, phy->scale);
+		if (phy->rotation.x != 0 || phy->rotation.y != 0 || phy->rotation.z != 0) {
+			model = glm::rotate(model, glm::length(phy->rotation), glm::normalize(phy->rotation)); //Rotate only if there is rotation, because if all are 0 it gliches
+		}
+
+		modelMatrixArray[i++] = model;
+	}
+
+	//Draws one model multiple times. Only works if there is only one model to use with instancing. FAST WORKAROUND
+	//for (const auto& mesh : models[0].getMeshes()) {
+	for (int q = 0; q < models[0].getMeshes().size(); q++) {
+		auto& mesh = models[0].getMeshes()[q];
+
+		unsigned int diffuseNr = 1;
+		unsigned int specularNr = 1;
+		for (std::size_t i = 0; i < mesh.textures.size(); i++)
+		{
+			glActiveTexture(GL_TEXTURE0 + i); // activate proper texture unit before binding
+			// retrieve texture number (the N in diffuse_textureN)
+			std::string number;
+			std::string name = mesh.textures[i].type;
+			if (name == "texture_diffuse")
+				number = std::to_string(diffuseNr++);
+			else if (name == "texture_specular")
+				number = std::to_string(specularNr++);
+
+			std::string finalName = ("material." + name + number);
+			instancingShader.setFloat(finalName.c_str(), i);
+			glBindTexture(GL_TEXTURE_2D, mesh.textures[i].id);
+		}
+		glActiveTexture(GL_TEXTURE0);
+
+		
+		if (changed) {
+			glBindBuffer(GL_ARRAY_BUFFER, instanceVBO);
+			glBufferData(GL_ARRAY_BUFFER, sizeof(glm::mat4) * models.size(), modelMatrixArray, GL_STATIC_DRAW);
+
+			glBindVertexArray(mesh.VAO);
+
+			//glBindBuffer(GL_ARRAY_BUFFER, instanceVBO); // this attribute comes from a different vertex buffer
+			glEnableVertexAttribArray(3);
+			glVertexAttribPointer(3, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(glm::vec4), (void*)0);
+			glEnableVertexAttribArray(4);
+			glVertexAttribPointer(4, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(glm::vec4), (void*)(sizeof(glm::vec4) * 1));
+			glEnableVertexAttribArray(5);
+			glVertexAttribPointer(5, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(glm::vec4), (void*)(sizeof(glm::vec4) * 2));
+			glEnableVertexAttribArray(6);
+			glVertexAttribPointer(6, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(glm::vec4), (void*)(sizeof(glm::vec4) * 3));
+
+			glVertexAttribDivisor(3, 1); // tell OpenGL this is an instanced vertex attribute.
+			glVertexAttribDivisor(4, 1); // tell OpenGL this is an instanced vertex attribute.
+			glVertexAttribDivisor(5, 1); // tell OpenGL this is an instanced vertex attribute.
+			glVertexAttribDivisor(6, 1); // tell OpenGL this is an instanced vertex attribute.
+
+			glBindVertexArray(0);
+			glBindBuffer(GL_ARRAY_BUFFER, 0);
+		}
+		else {
+			glBindBuffer(GL_ARRAY_BUFFER, instanceVBO);
+			glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(glm::mat4) * models.size(), modelMatrixArray);
+			glBindBuffer(GL_ARRAY_BUFFER, 0);
+		}
+		
+		glBindVertexArray(mesh.VAO);
+		setLightInformation();
+		glDrawElementsInstanced(GL_TRIANGLES, mesh.indices.size(), GL_UNSIGNED_INT, 0, models.size());
+		glBindVertexArray(0);
 	}
 }
 
