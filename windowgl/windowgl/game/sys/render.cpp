@@ -111,7 +111,7 @@ void RenderSystem_t::update(ECS::EntityManager_t& g) {
 
 	drawAllModels(g, g.getComponents<Model_t>());
 	drawAllInstantiatedModels(g, g.getComponents<InstantiatedModel_t>());
-	drawFormationTargets(g.getComponents<IA_t>());
+	//drawFormationTargets(g.getComponents<IA_t>());
 	drawLights();
 	if (drawCollisions) {
 		drawCollisionBoxes(g, g.getComponents<BoxCollider_t>());
@@ -272,7 +272,7 @@ void RenderSystem_t::drawAllInstantiatedModels(const ECS::EntityManager_t& em, c
 		
 		if (changed) {
 			glBindBuffer(GL_ARRAY_BUFFER, instanceVBO);
-			glBufferData(GL_ARRAY_BUFFER, sizeof(glm::mat4) * models.size(), modelMatrixArray, GL_STATIC_DRAW);
+			glBufferData(GL_ARRAY_BUFFER, sizeof(glm::mat4) * models.size() -1, modelMatrixArray, GL_STATIC_DRAW);
 
 			glBindVertexArray(mesh.VAO);
 
@@ -296,7 +296,7 @@ void RenderSystem_t::drawAllInstantiatedModels(const ECS::EntityManager_t& em, c
 		}
 		else {
 			glBindBuffer(GL_ARRAY_BUFFER, instanceVBO);
-			glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(glm::mat4) * models.size(), modelMatrixArray);
+			glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(glm::mat4) * models.size() -1, modelMatrixArray);
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
 		}
 		

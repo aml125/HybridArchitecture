@@ -4,6 +4,8 @@ layout (location = 1) in vec3 aNormal;
 layout (location = 2) in vec2 aTexCoords;
 layout (location = 3) in mat4 model;
 
+
+
 out vec3 Normal;
 out vec3 FragPos;
 out vec2 TexCoords;
