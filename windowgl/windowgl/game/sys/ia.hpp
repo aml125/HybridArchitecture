@@ -14,10 +14,10 @@ namespace GM {
 
 	struct IASystem_t : System_t {
 		void update(ECS::EntityManager_t& em) override;
-		Steering arrive(const IA_t& ia, const PhysicsComponent_t& phy, bool& arrived);
 		FormationManager fm{};
 
 	private:
+		Steering arrive(const IA_t& ia, const PhysicsComponent_t& phy, bool& arrived);
 		void setOrientation(glm::vec3& orientation, const glm::vec3& velocity);
 		void stateMachineUpdate(ECS::EntityManager_t& em, IA_t& ia, PhysicsComponent_t& phy);
 		bool targetHasMoved(IA_t& ia, PhysicsComponent_t& phy);

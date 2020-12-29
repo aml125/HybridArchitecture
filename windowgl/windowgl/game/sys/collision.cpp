@@ -93,6 +93,28 @@ void CollisionSystem_t::update(ECS::EntityManager_t& g) {
 	//			phy2->position -= speed2 * RenderSystem_t::deltaTime;
 	//		}
  //       }
+ //   }auto& vec = g.getComponents<BoxCollider_t>();
+ //   for (size_t i = 0; i < vec.size(); ++i) {
+	//	auto& coll1 = vec[i];
+	//	//TODO QUITAR DUPLICIDAD
+	//	for (size_t j = i+1; j < vec.size(); ++j) {
+	//		auto& coll2 = vec[j];
+	//		auto* phy1 = g.getEntity(coll1.entityID).getComponent<PhysicsComponent_t>();
+	//		auto* phy2 = g.getEntity(coll2.entityID).getComponent<PhysicsComponent_t>();
+	//		if (phy1 == nullptr || phy2 == nullptr) {
+	//			GM::Log::log("CollisionSystem_t::collide ERROR A collider entity MUST have a physics component");
+	//			exit(-1);
+	//		}
+	//		if (collide(*phy1, *phy2, coll1, coll2)) {
+	//			////Check speed correction for obj 1
+	//			glm::vec3 speed1 = { phy1->speed };
+	//			glm::vec3 speed2 = { phy2->speed };
+	//			modifySpeedAndVelocityOnCollision(*phy1, *phy2, coll1, coll2); //Comprobar los dos objetos, por eso se le da la vuelta a los parametros
+	//			modifySpeedAndVelocityOnCollision(*phy2, *phy1, coll2, coll1);
+	//			phy1->position -= speed1 * RenderSystem_t::deltaTime;
+	//			phy2->position -= speed2 * RenderSystem_t::deltaTime;
+	//		}
+ //       }
  //   }
 #ifdef TIMEMEASURE
 	Log::log("Collisions: " + std::to_string(tm.GetCounter()));

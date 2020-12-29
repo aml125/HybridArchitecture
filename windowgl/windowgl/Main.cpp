@@ -136,6 +136,8 @@ int main()
 	auto& pattern2 = GM::EntityBuilder::buildPattern(gameManager, iaSystem, 400, 1, 2, ALABARDERO_PATH, { -5, 1, 10 });
 	pattern2.anchorPoint->getComponent<GM::IA_t>()->target.position = { 10, 1, -10 };
 	
+	//auto& auxAl = GM::EntityBuilder::buildFullEntity(gameManager, { 1, 1, 1 }, ALABARDERO_PATH, { 1, 1.55f, 0.5f }, { 0, 0.78f, 0 });
+	//player = &auxAl.getComponent<GM::PhysicsComponent_t>()->position;
 
 	glm::vec3 cLength0{ 103.75f, 0.75f,  47.32f };
 	glm::vec3 cOffset0{ 1.875f, 0.375f, -1.98 };
@@ -143,6 +145,12 @@ int main()
 	auto* sueloPhy = suelo.getComponent<GM::PhysicsComponent_t>();
 	sueloPhy->scale.x = 5;
 	sueloPhy->scale.z = 2;
+//=======
+//	glm::vec3 cLength0{ 20.75f, 0.75f,  23.66f };
+//	glm::vec3 cOffset0{ 0.375f, 0.375f, -0.495 };
+//	ECS::Entity_t& e0 = GM::EntityBuilder::buildFullEntity(gameManager, glm::vec3(0, 0, 0), SUELO_PATH, cLength0, cOffset0);
+//	e0.getComponent<GM::PhysicsComponent_t>()->scale.x = 2;
+//>>>>>>> sinc
 
 	//Tower
 	glm::vec3 cLength2{ 1.25f, 3, 2 };
@@ -165,8 +173,10 @@ int main()
 	GM::PointLight_t pt6({ 2, 3.5, -19.5f }, { 0.05f, 0.05f, 0.05f }, { 0.8f, 0.8f, 0.8f }, { 1.0f, 1.0f, 1.0f }); //Tower light
 	render.lights.push_back(pt6);
 
+	//Initialize game manager
+	gameManager.init();
+
 	//GAME LOOP
-	while (gameManager.update()) {
-	}
+	while (gameManager.update());
 	return 0;
 }

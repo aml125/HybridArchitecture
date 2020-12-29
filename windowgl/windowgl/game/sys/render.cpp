@@ -276,7 +276,7 @@ void RenderSystem_t::drawCollisionBox(const BoxCollider_t& box, const glm::vec3 
 	lightShader.setMatrix4("model", model);
 	glDrawArrays(GL_TRIANGLES, 0, 36);
 	glBindVertexArray(0);
-	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 }
 
 void RenderSystem_t::drawLightSource(const PointLight_t& light) const
@@ -285,7 +285,7 @@ void RenderSystem_t::drawLightSource(const PointLight_t& light) const
 	lightShader.setMatrix4("projection", projection);
 	lightShader.setMatrix4("view", view);
 	lightShader.setVec3("objectColor", light.diffuse);
-	lightShader.setVec3("lightColor", light.diffuse);
+	lightShader.setVec3("lightColor", RGB_GREEN);
 
 	glBindVertexArray(light.boxRenderer.VAO);
 	glm::mat4 model = glm::mat4(1.0f);

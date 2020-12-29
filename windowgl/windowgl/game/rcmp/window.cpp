@@ -18,7 +18,7 @@ namespace GM {
 
 		//Create window
 		window = glfwCreateWindow(m_w, m_h,
-			"Primera ventana", NULL, NULL); //Resolution and name
+			"Prototipo", NULL, NULL); //Resolution and name
 		if (window == NULL)
 		{
 			GM::Log::log("Failed to create GLFW window");

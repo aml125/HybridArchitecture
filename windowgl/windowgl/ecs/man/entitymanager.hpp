@@ -4,7 +4,6 @@
 #include <vector>
 #include <ecs/man/componentstorage.hpp>
 #include <ecs/util/typealiases.hpp>
-#include <ecs/util/gamecontext.hpp>
 #include <ecs\cmp\entity.hpp>
 
 namespace ECS {
@@ -37,3 +36,4 @@ private:
     ComponentStorage_t m_components { kNUMINITALLENTITIES };
 };
 }
+//siharaib@mindfase.tk

@@ -12,6 +12,8 @@ namespace GM {
         
 		glm::vec3 position{};
         glm::vec3 rotation{};
+        glm::vec3 nextPosition{};
+        glm::vec3 nextRotation{};
 		glm::vec3 speed{};
         glm::vec3 rotationAceleration{};
         glm::vec3 rotationSpeed{};

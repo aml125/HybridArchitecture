@@ -23,13 +23,42 @@ namespace GM {
 
 	bool GameManager::update()
 	{
+		sincronize();
 		
-		//std::thread thread(executeSystems, &systems, &entityMan);
+		std::thread thread(executeSystems, &systems, &entityMan);
 		
 		executeRender(render, &entityMan);
-		executeSystems(&systems, &entityMan);
-		//thread.join();
+		//executeSystems(&systems, &entityMan);
+		thread.join();
+
 
 		return !RenderSystem_t::windowShouldClose;
+	}
+
+	void GameManager::init()
+	{
+		for (auto& phy : entityMan.getComponents<PhysicsComponent_t>()) {
+			phy.nextPosition.x = phy.position.x;
+			phy.nextPosition.y = phy.position.y;
+			phy.nextPosition.z = phy.position.z;
+
+			phy.nextRotation.x = phy.rotation.x;
+			phy.nextRotation.y = phy.rotation.y;
+			phy.nextRotation.z = phy.rotation.z;
+		}
+	}
+
+	void GameManager::sincronize()
+	{
+		//Set new positions and rotations for the entities
+		for (auto& phy : entityMan.getComponents<PhysicsComponent_t>()) {
+			phy.position.x = phy.nextPosition.x;
+			phy.position.y = phy.nextPosition.y;
+			phy.position.z = phy.nextPosition.z;
+
+			phy.rotation.x = phy.nextRotation.x;
+			phy.rotation.y = phy.nextRotation.y;
+			phy.rotation.z = phy.nextRotation.z;
+		}
 	}
 }
