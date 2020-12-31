@@ -14,6 +14,7 @@
 #include <GLFW/glfw3.h>
 #include <game\cmp\ia.hpp>
 #include <game/util/timemeasure.hpp>
+#include <game/cmp/instantiatedModel.hpp>
 
 namespace GM {
 
@@ -48,6 +49,7 @@ private :
     
 	void setLightInformation() const;
 	void drawAllModels(const ECS::EntityManager_t&, const std::vector<Model_t>& entities) const;
+	void drawAllInstantiatedModels(const ECS::EntityManager_t& em, const std::vector<InstantiatedModel_t>& models);
 	void drawLightSource(const PointLight_t& light)  const;
 	void drawLights() const;
 	void drawFormationTargets(const std::vector<IA_t> ias);
@@ -65,8 +67,12 @@ private :
 	//SHADERS
 	Shader myShader{ "shaders/Vertex.glsl", "shaders/Fragment.glsl" };
 	Shader lightShader{ "shaders/lightningVertex.glsl", "shaders/lightningFragment.glsl" };
+	Shader instancingShader{ "shaders/instancingVertex.glsl", "shaders/Fragment.glsl" };
 
 	TimeMeasure tm{}; 
-	
+
+	unsigned int instanceVBO;
+	inline static unsigned int totalInstances = 0;
+	glm::mat4* modelMatrixArray;
 };
 }

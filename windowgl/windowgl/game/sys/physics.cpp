@@ -20,17 +20,17 @@ namespace GM {
         firstTime = false;
         return;
     }
-    ////GPU Implementation
-    //std::vector<PhysicsComponent_t>& vecPhy = g.getComponents<PhysicsComponent_t>();
-    //if (vecPhy.size() != lastPhysicsVectorSize) {
-    //    createBuffer(ocl, phyBuffer, true, vecPhy);
-    //    lastPhysicsVectorSize = vecPhy.size();
-    //}
-    //copyParameters(ocl, kernel, 0, phyBuffer, vecPhy);
-    //copyFloatParam(ocl, kernel, 1, deltaTimeBuffer, RenderSystem_t::deltaTime);
-    //unsigned int dimensionSizes[] = { vecPhy.size() };
-    //executeKernel(ocl, kernel, 1, dimensionSizes);
-    //readBuffer(ocl, phyBuffer, vecPhy);
+    //GPU Implementation
+    /*std::vector<PhysicsComponent_t>& vecPhy = g.getComponents<PhysicsComponent_t>();
+    if (vecPhy.size() != lastPhysicsVectorSize) {
+        createBuffer(ocl, phyBuffer, true, vecPhy);
+        lastPhysicsVectorSize = vecPhy.size();
+    }
+    copyParameters(ocl, kernel, 0, phyBuffer, vecPhy);
+    copyFloatParam(ocl, kernel, 1, deltaTimeBuffer, RenderSystem_t::deltaTime);
+    unsigned int dimensionSizes[] = { vecPhy.size() };
+    executeKernel(ocl, kernel, 1, dimensionSizes);
+    readBuffer(ocl, phyBuffer, vecPhy);*/
 
     //CPU Implementation
     for (auto& phy : g.getComponents<PhysicsComponent_t>()) {

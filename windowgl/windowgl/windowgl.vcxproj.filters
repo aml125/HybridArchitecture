@@ -82,6 +82,7 @@
     <ClCompile Include="game\util\log.cpp" />
     <ClCompile Include="game\util\timemeasure.cpp" />
     <ClCompile Include="game\util\opencl-utils.cpp" />
+    <ClCompile Include="game\cmp\instantiatedModel.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ecs\cmp\component.hpp">
@@ -189,6 +190,9 @@
     <ClInclude Include="game\util\opencl-utils.hpp">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="game\cmp\instantiatedModel.hpp">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\Fragment.glsl">
@@ -218,5 +222,6 @@
     <None Include="game\ocl\physics_ocl.cl" />
     <None Include="game\ocl\ocl_structs.cl" />
     <None Include="game\ocl\collision_ocl.cl" />
+    <None Include="shaders\instancingVertex.glsl" />
   </ItemGroup>
 </Project>

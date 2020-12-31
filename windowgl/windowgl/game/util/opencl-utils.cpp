@@ -91,6 +91,7 @@ namespace GM {
         deviceVersion(OPENCL_VERSION_1_2),
         compilerVersion(OPENCL_VERSION_1_2)
     {
+        //Names: NVIDIA, Intel
         setupOpenCL(this, "Intel");
     }
 
@@ -165,7 +166,7 @@ namespace GM {
         // Read the platform's name string
         // The read value returned in platformName
         err = clGetPlatformInfo(platform, CL_PLATFORM_NAME, stringLength, &platformName[0], NULL);
-        Log::log("%s\n" + std::string(&platformName[0]));
+        Log::log("Platform name: " + std::string(&platformName[0]) + ". Prefered name: " + std::string(preferredPlatform) + "\n");
         if (CL_SUCCESS != err)
         {
             Log::log("Error: clGetplatform_ids() to get CL_PLATFORM_NAME returned %s.\n" + std::string(TranslateOpenCLError(err)));
@@ -199,7 +200,7 @@ namespace GM {
             Log::log("Error: clGetplatform_ids() to get num platforms returned %s.\n" + std::string(TranslateOpenCLError(err)));
             return NULL;
         }
-        Log::log("Number of available platforms: %u\n" + std::to_string(numPlatforms));
+        Log::log("Number of available platforms: " + std::to_string(numPlatforms) + "\n");
 
         if (0 == numPlatforms)
         {
@@ -314,7 +315,7 @@ namespace GM {
             return err;
         }
 
-        Log::log("%s\n" + std::string(&deviceName[0]));
+        Log::log("Device choosen: \n" + std::string(&deviceName[0]));
 
         // Read the device's version string length (param_value is NULL).
         err = clGetDeviceInfo(ocl->device, CL_DEVICE_VERSION, 0, NULL, &stringLength);

@@ -1,6 +1,7 @@
 #include "entitybuilder.hpp"
 #include <game\cmp\model.hpp>
 #include <game\util\log.hpp>
+#include <game\cmp\instantiatedModel.hpp>
 //
 //ECS::Entity_t& GM::EntityBuilder::buildSoldier(ECS::EntityManager_t& em)
 //{
@@ -41,10 +42,47 @@ namespace GM {
 		return e;
 	}
 
+	ECS::Entity_t& EntityBuilder::buildInstantiatedEntityWithModelAndCollision(GameManager& gm, const std::string& modelPath,
+		const glm::vec3& colliderLength, const glm::vec3& colliderOffset)
+	{
+		auto& em = gm.entityMan;
+		ECS::Entity_t& e = em.createEntity();
+		auto& ph = em.createComponent<PhysicsComponent_t>(e.entityID);
+		e.addComponent(ph);
+		ph.speed.x = ph.speed.y = ph.speed.z = 0;
+
+		//Add model
+		InstantiatedModel_t& mod = em.createComponent<InstantiatedModel_t>(e.entityID);
+		mod.loadModel(modelPath);
+		e.addComponent(mod);
+
+		//Add box colider
+		BoxCollider_t& bc = em.createComponent<BoxCollider_t>(e.entityID);
+		e.addComponent(bc);
+		bc.length = colliderLength;
+		bc.offset = colliderOffset;
+
+		return e;
+	}
+
 	ECS::Entity_t& EntityBuilder::buildFullEntity(GameManager& gm, const glm::vec3& position,
 		const std::string& modelPath, const glm::vec3& colliderLength, const glm::vec3& colliderOffset)
 	{
 		auto& e = buildEntityWithModelAndCollision(gm, modelPath, colliderLength, colliderOffset);
+		auto* phy = e.getComponent<PhysicsComponent_t>();
+		if (phy == nullptr) {
+			GM::Log::log("EntityBuilder__buildFullEntity() ERROR created entity has no physics system. SOMETHING GONE TERRIBLY WRONG");
+			exit(-1);
+		}
+		//Set position
+		phy->position = position;
+		return e;
+	}
+
+	ECS::Entity_t& EntityBuilder::buildFullInstantiatedEntity(GameManager& gm, const glm::vec3& position,
+		const std::string& modelPath, const glm::vec3& colliderLength, const glm::vec3& colliderOffset)
+	{
+		auto& e = buildInstantiatedEntityWithModelAndCollision(gm, modelPath, colliderLength, colliderOffset);
 		auto* phy = e.getComponent<PhysicsComponent_t>();
 		if (phy == nullptr) {
 			GM::Log::log("EntityBuilder__buildFullEntity() ERROR created entity has no physics system. SOMETHING GONE TERRIBLY WRONG");
@@ -60,7 +98,7 @@ namespace GM {
 		const std::string& modelPath, unsigned int patternNumber, IASystem_t& iaSystem) {
 		constexpr glm::vec3 cLength1{ 1, 1.55f, 0.5f };
 		constexpr glm::vec3 cOffset1{ 0, 0.78f, 0 };
-		ECS::Entity_t& e1 = GM::EntityBuilder::buildFullEntity(gm, position, modelPath, cLength1, cOffset1);
+		ECS::Entity_t& e1 = GM::EntityBuilder::buildFullInstantiatedEntity(gm, position, modelPath, cLength1, cOffset1);
 		
 		//IA
 		GM::IA_t& ia = gm.entityMan.createComponent<GM::IA_t>(e1.entityID);
