@@ -23,10 +23,10 @@ namespace GM {
 
 	bool GameManager::update()
 	{	
-		//std::thread thread(executeSystems, &systems, &entityMan);
+		std::thread thread(executeSystems, &systems, &entityMan);
 		executeRender(render, &entityMan);
-		executeSystems(&systems, &entityMan);
-		//thread.join();
+		//executeSystems(&systems, &entityMan);
+		thread.join();
 
 		sincronize();
 
