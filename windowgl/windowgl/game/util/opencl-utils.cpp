@@ -385,7 +385,7 @@ namespace GM {
          */
     int setupOpenCL(ocl_args_d_t* ocl, const std::string& platformName)
     {
-        cl_device_type deviceType = CL_DEVICE_TYPE_CPU;
+        cl_device_type deviceType = CL_DEVICE_TYPE_GPU;
 
         // The following variable stores return codes for all OpenCL calls.
         cl_int err = CL_SUCCESS;
