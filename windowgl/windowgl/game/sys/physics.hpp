@@ -14,6 +14,7 @@ struct PhysicsSystem_t : System_t {
     void moveObject(PhysicsComponent_t& phy) const; //TODO Change to private
 private:
     void aplyGravity(PhysicsComponent_t& cmp) const;
+    void copyValues(PhysicsComponent_t& phy) const;
     TimeMeasure tm{};
     bool firstTime = true;
 

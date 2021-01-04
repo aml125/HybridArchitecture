@@ -154,6 +154,42 @@ void addVectorLL(struct mivec3_t* source,  struct mivec3_t* target) {
 }
 
 /*
+    Adds a vector and b vector into result
+*/
+void addVectorsGG(__global struct mivec3_t* a, __global struct mivec3_t* b, __global struct mivec3_t* result) {
+    result->x = a->x + b->x;
+    result->y = a->y + b->y;
+    result->z = a->z + b->z;
+}
+
+/*
+    Adds a vector and b vector into result
+*/
+void addVectorsGL(__global struct mivec3_t* a, struct mivec3_t* b, __global struct mivec3_t* result) {
+    result->x = a->x + b->x;
+    result->y = a->y + b->y;
+    result->z = a->z + b->z;
+}
+
+/*
+    Adds a vector and b vector into result
+*/
+void addVectorsLG(struct mivec3_t* a, __global struct mivec3_t* b, __global struct mivec3_t* result) {
+    result->x = a->x + b->x;
+    result->y = a->y + b->y;
+    result->z = a->z + b->z;
+}
+
+/*
+    Adds a vector and b vector into result
+*/
+void addVectorsLL(struct mivec3_t* a,  struct mivec3_t* b, __global struct mivec3_t* result) {
+    result->x = a->x + b->x;
+    result->y = a->y + b->y;
+    result->z = a->z + b->z;
+}
+
+/*
     Copies BoxCollider_ocl_t source to target
 */
 void copyBxGG(__global struct BoxCollider_ocl_t* source, __global struct BoxCollider_ocl_t* target) {

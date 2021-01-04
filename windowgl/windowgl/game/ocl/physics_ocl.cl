@@ -13,11 +13,11 @@ void moveObject(__global struct PhysicsComponent_ocl_t* phy, float deltaTime) {
 	multiplyVectorByScalarGL(&phy->aceleration, deltaTime, &aux);
 	addVectorLG(&aux, &phy->speed);
 	multiplyVectorByScalarGL(&phy->speed, deltaTime, &aux);
-	addVectorLG(&aux, &phy->nextPosition);
+	addVectorsLG(&aux, &phy->position, &phy->nextPosition);
 	multiplyVectorByScalarGL(&phy->rotationAceleration, deltaTime, &aux);
 	addVectorLG(&aux, &phy->rotationSpeed);
 	multiplyVectorByScalarGL(&phy->rotationSpeed, deltaTime, &aux);
-	addVectorLG(&aux, &phy->nextRotation);
+	addVectorsLG(&aux, &phy->rotation, &phy->nextRotation);
 }
 
 __kernel void update(__global struct PhysicsComponent_ocl_t* phy, __constant float* deltaTime) {

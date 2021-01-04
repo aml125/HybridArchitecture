@@ -16,7 +16,6 @@ namespace GM {
         void addSystem(System_t& sys) {
             systems.push_back(&sys);
         }
-        void init();
 
         ECS::EntityManager_t entityMan;
         RenderSystem_t* render{};

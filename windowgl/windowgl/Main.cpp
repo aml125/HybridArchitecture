@@ -173,9 +173,6 @@ int main()
 	GM::PointLight_t pt6({ 2, 3.5, -19.5f }, { 0.05f, 0.05f, 0.05f }, { 0.8f, 0.8f, 0.8f }, { 1.0f, 1.0f, 1.0f }); //Tower light
 	render.lights.push_back(pt6);
 
-	//Initialize game manager
-	gameManager.init();
-
 	//GAME LOOP
 	while (gameManager.update());
 	return 0;
