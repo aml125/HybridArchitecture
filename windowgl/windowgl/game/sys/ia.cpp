@@ -129,11 +129,11 @@ namespace GM {
 			if (ia.isAnchorPoint) {
 				ia.state = ANCHOR_ARRIVE;
 			}
-			else if (totalArrived == 2) {
-				//find closest enemy
-				ia.enemyID = findClosestEnemy(em, phy.position, ia.patternNumber);
-				ia.state = GO;
-			}
+			//else if (totalArrived == 2) {
+			//	////find closest enemy
+			//	//ia.enemyID = findClosestEnemy(em, phy.position, ia.patternNumber);
+			//	//ia.state = GO;
+			//}
 			else if (targetHasMoved(ia, phy)) {
 				ia.state = ARRIVE;
 			}

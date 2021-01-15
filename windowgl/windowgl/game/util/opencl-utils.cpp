@@ -92,7 +92,7 @@ namespace GM {
         compilerVersion(OPENCL_VERSION_1_2)
     {
         //Names: NVIDIA, Intel
-        setupOpenCL(this, "Intel");
+        setupOpenCL(this, "NVIDIA");
     }
 
     /*

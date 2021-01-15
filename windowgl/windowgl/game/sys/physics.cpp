@@ -26,7 +26,7 @@ namespace GM {
         return;
     }
     //GPU Implementation
-    std::vector<PhysicsComponent_t>& vecPhy = g.getComponents<PhysicsComponent_t>();
+    /*std::vector<PhysicsComponent_t>& vecPhy = g.getComponents<PhysicsComponent_t>();
     if (vecPhy.size() != lastPhysicsVectorSize) {
         createBuffer(ocl, phyBuffer, true, vecPhy);
         lastPhysicsVectorSize = vecPhy.size();
@@ -35,15 +35,15 @@ namespace GM {
     copyFloatParam(ocl, kernel, 1, deltaTimeBuffer, RenderSystem_t::deltaTime);
     unsigned int dimensionSizes[] = { vecPhy.size() };
     executeKernel(ocl, kernel, 1, dimensionSizes);
-    readBuffer(ocl, phyBuffer, vecPhy);
+    readBuffer(ocl, phyBuffer, vecPhy);*/
 
     //CPU Implementation
-    /*for (auto& phy : g.getComponents<PhysicsComponent_t>()) {
+    for (auto& phy : g.getComponents<PhysicsComponent_t>()) {
         if (phy.gravity) {
             aplyGravity(phy);
         }
         moveObject(phy);
-    }*/
+    }
 #ifdef TIMEMEASURE
     Log::log("Physics: " + std::to_string(tm.GetCounter()));
 #endif
