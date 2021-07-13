@@ -59,16 +59,17 @@ void CollisionSystem_t::update(ECS::EntityManager_t& g) {
 		lastCollisionsVectorSize = vecBx.size();
 	}
 
-	copyParameters(ocl, kernel, 0, phyBuffer, vecPhy);
-	copyParameters(ocl, kernel, 1, bxBuffer, vecBx);
-	copyParameters(ocl, kernel, 2, indexBuffer, vecIndex);
+	copyParameter(ocl, kernel, 0, phyBuffer, vecPhy);
+	copyParameter(ocl, kernel, 1, bxBuffer, vecBx);
+	copyParameter(ocl, kernel, 2, indexBuffer, vecIndex);
 
 	copyFloatParam(ocl, kernel, 3, deltaTimeBuffer, RenderSystem_t::deltaTime);
 
 	unsigned int dimensionSizes[] = { vecBx.size(), vecBx.size()}; //Definimos el tamaño de las dos dimensiones
-	executeKernel(ocl, kernel, 2, dimensionSizes);
+	unsigned int localSizes[] = { 1, 1 };
+	executeKernel(ocl, kernel, 2, dimensionSizes, localSizes);
 
-	readBuffer(ocl, phyBuffer, vecPhy);
+	readVectorBuffer(ocl, phyBuffer, vecPhy);
 
 	//CPU Implementation
 	//auto& vec = g.getComponents<BoxCollider_t>();

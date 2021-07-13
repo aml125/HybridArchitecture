@@ -128,12 +128,12 @@ int main()
 
 	//Formation 1
 	//Set formation 1 slots
-	auto& pattern1 = GM::EntityBuilder::buildPattern(gameManager, iaSystem, 10000, 10, 2, ALABARDERO_PATH, { -5, 1, -50 });
+	auto& pattern1 = GM::EntityBuilder::buildPattern(gameManager, iaSystem, 100, 10, 2, ALABARDERO_PATH, { -5, 1, -50 });
 	pattern1.anchorPoint->getComponent<GM::IA_t>()->target.position = { 0, 1, -10 };
 	player = &pattern1.anchorPoint->getComponent<GM::IA_t>()->target.position;
 	
 	//Formation 2
-	auto& pattern2 = GM::EntityBuilder::buildPattern(gameManager, iaSystem, 10000, 10, 2, ALABARDERO_PATH, { -5, 1, 50 });
+	auto& pattern2 = GM::EntityBuilder::buildPattern(gameManager, iaSystem, 100, 10, 2, ALABARDERO_PATH, { -5, 1, 50 });
 	pattern2.anchorPoint->getComponent<GM::IA_t>()->target.position = { 10, 1, -10 };
 	
 	//auto& auxAl = GM::EntityBuilder::buildFullEntity(gameManager, { 1, 1, 1 }, ALABARDERO_PATH, { 1, 1.55f, 0.5f }, { 0, 0.78f, 0 });

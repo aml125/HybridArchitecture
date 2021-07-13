@@ -92,7 +92,7 @@ namespace GM {
         compilerVersion(OPENCL_VERSION_1_2)
     {
         //Names: NVIDIA, Intel
-        setupOpenCL(this, "NVIDIA");
+        setupOpenCL(this, "Intel");
     }
 
     /*
@@ -450,7 +450,7 @@ namespace GM {
         }
 
         return CL_SUCCESS;
-        }
+    }
 
     // Upload the OpenCL C source code to output argument source
         // The memory resource is implicitly allocated in the function
@@ -554,23 +554,35 @@ namespace GM {
     }
 
     /*
-        Execute the kernel. Must have been set all parameters before
+        Execute the kernel. Must have set all parameters before
     */
-    void executeKernel(const ocl_args_d_t& ocl, cl_kernel& kernel, const unsigned int dimensions, const unsigned int* dimensionSizes) {
-        if (dimensionSizes == nullptr) {
-            Log::log("Error: Failed to run kernel, dimensionSizes is null");
+    void executeKernel(const ocl_args_d_t& ocl, cl_kernel& kernel, const unsigned int dimensions, unsigned int* globalDimensionSizes, unsigned int* localDimensionSizes) {
+        if (globalDimensionSizes == nullptr) {
+            Log::log("Error: Failed to run kernel, globalDimensionSizes is null");
             exit(-1);
         }
+        if (localDimensionSizes == nullptr) {
+            Log::log("Error: Failed to run kernel, localDimensionSizes is null");
+            exit(-1);
+        }
+
         /*Step 10: Running the kernel.*/
-        //Setup work sizes for every dimension
+        //Setup global work sizes for every dimension
         size_t* global_work_size = new size_t[dimensions];
         for (size_t i = 0; i < dimensions; i++)
         {
-            global_work_size[i] = dimensionSizes[i];
+            global_work_size[i] = globalDimensionSizes[i];
+        }
+
+        //Setup local work sizes for every dimension
+        size_t* local_work_size = new size_t[dimensions];
+        for (size_t i = 0; i < dimensions; i++)
+        {
+            local_work_size[i] = localDimensionSizes[i];
         }
 
         cl_int status = clEnqueueNDRangeKernel(ocl.commandQueue, kernel, dimensions, NULL,
-            global_work_size, NULL, 0, NULL, NULL);
+            global_work_size, local_work_size, 0, NULL, NULL);
         if (CL_SUCCESS != status)
         {
             Log::log("Error: Failed to run kernel, return %s\n" + std::string(TranslateOpenCLError(status)));
@@ -603,6 +615,18 @@ namespace GM {
         cl_mem newBuffer = clCreateBuffer(ocl.context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR,
             sizeof(float), (void*)&value, NULL);
         return newBuffer;
+    }
+
+    /*
+    * Allocates local memory of defined size
+    */
+    void allocateLocalMemory(ocl_args_d_t& ocl, cl_kernel& kernel, unsigned int argumentIndex, size_t size) {
+        cl_int status = clSetKernelArg(kernel, argumentIndex, size, NULL);
+        if (CL_SUCCESS != status)
+        {
+            Log::log("error: Failed to set argument buffer, returned %s\n" + std::string(TranslateOpenCLError(status)));
+            exit(-1);
+        }
     }
 #pragma warning ( pop )
 }
