@@ -97,9 +97,11 @@
       <ConformanceMode>false</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)windowgl\glm;$(INTELOCLSDKROOT)include;$(SolutionDir)windowgl\cmp;$(SolutionDir)windowgl\sys;$(SolutionDir)windowgl\util;$(SolutionDir)windowgl\man;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <CompileAsWinRT>false</CompileAsWinRT>
+      <CompileAsWinRT>
+      </CompileAsWinRT>
       <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
       <PreprocessorDefinitions>TIMEMEASURE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <EnableModules>true</EnableModules>
     </ClCompile>
     <Link>
       <AdditionalDependencies>opengl32.lib;glfw3.lib;assimp-vc140-mt.lib;OpenCL.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -207,8 +209,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="game\ocl\collision_ocl.cl" />
+    <None Include="game\ocl\jaya.cl" />
+    <None Include="game\ocl\mwc64x_rng.cl" />
     <None Include="game\ocl\ocl_structs.cl" />
     <None Include="game\ocl\physics_ocl.cl" />
+    <None Include="game\ocl\skip_mwc.cl" />
     <None Include="shaders\Fragment.glsl" />
     <None Include="shaders\instancingVertex.glsl" />
     <None Include="shaders\pointFragment.glsl" />

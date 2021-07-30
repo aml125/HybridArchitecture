@@ -1,4 +1,6 @@
-#include "mwc64x_rng.cl"
+// TODO: Add OpenCL kernel code here.
+
+#include <game/ocl/mwc64x_rng.cl>
 
 //#pragma OPENCL EXTENSION cl_khr_fp64 : enable
 

@@ -45,31 +45,31 @@ void CollisionSystem_t::update(ECS::EntityManager_t& g) {
 	tm.StartCounter();
 #endif
 	//GPU Implementation
-	std::vector<PhysicsComponent_t>& vecPhy = g.getComponents<PhysicsComponent_t>();
-	std::vector<BoxCollider_t>& vecBx = g.getComponents<BoxCollider_t>();
+	//std::vector<PhysicsComponent_t>& vecPhy = g.getComponents<PhysicsComponent_t>();
+	//std::vector<BoxCollider_t>& vecBx = g.getComponents<BoxCollider_t>();
 
-	if (vecPhy.size() != lastPhysicsVectorSize) {
-		createBuffer(ocl, phyBuffer, true, vecPhy);
-		lastPhysicsVectorSize = vecPhy.size();
-	}
-	if (vecBx.size() != lastCollisionsVectorSize) {
-		createBuffer(ocl, bxBuffer, true, vecBx);
-		vecIndex = getPhyIndexFromBx(g);
-		createBuffer(ocl, indexBuffer, false, vecIndex);
-		lastCollisionsVectorSize = vecBx.size();
-	}
+	//if (vecPhy.size() != lastPhysicsVectorSize) {
+	//	createBuffer(ocl, phyBuffer, true, vecPhy);
+	//	lastPhysicsVectorSize = vecPhy.size();
+	//}
+	//if (vecBx.size() != lastCollisionsVectorSize) {
+	//	createBuffer(ocl, bxBuffer, true, vecBx);
+	//	vecIndex = getPhyIndexFromBx(g);
+	//	createBuffer(ocl, indexBuffer, false, vecIndex);
+	//	lastCollisionsVectorSize = vecBx.size();
+	//}
 
-	copyParameter(ocl, kernel, 0, phyBuffer, vecPhy);
-	copyParameter(ocl, kernel, 1, bxBuffer, vecBx);
-	copyParameter(ocl, kernel, 2, indexBuffer, vecIndex);
+	//copyParameter(ocl, kernel, 0, phyBuffer, vecPhy);
+	//copyParameter(ocl, kernel, 1, bxBuffer, vecBx);
+	//copyParameter(ocl, kernel, 2, indexBuffer, vecIndex);
 
-	copyFloatParam(ocl, kernel, 3, deltaTimeBuffer, RenderSystem_t::deltaTime);
+	//copyFloatParam(ocl, kernel, 3, deltaTimeBuffer, RenderSystem_t::deltaTime);
 
-	unsigned int dimensionSizes[] = { vecBx.size(), vecBx.size()}; //Definimos el tamaño de las dos dimensiones
-	unsigned int localSizes[] = { 1, 1 };
-	executeKernel(ocl, kernel, 2, dimensionSizes, localSizes);
+	//unsigned int dimensionSizes[] = { vecBx.size(), vecBx.size()}; //Definimos el tamaño de las dos dimensiones
+	//unsigned int localSizes[] = { 1, 1 };
+	//executeKernel(ocl, kernel, 2, dimensionSizes, localSizes);
 
-	readVectorBuffer(ocl, phyBuffer, vecPhy);
+	//readVectorBuffer(ocl, phyBuffer, vecPhy);
 
 	//CPU Implementation
 	//auto& vec = g.getComponents<BoxCollider_t>();

@@ -31,11 +31,12 @@ namespace GM {
         createBuffer(ocl, phyBuffer, true, vecPhy);
         lastPhysicsVectorSize = vecPhy.size();
     }
-    copyParameters(ocl, kernel, 0, phyBuffer, vecPhy);
+    copyParameter(ocl, kernel, 0, phyBuffer, vecPhy);
     copyFloatParam(ocl, kernel, 1, deltaTimeBuffer, RenderSystem_t::deltaTime);
     unsigned int dimensionSizes[] = { vecPhy.size() };
-    executeKernel(ocl, kernel, 1, dimensionSizes);
-    readBuffer(ocl, phyBuffer, vecPhy);*/
+    unsigned int localdimensionSizes[] = { vecPhy.size() };
+    executeKernel(ocl, kernel, 1, dimensionSizes, localdimensionSizes);
+    readVectorBuffer(ocl, phyBuffer, vecPhy);*/
 
     //CPU Implementation
     for (auto& phy : g.getComponents<PhysicsComponent_t>()) {

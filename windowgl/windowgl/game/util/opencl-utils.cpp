@@ -550,7 +550,12 @@ namespace GM {
         Creates a kernel from a named function on the .cl file
     */
     void createKernelFromProgram(ocl_args_d_t& ocl, cl_program& program, cl_kernel& kernel, const std::string& functionName) {
-        kernel = clCreateKernel(program, functionName.c_str(), NULL);
+        cl_int error_ret;
+        kernel = clCreateKernel(program, functionName.c_str(), &error_ret);
+        if (error_ret != CL_SUCCESS) {
+            Log::log("Error, no se ha podido crear el kernel del programa: " + std::string(TranslateOpenCLError(error_ret)));
+            exit(-1);
+        }
     }
 
     /*
