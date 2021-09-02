@@ -169,5 +169,6 @@ int main()
 
 	//GAME LOOP
 	while (gameManager.update());
+	while (!iaSystem.threadDied());
 	return 0;
 }

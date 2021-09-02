@@ -7,6 +7,6 @@ namespace GM {
 		explicit System_t() = default;
 
 		virtual void update(ECS::EntityManager_t& em) = 0;
-		inline static ocl_args_d_t ocl{};
+		//inline static ocl_args_d_t ocl{std::string("Intel"), true};
 	};
 }

@@ -14,7 +14,7 @@ namespace GM {
 
     struct ocl_args_d_t
     {
-        ocl_args_d_t();
+        ocl_args_d_t(std::string& device, bool GPU);
         ~ocl_args_d_t();
 
         // Regular OpenCL objects:
@@ -24,6 +24,7 @@ namespace GM {
         float            platformVersion;   // hold the OpenCL platform version (default 1.2)
         float            deviceVersion;     // hold the OpenCL device version (default. 1.2)
         float            compilerVersion;   // hold the device OpenCL C version (default. 1.2)
+        bool             GPU;
     };
 
 

@@ -83,7 +83,7 @@ namespace GM {
         }
     }
 
-    ocl_args_d_t::ocl_args_d_t() :
+    ocl_args_d_t::ocl_args_d_t(std::string& device, bool GPU) :
         context(NULL),
         device(NULL),
         commandQueue(NULL),
@@ -91,8 +91,9 @@ namespace GM {
         deviceVersion(OPENCL_VERSION_1_2),
         compilerVersion(OPENCL_VERSION_1_2)
     {
-        //Names: NVIDIA, Intel
-        setupOpenCL(this, "Intel");
+        this->GPU = GPU;
+        //Names: NVIDIA CUDA, Intel
+        setupOpenCL(this, device.c_str());
     }
 
     /*
@@ -386,6 +387,9 @@ namespace GM {
     int setupOpenCL(ocl_args_d_t* ocl, const std::string& platformName)
     {
         cl_device_type deviceType = CL_DEVICE_TYPE_GPU;
+        if (!ocl->GPU) {
+            deviceType = CL_DEVICE_TYPE_CPU;
+        }
 
         // The following variable stores return codes for all OpenCL calls.
         cl_int err = CL_SUCCESS;

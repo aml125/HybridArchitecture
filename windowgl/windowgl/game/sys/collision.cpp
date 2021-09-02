@@ -5,9 +5,9 @@
 namespace GM {
 CollisionSystem_t::CollisionSystem_t()
 {
-	createAndBuildProgram(&ocl, program, "game/ocl/collision_ocl.cl");
-	createKernelFromProgram(ocl, program, kernel, "update");
-	deltaTimeBuffer = createFloatParam(ocl, RenderSystem_t::deltaTime);
+	/*createAndBuildProgram(&ocl, program, "game/ocl/collision_ocl.cl");
+	createKernelFromProgram(ocl, program, kernel, "update");*/
+	//deltaTimeBuffer = createFloatParam(ocl, RenderSystem_t::deltaTime);
 }
 
 /*

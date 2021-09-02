@@ -8,6 +8,12 @@
 //TODO Refactor: All entities should't have to have a pattern assigned
 //TODO make formations not count on y axis, so they walk on the terrain
 namespace GM {
+
+	bool IASystem_t::threadDied() {
+
+		return !jayaThreadLaunched;
+	}
+
 	void launchJaya(OpenCLParams* op, cl_ulong seed, int vars, bool* threadLaunched);
 
 	IASystem_t::IASystem_t() {
@@ -42,6 +48,10 @@ namespace GM {
 		//Check jaya Algorithm
 		if (!jayaThreadLaunched) {
 			if (!jayaFirstTime) {
+				#ifdef TIMEMEASURE
+								Log::log("Jaya got results: " + std::to_string(tm2.GetCounter()));
+								tm2.StartCounter();
+				#endif
 				readJayaResults(vecIA, vecIA.size());
 			}
 			jayaFirstTime = false;

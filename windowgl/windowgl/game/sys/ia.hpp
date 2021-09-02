@@ -29,7 +29,7 @@ namespace GM {
 		cl_mem minValLocalBuffer{};
 		cl_mem minValLocalIndexBuffer{};
 		cl_mem minMaxBuffer{};
-		GM::ocl_args_d_t ocl{};
+		GM::ocl_args_d_t ocl{std::string("Intel"), false};
 		cl_program       program;           // hold the program handler
 		cl_kernel        kernel;            // hold the kernel handler
 		
@@ -50,6 +50,7 @@ namespace GM {
 	struct IASystem_t : System_t {
 		IASystem_t();
 		void update(ECS::EntityManager_t& em) override;
+		bool threadDied();
 		FormationManager fm{};
 
 	private:
@@ -64,6 +65,7 @@ namespace GM {
 		void readJayaResults(std::vector<IA_t>& vecIA, int vars);
 		int totalArrived = 0;
 		TimeMeasure tm;
+		TimeMeasure tm2;
 		bool jayaThreadLaunched = false;
 		bool jayaFirstTime = true;
 

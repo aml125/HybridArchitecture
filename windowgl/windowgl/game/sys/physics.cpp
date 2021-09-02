@@ -6,9 +6,9 @@
 namespace GM {
     PhysicsSystem_t::PhysicsSystem_t()
     {
-        createAndBuildProgram(&ocl, program, "game/ocl/physics_ocl.cl");
+        /*createAndBuildProgram(&ocl, program, "game/ocl/physics_ocl.cl");
         createKernelFromProgram(ocl, program, kernel, "update");
-        deltaTimeBuffer = createFloatParam(ocl, RenderSystem_t::deltaTime);
+        deltaTimeBuffer = createFloatParam(ocl, RenderSystem_t::deltaTime);*/
     }
 
 
