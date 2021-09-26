@@ -14,7 +14,7 @@ namespace GM {
 		return !jayaThreadLaunched;
 	}
 
-	void launchJaya(OpenCLParams* op, cl_ulong seed, int vars, bool* threadLaunched);
+	void launchJaya(OpenCLParams* op, cl_ulong seed, int vars, bool* threadLaunched, TimeMeasure& tm2);
 
 	IASystem_t::IASystem_t() {
 		createAndBuildProgram(&op.ocl, op.program, "game/ocl/jaya.cl");
@@ -48,16 +48,12 @@ namespace GM {
 		//Check jaya Algorithm
 		if (!jayaThreadLaunched) {
 			if (!jayaFirstTime) {
-				#ifdef TIMEMEASURE
-								Log::log("Jaya got results: " + std::to_string(tm2.GetCounter()));
-								tm2.StartCounter();
-				#endif
 				readJayaResults(vecIA, vecIA.size());
 			}
 			jayaFirstTime = false;
 			jayaThreadLaunched = true;
 			/*OpenCLParams* op, std::vector<float>* matrix, std::vector<float>* matrix2, int seed, int vars, bool* threadLaunched*/
-			std::thread thread(launchJaya, &op, seed++, (int)vecIA.size(), &jayaThreadLaunched);
+			std::thread thread(launchJaya, &op, seed++, (int)vecIA.size(), &jayaThreadLaunched, tm2);
 			thread.detach();
 			//launchJaya(ocl, &op, &matrix, &matrix2, seed, (int)vecIA.size(), &jayaThreadLaunched);
 		}
@@ -293,8 +289,12 @@ namespace GM {
 	//cl_program       program;           // hold the program handler
 	//cl_kernel        kernel;            // hold the kernel handler
 
-	void launchJaya(OpenCLParams* op, cl_ulong seed, int vars, bool* threadLaunched)
+	void launchJaya(OpenCLParams* op, cl_ulong seed, int vars, bool* threadLaunched, TimeMeasure &tm2)
 	{
+#ifdef TIMEMEASURE
+		Log::log("Starting Jaya.");
+		tm2.StartCounter();
+#endif
 		op->matrix.resize(POPULATION * (vars + 1)); // +1 to store min value
 
 		createBuffer(op->ocl, op->matrixBuffer, true, op->matrix);
@@ -314,6 +314,7 @@ namespace GM {
 		copyMatrixParameter<float>(op->ocl, op->kernel, 4, op->minValIndexBuffer, &aux, 1);
 
 		copySimpleParameter(op->ocl, op->kernel, 5, vars);
+		Log::log("Half way copied");
 
 		copySimpleParameter(op->ocl, op->kernel, 6, seed);
 
@@ -335,6 +336,7 @@ namespace GM {
 
 		unsigned int globalDimensionSizes[] = { POPULATION };
 		unsigned int localDimensionSizes[] = { POPULATION };
+		Log::log("Executing Jaya");
 		GM::executeKernel(op->ocl, op->kernel, 1, globalDimensionSizes, localDimensionSizes);  //AVISO! Cambiar número de dimensiones si se cambian
 
 		//Read result
@@ -344,80 +346,10 @@ namespace GM {
 		GM::readBuffer(op->ocl, op->maxValIndexBuffer, op->imax);
 		GM::readBuffer(op->ocl, op->minValIndexBuffer, op->imin);
 
-		*threadLaunched = false;
-
-
-		//GM::ocl_args_d_t ocl{};
-		//createAndBuildProgram(&ocl, program, "game/ocl/jaya.cl");
-		//createKernelFromProgram(ocl, program, kernel, "jayaGPU");
-
-		////Reserve memory for the matrix
-		///*double* matrix = new double [population * vars];*/
-		//std::vector<float> matrix;
-		//matrix.resize(population * (vars + 1)); // +1 to store min value
-
-		//GM::createBuffer(ocl, matrixBuffer, true, matrix);
-		//GM::copyParameter(ocl, kernel, 0, matrixBuffer, matrix);
-
-		//float aux = 0;
-		//GM::createSimpleBuffer(ocl, maxValBuffer, true, aux);
-		//GM::copyMatrixParameter<float>(ocl, kernel, 1, maxValBuffer, &aux, 1);
-
-		//GM::createSimpleBuffer(ocl, minValBuffer, true, aux);
-		//GM::copyMatrixParameter<float>(ocl, kernel, 2, minValBuffer, &aux, 1);
-
-		//GM::createSimpleBuffer(ocl, maxValIndexBuffer, true, aux);
-		//GM::copyMatrixParameter<float>(ocl, kernel, 3, maxValIndexBuffer, &aux, 1);
-
-		//GM::createSimpleBuffer(ocl, minValIndexBuffer, true, aux);
-		//GM::copyMatrixParameter<float>(ocl, kernel, 4, minValIndexBuffer, &aux, 1);
-
-		//GM::copySimpleParameter(ocl, kernel, 5, vars);
-
-		//GM::copySimpleParameter(ocl, kernel, 6, seed);
-
-		////GM::copySimpleParameter(ocl, kernel, 7, iterations);
-
-		//GM::copySimpleParameter(ocl, kernel, 7, runs);
-
-
-		//GM::createLocalParameter<float>(kernel, 8, population * 2);
-		//GM::createLocalParameter<float>(kernel, 9, population * 2);
-		//GM::createLocalParameter<int>(kernel, 10, population * 2);
-		//GM::createLocalParameter<int>(kernel, 11, population * 2);
-
-		//std::vector<float> matrix2;
-		//matrix2.resize(population * vars);
-
-		//GM::createBuffer(ocl, matrixBuffer2, true, matrix2);
-		//GM::copyParameter(ocl, kernel, 12, matrixBuffer2, matrix2);
-
-		////std::vector<float> minMaxMatrix;
-		////minMaxMatrix.resize(population * 2); //every individual stores 2 values, min and max
-		////GM::createBuffer(ocl, minMaxBuffer, true, minMaxMatrix);
-		////GM::copyParameter(ocl, kernel, 14, minMaxBuffer, minMaxMatrix);
-
-		//std::size_t result;
-		//cl_int maxLocal = clGetKernelWorkGroupInfo(kernel, NULL, CL_KERNEL_WORK_GROUP_SIZE, sizeof(std::size_t), &result, NULL);
-		//if (maxLocal != 0) {
-		//	std::cout << "Ha ocurrido algun error" << std::endl;
-		//}
-
-		//std::cout << "Max work group size: " << result << std::endl;
-
-		///*unsigned int globalDimensionSizes[] = { runs, population };
-		//unsigned int localDimensionSizes[] = { 1, population };*/
-		//unsigned int globalDimensionSizes[] = { population };
-		//unsigned int localDimensionSizes[] = { population };
-		//GM::executeKernel(ocl, kernel, 1, globalDimensionSizes, localDimensionSizes);  //AVISO! Cambiar número de dimensiones si se cambian
-
-		//float maxVal, minVal;
-		//int imax, imin;
-		//GM::readVectorBuffer(ocl, matrixBuffer, matrix);
-		//GM::readBuffer(ocl, maxValBuffer, maxVal);
-		//GM::readBuffer(ocl, minValBuffer, minVal);
-		//GM::readBuffer(ocl, maxValIndexBuffer, imax);
-		//GM::readBuffer(ocl, minValIndexBuffer, imin);
+#ifdef TIMEMEASURE
+		Log::log("Jaya got results: " + std::to_string(tm2.GetCounter()));
+#endif
+		* threadLaunched = false;
 
 	}
 

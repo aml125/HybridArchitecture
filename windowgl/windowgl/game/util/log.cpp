@@ -1,6 +1,7 @@
 #include "Log.hpp"
 #include <fstream>
 #include <iostream>
+#include <algorithm>
 
 namespace GM {
 	void Log::log(const std::string message)
@@ -10,6 +11,14 @@ namespace GM {
 		myLock.unlock();
 		//std::cout << message << std::endl;
 	}
+
+	void Log::frameTime(double miliseconds)
+	{
+		myLock.lock();
+		frameMeasures.push_back(miliseconds);
+		myLock.unlock();
+	}
+
 	void Log::flush(const std::string& filename)
 	{
 		log("Writting logs to a file");
@@ -19,6 +28,21 @@ namespace GM {
 		{
 			myfile << "[" << std::to_string(i) << "] " << messages[i] << std::endl;
 		}
+		myfile.close();
+
+		myfile.open("fps_"+filename);
+		double sum = 0;
+		for (size_t i = 59; i < frameMeasures.size(); i++)
+		{
+			std::string avgStr = std::to_string(frameMeasures[i]);
+			std::replace(avgStr.begin(), avgStr.end(), '.', ',');
+			myfile << avgStr << std::endl;
+			sum += frameMeasures[i];
+		}
+		double average = sum / (frameMeasures.size() - 60);
+		std::string avgStr = std::to_string(average);
+		std::replace(avgStr.begin(), avgStr.end(), '.', ',');
+		myfile << "Average: " << avgStr << std::endl;
 		myfile.close();
 	}
 	void Log::flush()

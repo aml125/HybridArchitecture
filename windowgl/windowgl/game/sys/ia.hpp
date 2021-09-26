@@ -8,7 +8,7 @@
 
 //Jaya parameters
 #define POPULATION 512
-#define ITERATIONS 1000
+#define ITERATIONS 500
 #define RUNS 50
 #define INITIAL_SEED 100
 #define HEIGHT 2
@@ -29,7 +29,7 @@ namespace GM {
 		cl_mem minValLocalBuffer{};
 		cl_mem minValLocalIndexBuffer{};
 		cl_mem minMaxBuffer{};
-		GM::ocl_args_d_t ocl{std::string("Intel"), false};
+		GM::ocl_args_d_t ocl{std::string("NVIDIA"), true};
 		cl_program       program;           // hold the program handler
 		cl_kernel        kernel;            // hold the kernel handler
 		

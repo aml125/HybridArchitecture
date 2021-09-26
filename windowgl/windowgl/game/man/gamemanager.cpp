@@ -23,12 +23,19 @@ namespace GM {
 
 	bool GameManager::update()
 	{	
+#ifdef TIMEMEASURE
+		tm.StartCounter();
+#endif
 		std::thread thread(executeSystems, &systems, &entityMan);
 		executeRender(render, &entityMan);
 		//executeSystems(&systems, &entityMan);
 		thread.join();
 
 		sincronize();
+		
+#ifdef TIMEMEASURE
+		Log::frameTime(tm.GetCounter());
+#endif
 
 		return !RenderSystem_t::windowShouldClose;
 	}

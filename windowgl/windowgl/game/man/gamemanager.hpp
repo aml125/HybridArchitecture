@@ -23,6 +23,8 @@ namespace GM {
     private:
         std::vector<System_t*> systems;
         void sincronize();
+
+        TimeMeasure tm{};
         
 	};
 }

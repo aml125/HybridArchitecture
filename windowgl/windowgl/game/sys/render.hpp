@@ -73,6 +73,6 @@ private :
 
 	unsigned int instanceVBO;
 	inline static unsigned int totalInstances = 0;
-	glm::mat4* modelMatrixArray;
+	glm::mat4* modelMatrixArray = NULL;
 };
 }

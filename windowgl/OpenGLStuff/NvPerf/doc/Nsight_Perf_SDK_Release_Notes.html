@@ -1,0 +1,99 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="res/style.css">
+<link rel="icon" href="res/logo.ico" type="image/x-icon"/>  
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<title>NVIDIA
+Nsight Perf SDK Release Notes - v2021.1 Public
+</title>
+</head>
+
+<body>
+    <img src="res/logo.png" width="100"/>
+    <h1>Nsight Perf SDK Release Notes - v2021.1 Public</h1>
+    <h2>Table of Contents</h2>
+    <ul class="toc">
+<li><a href="#prerequisites">Prerequisites</a></li>
+<li><a href="#known_issues">Known Issues</a></li>
+<li><a href="#limitations">Limitations</a></li>
+<li><a href="#0x20fc345993d53a70">v2021.1 Public</a></li>
+<li><a href="#0xbf900f09f70c91f6">v2021.1 Public Beta</a></li>
+<li><a href="#0xf0d94cae676d012a">v2021.1 Early Access 1</a></li>
+</ul>
+
+    <h2><a name="prerequisites">Prerequisites</a></h2>
+<ul class="prerequisites">
+<li>Windows 10 or Linux (Ubuntu 20.04 or similar distro).</li>
+<li>NVIDIA Graphics Driver: R465 or newer.</li>
+<li>NVIDIA GeForce, Quadro, or RTX GPU listed below:<br>
+<table class='chips'><thead>
+<tr><th>NVIDIA Architecture</th>                    <th>Chip Names</th>                     <th>GeForce Families</th>                                       <th>NVIDIA RTX/Quadro Families</th>                             <th>Data Center</th></tr>
+<tr><th>NVIDIA Ampere GA10x Architecture</th>       <th>GA102, GA104,<br>GA106, GA107</th>  <th>RTX 3090, RTX 3080, RTX 3070,<br>RTX 3060, RTX 3050</th>    <th>RTX A6000, RTX A5000, RTX A4000</th>                        <th>A40</th></tr>
+<tr><th>NVIDIA Turing TU10x Architecture</th>       <th>TU102, TU104,<br>TU106</th>         <th>Titan RTX, RTX 2080,<br>RTX 2070, RTX 2060</th>             <th>RTX 8000, RTX 6000, RTX 5000,<br>RTX 4000, RTX 3000</th>    <th>T4</th></tr>
+<tr><th>NVIDIA Turing TU11x Architecture</th>       <th>TU116, TU117</th>                   <th>GTX 1660, GTX 1650</th>                                     <th>T2000, T1000</th>                                           <th></th></tr>
+<tr><th>NVIDIA Volta V100i Architecture</th>        <th>GV100</th>                          <th>Titan V</th>                                                <th>Quadro GV100</th>                                           <th></th></tr>
+</thead></table></li>
+<li>By default, the driver disallows GPU profiling. To enable permissions, follow the instructions at <a href="https://developer.nvidia.com/ERR_NVGPUCTRPERM">https://developer.nvidia.com/ERR_NVGPUCTRPERM</a>, or try the workarounds described in the Getting Started Guide.</li>
+</ul>
+<h2><a name="known_issues">Known Issues</a></h2>
+<ul class="known_issues">
+<li>Vulkan Profiler<ol>
+<li>vkQueueWaitIdle is required before present when profiling Vulkan applications. (<span class="gray">3201058</span>)</li>
+</ol>
+</li>
+</ul>
+<h2><a name="limitations">Limitations</a></h2>
+<ul class="limitations">
+<li>General Limitations<ol>
+<li>Nsight Perf SDK does not support SLI systems. (<span class="gray">PW-2935</span>)</li>
+<li>Each GPU is limited to one profiling session at a time, across the entire system.  However, multiple GPUs can be independently profiled concurrently.  This is a driver limitation.</li>
+<li>NVPW_Device_SetClockSetting() performs a system-global clock change, that is not undone at process exit.  The *SetDeviceClockState() family of NvPerfUtility functions have the same behavior, as they are convenience functions around NVPW_Device_SetClockSetting().</li>
+<li>Not all counters and metrics are available to the Range Profiler APIs, due to driver limitations.  The CounterAvailability APIs exist to reveal which metrics are available.</li>
+</ol>
+</li>
+<li>D3D12 Profiler<ol>
+<li>D3D12 Range Profiler is not compatible with the D3D12 debug layer. (<span class="gray">PW-925</span>)</li>
+<li>D3D12 Range Profiler does not support PushRange and PopRange commands on Bundles (Command Lists created with <a href="https://docs.microsoft.com/en-us/windows/win32/api/d3d12/ne-d3d12-d3d12_command_list_type">D3D12_COMMAND_LIST_TYPE_BUNDLE</a>).</li>
+</ol>
+</li>
+<li>Vulkan Profiler<ol>
+<li>Vulkan Range Profiler is not compatible with Vulkan layers that perform <a href="https://vulkan.lunarg.com/doc/view/1.1.114.0/linux/loader_and_layer_interface.html#user-content-wrapping">object-wrapping</a>.</li>
+<li>Vulkan Range Profiler does not support PushRange and PopRange calls on secondary command buffers (VkCommandBuffer created with <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkCommandBufferLevel.html">VK_COMMAND_BUFFER_LEVEL_SECONDARY</a>.</li>
+<li>Vulkan Range Profiler does not support PushRange and PopRange calls on a VkCommandBuffer that is recording with <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkCommandBufferUsageFlagBits.html">VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT</a>.</li>
+</ol>
+</li>
+<li>D3D11 Profiler<ol>
+<li>D3D11 Range Profiler does not support PushRange and PopRange calls on a <a href="https://docs.microsoft.com/en-us/windows/win32/direct3d11/overviews-direct3d-11-render-multi-thread-render">Deffered Context</a>.</li>
+</ol>
+</li>
+</ul>
+<h2><a name="0x20fc345993d53a70">v2021.1 Public</a></h2>
+<ul class="changelog">
+<li>API Versions<br>
+<table class="api">
+<thead>
+<tr>
+<th>API</th><th>New Version</th><th>Previous Version</th><tr><td>GV100 Graphics Metrics</td><td style="text-align:center">0.1.0</td><td style="text-align:center">0.1.0</td></tr><tr><td>TU10X Graphics Metrics</td><td style="text-align:center">0.1.0</td><td style="text-align:center">0.1.0</td></tr><tr><td>TU11X Graphics Metrics</td><td style="text-align:center">0.1.0</td><td style="text-align:center">0.1.0</td></tr><tr><td>GA10X Graphics Metrics</td><td style="text-align:center">0.1.0</td><td style="text-align:center">0.1.0</td></tr><tr><td>Metrics Evaluator</td><td style="text-align:center">0.1.0</td><td style="text-align:center">0.1.0</td></tr><tr><td>D3D12 Profiler</td><td style="text-align:center">0.1.0</td><td style="text-align:center">0.1.0</td></tr><tr><td>Vulkan Profiler</td><td style="text-align:center">0.1.0</td><td style="text-align:center">0.1.0</td></tr></tbody>
+</table></li>
+</ul>
+<h2><a name="0xbf900f09f70c91f6">v2021.1 Public Beta</a></h2>
+<ul class="changelog">
+<li>API Versions<br>
+<table class="api">
+<thead>
+<tr>
+<th>API</th><th>New Version</th><th>Previous Version</th><tr><td>GV100 Graphics Metrics</td><td style="text-align:center">0.1.0</td><td style="text-align:center">0.1.0</td></tr><tr><td>TU10X Graphics Metrics</td><td style="text-align:center">0.1.0</td><td style="text-align:center">0.1.0</td></tr><tr><td>TU11X Graphics Metrics</td><td style="text-align:center">0.1.0</td><td style="text-align:center">0.1.0</td></tr><tr><td>GA10X Graphics Metrics</td><td style="text-align:center">0.1.0</td><td style="text-align:center">0.1.0</td></tr><tr><td>Metrics Evaluator</td><td style="text-align:center">0.1.0</td><td style="text-align:center">0.1.0</td></tr><tr><td>D3D12 Profiler</td><td style="text-align:center">0.1.0</td><td style="text-align:center">0.1.0</td></tr><tr><td>Vulkan Profiler</td><td style="text-align:center">0.1.0</td><td style="text-align:center">0.1.0</td></tr></tbody>
+</table></li>
+</ul>
+<h2><a name="0xf0d94cae676d012a">v2021.1 Early Access 1</a></h2>
+<ul class="changelog">
+<li>API Versions<br>
+<table class="api">
+<thead>
+<tr>
+<th>API</th><th>New Version</th><th>Previous Version</th><tr><td>GV100 Graphics Metrics</td><td style="text-align:center">0.1.0</td><td style="text-align:center">N/A</td></tr><tr><td>TU10X Graphics Metrics</td><td style="text-align:center">0.1.0</td><td style="text-align:center">N/A</td></tr><tr><td>TU11X Graphics Metrics</td><td style="text-align:center">0.1.0</td><td style="text-align:center">N/A</td></tr><tr><td>GA10X Graphics Metrics</td><td style="text-align:center">0.1.0</td><td style="text-align:center">N/A</td></tr><tr><td>Metrics Evaluator</td><td style="text-align:center">0.1.0</td><td style="text-align:center">N/A</td></tr><tr><td>D3D12 Profiler</td><td style="text-align:center">0.1.0</td><td style="text-align:center">N/A</td></tr><tr><td>Vulkan Profiler</td><td style="text-align:center">0.1.0</td><td style="text-align:center">N/A</td></tr></tbody>
+</table></li>
+</ul>
+
+</body>
+</html>

@@ -119,7 +119,7 @@ int main()
 	input.upKeyDown = up;
 	input.downKeyDown = down;
 	input.leftKeyDown = left;
-	input.rightKeyDown = right;
+	input.rightKeyDown = right; 
 	input.spaceKeyDown = space;
 	input.cKeyDown = c;
 	input.lKeyDown = l;
@@ -128,16 +128,16 @@ int main()
 
 	//Formation 1
 	//Set formation 1 slots
-	auto& pattern1 = GM::EntityBuilder::buildPattern(gameManager, iaSystem, 100, 10, 2, ALABARDERO_PATH, { -5, 1, -50 });
+	auto& pattern1 = GM::EntityBuilder::buildPattern(gameManager, iaSystem, 51, 1, 2, ALABARDERO_PATH, { -5, 1, -50 });
 	pattern1.anchorPoint->getComponent<GM::IA_t>()->target.position = { 0, 1, -10 };
 	player = &pattern1.anchorPoint->getComponent<GM::IA_t>()->target.position;
 	
 	//Formation 2
-	auto& pattern2 = GM::EntityBuilder::buildPattern(gameManager, iaSystem, 100, 10, 2, ALABARDERO_PATH, { -5, 1, 50 });
+	auto& pattern2 = GM::EntityBuilder::buildPattern(gameManager, iaSystem, 51, 1, 2, ALABARDERO_PATH, { -5, 1, 50 });
 	pattern2.anchorPoint->getComponent<GM::IA_t>()->target.position = { 10, 1, -10 };
 	
-	//auto& auxAl = GM::EntityBuilder::buildFullEntity(gameManager, { 1, 1, 1 }, ALABARDERO_PATH, { 1, 1.55f, 0.5f }, { 0, 0.78f, 0 });
-	//player = &auxAl.getComponent<GM::PhysicsComponent_t>()->position;
+	auto& auxAl = GM::EntityBuilder::buildFullEntity(gameManager, { 1, 1, 1 }, ALABARDERO_PATH, { 1, 1.55f, 0.5f }, { 0, 0.78f, 0 });
+	player = &auxAl.getComponent<GM::PhysicsComponent_t>()->position;
 
 	glm::vec3 cLength0{ 103.75f, 0.75f,  47.32f };
 	glm::vec3 cOffset0{ 1.875f, 0.375f, -1.98 };
