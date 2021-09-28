@@ -1,0 +1,4 @@
+En la configuración:
+
+C/C++/idioma
+Estándar de C++: C++17

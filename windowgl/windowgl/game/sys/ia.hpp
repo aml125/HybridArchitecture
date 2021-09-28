@@ -8,7 +8,7 @@
 
 //Jaya parameters
 #define POPULATION 512
-#define ITERATIONS 500
+#define ITERATIONS 50
 #define RUNS 50
 #define INITIAL_SEED 100
 #define HEIGHT 2
