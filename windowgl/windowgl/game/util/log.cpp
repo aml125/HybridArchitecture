@@ -32,14 +32,14 @@ namespace GM {
 
 		myfile.open("fps_"+filename);
 		double sum = 0;
-		for (size_t i = 59; i < frameMeasures.size(); i++)
+		for (size_t i = 59; i < frameMeasures.size()-1; i++)
 		{
 			std::string avgStr = std::to_string(frameMeasures[i]);
 			std::replace(avgStr.begin(), avgStr.end(), '.', ',');
 			myfile << avgStr << std::endl;
 			sum += frameMeasures[i];
 		}
-		double average = sum / (frameMeasures.size() - 60);
+		double average = sum / (frameMeasures.size() - 60 - 1);
 		std::string avgStr = std::to_string(average);
 		std::replace(avgStr.begin(), avgStr.end(), '.', ',');
 		myfile << "Average: " << avgStr << std::endl;

@@ -94,6 +94,21 @@ namespace GM {
         this->GPU = GPU;
         //Names: NVIDIA CUDA, Intel
         setupOpenCL(this, device.c_str());
+        size_t param_value_size = sizeof(size_t);
+        size_t param_value = 0;
+        int result = clGetDeviceInfo(
+            this->device,
+            CL_DEVICE_MAX_WORK_GROUP_SIZE,
+            param_value_size,
+            (void*)&param_value,
+            NULL);
+
+        if (result != CL_SUCCESS) {
+            Log::log("ERROR accesing workgoup info: " + std::string(TranslateOpenCLError(result)));
+        }
+        else {
+            Log::log(std::string("Max workgroup size: ") + std::to_string(param_value));
+        }
     }
 
     /*

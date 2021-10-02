@@ -295,7 +295,9 @@ namespace GM {
 		Log::log("Starting Jaya.");
 		tm2.StartCounter();
 #endif
-		op->matrix.resize(POPULATION * (vars + 1)); // +1 to store min value
+		size_t sz = POPULATION * (vars + 1);
+		Log::log(std::string("Allocated size: ") + std::to_string(sz*sizeof(float)));
+		op->matrix.resize(sz); // +1 to store min value
 
 		createBuffer(op->ocl, op->matrixBuffer, true, op->matrix);
 		copyParameter(op->ocl, op->kernel, 0, op->matrixBuffer, op->matrix);
