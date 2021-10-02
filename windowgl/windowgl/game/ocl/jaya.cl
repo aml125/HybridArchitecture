@@ -166,7 +166,7 @@ void createPopulation (__global float* x, __global float* maxVal, __global float
 /*============================================================================ */
 void updatePopulation (__global float* x, __global float* maxVal, __global float* minVal, __global int* imax, __global int* imin, ulong seed, int vars,
     mwc64x_state_t* state, __local float* evalMax, __local float* evalMin, __local int* evalMaxIndex, __local int* evalMinIndex, __global float* xn ) {
-    __global float* xnew = xn - 1;
+    __global float* xnew = xn; // xn - 1; TODO QUE HACIA ESTO!!!!!??????
     int i = get_global_id(0);
     // Se crea un nuevo individuo en funcion del algoritmo Jaya
 	// xnew(i, j) = x(i, j) + r(1)*(Best(j) - abs(x(i, j))) - r(2)*(worst(j) - abs(x(i, j)));
