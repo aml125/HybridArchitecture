@@ -331,7 +331,7 @@ namespace GM {
 		createLocalParameter<int>(op->kernel, 10, POPULATION * 2);
 		createLocalParameter<int>(op->kernel, 11, POPULATION * 2);
 
-		op->matrix2.resize(POPULATION * vars);
+		op->matrix2.resize(POPULATION * (vars+1));
 
 		createBuffer(op->ocl, op->matrixBuffer2, true, op->matrix2);
 		copyParameter(op->ocl, op->kernel, 12, op->matrixBuffer2, op->matrix2);
@@ -349,7 +349,9 @@ namespace GM {
 		GM::readBuffer(op->ocl, op->minValIndexBuffer, op->imin);
 
 #ifdef TIMEMEASURE
-		Log::log("Jaya got results: " + std::to_string(tm2.GetCounter()));
+		double tm = tm2.GetCounter();
+		Log::log("Jaya got results: " + std::to_string(tm));
+		Log::jayaTime(tm);
 #endif
 		* threadLaunched = false;
 

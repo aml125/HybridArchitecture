@@ -10,7 +10,7 @@ namespace ECS {
 
 struct EntityManager_t {
 
-    static constexpr std::size_t kNUMINITALLENTITIES { 50000 };
+    static constexpr std::size_t kNUMINITALLENTITIES { 500000 };
 
     explicit EntityManager_t();
 
