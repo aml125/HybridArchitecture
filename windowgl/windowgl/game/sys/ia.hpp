@@ -8,13 +8,19 @@
 
 //Jaya parameters
 #define POPULATION 256
-#define ITERATIONS 100
+//#define ITERATIONS 100
 #define RUNS 50
 #define INITIAL_SEED 100
 #define HEIGHT 2
 
 namespace GM {
 	struct OpenCLParams {
+		OpenCLParams (std::string gpuName) 
+			: ocl{ gpuName, true }
+		{
+
+		}
+
 		//Opencl stuff
 		cl_mem matrixBuffer{};
 		cl_mem matrixBuffer2{};
@@ -48,7 +54,7 @@ namespace GM {
 	};
 
 	struct IASystem_t : System_t {
-		IASystem_t();
+		IASystem_t(std::string gpuName, int iterations);
 		void update(ECS::EntityManager_t& em) override;
 		bool threadDied();
 		FormationManager fm{};
@@ -68,8 +74,9 @@ namespace GM {
 		TimeMeasure tm2;
 		bool jayaThreadLaunched = false;
 		bool jayaFirstTime = true;
+		int ITERATIONS = 100;
 
-		OpenCLParams op{};
+		OpenCLParams op{"Intel"};
 
 		int seed = INITIAL_SEED;
 	};

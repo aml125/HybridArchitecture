@@ -1,4 +1,5 @@
 #include <game/util/opencl-utils.hpp>
+#include <iostream>
 
 //we want to use POSIX functions
 #pragma warning( push )

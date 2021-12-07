@@ -20,7 +20,7 @@
 #define MIN_Y 1
 #define MAX_X 2
 #define MAX_Y 3
-#define POPULATION 512
+#define POPULATION 256
 
 //FUNCION OBJETIVO
 float MyObjective(__global float* x, int VARS)

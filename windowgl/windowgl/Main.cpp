@@ -20,6 +20,7 @@
 #include <game\cmp\ia.hpp>
 #include <game/sys/ia.hpp>
 #include <game\util\Log.hpp>
+#include <filesystem>
 
 
 constexpr glm::vec3 cubePositions[] = {
@@ -96,14 +97,40 @@ void l() {
 	}
 }
 
-int main()
+std::string ExePath() {
+	TCHAR buffer[MAX_PATH] = { 0 };
+	GetModuleFileName(NULL, buffer, MAX_PATH);
+	return std::string(buffer);
+}
+
+int main(int argc, char *argv[])
 {
+	std::cout << "Current path: " << ExePath() << std::endl;
+	std::string gpuName = "Intel";
+	int iterations = 100;
+	int vars = 20000; //This number is is divided by 2, because there is two batallions. EXAMPLE: 20000 is 40000 variables.
+	int extra_pj = 20000;
+	int totalFrames = 200;
+
+	if (argc >= 6) {
+		gpuName = std::string(argv[1]);
+		iterations = atoi(argv[2]);
+		vars = atoi(argv[3])/2;
+		extra_pj = atoi(argv[4]);
+		totalFrames = atoi(argv[5]);
+	}
+	else if (argc > 1) {
+		GM::Log::log("ERROR: Not enought arguments. \nUsage: " + std::string(argv[0]) + " gpuName iterations vars extra_pj total_frames");
+		std::cout << "ERROR: Not enought arguments. \nUsage: " + std::string(argv[0]) + " gpuName iterations vars extra_pj total_frames";
+		exit(-1);
+	}
+
 	GM::Window_t window{ kSCRWIDTH, kSCRHEIGHT };
 	GM::RenderSystem_t render(window);
 	GM::GameManager gameManager{ &render };
 
 	GM::InputSystem_t input(window);
-	GM::IASystem_t iaSystem{};
+	GM::IASystem_t iaSystem{gpuName, iterations};
 	GM::PhysicsSystem_t physics;
 	GM::CollisionSystem_t collision;
 
@@ -114,7 +141,6 @@ int main()
 	gameManager.addSystem(physics);
 	gameManager.addSystem(collision);
 	
-
 	//Set key callbacks
 	input.upKeyDown = up;
 	input.downKeyDown = down;
@@ -128,13 +154,16 @@ int main()
 
 	//Formation 1
 	//Set formation 1 slots   1023 causes error
-	auto& pattern1 = GM::EntityBuilder::buildPattern(gameManager, iaSystem, 10000, 1, 2, ALABARDERO_PATH, { -5, 1, -50 });
-	pattern1.anchorPoint->getComponent<GM::IA_t>()->target.position = { 0, 1, -10 };
-	player = &pattern1.anchorPoint->getComponent<GM::IA_t>()->target.position;
+	GM::EntityBuilder::buildPattern(gameManager, iaSystem, vars/2, 1, 2, ALABARDERO_PATH, { -5, 1, -50 });
 	
 	//Formation 2
-	auto& pattern2 = GM::EntityBuilder::buildPattern(gameManager, iaSystem, 10000, 1, 2, ALABARDERO_PATH, { -5, 1, 50 });
-	pattern2.anchorPoint->getComponent<GM::IA_t>()->target.position = { 10, 1, -10 };
+	GM::EntityBuilder::buildPattern(gameManager, iaSystem, vars/2, 1, 2, ALABARDERO_PATH, { -5, 1, 50 });
+
+	//Formation 3 without ia
+	GM::EntityBuilder::buildPatternWithoutIa(gameManager, iaSystem, extra_pj/2, 100, 2, ALABARDERO_PATH, { -5, 1, 50 });
+
+	//Formation 4
+	GM::EntityBuilder::buildPatternWithoutIa(gameManager, iaSystem, extra_pj/2, 100, 2, ALABARDERO_PATH, { -5, 1, 50 });
 	
 	auto& auxAl = GM::EntityBuilder::buildFullEntity(gameManager, { 1, 1, 1 }, ALABARDERO_PATH, { 1, 1.55f, 0.5f }, { 0, 0.78f, 0 });
 	player = &auxAl.getComponent<GM::PhysicsComponent_t>()->position;
@@ -168,7 +197,9 @@ int main()
 	render.lights.push_back(pt6);
 
 	//GAME LOOP
-	while (gameManager.update());
+	while (gameManager.update() && totalFrames > 0) {
+		totalFrames--;
+	}
 	while (!iaSystem.threadDied());
 	return 0;
 }

@@ -42,31 +42,32 @@ namespace GM {
 		double sum = 0;
 		for (size_t i = 59; i < frameMeasures.size()-1; i++)
 		{
-			std::string avgStr = std::to_string(frameMeasures[i]);
-			//std::replace(avgStr.begin(), avgStr.end(), '.', ',');
-			myfile << avgStr << std::endl;
+			/*std::string avgStr = std::to_string(frameMeasures[i]);
+			std::replace(avgStr.begin(), avgStr.end(), '.', ',');*/
+			//myfile << avgStr << std::endl;
 			sum += frameMeasures[i];
 		}
 		double average = sum / (frameMeasures.size() - 60 - 1);
 		std::string avgStr = std::to_string(average);
-		//std::replace(avgStr.begin(), avgStr.end(), '.', ',');
-		myfile << "Average: " << avgStr << std::endl;
+		std::replace(avgStr.begin(), avgStr.end(), '.', ',');
+		myfile << avgStr << std::endl;
 		myfile.close();
 
 		//Jaya file
 		myfile.open("ja_" + filename);
 		sum = 0;
-		for (size_t i = 1; i < jayaMeasures.size() - 1; i++)
+		for (size_t i = 0; i < jayaMeasures.size() - 1; i++)
 		{
-			std::string avgStr = std::to_string(jayaMeasures[i]);
+			//std::string avgStr = std::to_string(jayaMeasures[i]);
 			//std::replace(avgStr.begin(), avgStr.end(), '.', ',');
-			myfile << avgStr << std::endl;
-			sum += jayaMeasures[i];
+				sum += jayaMeasures[i];
+
+			//myfile << avgStr << std::endl;
 		}
-		average = sum / (jayaMeasures.size() - 2);
+		average = sum / (jayaMeasures.size() - 1);
 		avgStr = std::to_string(average);
-		//std::replace(avgStr.begin(), avgStr.end(), '.', ',');
-		myfile << "Average: " << avgStr << std::endl;
+		std::replace(avgStr.begin(), avgStr.end(), '.', ',');
+		myfile << avgStr << std::endl;
 		myfile.close();
 	}
 	void Log::flush()
