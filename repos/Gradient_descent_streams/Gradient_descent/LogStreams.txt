@@ -1,0 +1,21 @@
+[0] Proceses: 1 Time: 1670.277200
+[1] Proceses: 2 Time: 1485.473700
+[2] Proceses: 3 Time: 1479.515000
+[3] Proceses: 4 Time: 1483.065000
+[4] Proceses: 5 Time: 1479.560400
+[5] Proceses: 6 Time: 1483.183800
+[6] Proceses: 7 Time: 1483.504200
+[7] Proceses: 8 Time: 1482.934300
+[8] Proceses: 9 Time: 2960.759900
+[9] Proceses: 10 Time: 2963.410400
+[10] Proceses: 11 Time: 2965.394700
+[11] Proceses: 12 Time: 2965.935200
+[12] Proceses: 13 Time: 2964.577900
+[13] Proceses: 14 Time: 2970.114100
+[14] Proceses: 15 Time: 2981.792100
+[15] Proceses: 16 Time: 2976.237000
+[16] Proceses: 17 Time: 2983.998500
+[17] Proceses: 18 Time: 2986.412800
+[18] Proceses: 19 Time: 2982.726800
+[19] Proceses: 20 Time: 2986.694900
+[20] Writting logs to a file

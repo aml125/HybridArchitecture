@@ -26,6 +26,10 @@ namespace GM {
 		myLock.unlock();
 	}
 
+	int Log::getTotalJayaMeasures() {
+		return jayaMeasures.size();
+	}
+
 	void Log::flush(const std::string& filename)
 	{
 		log("Writting logs to a file");

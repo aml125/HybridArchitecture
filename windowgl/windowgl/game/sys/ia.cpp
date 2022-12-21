@@ -57,7 +57,7 @@ namespace GM {
 				readJayaResults(vecIA, vars); //TODO REDO THIS FUNCTION
 			}
 			else {
-				size_t sz = POPULATION * (vars + 1);
+				size_t sz = POPULATION * (vars + 1); //Vars + 1
 				Log::log(std::string("Vars: ") + std::to_string(vars));
 				Log::log(std::string("Allocated size: ") + std::to_string(sz * sizeof(float) / 1024 / 1024));
 				op.matrix.resize(sz); // +1 to store min value

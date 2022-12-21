@@ -10,6 +10,7 @@ namespace GM{
 		static void jayaTime(double miliseconds);
 		static void flush(const std::string& filename);
 		static void flush();
+		static int getTotalJayaMeasures();
 
 	private:
 		inline static std::vector<std::string> messages{};

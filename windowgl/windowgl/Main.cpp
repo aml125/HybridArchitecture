@@ -108,22 +108,26 @@ int main(int argc, char *argv[])
 	std::cout << "Current path: " << ExePath() << std::endl;
 	std::string gpuName = "Intel";
 	int iterations = 100;
-	int vars = 20000; //This number is is divided by 2, because there is two batallions. EXAMPLE: 20000 is 40000 variables.
-	int extra_pj = 20000;
-	int totalFrames = 200;
+	int vars = 4000; //This number is half of what it is, because there is two batallions. EXAMPLE: 20000 is 40000 variables.
+	int total_pj = 40000;
+	int totalFrames = 500;
 
 	if (argc >= 6) {
 		gpuName = std::string(argv[1]);
 		iterations = atoi(argv[2]);
 		vars = atoi(argv[3])/2;
-		extra_pj = atoi(argv[4]);
+		total_pj = atoi(argv[4]);
 		totalFrames = atoi(argv[5]);
 	}
 	else if (argc > 1) {
-		GM::Log::log("ERROR: Not enought arguments. \nUsage: " + std::string(argv[0]) + " gpuName iterations vars extra_pj total_frames");
-		std::cout << "ERROR: Not enought arguments. \nUsage: " + std::string(argv[0]) + " gpuName iterations vars extra_pj total_frames";
+		GM::Log::log("ERROR: Not enought arguments. \nUsage: " + std::string(argv[0]) + " gpuName iterations vars total_pj total_frames");
+		std::cout << "ERROR: Not enought arguments. \nUsage: " + std::string(argv[0]) + " gpuName iterations vars total_pj total_frames";
 		exit(-1);
 	}
+
+	total_pj -= vars;
+
+	GM::Log::log("Extra pj: " + total_pj);
 
 	GM::Window_t window{ kSCRWIDTH, kSCRHEIGHT };
 	GM::RenderSystem_t render(window);
@@ -160,10 +164,10 @@ int main(int argc, char *argv[])
 	GM::EntityBuilder::buildPattern(gameManager, iaSystem, vars/2, 1, 2, ALABARDERO_PATH, { -5, 1, 50 });
 
 	//Formation 3 without ia
-	GM::EntityBuilder::buildPatternWithoutIa(gameManager, iaSystem, extra_pj/2, 100, 2, ALABARDERO_PATH, { -5, 1, 50 });
+	GM::EntityBuilder::buildPatternWithoutIa(gameManager, iaSystem, total_pj/2, 100, 2, ALABARDERO_PATH, { -5, 1, 50 });
 
 	//Formation 4
-	GM::EntityBuilder::buildPatternWithoutIa(gameManager, iaSystem, extra_pj/2, 100, 2, ALABARDERO_PATH, { -5, 1, 50 });
+	GM::EntityBuilder::buildPatternWithoutIa(gameManager, iaSystem, total_pj/2, 100, 2, ALABARDERO_PATH, { -5, 1, 50 });
 	
 	auto& auxAl = GM::EntityBuilder::buildFullEntity(gameManager, { 1, 1, 1 }, ALABARDERO_PATH, { 1, 1.55f, 0.5f }, { 0, 0.78f, 0 });
 	player = &auxAl.getComponent<GM::PhysicsComponent_t>()->position;
@@ -197,7 +201,7 @@ int main(int argc, char *argv[])
 	render.lights.push_back(pt6);
 
 	//GAME LOOP
-	while (gameManager.update() && totalFrames > 0) {
+	while ((gameManager.update() && totalFrames > 0) || GM::Log::getTotalJayaMeasures() <= 1) {
 		totalFrames--;
 	}
 	while (!iaSystem.threadDied());
