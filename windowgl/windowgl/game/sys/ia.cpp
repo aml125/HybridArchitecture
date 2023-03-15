@@ -356,7 +356,7 @@ namespace GM {
 		tm2.StartCounter();
 #endif
 		GM::executeKernel(op->ocl, op->kernel, 1, globalDimensionSizes, localDimensionSizes);  //AVISO! Cambiar número de dimensiones si se cambian
-		clFinish(op->ocl.commandQueue);
+		clFinish(op->ocl.commandQueue);  // Wait until the command has finished, to get accurate time measurements
 #ifdef TIMEMEASURE
 		tm = tm2.GetCounter();
 		Log::log("Jaya got results: " + std::to_string(tm));

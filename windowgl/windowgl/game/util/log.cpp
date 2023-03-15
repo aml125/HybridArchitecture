@@ -15,7 +15,7 @@ namespace GM {
 	void Log::frameTime(double miliseconds)
 	{
 		myLock.lock();
-		frameMeasures.push_back(miliseconds);
+		frameMeasures.push_back(((double)1000)/miliseconds); // Convertir de milisegundos a FPS
 		myLock.unlock();
 	}
 
@@ -27,7 +27,7 @@ namespace GM {
 	}
 
 	int Log::getTotalJayaMeasures() {
-		return jayaMeasures.size();
+		return (int)jayaMeasures.size();
 	}
 
 	void Log::flush(const std::string& filename)
