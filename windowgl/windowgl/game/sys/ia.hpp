@@ -82,7 +82,7 @@ namespace GM {
 		int ITERATIONS = 100;
 
 #ifdef JAYA
-		OpenCLParams op{"Intel"};
+		OpenCLParams op{"Intel"};  // Default param. The constructor sets this option
 #endif
 
 		int seed = INITIAL_SEED;

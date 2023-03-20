@@ -148,7 +148,7 @@ namespace GM {
 			for (int j = 0; j < rowSlots; j++) {
 				auto& loc = pat.slots.emplace_back();
 				loc.position = { xPos, 0, zPos };
-				buildNPC(gm, (initialPosition + glm::vec3{ xPos, 0, zPos }), modelPath, 0, iaSys);
+				buildNPC(gm, (initialPosition + glm::vec3{ xPos, 0, zPos }), modelPath, pat.patternNumber, iaSys);
 				xPos += separation;
 			}
 			xPos = initXPos;
