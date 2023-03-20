@@ -5,25 +5,29 @@
 #include <game\sys\physics.hpp>
 #include <game\util\log.hpp>
 
+
 //TODO Refactor: All entities should't have to have a pattern assigned
 //TODO make formations not count on y axis, so they walk on the terrain
 namespace GM {
-
-	void createBuffers(OpenCLParams* op, int vars);
-
 	bool IASystem_t::threadDied() {
 
 		return !jayaThreadLaunched;
 	}
-
+#ifdef JAYA
+	void createBuffers(OpenCLParams* op, int vars);
 	void launchJaya(OpenCLParams* op, cl_ulong seed, int vars, int iterations, bool* threadLaunched, TimeMeasure& tm2);
+#endif
 
 	IASystem_t::IASystem_t(std::string gpuName, int iterations)
+#ifdef JAYA
 		: op{gpuName}
+#endif
 	{
+#ifdef JAYA
 		ITERATIONS = iterations;
 		createAndBuildProgram(&op.ocl, op.program, "game/ocl/jaya.cl");
 		createKernelFromProgram(op.ocl, op.program, op.kernel, "jayaGPU");
+#endif
 	}
 
 	void IASystem_t::update(ECS::EntityManager_t& em) {
@@ -42,14 +46,16 @@ namespace GM {
 			
 		}
 
-		//if (totalArrived < 2) {
-		//	//Execute the pattern manager to set the new targets of the formation
-		//	fm.updateSlots(em.getComponents<IA_t>());
+#ifndef JAYA
+		if (totalArrived < 2) {
+			//Execute the pattern manager to set the new targets of the formation
+			fm.updateSlots(em.getComponents<IA_t>());
 
-		//	//Reset the anchor point to the center of mass of the formation
-		//	fm.ressetAnchorsToCenterOfMass(em.getComponents <IA_t>(), em);
-		//}
+			//Reset the anchor point to the center of mass of the formation
+			fm.ressetAnchorsToCenterOfMass(em.getComponents <IA_t>(), em);
+		}
 
+#else
 		//Check jaya Algorithm
 		int vars = ((int)vecIA.size()) * 2; //TODO CHECK WHY -2 SEG FAULTS (THE FORMATION CENTER AND THE FLAG NEEDN'T BE CALCULATED)
 		if (!jayaThreadLaunched) {
@@ -71,6 +77,7 @@ namespace GM {
 			thread.detach();
 			//launchJaya(ocl, &op, &matrix, &matrix2, seed, (int)vecIA.size(), &jayaThreadLaunched);
 		}
+#endif
 #ifdef TIMEMEASURE
 		Log::log("IA: " + std::to_string(tm.GetCounter()));
 #endif
@@ -278,7 +285,7 @@ namespace GM {
 		ia.target.position.x = enemyPhy->position.x;
 	}
 
-
+#ifdef JAYA
 	void createBuffers(OpenCLParams* op, int vars) {
 		float aux = 0;
 		createBuffer(op->ocl, op->matrixBuffer, true, op->matrix);
@@ -391,6 +398,6 @@ namespace GM {
 		}
 		//file1.close();
 	}
-
+#endif
 
 }

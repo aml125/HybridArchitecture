@@ -103,7 +103,7 @@ namespace GM {
 		//IA
 		GM::IA_t& ia = gm.entityMan.createComponent<GM::IA_t>(e1.entityID);
 		ia.patternNumber = patternNumber;
-		//iaSystem.fm.addCharacter(ia, gm.entityMan.getComponents<GM::IA_t>());
+		iaSystem.fm.addCharacter(ia, gm.entityMan.getComponents<GM::IA_t>());
 
 		//Physics
 		auto* phy1 = e1.getComponent<GM::PhysicsComponent_t>();
@@ -130,7 +130,7 @@ namespace GM {
 	}
 	void EntityBuilder::buildPattern(GameManager& gm, IASystem_t& iaSys, unsigned int totalSlots, unsigned int depth, float separation, const std::string& modelPath, const glm::vec3& initialPosition)
 	{
-		//Pattern& pat = iaSys.fm.createPattern(gm.entityMan);
+		Pattern& pat = iaSys.fm.createPattern(gm.entityMan);
 		int rowSlots = totalSlots / depth;
 		int auxRow = rowSlots;
 		int auxDepth = depth;
@@ -146,8 +146,8 @@ namespace GM {
 		float initZPos = zPos;
 		for (int i = 0; i < depth; i++) {
 			for (int j = 0; j < rowSlots; j++) {
-				//auto& loc = pat.slots.emplace_back();
-				//loc.position = { xPos, 0, zPos };
+				auto& loc = pat.slots.emplace_back();
+				loc.position = { xPos, 0, zPos };
 				buildNPC(gm, (initialPosition + glm::vec3{ xPos, 0, zPos }), modelPath, 0, iaSys);
 				xPos += separation;
 			}

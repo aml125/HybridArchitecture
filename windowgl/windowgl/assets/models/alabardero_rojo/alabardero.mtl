@@ -1,0 +1,44 @@
+# Blender MTL File: 'Defender.blend'
+# Material Count: 3
+
+newmtl Defender
+Ns 125.490196
+Ka 1.000000 1.000000 1.000000
+Kd 0.607976 0.607976 0.607976
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd Texture-1024.png
+map_Bump -bm 0.121339 NMoverlay2.png
+map_Ks Spec.png
+map_Ns Spec.png
+
+newmtl Defender_NONE
+Ns 125.490196
+Ka 1.000000 1.000000 1.000000
+Kd 0.607976 0.607976 0.607976
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Bump -bm 0.121339 NMoverlay2.png
+map_Kd Texture-1024.png
+map_Ks Spec.png
+map_Ns Spec.png
+
+newmtl Defender_Weapon
+Ns 243.137255
+Ka 1.000000 1.000000 1.000000
+Kd 0.538641 0.538641 0.538641
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd Weps.png
+map_Bump -bm 0.571428 Weps_NM2.png
+map_Ks DoneWeps_Spec.png
+map_Ns DoneWeps_Spec.png

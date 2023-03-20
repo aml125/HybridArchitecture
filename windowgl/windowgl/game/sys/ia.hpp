@@ -14,6 +14,10 @@
 #define HEIGHT 2
 
 namespace GM {
+
+//#define JAYA
+
+#ifdef JAYA
 	struct OpenCLParams {
 		OpenCLParams (std::string gpuName) 
 			: ocl{ gpuName, true }
@@ -35,7 +39,7 @@ namespace GM {
 		cl_mem minValLocalBuffer{};
 		cl_mem minValLocalIndexBuffer{};
 		cl_mem minMaxBuffer{};
-		GM::ocl_args_d_t ocl{std::string("NVIDIA"), true};
+		GM::ocl_args_d_t ocl{std::string("NVIDIA"), true}; // These are default params, real params are passed in the constructor
 		cl_program       program;           // hold the program handler
 		cl_kernel        kernel;            // hold the kernel handler
 		
@@ -47,6 +51,7 @@ namespace GM {
 		float minVal;
 		float maxVal;
 	};
+#endif
 
 	struct Steering {
 		glm::vec3 aceleration{};
@@ -76,7 +81,9 @@ namespace GM {
 		bool jayaFirstTime = true;
 		int ITERATIONS = 100;
 
+#ifdef JAYA
 		OpenCLParams op{"Intel"};
+#endif
 
 		int seed = INITIAL_SEED;
 	};

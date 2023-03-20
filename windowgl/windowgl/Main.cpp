@@ -39,10 +39,6 @@ constexpr glm::vec3 cubePositions[] = {
 constexpr unsigned int kSCRWIDTH{ 1024 };
 constexpr unsigned int kSCRHEIGHT{ 768 };
 
-//const std::string MESA_PATH = "C:\\Users\\tonet\\Desktop\\OpenGl\\windowgl\\x64\\Debug\\models\\mesa\\mesa.fbx";
-//const std::string NANOSUIT_PATH = "C:\\Users\\tonet\\Desktop\\OpenGl\\windowgl\\x64\\Debug\\models\\nanosuit\\nanosuit.obj";
-//const std::string DICE_PATH = "C:\\Users\\tonet\\Desktop\\OpenGl\\windowgl\\x64\\Debug\\models\\dice\\dice.fbx";
-
 const std::string MESA_PATH = "assets\\models\\mesa\\mesa.fbx";
 const std::string NANOSUIT_PATH = "assets\\models\\nanosuit\\nanosuit.obj";
 const std::string DICE_PATH = "assets\\models\\dice\\dice.fbx";
@@ -51,6 +47,8 @@ const std::string TORRE_PATH = "assets\\models\\torre\\torre.obj";
 const std::string CAJA_PATH = "assets\\models\\caja\\caja.obj";
 const std::string PINK_KNIGHT_PATH = "assets\\models\\pink_knight\\pink_knight.obj";
 const std::string ALABARDERO_PATH = "assets\\models\\alabardero\\alabardero.obj";
+const std::string ALABARDERO_ROJO_PATH = "assets\\models\\alabardero_rojo\\alabardero.obj";
+const std::string ALABARDERO_AZUL_PATH = "assets\\models\\alabardero_azul\\alabardero.obj";
 
 // positions of the point lights
 glm::vec3 pointLightPositions[] = {
@@ -108,8 +106,8 @@ int main(int argc, char *argv[])
 	std::cout << "Current path: " << ExePath() << std::endl;
 	std::string gpuName = "Intel";
 	int iterations = 100;
-	int vars = 4000; //This number is half of what it is, because there is two batallions. EXAMPLE: 20000 is 40000 variables.
-	int total_pj = 40000;
+	int vars = 20; //This number is half of what it is, because there is two batallions. EXAMPLE: 20000 is 40000 variables.
+	int total_pj = 20;
 	int totalFrames = 500;
 
 	if (argc >= 6) {
@@ -202,7 +200,7 @@ int main(int argc, char *argv[])
 
 	//GAME LOOP
 	while ((gameManager.update() && totalFrames > 0) || GM::Log::getTotalJayaMeasures() <= 1) {
-		totalFrames--;
+		//totalFrames--;
 	}
 	while (!iaSystem.threadDied());
 	return 0;

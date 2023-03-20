@@ -76,7 +76,7 @@ float MyObjective(__global float* x, int VARS)
     float dy = fmin(rect1[MAX_Y], rect2[MAX_Y]) - fmax(rect1[MIN_Y], rect2[MIN_Y]);
 
     if (dx <= 0 || dy <= 0) {
-        f = -1;
+        f = -1; // TODO ????? Esto no deberia ser MAX_INT????
     }
     else {
         f = dx * dy;  //Area del rectangulo formado por la intersección = lado * lado
