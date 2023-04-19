@@ -117,7 +117,7 @@ namespace GM {
             Log::log("error: Failed to copy data to device memory, returned %s\n" + std::string(TranslateOpenCLError(status)));
             exit(-1);
         }*/
-        cl_int status = clSetKernelArg(kernel, argumentIndex, sizeof(T), (void*)&data);
+        cl_int status = clSetKernelArg(kernel, argumentIndex, sizeof(T), /*(void*)*/&data);
         if (CL_SUCCESS != status)
         {
             Log::log("error: Failed to set argument buffer, returned %s\n" + std::string(TranslateOpenCLError(status)));

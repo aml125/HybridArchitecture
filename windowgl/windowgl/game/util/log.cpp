@@ -44,7 +44,7 @@ namespace GM {
 		//Timemeasures file
 		myfile.open("fps_"+filename);
 		double sum = 0;
-		for (size_t i = 59; i < frameMeasures.size()-1; i++)
+		for (long int i = 59; i < ((long int)frameMeasures.size())-1; i++)
 		{
 			/*std::string avgStr = std::to_string(frameMeasures[i]);
 			std::replace(avgStr.begin(), avgStr.end(), '.', ',');*/
@@ -53,14 +53,14 @@ namespace GM {
 		}
 		double average = sum / (frameMeasures.size() - 60 - 1);
 		std::string avgStr = std::to_string(average);
-		std::replace(avgStr.begin(), avgStr.end(), '.', ',');
+		std::replace(avgStr.begin(), avgStr.end(), ',', '.');
 		myfile << avgStr << std::endl;
 		myfile.close();
 
 		//Jaya file
 		myfile.open("ja_" + filename);
 		sum = 0;
-		for (size_t i = 0; i < jayaMeasures.size() - 1; i++)
+		for (size_t i = 0; i < jayaMeasures.size() - 1 && jayaMeasures.size() > 0; i++)
 		{
 			//std::string avgStr = std::to_string(jayaMeasures[i]);
 			//std::replace(avgStr.begin(), avgStr.end(), '.', ',');
@@ -70,7 +70,7 @@ namespace GM {
 		}
 		average = sum / (jayaMeasures.size() - 1);
 		avgStr = std::to_string(average);
-		std::replace(avgStr.begin(), avgStr.end(), '.', ',');
+		std::replace(avgStr.begin(), avgStr.end(), ',', '.');
 		myfile << avgStr << std::endl;
 		myfile.close();
 	}

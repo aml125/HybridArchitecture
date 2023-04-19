@@ -13,7 +13,7 @@ bool linearOverlap(float x1, float w1, float x2, float w2) {
 /*
 	Ads the offset to the position
 */
-struct mivec3_t calculatePosition(struct mivec3_t* position, __constant struct mivec3_t* length, __constant struct mivec3_t* offset) {
+struct mivec3_t calculatePosition(struct mivec3_t* position, __global struct mivec3_t* length, __global struct mivec3_t* offset) {
 	struct mivec3_t result;
 	result.x = position->x - (length->x / 2) + offset->x;
 	result.y = position->y - (length->y / 2) + offset->y;  // Length / 2 porque asi se define el origen en el centro de la caja,
@@ -25,7 +25,7 @@ struct mivec3_t calculatePosition(struct mivec3_t* position, __constant struct m
 	Calculates if two entities collide
 */
 bool collide(struct AuxPhy_ocl_t* phy1, struct AuxPhy_ocl_t* phy2, 
-	__constant struct BoxCollider_ocl_t* c1, __constant struct BoxCollider_ocl_t* c2) {
+	__global struct BoxCollider_ocl_t* c1, __global struct BoxCollider_ocl_t* c2) {
 	//Add offset to the position
 	struct mivec3_t pos1 = calculatePosition(&phy1->position, &c1->length, &c1->offset);
 	struct mivec3_t pos2 = calculatePosition(&phy2->position, &c2->length, &c2->offset);
@@ -47,7 +47,7 @@ bool collide(struct AuxPhy_ocl_t* phy1, struct AuxPhy_ocl_t* phy2,
 	Modifica la velocidad de phy1 comprobando la colisión de phy1 con phy2
 */
 void modifySpeedAndVelocityOnCollision(struct AuxPhy_ocl_t* phy1, struct AuxPhy_ocl_t* phy2,
-	__constant struct BoxCollider_ocl_t* coll1, __constant struct BoxCollider_ocl_t* coll2, float deltaTime)
+	__global struct BoxCollider_ocl_t* coll1, __global struct BoxCollider_ocl_t* coll2, float deltaTime)
 {
 	bool oneCollides = false;
 	//Get back to the original position, before moving
@@ -94,11 +94,11 @@ void modifySpeedAndVelocityOnCollision(struct AuxPhy_ocl_t* phy1, struct AuxPhy_
 }
 
 
-__kernel void update(__global struct PhysicsComponent_ocl_t* vecPhy, __constant struct BoxCollider_ocl_t* vecBx, __constant ulong* vecIdx, __constant float* deltaTime) {
+__kernel void update(__global struct PhysicsComponent_ocl_t* vecPhy, __global struct BoxCollider_ocl_t* vecBx, __global ulong* vecIdx, float deltaTime, int vecPhySize) {
 	unsigned int i = get_global_id(0);
 	unsigned int j = get_global_id(1);
 
-	if (j > i) { //From size_t j = i + 1; i < vec.size()... 
+	if (j > i && i < vecPhySize && j < vecPhySize) { //From size_t j = i + 1; i < vec.size()... 
 		//Copy data to local memory to avoid race conditions
 		struct AuxPhy_ocl_t phy1;
 		copyPhyGL(&vecPhy[vecIdx[i]], &phy1);
@@ -111,15 +111,15 @@ __kernel void update(__global struct PhysicsComponent_ocl_t* vecPhy, __constant 
 			struct mivec3_t speed1 = phy1.speed;
 			struct mivec3_t speed2 = phy2.speed;
 
-			modifySpeedAndVelocityOnCollision(&phy1, &phy2, &vecBx[i], &vecBx[j], *deltaTime); //Comprobar los dos objetos, por eso se le da la vuelta a los parametros
-			modifySpeedAndVelocityOnCollision(&phy2, &phy1, &vecBx[j], &vecBx[i], *deltaTime);
+			modifySpeedAndVelocityOnCollision(&phy1, &phy2, &vecBx[i], &vecBx[j], deltaTime); //Comprobar los dos objetos, por eso se le da la vuelta a los parametros
+			modifySpeedAndVelocityOnCollision(&phy2, &phy1, &vecBx[j], &vecBx[i], deltaTime);
 
 			//Make the objects not move
 			struct mivec3_t auxSub;
-			multiplyVectorByScalarLL(&speed1, *deltaTime, &auxSub);
+			multiplyVectorByScalarLL(&speed1, deltaTime, &auxSub);
 			substractVectorsLL(&phy1.position, &auxSub, &phy1.position);
 
-			multiplyVectorByScalarLL(&speed2, *deltaTime, &auxSub);
+			multiplyVectorByScalarLL(&speed2, deltaTime, &auxSub);
 			substractVectorsLL(&phy2.position, &auxSub, &phy2.position);
 
 			//Copy data back to global

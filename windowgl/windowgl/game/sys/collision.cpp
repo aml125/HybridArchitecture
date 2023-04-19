@@ -1,13 +1,19 @@
 #include <game/sys/collision.hpp>
 #include <game/sys/render.hpp>
 #include <game\util\log.hpp>
+#include <game\util\opencl-utils.hpp>
 
 namespace GM {
 CollisionSystem_t::CollisionSystem_t()
 {
-	createAndBuildProgram(&ocl, program, "game/ocl/collision_ocl.cl");
-	createKernelFromProgram(ocl, program, kernel, "update");
-	deltaTimeBuffer = createFloatParam(ocl, RenderSystem_t::deltaTime);
+	if (ocl == NULL) {
+		Log::log("ERROR OpenCLArgs (ocl) in System_t has to be set before initializing the systems");
+		Log::flush();
+		exit(-1);
+	}
+	createAndBuildProgram(ocl, program, "game/ocl/collision_ocl.cl");
+	createKernelFromProgram(*ocl, program, kernel, "update");
+	//deltaTimeBuffer = createFloatParam(op->ocl, RenderSystem_t::deltaTime);
 }
 
 /*
@@ -49,27 +55,39 @@ void CollisionSystem_t::update(ECS::EntityManager_t& g) {
 	std::vector<BoxCollider_t>& vecBx = g.getComponents<BoxCollider_t>();
 
 	if (vecPhy.size() != lastPhysicsVectorSize) {
-		createBuffer(ocl, phyBuffer, true, vecPhy);
+		createBuffer(*ocl, phyBuffer, true, vecPhy);
 		lastPhysicsVectorSize = vecPhy.size();
 	}
 	if (vecBx.size() != lastCollisionsVectorSize) {
-		createBuffer(ocl, bxBuffer, true, vecBx);
+		createBuffer(*ocl, bxBuffer, true, vecBx);
 		vecIndex = getPhyIndexFromBx(g);
-		createBuffer(ocl, indexBuffer, false, vecIndex);
+		createBuffer(*ocl, indexBuffer, false, vecIndex);
 		lastCollisionsVectorSize = vecBx.size();
 	}
 
-	copyParameter(ocl, kernel, 0, phyBuffer, vecPhy);
-	copyParameter(ocl, kernel, 1, bxBuffer, vecBx);
-	copyParameter(ocl, kernel, 2, indexBuffer, vecIndex);
+	copyParameter(*ocl, kernel, 0, phyBuffer, vecPhy);
+	copyParameter(*ocl, kernel, 1, bxBuffer, vecBx);
+	copyParameter(*ocl, kernel, 2, indexBuffer, vecIndex);
 
-	copyFloatParam(ocl, kernel, 3, deltaTimeBuffer, RenderSystem_t::deltaTime);
-
-	unsigned int dimensionSizes[] = { vecBx.size(), vecBx.size()}; //Definimos el tamaño de las dos dimensiones
-	unsigned int localSizes[] = { 1, 1 };
-	executeKernel(ocl, kernel, 2, dimensionSizes, localSizes);
-
-	readVectorBuffer(ocl, phyBuffer, vecPhy);
+	//copyFloatParam(op->ocl, kernel, 3, deltaTimeBuffer, RenderSystem_t::deltaTime);
+	cl_float dt = RenderSystem_t::deltaTime;
+	copySimpleParameter<cl_float>(*ocl, kernel, 3, dt);
+	cl_int vecSize = (int)vecBx.size();
+	copySimpleParameter<cl_int>(*ocl, kernel, 4, vecSize);
+	int amount_x, amount_y;
+	if (vecBx.size() % 8 == 0) {
+		amount_x = vecBx.size();
+		amount_y = amount_x;
+	}
+	else {
+		amount_x = vecBx.size() + 8 - (vecBx.size() % 8);
+		amount_y = amount_x;
+	}
+	unsigned int globalDimensionSizes[] = { amount_x, amount_y}; //Definimos el tamaño de las dos dimensiones. Los convertimos a multiplo de 8
+	unsigned int localSizes[] = { 8, 8 };
+	executeKernel(*ocl, kernel, 2, globalDimensionSizes, localSizes); // Null local dimensions lets OpenCL decide the optimal size
+	clFinish(ocl->commandQueue);
+	readVectorBuffer(*ocl, phyBuffer, vecPhy);
 
 	//CPU Implementation
 	//auto& vec = g.getComponents<BoxCollider_t>();
@@ -94,7 +112,8 @@ void CollisionSystem_t::update(ECS::EntityManager_t& g) {
 	//			phy2->position -= speed2 * RenderSystem_t::deltaTime;
 	//		}
  //       }
- //   }auto& vec = g.getComponents<BoxCollider_t>();
+ //   }
+	////auto& vec = g.getComponents<BoxCollider_t>();
  //   for (size_t i = 0; i < vec.size(); ++i) {
 	//	auto& coll1 = vec[i];
 	//	//TODO QUITAR DUPLICIDAD

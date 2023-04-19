@@ -30,7 +30,7 @@ private :
 	cl_mem phyBuffer{};
 	cl_mem bxBuffer{};
 	cl_mem indexBuffer{};
-	cl_mem deltaTimeBuffer{};
+	//cl_mem deltaTimeBuffer{};
 	std::size_t lastPhysicsVectorSize = 0;
 	std::size_t lastCollisionsVectorSize = 0;
 	std::vector<unsigned _int64> vecIndex;

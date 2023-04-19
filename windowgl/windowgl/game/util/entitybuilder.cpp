@@ -42,6 +42,22 @@ namespace GM {
 		return e;
 	}
 
+	ECS::Entity_t& EntityBuilder::buildInstantiatedEntityWithModel(GameManager& gm, const std::string& modelPath)
+	{
+		auto& em = gm.entityMan;
+		ECS::Entity_t& e = em.createEntity();
+		auto& ph = em.createComponent<PhysicsComponent_t>(e.entityID);
+		e.addComponent(ph);
+		ph.speed.x = ph.speed.y = ph.speed.z = 0;
+
+		//Add model
+		InstantiatedModel_t& mod = em.createComponent<InstantiatedModel_t>(e.entityID);
+		mod.loadModel(modelPath);
+		e.addComponent(mod);
+
+		return e;
+	}
+
 	ECS::Entity_t& EntityBuilder::buildInstantiatedEntityWithModelAndCollision(GameManager& gm, const std::string& modelPath,
 		const glm::vec3& colliderLength, const glm::vec3& colliderOffset)
 	{
@@ -80,6 +96,20 @@ namespace GM {
 	}
 
 	ECS::Entity_t& EntityBuilder::buildFullInstantiatedEntity(GameManager& gm, const glm::vec3& position,
+		const std::string& modelPath)
+	{
+		auto& e = buildInstantiatedEntityWithModel(gm, modelPath);
+		auto* phy = e.getComponent<PhysicsComponent_t>();
+		if (phy == nullptr) {
+			GM::Log::log("EntityBuilder__buildFullEntity() ERROR created entity has no physics system. SOMETHING GONE TERRIBLY WRONG");
+			exit(-1);
+		}
+		//Set position
+		phy->position = position;
+		return e;
+	}
+
+	ECS::Entity_t& EntityBuilder::buildFullInstantiatedEntityWithColl(GameManager& gm, const glm::vec3& position,
 		const std::string& modelPath, const glm::vec3& colliderLength, const glm::vec3& colliderOffset)
 	{
 		auto& e = buildInstantiatedEntityWithModelAndCollision(gm, modelPath, colliderLength, colliderOffset);
@@ -98,7 +128,7 @@ namespace GM {
 		const std::string& modelPath, unsigned int patternNumber, IASystem_t& iaSystem) {
 		constexpr glm::vec3 cLength1{ 1, 1.55f, 0.5f };
 		constexpr glm::vec3 cOffset1{ 0, 0.78f, 0 };
-		ECS::Entity_t& e1 = GM::EntityBuilder::buildFullInstantiatedEntity(gm, position, modelPath, cLength1, cOffset1);
+		ECS::Entity_t& e1 = GM::EntityBuilder::buildFullInstantiatedEntityWithColl(gm, position, modelPath, cLength1, cOffset1);
 		
 		//IA
 		GM::IA_t& ia = gm.entityMan.createComponent<GM::IA_t>(e1.entityID);
@@ -111,11 +141,11 @@ namespace GM {
 		phy1->gravity = true;
 		return e1;
 	}
-	ECS::Entity_t& EntityBuilder::buildNPCWithoutIa(GameManager& gm, const glm::vec3& position,
+	ECS::Entity_t& EntityBuilder::buildNPCWithoutIaColl(GameManager& gm, const glm::vec3& position,
 		const std::string& modelPath, unsigned int patternNumber, IASystem_t& iaSystem) {
 		constexpr glm::vec3 cLength1{ 1, 1.55f, 0.5f };
 		constexpr glm::vec3 cOffset1{ 0, 0.78f, 0 };
-		ECS::Entity_t& e1 = GM::EntityBuilder::buildFullInstantiatedEntity(gm, position, modelPath, cLength1, cOffset1);
+		ECS::Entity_t& e1 = GM::EntityBuilder::buildFullInstantiatedEntity(gm, position, modelPath);
 
 		//IA
 		/*GM::IA_t& ia = gm.entityMan.createComponent<GM::IA_t>(e1.entityID);
@@ -156,7 +186,7 @@ namespace GM {
 		}
 	}
 
-	void EntityBuilder::buildPatternWithoutIa(GameManager& gm, IASystem_t& iaSys, unsigned int totalSlots, unsigned int depth, float separation, const std::string& modelPath, const glm::vec3& initialPosition)
+	void EntityBuilder::buildPatternWithoutIaColl(GameManager& gm, IASystem_t& iaSys, unsigned int totalSlots, unsigned int depth, float separation, const std::string& modelPath, const glm::vec3& initialPosition)
 	{
 		//Pattern& pat = iaSys.fm.createPattern(gm.entityMan);
 		int rowSlots = totalSlots / depth;
@@ -176,7 +206,7 @@ namespace GM {
 			for (int j = 0; j < rowSlots; j++) {
 				//auto& loc = pat.slots.emplace_back();
 				//loc.position = { xPos, 0, zPos };
-				buildNPCWithoutIa(gm, (initialPosition + glm::vec3{ xPos, 0, zPos }), modelPath, 0, iaSys);
+				buildNPCWithoutIaColl(gm, (initialPosition + glm::vec3{ xPos, 0, zPos }), modelPath, 0, iaSys);
 				xPos += separation;
 			}
 			xPos = initXPos;

@@ -15,12 +15,16 @@
 #include <game\sys\collision.hpp>
 #include <game\sys\render.hpp>
 #include <game\sys\input.hpp>
+#include <game\sys\system.hpp>
 #include <game\util\entitybuilder.hpp>
 #include <game\man\gamemanager.hpp>
 #include <game\cmp\ia.hpp>
 #include <game/sys/ia.hpp>
 #include <game\util\Log.hpp>
+#include <game\util\opencl-utils.hpp>
 #include <filesystem>
+
+#define TESTING
 
 
 constexpr glm::vec3 cubePositions[] = {
@@ -77,7 +81,7 @@ void down() {
 }
 
 void space() {
-	/*player->y = 0.6 * GM::RenderSystem_t::deltaTime;*/
+	player->y = -0.6 * GM::RenderSystem_t::deltaTime;
 }
 
 float lastPushTime = 0.0f;
@@ -101,19 +105,23 @@ std::string ExePath() {
 	return std::string(buffer);
 }
 
+GM::ocl_args_d_t* GM::System_t::ocl = NULL; // Declare the symbol here
+
 int main(int argc, char *argv[])
 {
 	std::cout << "Current path: " << ExePath() << std::endl;
+	
+	// Default params
 	std::string gpuName = "Intel";
 	int iterations = 100;
-	int vars = 20; //This number is half of what it is, because there is two batallions. EXAMPLE: 20000 is 40000 variables.
-	int total_pj = 20;
-	int totalFrames = 500;
+	int vars = 4100; // Number of PJ with AI and Collision
+	int total_pj = 4100;
+	int totalFrames = 20000;
 
 	if (argc >= 6) {
 		gpuName = std::string(argv[1]);
 		iterations = atoi(argv[2]);
-		vars = atoi(argv[3])/2;
+		vars = atoi(argv[3]);
 		total_pj = atoi(argv[4]);
 		totalFrames = atoi(argv[5]);
 	}
@@ -123,16 +131,23 @@ int main(int argc, char *argv[])
 		exit(-1);
 	}
 
-	total_pj -= vars;
+	int old_total_pj_val = total_pj;
+	total_pj -= vars; // calculate the extra PJ without IA and Collision so the total number is the indicated
 
-	GM::Log::log("Extra pj: " + total_pj);
+	GM::Log::log("PARAMS --> Iterations: " + std::to_string(iterations) 
+		+ " Vars: " + std::to_string(vars)
+		+ " Total PJ: " + std::to_string(old_total_pj_val)
+		+ " Total Frames: " + std::to_string(totalFrames)
+		+ " Extra PJ: " + std::to_string(total_pj));
 
 	GM::Window_t window{ kSCRWIDTH, kSCRHEIGHT };
 	GM::RenderSystem_t render(window);
 	GM::GameManager gameManager{ &render };
 
+	GM::ocl_args_d_t oclp{ gpuName, true };
+	GM::System_t::ocl = &oclp; // Set the Open CL params before initializing the systems, as they need that set before initializing
 	GM::InputSystem_t input(window);
-	GM::IASystem_t iaSystem{gpuName, iterations};
+	GM::IASystem_t iaSystem{iterations};
 	GM::PhysicsSystem_t physics;
 	GM::CollisionSystem_t collision;
 
@@ -161,29 +176,29 @@ int main(int argc, char *argv[])
 	//Formation 2
 	GM::EntityBuilder::buildPattern(gameManager, iaSystem, vars/2, 1, 2, ALABARDERO_PATH, { -5, 1, 50 });
 
-	//Formation 3 without ia
-	GM::EntityBuilder::buildPatternWithoutIa(gameManager, iaSystem, total_pj/2, 100, 2, ALABARDERO_PATH, { -5, 1, 50 });
+	//Formation 3 without ia and collisions
+	GM::EntityBuilder::buildPatternWithoutIaColl(gameManager, iaSystem, total_pj/2, 100, 2, ALABARDERO_PATH, { -5, 1, 50 });
 
-	//Formation 4
-	GM::EntityBuilder::buildPatternWithoutIa(gameManager, iaSystem, total_pj/2, 100, 2, ALABARDERO_PATH, { -5, 1, 50 });
+	//Formation 4 without ia and collisions
+	GM::EntityBuilder::buildPatternWithoutIaColl(gameManager, iaSystem, total_pj/2, 100, 2, ALABARDERO_PATH, { -5, 1, 50 });
 	
-	auto& auxAl = GM::EntityBuilder::buildFullEntity(gameManager, { 1, 1, 1 }, ALABARDERO_PATH, { 1, 1.55f, 0.5f }, { 0, 0.78f, 0 });
-	player = &auxAl.getComponent<GM::PhysicsComponent_t>()->position;
+	/*auto& auxAl = GM::EntityBuilder::buildFullEntity(gameManager, { 1, 1, 1 }, ALABARDERO_PATH, { 1, 1.55f, 0.5f }, { 0, 0.78f, 0 });
+	player = &auxAl.getComponent<GM::PhysicsComponent_t>()->position;*/
 
-	glm::vec3 cLength0{ 103.75f, 0.75f,  47.32f };
+	/*glm::vec3 cLength0{ 103.75f, 0.75f,  47.32f };
 	glm::vec3 cOffset0{ 1.875f, 0.375f, -1.98 };
 	ECS::Entity_t& suelo = GM::EntityBuilder::buildFullEntity(gameManager, glm::vec3(-8.5, 0, 0), SUELO_PATH, cLength0, cOffset0);
 	auto* sueloPhy = suelo.getComponent<GM::PhysicsComponent_t>();
 	sueloPhy->scale.x = 5;
-	sueloPhy->scale.z = 2;
+	sueloPhy->scale.z = 2;*/
 
 	//Tower
-	glm::vec3 cLength2{ 1.25f, 3, 2 };
+	/*glm::vec3 cLength2{ 1.25f, 3, 2 };
 	glm::vec3 cOffset2{ 0.625f, 1.5f, -1.0f };
 	auto& torre = GM::EntityBuilder::buildFullEntity(gameManager, glm::vec3(0, 1, -18.5f), TORRE_PATH, cLength2, cOffset2);
 	auto* phy2 = torre.getComponent<GM::PhysicsComponent_t>();
 	phy2->gravity = true;
-	phy2->scale = { 0.0015f, 0.0015f, 0.0015f };
+	phy2->scale = { 0.0015f, 0.0015f, 0.0015f };*/
 
 	/*GM::PointLight_t pt({3, 3, -1.5}, { 0.05f, 0.05f, 0.05f }, { 0.8f, 0.8f, 0.8f }, { 1.0f, 1.0f, 1.0f });
 	render.lights.push_back(pt);*/
@@ -199,9 +214,13 @@ int main(int argc, char *argv[])
 	render.lights.push_back(pt6);
 
 	//GAME LOOP
-	while ((gameManager.update() && totalFrames > 0) || GM::Log::getTotalJayaMeasures() <= 1) {
-		//totalFrames--;
+#ifdef TESTING
+	while ((gameManager.update() && totalFrames > 0) /* || GM::Log::getTotalJayaMeasures() <= 1*/) {
+		totalFrames--;
 	}
+#else
+	while (gameManager.update());
+#endif
 	while (!iaSystem.threadDied());
 	return 0;
 }

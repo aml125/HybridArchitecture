@@ -582,17 +582,12 @@ namespace GM {
         Execute the kernel. Must have set all parameters before
     */
     void executeKernel(const ocl_args_d_t& ocl, cl_kernel& kernel, const unsigned int dimensions, unsigned int* globalDimensionSizes, unsigned int* localDimensionSizes) {
+        /*Step 10: Running the kernel.*/
+        //Setup global work sizes for every dimension
         if (globalDimensionSizes == nullptr) {
             Log::log("Error: Failed to run kernel, globalDimensionSizes is null");
             exit(-1);
         }
-        if (localDimensionSizes == nullptr) {
-            Log::log("Error: Failed to run kernel, localDimensionSizes is null");
-            exit(-1);
-        }
-
-        /*Step 10: Running the kernel.*/
-        //Setup global work sizes for every dimension
         size_t* global_work_size = new size_t[dimensions];
         for (size_t i = 0; i < dimensions; i++)
         {
@@ -600,14 +595,22 @@ namespace GM {
         }
 
         //Setup local work sizes for every dimension
-        size_t* local_work_size = new size_t[dimensions];
-        for (size_t i = 0; i < dimensions; i++)
-        {
-            local_work_size[i] = localDimensionSizes[i];
+        size_t* local_work_size = NULL;
+        if (localDimensionSizes != nullptr) {
+            local_work_size = new size_t[dimensions];
+            for (size_t i = 0; i < dimensions; i++)
+            {
+                local_work_size[i] = localDimensionSizes[i];
+            }
         }
 
         cl_int status = clEnqueueNDRangeKernel(ocl.commandQueue, kernel, dimensions, NULL,
             global_work_size, local_work_size, 0, NULL, NULL);
+
+        // Free dimension arrays
+        free(global_work_size);
+        free(local_work_size);
+
         if (CL_SUCCESS != status)
         {
             Log::log("Error: Failed to run kernel, return %s\n" + std::string(TranslateOpenCLError(status)));

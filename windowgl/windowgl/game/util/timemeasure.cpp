@@ -1,23 +1,26 @@
 #include <game/util/timemeasure.hpp>
 #include <game\util\log.hpp>
+#include <sysinfoapi.h>
 
 namespace GM {
 	void TimeMeasure::StartCounter()
 	{
-		LARGE_INTEGER li;
-		if (!QueryPerformanceFrequency(&li))
-			GM::Log::log("QueryPerformanceFrequency failed!");
+		FILETIME fileTime{};
+		ULARGE_INTEGER li;
 
-		PCFreq = double(li.QuadPart) / 1000.0;
-
-		QueryPerformanceCounter(&li);
+		GetSystemTimePreciseAsFileTime(&fileTime);
+		li.LowPart = fileTime.dwLowDateTime;
+		li.HighPart = fileTime.dwHighDateTime;
 		CounterStart = li.QuadPart;
 	}
 
 	double TimeMeasure::GetCounter()
 	{
-		LARGE_INTEGER li;
-		QueryPerformanceCounter(&li);
-		return double(li.QuadPart - CounterStart) / PCFreq;
+		FILETIME fileTime{};
+		ULARGE_INTEGER li;
+		GetSystemTimePreciseAsFileTime(&fileTime);
+		li.LowPart = fileTime.dwLowDateTime;
+		li.HighPart = fileTime.dwHighDateTime;
+		return double(li.QuadPart - CounterStart) / 10000; // 100 nanosecond intervals to miliseconds
 	}
 }

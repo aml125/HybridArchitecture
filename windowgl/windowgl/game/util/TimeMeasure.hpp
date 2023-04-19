@@ -1,8 +1,10 @@
 #pragma once
 #include <windows.h>
 #include <iostream>
+#include <Profileapi.h>
+
 namespace GM {
-	struct TimeMeasure {
+	struct TimeMeasure { // TODO CAMBIAR A https://learn.microsoft.com/en-us/windows/win32/api/sysinfoapi/nf-sysinfoapi-getsystemtimepreciseasfiletime
 		void StartCounter();
 		double GetCounter();
 

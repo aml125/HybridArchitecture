@@ -18,10 +18,10 @@ namespace GM {
 	void launchJaya(OpenCLParams* op, cl_ulong seed, int vars, int iterations, bool* threadLaunched, TimeMeasure& tm2);
 #endif
 
-	IASystem_t::IASystem_t(std::string gpuName, int iterations)
-#ifdef JAYA
-		: op{gpuName}
-#endif
+	IASystem_t::IASystem_t(int iterations)
+//#ifdef JAYA
+//		: op{gpuName}
+//#endif
 	{
 #ifdef JAYA
 		ITERATIONS = iterations;

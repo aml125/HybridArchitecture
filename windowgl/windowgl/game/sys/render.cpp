@@ -63,10 +63,6 @@ RenderSystem_t::RenderSystem_t(Window_t window)
 
 	//Create instance buffer
 	glGenBuffers(1, &instanceVBO);
-
-#ifdef TIMEMEASURE
-	tm.StartCounter();
-#endif
 }
 
 
@@ -83,7 +79,7 @@ void RenderSystem_t::terminateWindow() {
 
 void RenderSystem_t::update(ECS::EntityManager_t& g) {
 	#ifdef TIMEMEASURE
-	 Log::log("Non graphic computing: " + std::to_string(tm.GetCounter()));
+	 //Log::log("Non graphic computing: " + std::to_string(tm.GetCounter()));
 	 tm.StartCounter();
 	#endif
 	//frame delta time
@@ -130,7 +126,7 @@ void RenderSystem_t::update(ECS::EntityManager_t& g) {
 
 #ifdef TIMEMEASURE
 	Log::log("Graphic computing: " + std::to_string(tm.GetCounter()));
-	tm.StartCounter();
+	//tm.StartCounter();
 #endif
 }
 
@@ -387,7 +383,7 @@ void RenderSystem_t::drawCollisionBox(const BoxCollider_t& box, const glm::vec3 
 	lightShader.setMatrix4("model", model);
 	glDrawArrays(GL_TRIANGLES, 0, 36);
 	glBindVertexArray(0);
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 }
 
 void RenderSystem_t::drawLightSource(const PointLight_t& light) const
