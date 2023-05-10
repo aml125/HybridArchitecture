@@ -15,43 +15,38 @@
 
 namespace GM {
 
-//#define JAYA
+#define JAYA
 
-//#ifdef JAYA
-//	struct OpenCLParams {
-//		OpenCLParams (std::string gpuName) 
-//			: ocl{ gpuName, true }
-//		{
-//
-//		}
-//
-//		//Opencl stuff
-//		cl_mem matrixBuffer{};
-//		cl_mem matrixBuffer2{};
-//		cl_mem varsBuffer{};
-//		cl_mem seedBuffer{};
-//		cl_mem maxValBuffer{};
-//		cl_mem maxValIndexBuffer{};
-//		cl_mem minValBuffer{};
-//		cl_mem minValIndexBuffer{};
-//		cl_mem maxValLocalBuffer{};
-//		cl_mem maxValLocalIndexBuffer{};
-//		cl_mem minValLocalBuffer{};
-//		cl_mem minValLocalIndexBuffer{};
-//		cl_mem minMaxBuffer{};
-//		GM::ocl_args_d_t ocl{std::string("NVIDIA"), true}; // These are default params, real params are passed in the constructor
-//		cl_program       program;           // hold the program handler
-//		cl_kernel        kernel;            // hold the kernel handler
-//		
-//		//Values
-//		std::vector<float> matrix;
-//		std::vector<float> matrix2;
-//		int imin;
-//		int imax;
-//		float minVal;
-//		float maxVal;
-//	};
-//#endif
+#ifdef JAYA
+	struct OpenCLParams {
+		/*OpenCLParams () 
+		{
+
+		}*/
+
+		//Opencl stuff
+		cl_mem matrixBuffer{};
+		cl_mem matrixBuffer2{};
+		cl_mem maxValBuffer{};
+		cl_mem maxValIndexBuffer{};
+		cl_mem minValBuffer{};
+		cl_mem minValIndexBuffer{};
+		//cl_mem maxValLocalBuffer{};
+		//cl_mem maxValLocalIndexBuffer{};
+		//cl_mem minValLocalBuffer{};
+		//cl_mem minValLocalIndexBuffer{};
+		cl_program       program;           // hold the program handler
+		cl_kernel        kernel;            // hold the kernel handler
+		
+		//Values
+		std::vector<float> matrix;
+		std::vector<float> matrix2;
+		int imin;
+		int imax;
+		float minVal;
+		float maxVal;
+	};
+#endif
 
 	struct Steering {
 		glm::vec3 aceleration{};
@@ -74,6 +69,7 @@ namespace GM {
 		unsigned int findClosestEnemy(const ECS::EntityManager_t& em, const glm::vec3& pos, unsigned int formation);
 		void setTargetOnRangeOfAttack(const ECS::EntityManager_t& em, IA_t& ia);
 		void readJayaResults(std::vector<IA_t>& vecIA, int vars);
+		void createBuffers(int vars);
 		int totalArrived = 0;
 		TimeMeasure tm;
 		TimeMeasure tm2;
@@ -81,9 +77,9 @@ namespace GM {
 		bool jayaFirstTime = true;
 		int ITERATIONS = 100;
 
-//#ifdef JAYA
-//		OpenCLParams op{"Intel"};  // Default param. The constructor sets this option
-//#endif
+#ifdef JAYA
+		OpenCLParams op{};  // Default param. The constructor sets this option
+#endif
 
 		int seed = INITIAL_SEED;
 	};

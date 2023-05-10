@@ -6,6 +6,7 @@
 namespace GM {
 CollisionSystem_t::CollisionSystem_t()
 {
+#ifdef COLLISION
 	if (ocl == NULL) {
 		Log::log("ERROR OpenCLArgs (ocl) in System_t has to be set before initializing the systems");
 		Log::flush();
@@ -14,6 +15,7 @@ CollisionSystem_t::CollisionSystem_t()
 	createAndBuildProgram(ocl, program, "game/ocl/collision_ocl.cl");
 	createKernelFromProgram(*ocl, program, kernel, "update");
 	//deltaTimeBuffer = createFloatParam(op->ocl, RenderSystem_t::deltaTime);
+#endif
 }
 
 /*
@@ -47,6 +49,7 @@ std::vector<unsigned _int64> CollisionSystem_t::getPhyIndexFromBx(const ECS::Ent
 }
 
 void CollisionSystem_t::update(ECS::EntityManager_t& g) {
+#ifdef COLLISION
 #ifdef TIMEMEASURE
 	tm.StartCounter();
 #endif
@@ -54,11 +57,11 @@ void CollisionSystem_t::update(ECS::EntityManager_t& g) {
 	std::vector<PhysicsComponent_t>& vecPhy = g.getComponents<PhysicsComponent_t>();
 	std::vector<BoxCollider_t>& vecBx = g.getComponents<BoxCollider_t>();
 
-	if (vecPhy.size() != lastPhysicsVectorSize) {
+	if (vecPhy.size() != lastPhysicsVectorSize) { //TODO liberar buffer anterior antes de reservar
 		createBuffer(*ocl, phyBuffer, true, vecPhy);
 		lastPhysicsVectorSize = vecPhy.size();
 	}
-	if (vecBx.size() != lastCollisionsVectorSize) {
+	if (vecBx.size() != lastCollisionsVectorSize) { //TODO liberar buffer anterior antes de reservar
 		createBuffer(*ocl, bxBuffer, true, vecBx);
 		vecIndex = getPhyIndexFromBx(g);
 		createBuffer(*ocl, indexBuffer, false, vecIndex);
@@ -138,6 +141,7 @@ void CollisionSystem_t::update(ECS::EntityManager_t& g) {
  //   }
 #ifdef TIMEMEASURE
 	Log::log("Collisions: " + std::to_string(tm.GetCounter()));
+#endif
 #endif
 }
 

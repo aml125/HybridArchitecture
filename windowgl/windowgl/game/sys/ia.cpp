@@ -6,27 +6,31 @@
 #include <game\util\log.hpp>
 
 
+
 //TODO Refactor: All entities should't have to have a pattern assigned
 //TODO make formations not count on y axis, so they walk on the terrain
 namespace GM {
+
+#ifdef JAYA
+	void launchJaya(ocl_args_d_t *ocl, OpenCLParams* op, cl_ulong seed, int vars, int iterations, bool* threadLaunched);
+#endif
+
 	bool IASystem_t::threadDied() {
 
 		return !jayaThreadLaunched;
 	}
-#ifdef JAYA
-	void createBuffers(OpenCLParams* op, int vars);
-	void launchJaya(OpenCLParams* op, cl_ulong seed, int vars, int iterations, bool* threadLaunched, TimeMeasure& tm2);
-#endif
 
 	IASystem_t::IASystem_t(int iterations)
-//#ifdef JAYA
-//		: op{gpuName}
-//#endif
 	{
 #ifdef JAYA
 		ITERATIONS = iterations;
-		createAndBuildProgram(&op.ocl, op.program, "game/ocl/jaya.cl");
-		createKernelFromProgram(op.ocl, op.program, op.kernel, "jayaGPU");
+		if (ocl == NULL) {
+			Log::log("ERROR OpenCLArgs (ocl) in System_t has to be set before initializing the systems");
+			Log::flush();
+			exit(-1);
+		}
+		createAndBuildProgram(ocl, op.program, "game/ocl/jaya.cl");
+		createKernelFromProgram(*ocl, op.program, op.kernel, "jayaGPU");
 #endif
 	}
 
@@ -65,17 +69,17 @@ namespace GM {
 			else {
 				size_t sz = POPULATION * (vars + 1); //Vars + 1
 				Log::log(std::string("Vars: ") + std::to_string(vars));
-				Log::log(std::string("Allocated size: ") + std::to_string(sz * sizeof(float) / 1024 / 1024));
+				Log::log(std::string("Allocated size: ") + std::to_string(sz * sizeof(float) / 1024 / 1024) + "MB");
 				op.matrix.resize(sz); // +1 to store min value
 				op.matrix2.resize(sz);
-				createBuffers(&op, vars);
+				createBuffers(vars);
 			}
 			jayaFirstTime = false;
 			jayaThreadLaunched = true;
 			/*OpenCLParams* op, std::vector<float>* matrix, std::vector<float>* matrix2, int seed, int vars, bool* threadLaunched*/
-			std::thread thread(launchJaya, &op, seed++, vars, ITERATIONS, &jayaThreadLaunched, tm2);
+			std::thread thread(launchJaya, ocl, &op, seed++, vars, ITERATIONS, &jayaThreadLaunched);
 			thread.detach();
-			//launchJaya(ocl, &op, &matrix, &matrix2, seed, (int)vecIA.size(), &jayaThreadLaunched);
+			//launchJaya(ocl, &op, seed++, vars, ITERATIONS, &jayaThreadLaunched, tm2);
 		}
 #endif
 #ifdef TIMEMEASURE
@@ -286,69 +290,48 @@ namespace GM {
 	}
 
 #ifdef JAYA
-	void createBuffers(OpenCLParams* op, int vars) {
-		float aux = 0;
-		createBuffer(op->ocl, op->matrixBuffer, true, op->matrix);
-		createSimpleBuffer(op->ocl, op->maxValBuffer, true, aux);
-		createSimpleBuffer(op->ocl, op->minValBuffer, true, aux);
-		createSimpleBuffer(op->ocl, op->maxValIndexBuffer, true, aux);
-		createSimpleBuffer(op->ocl, op->minValIndexBuffer, true, aux);
-		createBuffer(op->ocl, op->matrixBuffer2, true, op->matrix2);
+	void IASystem_t::createBuffers(int vars) {
+		cl_float aux = 0;
+		createBuffer(*ocl, op.matrixBuffer, true, op.matrix);
+		createSimpleBuffer<cl_float>(*ocl, op.maxValBuffer, true, aux);
+		createSimpleBuffer<cl_float>(*ocl, op.minValBuffer, true, aux);
+		createSimpleBuffer<cl_float>(*ocl, op.maxValIndexBuffer, true, aux);
+		createSimpleBuffer<cl_float>(*ocl, op.minValIndexBuffer, true, aux);
+		createBuffer(*ocl, op.matrixBuffer2, true, op.matrix2);
 
-		createLocalParameter<float>(op->kernel, 8, POPULATION * 2);
-		createLocalParameter<float>(op->kernel, 9, POPULATION * 2);
-		createLocalParameter<int>(op->kernel, 10, POPULATION * 2);
-		createLocalParameter<int>(op->kernel, 11, POPULATION * 2);
+		createLocalParameter<cl_float>(op.kernel, 8, POPULATION * 2);
+		createLocalParameter<cl_float>(op.kernel, 9, POPULATION * 2);
+		createLocalParameter<int>(op.kernel, 10, POPULATION * 2);
+		createLocalParameter<int>(op.kernel, 11, POPULATION * 2);
 
-		copyParameter(op->ocl, op->kernel, 0, op->matrixBuffer, op->matrix);
-		copyParameter(op->ocl, op->kernel, 12, op->matrixBuffer2, op->matrix2);
+		copyParameter(*ocl, op.kernel, 0, op.matrixBuffer, op.matrix);
+		copyParameter(*ocl, op.kernel, 12, op.matrixBuffer2, op.matrix2);
 	}
 
-	void launchJaya(OpenCLParams* op, cl_ulong seed, int vars, int iterations, bool* threadLaunched, TimeMeasure &tm2)
+	void launchJaya(ocl_args_d_t *ocl, OpenCLParams* op, cl_ulong seed, int vars, int iterations, bool* threadLaunched)
 	{
+		TimeMeasure tm2{};
 #ifdef TIMEMEASURE
 		//Log::log("Starting Jaya.");
 		tm2.StartCounter();
 #endif
-		//size_t sz = POPULATION * (vars + 1);
-		//Log::log(std::string("Allocated size: ") + std::to_string(sz*sizeof(float)));
-		//op->matrix.resize(sz); // +1 to store min value
-		//op->matrix2.resize(POPULATION * (vars + 1));
-		//createBuffers(op, vars);
+		
+		cl_float aux = 0.0f;
+		copyMatrixParameter<cl_float>(*ocl, op->kernel, 1, op->maxValBuffer, &aux, 1);
 
-		/*createBuffer(op->ocl, op->matrixBuffer, true, op->matrix);*/
-		/*copyParameter(op->ocl, op->kernel, 0, op->matrixBuffer, op->matrix);*/
+		copyMatrixParameter<cl_float>(*ocl, op->kernel, 2, op->minValBuffer, &aux, 1);
 
-		float aux = 0;
-		/*createSimpleBuffer(op->ocl, op->maxValBuffer, true, aux);*/
-		copyMatrixParameter<float>(op->ocl, op->kernel, 1, op->maxValBuffer, &aux, 1);
+		copyMatrixParameter<cl_float>(*ocl, op->kernel, 3, op->maxValIndexBuffer, &aux, 1);
 
-		/*createSimpleBuffer(op->ocl, op->minValBuffer, true, aux);*/
-		copyMatrixParameter<float>(op->ocl, op->kernel, 2, op->minValBuffer, &aux, 1);
+		copyMatrixParameter<cl_float>(*ocl, op->kernel, 4, op->minValIndexBuffer, &aux, 1);
 
-		/*createSimpleBuffer(op->ocl, op->maxValIndexBuffer, true, aux);*/
-		copyMatrixParameter<float>(op->ocl, op->kernel, 3, op->maxValIndexBuffer, &aux, 1);
-
-		/*createSimpleBuffer(op->ocl, op->minValIndexBuffer, true, aux);*/
-		copyMatrixParameter<float>(op->ocl, op->kernel, 4, op->minValIndexBuffer, &aux, 1);
-
-		copySimpleParameter(op->ocl, op->kernel, 5, vars);
+		copySimpleParameter(*ocl, op->kernel, 5, vars);
 		//Log::log("Half way copied");
 
-		copySimpleParameter(op->ocl, op->kernel, 6, seed);
+		copySimpleParameter(*ocl, op->kernel, 6, seed);
 
-		copySimpleParameter(op->ocl, op->kernel, 7, iterations);
+		copySimpleParameter(*ocl, op->kernel, 7, iterations);
 
-		//copySimpleParameter(op->ocl, kernel, 7, runs);
-
-
-		/*createLocalParameter<float>(op->kernel, 8, POPULATION * 2);
-		createLocalParameter<float>(op->kernel, 9, POPULATION * 2);
-		createLocalParameter<int>(op->kernel, 10, POPULATION * 2);
-		createLocalParameter<int>(op->kernel, 11, POPULATION * 2);*/
-
-		/*createBuffer(op->ocl, op->matrixBuffer2, true, op->matrix2);*/
-		/*copyParameter(op->ocl, op->kernel, 12, op->matrixBuffer2, op->matrix2);*/
 
 		unsigned int globalDimensionSizes[] = { POPULATION };
 		unsigned int localDimensionSizes[] = { POPULATION };
@@ -362,8 +345,8 @@ namespace GM {
 		//Log::log("Starting Jaya.");
 		tm2.StartCounter();
 #endif
-		GM::executeKernel(op->ocl, op->kernel, 1, globalDimensionSizes, localDimensionSizes);  //AVISO! Cambiar número de dimensiones si se cambian
-		clFinish(op->ocl.commandQueue);  // Wait until the command has finished, to get accurate time measurements
+		GM::executeKernel(*ocl, op->kernel, 1, globalDimensionSizes, localDimensionSizes);  //AVISO! Cambiar número de dimensiones si se cambian
+		clFinish(ocl->commandQueue);  // Wait until the command has finished, to get accurate time measurements
 #ifdef TIMEMEASURE
 		tm = tm2.GetCounter();
 		Log::log("Jaya got results: " + std::to_string(tm));
@@ -372,11 +355,11 @@ namespace GM {
 #endif
 
 		//Read result
-		GM::readVectorBuffer(op->ocl, op->matrixBuffer, op->matrix);
-		GM::readBuffer(op->ocl, op->maxValBuffer, op->maxVal);
-		GM::readBuffer(op->ocl, op->minValBuffer, op->minVal);
-		GM::readBuffer(op->ocl, op->maxValIndexBuffer, op->imax);
-		GM::readBuffer(op->ocl, op->minValIndexBuffer, op->imin);
+		GM::readVectorBuffer(*ocl, op->matrixBuffer, op->matrix);
+		GM::readBuffer(*ocl, op->maxValBuffer, op->maxVal);
+		GM::readBuffer(*ocl, op->minValBuffer, op->minVal);
+		GM::readBuffer(*ocl, op->maxValIndexBuffer, op->imax);
+		GM::readBuffer(*ocl, op->minValIndexBuffer, op->imin);
 
 #ifdef TIMEMEASURE
 		tm = tm2.GetCounter();

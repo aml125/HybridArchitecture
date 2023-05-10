@@ -53,8 +53,9 @@ namespace GM {
         if (writeable) {
             rwOptions = CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR;
         }
+        const int sz = sizeof(T);
         buffer = clCreateBuffer(ocl.context, rwOptions,
-            sizeof(T), (void*)&data, NULL);
+            sz, (void*)&data, NULL);
     }
 
     /*
@@ -130,7 +131,8 @@ namespace GM {
     */
     template <typename T>
     void copyMatrixParameter(ocl_args_d_t& ocl, cl_kernel& kernel, unsigned int argumentIndex, cl_mem& buffer, T* data, size_t size) {
-        cl_int status = clEnqueueWriteBuffer(ocl.commandQueue, buffer, true, 0, sizeof(T) * size, data, NULL, NULL, NULL);
+        const int sz = sizeof(T) * size;
+        cl_int status = clEnqueueWriteBuffer(ocl.commandQueue, buffer, true, 0, sz, data, NULL, NULL, NULL);
         if (CL_SUCCESS != status)
         {
             Log::log("error: Failed to copy data to device memory, returned %s\n" + std::string(TranslateOpenCLError(status)));

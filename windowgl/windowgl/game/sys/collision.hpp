@@ -5,6 +5,8 @@
 #include <game/sys/system.hpp>
 #include <game/util/timemeasure.hpp>
 
+//#define COLLISION
+
 namespace GM {
 
 // Forward delaration

@@ -608,8 +608,8 @@ namespace GM {
             global_work_size, local_work_size, 0, NULL, NULL);
 
         // Free dimension arrays
-        free(global_work_size);
-        free(local_work_size);
+        //free(global_work_size);
+        //free(local_work_size);
 
         if (CL_SUCCESS != status)
         {

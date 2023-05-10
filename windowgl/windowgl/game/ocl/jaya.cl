@@ -192,13 +192,13 @@ void updatePopulation (__global float* x, __global float* maxVal, __global float
         evalMin, evalMaxIndex, evalMinIndex);
 }
 
-__kernel void jayaGPU(__global float* x, __global float* maxVal, __global float* minVal, __global int* imax, __global int* imin,
+__kernel void jayaGPU(__global float* x, __global float* maxVal, __global float* minVal, __global int* imax, __global int* imin, 
     int vars, ulong seed, int iterations, __local float* evalMax, __local float* evalMin, __local int* evalMaxIndex, __local int* evalMinIndex, __global float* xnew) {
 	int iter = 0;
 	mwc64x_state_t state;
 	createPopulation(x, maxVal, minVal, imax, imin, seed, vars, 
         &state, evalMax, evalMin, evalMaxIndex, evalMinIndex);
-    while (iter < iterations) {
+   while (iter < iterations) {
         updatePopulation(x, maxVal, minVal, imax, imin, seed, vars,
             &state, evalMax, evalMin, evalMaxIndex, evalMinIndex, xnew);
         iter++;

@@ -112,10 +112,10 @@ int main(int argc, char *argv[])
 	std::cout << "Current path: " << ExePath() << std::endl;
 	
 	// Default params
-	std::string gpuName = "Intel";
+	std::string gpuName = std::string("Intel");
 	int iterations = 100;
-	int vars = 4100; // Number of PJ with AI and Collision
-	int total_pj = 4100;
+	int vars = 4000; // Number of PJ with AI and Collision
+	int total_pj = 40000;
 	int totalFrames = 20000;
 
 	if (argc >= 6) {
