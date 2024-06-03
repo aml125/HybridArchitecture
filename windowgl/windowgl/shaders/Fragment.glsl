@@ -5,7 +5,7 @@ in vec3 FragPos;
 in vec2 TexCoords;
 uniform vec3 viewPos;
 
-struct Material {
+struct Material { // Uses the naming convention texture_(diffuse/specular)+i. Only uses 1 because the used model only has one of each type.
     sampler2D texture_diffuse1;
     sampler2D texture_specular1;
     float shininess; //Radius of the specular highlight

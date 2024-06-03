@@ -31,7 +31,8 @@ struct RenderSystem_t : System_t {
 
 	//Lights
 	std::vector<PointLight_t> lights{};
-	DirectionalLight_t sunLight{ {-0.2f, -1.0f, -0.3f}, { 0.05f, 0.05f, 0.05f}, {0.4f, 0.4f, 0.4f}, {0.5f, 0.5f, 0.5f} };
+	//DirectionalLight_t sunLight{ {-0.2f, -1.0f, -0.3f}, { 0.05f, 0.05f, 0.05f}, {0.4f, 0.4f, 0.4f}, {0.5f, 0.5f, 0.5f} };
+	DirectionalLight_t sunLight{ {-0.2f, -1.0f, -0.3f}, { 0.08f, 0.08f, 0.08f}, {0.7f, 0.7f, 0.7f}, {0.6f, 0.6f, 0.6f} };
 
 	//CAMERA
 	inline static Camera camera{};

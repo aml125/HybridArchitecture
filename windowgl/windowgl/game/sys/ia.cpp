@@ -364,7 +364,6 @@ namespace GM {
 #ifdef TIMEMEASURE
 		tm = tm2.GetCounter();
 		Log::log("Results copied: " + std::to_string(tm));
-		//Log::jayaTime(tm);
 #endif
 
 		* threadLaunched = false;

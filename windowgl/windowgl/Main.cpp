@@ -40,8 +40,10 @@ constexpr glm::vec3 cubePositions[] = {
   glm::vec3(-1.3f,  1.0f, -1.5f)
 };
 
-constexpr unsigned int kSCRWIDTH{ 1024 };
-constexpr unsigned int kSCRHEIGHT{ 768 };
+//constexpr unsigned int kSCRWIDTH{ 1024 };
+//constexpr unsigned int kSCRHEIGHT{ 768 };
+constexpr unsigned int kSCRWIDTH{ 4000 };
+constexpr unsigned int kSCRHEIGHT{ 2000 };
 
 const std::string MESA_PATH = "assets\\models\\mesa\\mesa.fbx";
 const std::string NANOSUIT_PATH = "assets\\models\\nanosuit\\nanosuit.obj";
@@ -114,8 +116,8 @@ int main(int argc, char *argv[])
 	// Default params
 	std::string gpuName = std::string("Intel");
 	int iterations = 100;
-	int vars = 4000; // Number of PJ with AI and Collision
-	int total_pj = 40000;
+	int vars = 4500; // Number of PJ with AI and Collision
+	int total_pj = 6000;
 	int totalFrames = 20000;
 
 	if (argc >= 6) {
@@ -155,8 +157,8 @@ int main(int argc, char *argv[])
 	//gameManager.addSystem(render);
 	gameManager.addSystem(input);
 	gameManager.addSystem(iaSystem);
-	gameManager.addSystem(physics);
-	gameManager.addSystem(collision);
+	gameManager.addSystem(physics); // Must be before collision
+	gameManager.addSystem(collision); // Must be after physics
 	
 	//Set key callbacks
 	input.upKeyDown = up;
@@ -171,10 +173,10 @@ int main(int argc, char *argv[])
 
 	//Formation 1
 	//Set formation 1 slots   1023 causes error
-	GM::EntityBuilder::buildPattern(gameManager, iaSystem, vars/2, 1, 2, ALABARDERO_PATH, { -5, 1, -50 });
+	GM::EntityBuilder::buildPattern(gameManager, iaSystem, vars/2, 4, 2, ALABARDERO_PATH, { -5, 1, -50 });
 	
 	//Formation 2
-	GM::EntityBuilder::buildPattern(gameManager, iaSystem, vars/2, 1, 2, ALABARDERO_PATH, { -5, 1, 50 });
+	GM::EntityBuilder::buildPattern(gameManager, iaSystem, vars/2, 4, 2, ALABARDERO_PATH, { -5, 1, 50 });
 
 	//Formation 3 without ia and collisions
 	GM::EntityBuilder::buildPatternWithoutIaColl(gameManager, iaSystem, total_pj/2, 100, 2, ALABARDERO_PATH, { -5, 1, 50 });

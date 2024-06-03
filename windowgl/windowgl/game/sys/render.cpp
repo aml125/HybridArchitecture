@@ -263,7 +263,7 @@ void RenderSystem_t::drawAllInstantiatedModels(const ECS::EntityManager_t& em, c
 				else if (name == "texture_specular")
 					number = std::to_string(specularNr++);
 
-				std::string finalName = ("material." + name + number);
+				std::string finalName = ("material." + name + number);  // Set the textures using the naming convention texture_(diffuse/specular)+i. See "Fragment.glsl"
 				instancingShader.setFloat(finalName.c_str(), i);
 				glBindTexture(GL_TEXTURE_2D, mesh.textures[i].id);
 			}
