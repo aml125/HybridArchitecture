@@ -67,11 +67,15 @@ namespace GM {
 				readJayaResults(vecIA, vars); //TODO REDO THIS FUNCTION
 			}
 			else {
-				size_t sz = POPULATION * (vars + 1); //Vars + 1
+				size_t sz = RUNS * POPULATION * (vars + 1); //Vars + 1
 				Log::log(std::string("Vars: ") + std::to_string(vars));
 				Log::log(std::string("Allocated size: ") + std::to_string(sz * sizeof(float) / 1024 / 1024) + "MB");
 				op.matrix.resize(sz); // +1 to store min value
 				op.matrix2.resize(sz);
+				op.maxVal_vec.resize(RUNS);
+				op.minVal_vec.resize(RUNS);
+				op.imax_vec.resize(RUNS);
+				op.imin_vec.resize(RUNS);
 				createBuffers(vars);
 			}
 			jayaFirstTime = false;
@@ -293,10 +297,14 @@ namespace GM {
 	void IASystem_t::createBuffers(int vars) {
 		cl_float aux = 0;
 		createBuffer(*ocl, op.matrixBuffer, true, op.matrix);
-		createSimpleBuffer<cl_float>(*ocl, op.maxValBuffer, true, aux);
-		createSimpleBuffer<cl_float>(*ocl, op.minValBuffer, true, aux);
-		createSimpleBuffer<cl_float>(*ocl, op.maxValIndexBuffer, true, aux);
-		createSimpleBuffer<cl_float>(*ocl, op.minValIndexBuffer, true, aux);
+		//createSimpleBuffer<cl_float>(*ocl, op.maxValBuffer, true, aux);
+		//createSimpleBuffer<cl_float>(*ocl, op.minValBuffer, true, aux);
+		//createSimpleBuffer<cl_float>(*ocl, op.maxValIndexBuffer, true, aux);
+		//createSimpleBuffer<cl_float>(*ocl, op.minValIndexBuffer, true, aux);
+		createBuffer(*ocl, op.maxValBuffer, true, op.maxVal_vec); // yeah, it does not make sense to pass the vectors to initialize empty memory...
+		createBuffer(*ocl, op.minValBuffer, true, op.minVal_vec);
+		createBuffer(*ocl, op.maxValIndexBuffer, true, op.imax_vec);
+		createBuffer(*ocl, op.minValIndexBuffer, true, op.imin_vec);
 		createBuffer(*ocl, op.matrixBuffer2, true, op.matrix2);
 
 		createLocalParameter<cl_float>(op.kernel, 8, POPULATION * 2);
@@ -333,7 +341,7 @@ namespace GM {
 		copySimpleParameter(*ocl, op->kernel, 7, iterations);
 
 
-		unsigned int globalDimensionSizes[] = { POPULATION };
+		unsigned int globalDimensionSizes[] = { RUNS * POPULATION };
 		unsigned int localDimensionSizes[] = { POPULATION };
 #ifdef TIMEMEASURE
 		double tm = tm2.GetCounter();
@@ -356,10 +364,10 @@ namespace GM {
 
 		//Read result
 		GM::readVectorBuffer(*ocl, op->matrixBuffer, op->matrix);
-		GM::readBuffer(*ocl, op->maxValBuffer, op->maxVal);
-		GM::readBuffer(*ocl, op->minValBuffer, op->minVal);
-		GM::readBuffer(*ocl, op->maxValIndexBuffer, op->imax);
-		GM::readBuffer(*ocl, op->minValIndexBuffer, op->imin);
+		GM::readVectorBuffer(*ocl, op->maxValBuffer, op->maxVal_vec);
+		GM::readVectorBuffer(*ocl, op->minValBuffer, op->minVal_vec);
+		GM::readVectorBuffer(*ocl, op->maxValIndexBuffer, op->imax_vec);
+		GM::readVectorBuffer(*ocl, op->minValIndexBuffer, op->imin_vec);
 
 #ifdef TIMEMEASURE
 		tm = tm2.GetCounter();
@@ -372,7 +380,21 @@ namespace GM {
 
 	void IASystem_t::readJayaResults(std::vector<IA_t>& vecIA, int vars)
 	{
-		float* solution = &op.matrix[op.imin * (vars + 1)];
+		// Get the run that got the min value
+		int min = op.minVal_vec[0];
+		int i_min = op.imin_vec[0];
+		int r_min = 0;
+		for (size_t i = 0; i < RUNS; i++)
+		{
+			if (op.minVal_vec[i] < min) {
+				min = op.minVal_vec[i];
+				i_min = op.imin_vec[i];
+				r_min = i;
+			}
+		}
+		std::cout << " minVal: " << min << " imin: " << i_min << " rmin: " << r_min << std::endl;
+
+		float* solution = &op.matrix[r_min*POPULATION*vars + i_min * (vars + 1)];
 		//std::ofstream file1("results1.dat");
 		for (size_t i = 0; i < vars; i += 2) {
 			vecIA[i/2].target.position = { solution[i], HEIGHT, solution[i + 1] };

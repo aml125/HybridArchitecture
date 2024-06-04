@@ -432,12 +432,14 @@ namespace GM {
         }
 
         // Query for OpenCL device which was used for context creation
-        err = clGetContextInfo(ocl->context, CL_CONTEXT_DEVICES, sizeof(cl_device_id), &ocl->device, NULL);
+        cl_device_id devices[2]; // Shortcut to only get the first device of the platform
+        err = clGetContextInfo(ocl->context, CL_CONTEXT_DEVICES, sizeof(cl_device_id)*2, devices, NULL);
         if (CL_SUCCESS != err)
         {
             Log::log("Error: clGetContextInfo() to get list of devices returned %s.\n" + std::string(TranslateOpenCLError(err)));
             return err;
         }
+        ocl->device = devices[0];
 
         // Read the OpenCL platform's version and the device OpenCL and OpenCL C versions
         GetPlatformAndDeviceVersion(platformId, ocl);

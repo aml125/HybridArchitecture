@@ -9,7 +9,7 @@
 //Jaya parameters
 #define POPULATION 256
 //#define ITERATIONS 100
-#define RUNS 50
+#define RUNS 20
 #define INITIAL_SEED 100
 #define HEIGHT 2
 
@@ -31,20 +31,24 @@ namespace GM {
 		cl_mem maxValIndexBuffer{};
 		cl_mem minValBuffer{};
 		cl_mem minValIndexBuffer{};
-		//cl_mem maxValLocalBuffer{};
-		//cl_mem maxValLocalIndexBuffer{};
-		//cl_mem minValLocalBuffer{};
-		//cl_mem minValLocalIndexBuffer{};
+		cl_mem maxValLocalBuffer{};
+		cl_mem maxValLocalIndexBuffer{};
+		cl_mem minValLocalBuffer{};
+		cl_mem minValLocalIndexBuffer{};
 		cl_program       program;           // hold the program handler
 		cl_kernel        kernel;            // hold the kernel handler
 		
 		//Values
 		std::vector<float> matrix;
 		std::vector<float> matrix2;
-		int imin;
+		/*int imin;
 		int imax;
 		float minVal;
-		float maxVal;
+		float maxVal;*/
+		std::vector<float> maxVal_vec; // This was made to be able to create the buffers of this size. It makes no sense, and I should have called OpenCL functions directly instead of building a crazy library to abstract the calls
+		std::vector<float> minVal_vec;
+		std::vector<int> imax_vec;
+		std::vector<int> imin_vec;
 	};
 #endif
 
