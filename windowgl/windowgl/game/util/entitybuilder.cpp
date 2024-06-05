@@ -68,9 +68,9 @@ namespace GM {
 		ph.speed.x = ph.speed.y = ph.speed.z = 0;
 
 		//Add model
-		InstantiatedModel_t& mod = em.createComponent<InstantiatedModel_t>(e.entityID);
+		/*InstantiatedModel_t& mod = em.createComponent<InstantiatedModel_t>(e.entityID);
 		mod.loadModel(modelPath);
-		e.addComponent(mod);
+		e.addComponent(mod);*/
 
 		//Add box colider
 		BoxCollider_t& bc = em.createComponent<BoxCollider_t>(e.entityID);

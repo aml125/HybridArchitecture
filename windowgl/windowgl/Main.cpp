@@ -117,7 +117,7 @@ int main(int argc, char *argv[])
 	std::string gpuName = std::string("Intel");
 	int iterations = 100;
 	int vars = 4500; // Number of PJ with AI and Collision (In reality its half of the Jaya vars)
-	int total_pj = 6000;
+	int total_pj = 16000; // Controls the number of PJ drawn
 	int totalFrames = 20000;
 
 	if (argc >= 6) {
@@ -133,14 +133,11 @@ int main(int argc, char *argv[])
 		exit(-1);
 	}
 
-	int old_total_pj_val = total_pj;
-	total_pj -= vars; // calculate the extra PJ without IA and Collision so the total number is the indicated
 
 	GM::Log::log("PARAMS --> Iterations: " + std::to_string(iterations) 
 		+ " Vars: " + std::to_string(vars)
-		+ " Total PJ: " + std::to_string(old_total_pj_val)
-		+ " Total Frames: " + std::to_string(totalFrames)
-		+ " Extra PJ: " + std::to_string(total_pj));
+		+ " Total PJ: " + std::to_string(total_pj)
+		+ " Total Frames: " + std::to_string(totalFrames));
 
 	GM::Window_t window{ kSCRWIDTH, kSCRHEIGHT };
 	GM::RenderSystem_t render(window);
@@ -179,10 +176,10 @@ int main(int argc, char *argv[])
 	GM::EntityBuilder::buildPattern(gameManager, iaSystem, vars/2, 4, 2, ALABARDERO_PATH, { -5, 1, 50 });
 
 	//Formation 3 without ia and collisions
-	GM::EntityBuilder::buildPatternWithoutIaColl(gameManager, iaSystem, total_pj/2, 100, 2, ALABARDERO_PATH, { -5, 1, 50 });
+	GM::EntityBuilder::buildPatternWithoutIaColl(gameManager, iaSystem, total_pj/2, 200, 1, ALABARDERO_PATH, { -2, 1, 0 });
 
 	//Formation 4 without ia and collisions
-	GM::EntityBuilder::buildPatternWithoutIaColl(gameManager, iaSystem, total_pj/2, 100, 2, ALABARDERO_PATH, { -5, 1, 50 });
+	GM::EntityBuilder::buildPatternWithoutIaColl(gameManager, iaSystem, total_pj/2, 200, 1, ALABARDERO_PATH, { 2.5, 1, 0 });
 	
 	/*auto& auxAl = GM::EntityBuilder::buildFullEntity(gameManager, { 1, 1, 1 }, ALABARDERO_PATH, { 1, 1.55f, 0.5f }, { 0, 0.78f, 0 });
 	player = &auxAl.getComponent<GM::PhysicsComponent_t>()->position;*/
