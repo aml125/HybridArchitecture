@@ -15,7 +15,7 @@
 
 namespace GM {
 
-#define JAYA
+//#define JAYA
 
 #ifdef JAYA
 	struct OpenCLParams {

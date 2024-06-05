@@ -116,7 +116,7 @@ int main(int argc, char *argv[])
 	// Default params
 	std::string gpuName = std::string("Intel");
 	int iterations = 100;
-	int vars = 4500; // Number of PJ with AI and Collision
+	int vars = 4500; // Number of PJ with AI and Collision (In reality its half of the Jaya vars)
 	int total_pj = 6000;
 	int totalFrames = 20000;
 
