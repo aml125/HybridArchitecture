@@ -8,14 +8,14 @@
 
 //Jaya parameters
 #define POPULATION 256
-//#define ITERATIONS 100
+//#define ITERATIONS 100  //Defined as program input
 #define RUNS 20
 #define INITIAL_SEED 100
 #define HEIGHT 2
 
 namespace GM {
 
-//#define JAYA
+#define JAYA  // Activates jaya algorithm in the IA system
 
 #ifdef JAYA
 	struct OpenCLParams {

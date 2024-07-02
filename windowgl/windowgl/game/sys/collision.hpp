@@ -5,7 +5,7 @@
 #include <game/sys/system.hpp>
 #include <game/util/timemeasure.hpp>
 
-#define COLLISION
+//#define COLLISION // Activates the collisions (for test purposes)
 
 namespace GM {
 

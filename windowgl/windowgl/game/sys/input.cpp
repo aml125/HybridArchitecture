@@ -5,41 +5,41 @@
 namespace GM {
 void InputSystem_t::mouse_move(GLFWwindow* window)
 {
-	double xpos, ypos;
-	glfwGetCursorPos(window, &xpos, &ypos);
-	if (firstMouse) // this bool variable is initially set to true
-	{
-		lastX = xpos;
-		lastY = ypos;
-		firstMouse = false;
-	}
+	//double xpos, ypos;
+	//glfwGetCursorPos(window, &xpos, &ypos);
+	//if (firstMouse) // this bool variable is initially set to true
+	//{
+	//	lastX = xpos;
+	//	lastY = ypos;
+	//	firstMouse = false;
+	//}
 
-	//Get the distance of the mouse compared to last
-	float xoffset = xpos - lastX;
-	float yoffset = lastY - ypos; // reversed since y-coordinates range from bottom to top
-	lastX = xpos;
-	lastY = ypos;
+	////Get the distance of the mouse compared to last
+	//float xoffset = xpos - lastX;
+	//float yoffset = lastY - ypos; // reversed since y-coordinates range from bottom to top
+	//lastX = xpos;
+	//lastY = ypos;
 
-	float sensitivity = 0.05f;
-	xoffset *= sensitivity;
-	yoffset *= sensitivity;
-
-
-	RenderSystem_t::yaw += xoffset;
-	RenderSystem_t::pitch += yoffset;
+	//float sensitivity = 0.05f;
+	//xoffset *= sensitivity;
+	//yoffset *= sensitivity;
 
 
-	if (RenderSystem_t::pitch > 89.0f)
-		RenderSystem_t::pitch = 89.0f;
-	if (RenderSystem_t::pitch < -89.0f)
-		RenderSystem_t::pitch = -89.0f;
+	//RenderSystem_t::yaw += xoffset;
+	//RenderSystem_t::pitch += yoffset;
 
-	//Calculate direction vector, using the cos and sin function to calculate de pitch and yaw
-	glm::vec3 front;
-	front.x = cos(glm::radians(RenderSystem_t::pitch)) * cos(glm::radians(RenderSystem_t::yaw));
-	front.y = sin(glm::radians(RenderSystem_t::pitch));
-	front.z = cos(glm::radians(RenderSystem_t::pitch)) * sin(glm::radians(RenderSystem_t::yaw));
-	RenderSystem_t::camera.Front = glm::normalize(front);
+
+	//if (RenderSystem_t::pitch > 89.0f)
+	//	RenderSystem_t::pitch = 89.0f;
+	//if (RenderSystem_t::pitch < -89.0f)
+	//	RenderSystem_t::pitch = -89.0f;
+
+	////Calculate direction vector, using the cos and sin function to calculate de pitch and yaw
+	//glm::vec3 front;
+	//front.x = cos(glm::radians(RenderSystem_t::pitch)) * cos(glm::radians(RenderSystem_t::yaw));
+	//front.y = sin(glm::radians(RenderSystem_t::pitch));
+	//front.z = cos(glm::radians(RenderSystem_t::pitch)) * sin(glm::radians(RenderSystem_t::yaw));
+	//RenderSystem_t::camera.Front = glm::normalize(front);
 }
 
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
