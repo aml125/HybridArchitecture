@@ -74,9 +74,9 @@ void CollisionSystem_t::update(ECS::EntityManager_t& g) {
 
 	//copyFloatParam(op->ocl, kernel, 3, deltaTimeBuffer, RenderSystem_t::deltaTime);
 	cl_float dt = RenderSystem_t::deltaTime;
-	copySimpleParameter<cl_float>(*ocl, kernel, 3, dt);
+	copySimpleParameter<cl_float>(kernel, 3, dt);
 	cl_int vecSize = (int)vecBx.size();
-	copySimpleParameter<cl_int>(*ocl, kernel, 4, vecSize);
+	copySimpleParameter<cl_int>(kernel, 4, vecSize);
 	int amount_x, amount_y;
 	if (vecBx.size() % 8 == 0) {
 		amount_x = vecBx.size();

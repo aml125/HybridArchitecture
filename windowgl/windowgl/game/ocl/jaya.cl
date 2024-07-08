@@ -192,6 +192,27 @@ void updatePopulation(__global float* x, __global float* maxVal, __global float*
         evalMin, evalMaxIndex, evalMinIndex);
 }
 
+/*
+*   Gets the minimum value of all the runs
+*/
+__kernel void getMinResult(__global float* glob_minVal, __global int* glob_imin, __global int* s_imin, __global int* s_rmin, int vars, int iterations, int population, int runs) {
+    if (get_global_id(0) == 0) { // This trivial work will do it only one thread. It is done on the device to not copy data back to the CPU RAM
+        int min = glob_minVal[0];
+        int i_min = glob_imin[0];
+        int r_min = 0;
+
+        for (int i = 0; i < runs; i++) {
+            if (glob_minVal[i] < min) {
+                min = glob_minVal[i];
+                i_min = glob_imin[i];
+                r_min = i;
+            }
+        }
+        *s_imin = i_min;
+        *s_rmin = r_min;
+    }
+}
+
 __kernel void jayaGPU(__global float* glob_x, __global float* glob_maxVal, __global float* glob_minVal, __global int* glob_imax, __global int* glob_imin,
     int vars, ulong seed, int iterations, __local float* evalMax, __local float* evalMin, __local int* evalMaxIndex, __local int* evalMinIndex, __global float* glob_xnew) {
     int iter = 0;

@@ -658,6 +658,31 @@ namespace GM {
             exit(-1);
         }
     }
+
+    /*
+    * Call the OpenCL setkernelArg function and check success
+    */
+    void setKernelArg(cl_kernel kernel, cl_uint arg_index, const size_t arg_size, const void* arg_value) {
+        cl_int status = clSetKernelArg(kernel, arg_index, arg_size, arg_value);
+        if (CL_SUCCESS != status)
+        {
+            Log::log("error: Failed to set argument buffer, returned %s\n" + std::string(TranslateOpenCLError(status)));
+            exit(-1);
+        }
+    }
+
+    /*
+    * Call the OpenCL clEnqueueReadBuffer function and check success
+    */
+    void enqueueReadBuffer(cl_command_queue command_queue, cl_mem buffer, cl_bool blocking_read, size_t offset,
+        size_t size, void* ptr, cl_uint num_events_in_wait_list, const cl_event* event_wait_list, cl_event* event) {
+        cl_int status = clEnqueueReadBuffer(command_queue, buffer, blocking_read, offset, size, ptr, num_events_in_wait_list, event_wait_list, event);
+        if (CL_SUCCESS != status)
+        {
+            Log::log("error: Failed to equeue read buffer: \n" + std::string(TranslateOpenCLError(status)));
+            exit(-1);
+        }
+    }
 #pragma warning ( pop )
 }
 #pragma warning ( pop )

@@ -48,7 +48,7 @@ struct RenderSystem_t : System_t {
 	 
 private :
     
-	void setLightInformation() const;
+	void setLightInformation(Shader myShader) const;
 	void drawAllModels(const ECS::EntityManager_t&, const std::vector<Model_t>& entities) const;
 	void drawAllInstantiatedModels(const ECS::EntityManager_t& em, const std::vector<InstantiatedModel_t>& models);
 	void drawLightSource(const PointLight_t& light)  const;

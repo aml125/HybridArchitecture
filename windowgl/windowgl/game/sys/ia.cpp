@@ -31,6 +31,7 @@ namespace GM {
 		}
 		createAndBuildProgram(ocl, op.program, "game/ocl/jaya.cl");
 		createKernelFromProgram(*ocl, op.program, op.kernel, "jayaGPU");
+		createKernelFromProgram(*ocl, op.program, op.kernel_min_result, "getMinResult");
 #endif
 	}
 
@@ -76,6 +77,7 @@ namespace GM {
 				op.minVal_vec.resize(RUNS);
 				op.imax_vec.resize(RUNS);
 				op.imin_vec.resize(RUNS);
+				op.result.resize(vars);
 				createBuffers(vars);
 			}
 			jayaFirstTime = false;
@@ -312,8 +314,10 @@ namespace GM {
 		createLocalParameter<int>(op.kernel, 10, POPULATION * 2);
 		createLocalParameter<int>(op.kernel, 11, POPULATION * 2);
 
-		copyParameter(*ocl, op.kernel, 0, op.matrixBuffer, op.matrix);
-		copyParameter(*ocl, op.kernel, 12, op.matrixBuffer2, op.matrix2);
+		/*copyParameter(*ocl, op.kernel, 0, op.matrixBuffer, op.matrix);
+		copyParameter(*ocl, op.kernel, 12, op.matrixBuffer2, op.matrix2);*/
+		setKernelArg(op.kernel, 0, sizeof(cl_mem), (void*)&op.matrixBuffer);
+		setKernelArg(op.kernel, 12, sizeof(cl_mem), (void*)&op.matrixBuffer2);
 	}
 
 	void launchJaya(ocl_args_d_t *ocl, OpenCLParams* op, cl_ulong seed, int vars, int iterations, bool* threadLaunched)
@@ -333,12 +337,12 @@ namespace GM {
 
 		copyMatrixParameter<cl_float>(*ocl, op->kernel, 4, op->minValIndexBuffer, &aux, 1);
 
-		copySimpleParameter(*ocl, op->kernel, 5, vars);
+		copySimpleParameter(op->kernel, 5, vars);
 		//Log::log("Half way copied");
 
-		copySimpleParameter(*ocl, op->kernel, 6, seed);
+		copySimpleParameter(op->kernel, 6, seed);
 
-		copySimpleParameter(*ocl, op->kernel, 7, iterations);
+		copySimpleParameter(op->kernel, 7, iterations);
 
 
 		unsigned int globalDimensionSizes[] = { RUNS * POPULATION };
@@ -363,11 +367,47 @@ namespace GM {
 #endif
 
 		//Read result
-		GM::readVectorBuffer(*ocl, op->matrixBuffer, op->matrix);
-		GM::readVectorBuffer(*ocl, op->maxValBuffer, op->maxVal_vec);
+		//GM::readVectorBuffer(*ocl, op->matrixBuffer, op->matrix);
+		//GM::readVectorBuffer(*ocl, op->maxValBuffer, op->maxVal_vec);
 		GM::readVectorBuffer(*ocl, op->minValBuffer, op->minVal_vec);
-		GM::readVectorBuffer(*ocl, op->maxValIndexBuffer, op->imax_vec);
+		//GM::readVectorBuffer(*ocl, op->maxValIndexBuffer, op->imax_vec);
 		GM::readVectorBuffer(*ocl, op->minValIndexBuffer, op->imin_vec);
+
+		//
+		//	Launch result kernel to find the minimum result
+		//
+
+		// Set kernel args
+		GM::setKernelArg(op->kernel_min_result, 0, sizeof(cl_mem), &op->minValBuffer);
+		GM::setKernelArg(op->kernel_min_result, 1, sizeof(cl_mem), &op->minValIndexBuffer);
+
+		int s_imin = 0;
+		GM::createSimpleBuffer(*ocl, op->s_iminBuffer, true, s_imin);
+		GM::setKernelArg(op->kernel_min_result, 2, sizeof(cl_mem), (void*)&op->s_iminBuffer);
+
+		int s_rmin = 0;
+		GM::createSimpleBuffer<int>(*ocl, op->s_rminBuffer, true, s_rmin);
+		GM::setKernelArg(op->kernel_min_result, 3, sizeof(cl_mem), (void*)&op->s_rminBuffer);
+
+		GM::copySimpleParameter(op->kernel_min_result, 4, vars);
+		GM::copySimpleParameter(op->kernel_min_result, 5, iterations);
+		GM::copySimpleParameter(op->kernel_min_result, 6, POPULATION);
+		GM::copySimpleParameter(op->kernel_min_result, 7, RUNS);
+
+		// Execute kernel
+		globalDimensionSizes[0] = 1;
+		localDimensionSizes[0] = 1;
+		GM::executeKernel(*ocl, op->kernel_min_result, 1, globalDimensionSizes, localDimensionSizes);
+
+		// Get results
+		GM::readBuffer(*ocl, op->s_iminBuffer, s_imin);
+		GM::readBuffer(*ocl, op->s_rminBuffer, s_rmin);
+
+		// Calculate index and read values
+		int idx = s_rmin * POPULATION * vars + s_imin * (vars + 1);
+		GM::enqueueReadBuffer(ocl->commandQueue, op->matrixBuffer, CL_TRUE, idx, vars * sizeof(float), &op->result[0], 0, NULL, NULL);
+
+		std::cout << " imin: " << s_imin << " rmin: " << s_rmin << std::endl;
 
 #ifdef TIMEMEASURE
 		tm = tm2.GetCounter();
@@ -380,24 +420,9 @@ namespace GM {
 
 	void IASystem_t::readJayaResults(std::vector<IA_t>& vecIA, int vars)
 	{
-		// Get the run that got the min value
-		int min = op.minVal_vec[0];
-		int i_min = op.imin_vec[0];
-		int r_min = 0;
-		for (size_t i = 0; i < RUNS; i++)
-		{
-			if (op.minVal_vec[i] < min) {
-				min = op.minVal_vec[i];
-				i_min = op.imin_vec[i];
-				r_min = i;
-			}
-		}
-		std::cout << " minVal: " << min << " imin: " << i_min << " rmin: " << r_min << std::endl;
-
-		float* solution = &op.matrix[r_min*POPULATION*vars + i_min * (vars + 1)];
 		//std::ofstream file1("results1.dat");
 		for (size_t i = 0; i < vars; i += 2) {
-			vecIA[i/2].target.position = { solution[i], HEIGHT, solution[i + 1] };
+			vecIA[i/2].target.position = { op.result[i], HEIGHT, op.result[i + 1] };
 			//file1 << solution[i] << "-" << solution[i + 1] << "\n";
 		}
 		//file1.close();

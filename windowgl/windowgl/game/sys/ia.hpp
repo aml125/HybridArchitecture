@@ -35,8 +35,12 @@ namespace GM {
 		cl_mem maxValLocalIndexBuffer{};
 		cl_mem minValLocalBuffer{};
 		cl_mem minValLocalIndexBuffer{};
+		cl_mem s_iminBuffer{};
+		cl_mem s_rminBuffer{};
+
 		cl_program       program;           // hold the program handler
 		cl_kernel        kernel;            // hold the kernel handler
+		cl_kernel		 kernel_min_result;
 		
 		//Values
 		std::vector<float> matrix;
@@ -49,6 +53,7 @@ namespace GM {
 		std::vector<float> minVal_vec;
 		std::vector<int> imax_vec;
 		std::vector<int> imin_vec;
+		std::vector<float> result;
 	};
 #endif
 

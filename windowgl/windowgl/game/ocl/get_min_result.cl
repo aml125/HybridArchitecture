@@ -1,0 +1,1 @@
+__kernel void getMinResult(__global float* glob_x, __global float* glob_minVal, __global int* glob_imin, int vars, int iterations)

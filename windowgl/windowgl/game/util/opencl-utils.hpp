@@ -53,9 +53,8 @@ namespace GM {
         if (writeable) {
             rwOptions = CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR;
         }
-        const int sz = sizeof(T);
         buffer = clCreateBuffer(ocl.context, rwOptions,
-            sz, (void*)&data, NULL);
+            sizeof(T), (void*)&data, NULL);
     }
 
     /*
@@ -86,6 +85,8 @@ namespace GM {
 
     void allocateLocalMemory(ocl_args_d_t& ocl, cl_kernel& kernel, unsigned int argumentIndex, size_t size);
 
+    void setKernelArg(cl_kernel kernel, cl_uint arg_index, const size_t arg_size, const void* arg_value);
+
     void createKernelFromProgram(ocl_args_d_t& ocl, cl_program& program, cl_kernel& kernel, const std::string& functionName);
 
     /*
@@ -111,14 +112,8 @@ namespace GM {
         Copies the data onto the device memory buffer
     */
     template <typename T>
-    void copySimpleParameter(ocl_args_d_t& ocl, cl_kernel& kernel, unsigned int argumentIndex, T& data) {
-        /*cl_int status = clEnqueueWriteBuffer(ocl.commandQueue, buffer, true, 0, sizeof(T), &data, NULL, NULL, NULL);
-        if (CL_SUCCESS != status)
-        {
-            Log::log("error: Failed to copy data to device memory, returned %s\n" + std::string(TranslateOpenCLError(status)));
-            exit(-1);
-        }*/
-        cl_int status = clSetKernelArg(kernel, argumentIndex, sizeof(T), /*(void*)*/&data);
+    void copySimpleParameter(cl_kernel& kernel, unsigned int argumentIndex, const T& data) {
+        cl_int status = clSetKernelArg(kernel, argumentIndex, sizeof(T), (void*)&data);
         if (CL_SUCCESS != status)
         {
             Log::log("error: Failed to set argument buffer, returned %s\n" + std::string(TranslateOpenCLError(status)));
@@ -131,8 +126,7 @@ namespace GM {
     */
     template <typename T>
     void copyMatrixParameter(ocl_args_d_t& ocl, cl_kernel& kernel, unsigned int argumentIndex, cl_mem& buffer, T* data, size_t size) {
-        const int sz = sizeof(T) * size;
-        cl_int status = clEnqueueWriteBuffer(ocl.commandQueue, buffer, true, 0, sz, data, NULL, NULL, NULL);
+        cl_int status = clEnqueueWriteBuffer(ocl.commandQueue, buffer, true, 0, sizeof(T) * size, data, NULL, NULL, NULL);
         if (CL_SUCCESS != status)
         {
             Log::log("error: Failed to copy data to device memory, returned %s\n" + std::string(TranslateOpenCLError(status)));
@@ -212,4 +206,6 @@ namespace GM {
 
     cl_mem createFloatParam(ocl_args_d_t& ocl, float& value);
     void copyFloatParam(ocl_args_d_t& ocl, cl_kernel& kernel, unsigned int argumentIndex, cl_mem& buffer, float& value);
+    void enqueueReadBuffer(cl_command_queue command_queue, cl_mem buffer, cl_bool blocking_read, size_t offset,
+        size_t size, void* ptr, cl_uint num_events_in_wait_list, const cl_event* event_wait_list, cl_event* event);
 }

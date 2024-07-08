@@ -131,7 +131,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <Optimization>MaxSpeed</Optimization>
+      <Optimization>Disabled</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
@@ -222,6 +222,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="game\ocl\collision_ocl.cl" />
+    <None Include="game\ocl\get_min_result.cl" />
     <None Include="game\ocl\jaya.cl" />
     <None Include="game\ocl\mwc64x_rng.cl" />
     <None Include="game\ocl\ocl_structs.cl" />

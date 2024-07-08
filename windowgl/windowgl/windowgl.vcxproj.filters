@@ -226,5 +226,6 @@
     <None Include="game\ocl\jaya.cl" />
     <None Include="game\ocl\mwc64x_rng.cl" />
     <None Include="game\ocl\skip_mwc.cl" />
+    <None Include="game\ocl\get_min_result.cl" />
   </ItemGroup>
 </Project>

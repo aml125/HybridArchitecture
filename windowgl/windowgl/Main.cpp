@@ -118,7 +118,7 @@ int main(int argc, char *argv[])
 	int iterations = 100;
 	int vars = 6000; // Number of PJ with AI and Collision (In reality its half of the Jaya vars)
 	int total_pj = 16000; // Controls the number of PJ drawn
-	int totalFrames = 20000;
+	int totalFrames = 2000000;
 
 	if (argc >= 6) {
 		gpuName = std::string(argv[1]);

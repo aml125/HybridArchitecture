@@ -53,11 +53,13 @@ RenderSystem_t::RenderSystem_t(Window_t window)
 
 
 	//Send uniforms
-	myShader.setInt("texture1", 0);
-	myShader.setInt("texture2", 1);
+	/*myShader.setInt("texture1", 0);
+	myShader.setInt("texture2", 1);*/
 	//myShader.setMatrix4("model", model);
+	myShader.use();
 	myShader.setMatrix4("view", view);
 	myShader.setMatrix4("projection", projection);
+	lightShader.use();
 
 	flag.loadModel("assets\\models\\bandera\\bandera.obj");
 
@@ -100,11 +102,12 @@ void RenderSystem_t::update(ECS::EntityManager_t& g) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	//General shader information
+	myShader.use();
 	myShader.setMatrix4("projection", projection);
 	myShader.setMatrix4("view", view);
-	myShader.setInt("material.diffuse", 0);
-	myShader.setVec3("material.specular", 0.5f, 0.5f, 0.5f);
-	myShader.setFloat("material.shininess", 32.0f);
+	//myShader.setInt("material.texture_diffuse1", 0);
+	//myShader.setVec3("material.texture_specular1", 0.5f, 0.5f, 0.5f);
+	//myShader.setFloat("material.shininess", 32.0f);
 	myShader.setVec3("viewPos", camera.Position);
 
 	drawAllModels(g, g.getComponents<Model_t>());
@@ -130,7 +133,7 @@ void RenderSystem_t::update(ECS::EntityManager_t& g) {
 #endif
 }
 
-void RenderSystem_t::setLightInformation() const
+void RenderSystem_t::setLightInformation(Shader myShader) const
 {
 	//directional light
 	myShader.setVec3("dirLight.direction", sunLight.direction);
@@ -197,7 +200,7 @@ void RenderSystem_t::drawAllModels(const ECS::EntityManager_t& em, const std::ve
 			}
 			myShader.setMatrix4("model", model);
 			
-			setLightInformation();
+			setLightInformation(myShader);
 			glDrawElements(GL_TRIANGLES, m.indices.size(), GL_UNSIGNED_INT, 0);
 			glBindVertexArray(0);
 
@@ -264,7 +267,7 @@ void RenderSystem_t::drawAllInstantiatedModels(const ECS::EntityManager_t& em, c
 					number = std::to_string(specularNr++);
 
 				std::string finalName = ("material." + name + number);  // Set the textures using the naming convention texture_(diffuse/specular)+i. See "Fragment.glsl"
-				instancingShader.setFloat(finalName.c_str(), i);
+				instancingShader.setInt(finalName.c_str(), i);
 				glBindTexture(GL_TEXTURE_2D, mesh.textures[i].id);
 			}
 			glActiveTexture(GL_TEXTURE0);
@@ -301,7 +304,7 @@ void RenderSystem_t::drawAllInstantiatedModels(const ECS::EntityManager_t& em, c
 			}
 
 			glBindVertexArray(mesh.VAO);
-			setLightInformation();
+			setLightInformation(instancingShader);
 			glDrawElementsInstanced(GL_TRIANGLES, mesh.indices.size(), GL_UNSIGNED_INT, 0, models.size());
 			glBindVertexArray(0);
 		}
@@ -316,6 +319,7 @@ void RenderSystem_t::drawLights() const
 }
 
 void RenderSystem_t::drawFormationTargets(const std::vector<IA_t> ias) {
+	myShader.use();
 	for (auto& ia : ias) {
 		if (ia.isAnchorPoint) {
 			for (const Mesh_t& m : flag.getMeshes()) {
@@ -349,7 +353,7 @@ void RenderSystem_t::drawFormationTargets(const std::vector<IA_t> ias) {
 				}
 				myShader.setMatrix4("model", model);
 
-				setLightInformation();
+				setLightInformation(myShader);
 				glDrawElements(GL_TRIANGLES, m.indices.size(), GL_UNSIGNED_INT, 0);
 				glBindVertexArray(0);
 
