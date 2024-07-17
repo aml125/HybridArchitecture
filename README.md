@@ -5,7 +5,7 @@ The project is structured into two main folders:
 - ecs: Files concerning the game engine
 - game: Game prototype implementation
 
-
+<br>
 
 Copyright 2024 Antonio Maciá Lillo
 
