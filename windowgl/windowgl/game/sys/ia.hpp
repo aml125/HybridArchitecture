@@ -9,7 +9,7 @@
 //Jaya parameters
 #define POPULATION 256
 //#define ITERATIONS 100  //Defined as program input
-#define RUNS 20
+#define RUNS 15
 #define INITIAL_SEED 100
 #define HEIGHT 2
 
@@ -82,6 +82,7 @@ namespace GM {
 		int totalArrived = 0;
 		TimeMeasure tm;
 		TimeMeasure tm2;
+		TimeMeasure tm3;
 		bool jayaThreadLaunched = false;
 		bool jayaFirstTime = true;
 		int ITERATIONS = 100;

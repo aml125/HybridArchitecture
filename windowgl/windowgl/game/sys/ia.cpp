@@ -360,66 +360,68 @@ namespace GM {
 		GM::executeKernel(*ocl, op->kernel, 1, globalDimensionSizes, localDimensionSizes);  //AVISO! Cambiar número de dimensiones si se cambian
 		clFinish(ocl->commandQueue);  // Wait until the command has finished, to get accurate time measurements
 #ifdef TIMEMEASURE
-		tm = tm2.GetCounter();
-		Log::log("Jaya got results: " + std::to_string(tm));
-		Log::jayaTime(tm);
-		tm2.StartCounter();
+		double time = tm2.GetCounter();
+		Log::log("Jaya got results: " + std::to_string(time));
+		Log::jayaTime(time);
 #endif
+		// Now results are read on the main thread. This was done due to somehow GPU reads were delayed.
 
+		* threadLaunched = false;
+	}
+
+	void IASystem_t::readJayaResults(std::vector<IA_t>& vecIA, int vars)
+	{
+#ifdef TIMEMEASURE
+		tm3.StartCounter();
+#endif
 		//Read result
 		//GM::readVectorBuffer(*ocl, op->matrixBuffer, op->matrix);
 		//GM::readVectorBuffer(*ocl, op->maxValBuffer, op->maxVal_vec);
-		GM::readVectorBuffer(*ocl, op->minValBuffer, op->minVal_vec);
+		GM::readVectorBuffer(*ocl, op.minValBuffer, op.minVal_vec);
 		//GM::readVectorBuffer(*ocl, op->maxValIndexBuffer, op->imax_vec);
-		GM::readVectorBuffer(*ocl, op->minValIndexBuffer, op->imin_vec);
+		GM::readVectorBuffer(*ocl, op.minValIndexBuffer, op.imin_vec);
 
 		//
 		//	Launch result kernel to find the minimum result
 		//
 
 		// Set kernel args
-		GM::setKernelArg(op->kernel_min_result, 0, sizeof(cl_mem), &op->minValBuffer);
-		GM::setKernelArg(op->kernel_min_result, 1, sizeof(cl_mem), &op->minValIndexBuffer);
+		GM::setKernelArg(op.kernel_min_result, 0, sizeof(cl_mem), &op.minValBuffer);
+		GM::setKernelArg(op.kernel_min_result, 1, sizeof(cl_mem), &op.minValIndexBuffer);
 
 		int s_imin = 0;
-		GM::createSimpleBuffer(*ocl, op->s_iminBuffer, true, s_imin);
-		GM::setKernelArg(op->kernel_min_result, 2, sizeof(cl_mem), (void*)&op->s_iminBuffer);
+		GM::createSimpleBuffer(*ocl, op.s_iminBuffer, true, s_imin);
+		GM::setKernelArg(op.kernel_min_result, 2, sizeof(cl_mem), (void*)&op.s_iminBuffer);
 
 		int s_rmin = 0;
-		GM::createSimpleBuffer<int>(*ocl, op->s_rminBuffer, true, s_rmin);
-		GM::setKernelArg(op->kernel_min_result, 3, sizeof(cl_mem), (void*)&op->s_rminBuffer);
+		GM::createSimpleBuffer<int>(*ocl, op.s_rminBuffer, true, s_rmin);
+		GM::setKernelArg(op.kernel_min_result, 3, sizeof(cl_mem), (void*)&op.s_rminBuffer);
 
-		GM::copySimpleParameter(op->kernel_min_result, 4, vars);
-		GM::copySimpleParameter(op->kernel_min_result, 5, iterations);
-		GM::copySimpleParameter(op->kernel_min_result, 6, POPULATION);
-		GM::copySimpleParameter(op->kernel_min_result, 7, RUNS);
+		GM::copySimpleParameter(op.kernel_min_result, 4, vars);
+		GM::copySimpleParameter(op.kernel_min_result, 5, ITERATIONS);
+		GM::copySimpleParameter(op.kernel_min_result, 6, POPULATION);
+		GM::copySimpleParameter(op.kernel_min_result, 7, RUNS);
 
 		// Execute kernel
-		globalDimensionSizes[0] = 1;
-		localDimensionSizes[0] = 1;
-		GM::executeKernel(*ocl, op->kernel_min_result, 1, globalDimensionSizes, localDimensionSizes);
+		unsigned int globalDimensionSizes[] = { 1 };
+		unsigned int localDimensionSizes[] = { 1 };
+		GM::executeKernel(*ocl, op.kernel_min_result, 1, globalDimensionSizes, localDimensionSizes);
 
 		// Get results
-		GM::readBuffer(*ocl, op->s_iminBuffer, s_imin);
-		GM::readBuffer(*ocl, op->s_rminBuffer, s_rmin);
+		GM::readBuffer(*ocl, op.s_iminBuffer, s_imin);
+		GM::readBuffer(*ocl, op.s_rminBuffer, s_rmin);
 
 		// Calculate index and read values
 		int idx = s_rmin * POPULATION * vars + s_imin * (vars + 1);
-		GM::enqueueReadBuffer(ocl->commandQueue, op->matrixBuffer, CL_TRUE, idx, vars * sizeof(float), &op->result[0], 0, NULL, NULL);
+		GM::enqueueReadBuffer(ocl->commandQueue, op.matrixBuffer, CL_TRUE, idx, vars * sizeof(float), &op.result[0], 0, NULL, NULL);
 
 		std::cout << " imin: " << s_imin << " rmin: " << s_rmin << std::endl;
 
 #ifdef TIMEMEASURE
-		tm = tm2.GetCounter();
-		Log::log("Results copied: " + std::to_string(tm));
+		double time = tm3.GetCounter();
+		Log::log("Results copied: " + std::to_string(time));
 #endif
 
-		* threadLaunched = false;
-
-	}
-
-	void IASystem_t::readJayaResults(std::vector<IA_t>& vecIA, int vars)
-	{
 		//std::ofstream file1("results1.dat");
 		for (size_t i = 0; i < vars; i += 2) {
 			vecIA[i/2].target.position = { op.result[i], HEIGHT, op.result[i + 1] };

@@ -16,8 +16,8 @@ bool linearOverlap(float x1, float w1, float x2, float w2) {
 struct mivec3_t calculatePosition(struct mivec3_t* position, __global struct mivec3_t* length, __global struct mivec3_t* offset) {
 	struct mivec3_t result;
 	result.x = position->x - (length->x / 2) + offset->x;
-	result.y = position->y - (length->y / 2) + offset->y;  // Length / 2 porque asi se define el origen en el centro de la caja,
-	result.z = position->z - (length->z / 2) + offset->z;  // por lo que length es el tamaño del lado de la caja
+	result.y = position->y - (length->y / 2) + offset->y;  // Length / 2 because thats how the center of the box is defined
+	result.z = position->z - (length->z / 2) + offset->z;  // where lenght is the side of the box
 	return result;
 }
 
@@ -44,7 +44,7 @@ bool collide(struct AuxPhy_ocl_t* phy1, struct AuxPhy_ocl_t* phy2,
 }
 
 /*
-	Modifica la velocidad de phy1 comprobando la colisión de phy1 con phy2
+	Modifies the speed of phy1 checking collision between phy1 and phy2
 */
 void modifySpeedAndVelocityOnCollision(struct AuxPhy_ocl_t* phy1, struct AuxPhy_ocl_t* phy2,
 	__global struct BoxCollider_ocl_t* coll1, __global struct BoxCollider_ocl_t* coll2, float deltaTime)
@@ -111,7 +111,7 @@ __kernel void update(__global struct PhysicsComponent_ocl_t* vecPhy, __global st
 			struct mivec3_t speed1 = phy1.speed;
 			struct mivec3_t speed2 = phy2.speed;
 
-			modifySpeedAndVelocityOnCollision(&phy1, &phy2, &vecBx[i], &vecBx[j], deltaTime); //Comprobar los dos objetos, por eso se le da la vuelta a los parametros
+			modifySpeedAndVelocityOnCollision(&phy1, &phy2, &vecBx[i], &vecBx[j], deltaTime); //Check both objects. That's why the parameters are swiped.
 			modifySpeedAndVelocityOnCollision(&phy2, &phy1, &vecBx[j], &vecBx[i], deltaTime);
 
 			//Make the objects not move

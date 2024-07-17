@@ -4,7 +4,7 @@
 
 //#pragma OPENCL EXTENSION cl_khr_fp64 : enable
 
-//CONSTANTES
+//CONSTANTS
 #define ERRORSIM 1
 #define OKSIM    0
 #define PRECISION 1e3
@@ -22,7 +22,7 @@
 #define MAX_Y 3
 #define POPULATION 255
 
-//FUNCION OBJETIVO
+//OBJECTIVE FUNCTION
 float MyObjective(__global float* x, int VARS)
 {
     int idx = get_local_id(0);
@@ -30,8 +30,8 @@ float MyObjective(__global float* x, int VARS)
 
     float f = 0.0f;// Evaluations++;
     float rect1[4] = { FLT_MAX, FLT_MAX, 0, 0 };  //rect = ({minx, miny}, {maxx, maxy})
-    //Calcular punto máximo y mínimo en los dos ejes para el equipo 1. Definir un cuadrado con estos puntos.
-    for (size_t i = 0; i < VARS / 2; i += 2) {  //Cada personaje tiene x e y, por lo que usa dos variables
+    //Calculate maximum and minimum point in both axis for team 1. Define a square with those points
+    for (size_t i = 0; i < VARS / 2; i += 2) {  //Each pj has x and y, so two variables are used in each iteration
         float Px = vars[i];
         float Py = vars[i + 1];
 
@@ -50,9 +50,9 @@ float MyObjective(__global float* x, int VARS)
         }
     }
 
-    //Calcular punto máximo y mínimo en los dos ejes para el equipo 1. Definir un cuadrado con estos puntos.
+    //Calculate maximum and minimum point in both axis for team 2. Define a square with those points
     float rect2[4] = { FLT_MAX, FLT_MAX, 0, 0 };  //rect = ({minx, miny}, {maxx, maxy}) 
-    for (size_t i = VARS / 2; i < VARS; i += 2) {  //Cada personaje tiene x e y, por lo que usa dos variables
+    for (size_t i = VARS / 2; i < VARS; i += 2) {  //Each pj has x and y, so two variables are used in each iteration
         float Px = vars[i];
         float Py = vars[i + 1];
 
@@ -71,7 +71,7 @@ float MyObjective(__global float* x, int VARS)
         }
     }
 
-    //Formula para el cálculo de los lados del rectangulo formado por la interseccion
+    //Formula to calculate the sides of the square formed by the intersection of both formation squares
     float dx = fmin(rect1[MAX_X], rect2[MAX_X]) - fmax(rect1[MIN_X], rect2[MIN_X]);
     float dy = fmin(rect1[MAX_Y], rect2[MAX_Y]) - fmax(rect1[MIN_Y], rect2[MIN_Y]);
 
@@ -79,14 +79,14 @@ float MyObjective(__global float* x, int VARS)
         f = -1;
     }
     else {
-        f = dx * dy;  //Area del rectangulo formado por la intersección = lado * lado
+        f = dx * dy;  //Area of the square = side * side
     }
 
     return f;
 }
 
 /*============================================================================ */
-/* Funciones Aleatorias: Genera una secuencia aleatoria  */
+/* Random Functions: Generates a random sequence with a seed */
 /*============================================================================ */
 void seedRandomSecuence(int i, int vars, ulong seed, mwc64x_state_t* state) {
     MWC64X_SeedStreams(state, i * vars, vars);
@@ -94,14 +94,14 @@ void seedRandomSecuence(int i, int vars, ulong seed, mwc64x_state_t* state) {
 }
 
 /*============================================================================ */
-/* Funciones Aleatorias: generan valores para las variables de cada individuo  */
+/* Random Functions: generates values for the indvidual variables  */
 /*============================================================================ */
 float var_rand(mwc64x_state_t* state) {
     return MINVARVALUE + (MAXVARVALUE - MINVARVALUE) * (float)MWC64X_NextUint(state) / ((float)RAND_MAX);
 }
 
 /*================================================================================ */
-/* Funciones Aleatorias: generan valores para los coeficientes del algoritmo JAYA  */
+/* Random Functions: generates values for the Jaya algorithm coeficients  */
 /*================================================================================ */
 float coef_rand(mwc64x_state_t* state)
 {
@@ -137,7 +137,7 @@ void getMinMax(__global float* x, __global float* maxVal, __global float* minVal
 }
 
 /*=============================================================================== */
-/* Crea una población de individuos, y selecciona el mejor y el peor (max y min)  */
+/* Create population, and select best and worst (max and min)  */
 /*=============================================================================== */
 void createPopulation(__global float* x, __global float* maxVal, __global float* minVal, __global int* imax, __global int* imin, ulong seed, int vars,
     mwc64x_state_t* state, __local float* evalMax, __local float* evalMin, __local int* evalMaxIndex, __local int* evalMinIndex) {
@@ -149,7 +149,7 @@ void createPopulation(__global float* x, __global float* maxVal, __global float*
         x[INDEX(i, j, vars)] = rnd;
     }
 
-    //Evaluar cada individuo
+    //Evaluate each individual
     float res = MyObjective(x, vars);
     x[VALUE(i, vars)] = res;
     evalMin[i] = res;
@@ -162,13 +162,13 @@ void createPopulation(__global float* x, __global float* maxVal, __global float*
 }
 
 /*============================================================================ */
-/* Actualiza las variables de las poblaciones en funcion del mejor y del peor*/
+/* Update the variables of the population using the best and worst individuals */
 /*============================================================================ */
 void updatePopulation(__global float* x, __global float* maxVal, __global float* minVal, __global int* imax, __global int* imin, ulong seed, int vars,
     mwc64x_state_t* state, __local float* evalMax, __local float* evalMin, __local int* evalMaxIndex, __local int* evalMinIndex, __global float* xn) {
     __global float* xnew = xn; // xn - 1; TODO QUE HACIA ESTO!!!!!??????
     int i = get_local_id(0);
-    // Se crea un nuevo individuo en funcion del algoritmo Jaya
+    // A new individual is created
     // xnew(i, j) = x(i, j) + r(1)*(Best(j) - abs(x(i, j))) - r(2)*(worst(j) - abs(x(i, j)));
     for (int j = 0; j < vars; j++) {
         xnew[INDEX(i, j, vars)] = x[INDEX(i, j, vars)] + coef_rand(state) * (x[INDEX(*imin, j, vars)] - fabs(x[INDEX(i, j, vars)]))
@@ -177,7 +177,7 @@ void updatePopulation(__global float* x, __global float* maxVal, __global float*
 
     float res = MyObjective(xnew, vars);
     if (res < x[VALUE(i, vars)]) {
-        // Actualizar variables
+        // Update variables
         for (int j = 0; j < vars; j++) {
             x[INDEX(i, j, vars)] = xnew[INDEX(i, j, vars)];
         }

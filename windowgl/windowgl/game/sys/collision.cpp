@@ -96,7 +96,7 @@ void CollisionSystem_t::update(ECS::EntityManager_t& g) {
 	//auto& vec = g.getComponents<BoxCollider_t>();
  //   for (size_t i = 0; i < vec.size(); ++i) {
 	//	auto& coll1 = vec[i];
-	//	//TODO QUITAR DUPLICIDAD
+	//	//TODO ELIMINATE DUPLICATE
 	//	for (size_t j = i+1; j < vec.size(); ++j) {
 	//		auto& coll2 = vec[j];
 	//		auto* phy1 = g.getEntity(coll1.entityID).getComponent<PhysicsComponent_t>();
@@ -119,7 +119,7 @@ void CollisionSystem_t::update(ECS::EntityManager_t& g) {
 	////auto& vec = g.getComponents<BoxCollider_t>();
  //   for (size_t i = 0; i < vec.size(); ++i) {
 	//	auto& coll1 = vec[i];
-	//	//TODO QUITAR DUPLICIDAD
+	//	//TODO ELIMINATE DUPLICATE
 	//	for (size_t j = i+1; j < vec.size(); ++j) {
 	//		auto& coll2 = vec[j];
 	//		auto* phy1 = g.getEntity(coll1.entityID).getComponent<PhysicsComponent_t>();
@@ -152,7 +152,7 @@ bool CollisionSystem_t::collide(const PhysicsComponent_t& phy1, const PhysicsCom
 	glm::vec3 pos1 = calculatePosition(phy1.position, c1.length, c1.offset);
 	glm::vec3 pos2 = calculatePosition(phy2.position, c2.length, c2.offset);
 
-	//TODO QUITAR DUPLICIDAD
+	//TODO ELIMINATE DUPLICATE
 	if (linearOverlap(pos1.x, c1.length.x,
 		pos2.x, c2.length.x)) {
 		if (linearOverlap(pos1.y, c1.length.y,
@@ -172,13 +172,13 @@ bool CollisionSystem_t::linearOverlap(float x1, float w1, float x2, float w2) co
 
 glm::vec3 CollisionSystem_t::calculatePosition(const glm::vec3& position, const glm::vec3& length, const glm::vec3& offset) const {
 	glm::vec3 result = { position.x - (length.x / 2) + offset.x,
-		position.y - (length.y / 2) + offset.y,  // Length / 2 porque asi se define el origen en el centro de la caja,
-		position.z - (length.z / 2) + offset.z	 // por lo que length es el tamaño del lado de la caja
+		position.y - (length.y / 2) + offset.y,  // Length / 2 because thats how the center of the box is defined,
+		position.z - (length.z / 2) + offset.z	 // where lenght is the side of the box
 	};
 	return result;
 }
 
-//Modifica la velocidad de phy1 comprobando la colisión de phy1 con phy2
+//Modifies the speed of phy1 checking the collision of phy1 with phy2
 void CollisionSystem_t::modifySpeedAndVelocityOnCollision(PhysicsComponent_t& phy1, PhysicsComponent_t& phy2,
 	const BoxCollider_t& coll1, const BoxCollider_t& coll2) const
 {

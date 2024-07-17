@@ -42,8 +42,8 @@ constexpr glm::vec3 cubePositions[] = {
 
 //constexpr unsigned int kSCRWIDTH{ 1024 };
 //constexpr unsigned int kSCRHEIGHT{ 768 };
-constexpr unsigned int kSCRWIDTH{ 4000 };
-constexpr unsigned int kSCRHEIGHT{ 2000 };
+constexpr unsigned int kSCRWIDTH{ 1920 };
+constexpr unsigned int kSCRHEIGHT{ 1080 };
 
 const std::string MESA_PATH = "assets\\models\\mesa\\mesa.fbx";
 const std::string NANOSUIT_PATH = "assets\\models\\nanosuit\\nanosuit.obj";
@@ -114,11 +114,11 @@ int main(int argc, char *argv[])
 	std::cout << "Current path: " << ExePath() << std::endl;
 	
 	// Default params
-	std::string gpuName = std::string("Intel");
+	std::string gpuName = std::string("NVIDIA");
 	int iterations = 100;
 	int vars = 6000; // Number of PJ with AI and Collision (In reality its half of the Jaya vars)
 	int total_pj = 16000; // Controls the number of PJ drawn
-	int totalFrames = 2000000;
+	int totalFrames = 2000;
 
 	if (argc >= 6) {
 		gpuName = std::string(argv[1]);
