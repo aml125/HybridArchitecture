@@ -6,6 +6,7 @@ The project is structured into two main folders:
 - game: Game prototype implementation
 
 <br>
+<br>
 
 Copyright 2024 Antonio Maciá Lillo
 
